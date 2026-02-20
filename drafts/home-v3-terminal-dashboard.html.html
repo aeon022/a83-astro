@@ -1,0 +1,361 @@
+<!-- Dateipfad: drafts/home-v3-terminal-dashboard.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>ABTEILUNG83 — Terminal Dashboard Landing</title>
+  <style>
+    :root{
+      --bg:#060806;
+      --panel:#0A110C;
+      --panel2:#080D09;
+      --txt:rgba(230,255,242,.88);
+      --mut:rgba(230,255,242,.62);
+      --line:rgba(160,255,190,.14);
+      --line2:rgba(160,255,190,.08);
+      --brand:#B7FF3C;
+      --mint:#35FFA6;
+      --pink:#FF3D7F;
+      --r:18px;
+      --shadow: 0 16px 48px rgba(0,0,0,.55);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:var(--mono);
+      background:
+        radial-gradient(900px 600px at 20% 10%, rgba(183,255,60,.10), transparent 60%),
+        radial-gradient(780px 520px at 85% 20%, rgba(53,255,166,.09), transparent 60%),
+        radial-gradient(700px 520px at 70% 95%, rgba(255,61,127,.08), transparent 60%),
+        linear-gradient(180deg, #040604, #060806 22%, #040604);
+      color:var(--txt);
+      overflow-x:hidden;
+    }
+    .wrap{ max-width:1180px; margin:0 auto; padding:22px; }
+    header{
+      border-bottom:1px solid var(--line2);
+      position:sticky; top:0; z-index:10;
+      background: linear-gradient(180deg, rgba(6,8,6,.92), rgba(6,8,6,.55));
+      backdrop-filter: blur(10px);
+    }
+    .top{
+      display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+      padding:14px 0;
+    }
+    .wm{
+      display:flex; align-items:center; gap:10px; letter-spacing:.08em;
+    }
+    .badge{
+      font-size:12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:5px 9px;
+      background: rgba(0,0,0,.25);
+      color:rgba(230,255,242,.75);
+    }
+    .wm b{ color:rgba(230,255,242,.92); }
+    .wm i{ color:var(--brand); font-style:normal; }
+    nav{ display:flex; gap:10px; flex-wrap:wrap; }
+    nav a{
+      color:rgba(230,255,242,.70);
+      text-decoration:none;
+      border:1px solid transparent;
+      padding:8px 10px;
+      border-radius: 14px;
+      font-size:12px;
+    }
+    nav a:hover{ border-color:var(--line); background: rgba(10,17,12,.55); color:rgba(230,255,242,.92); }
+    .btn{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(10,17,12,.75), rgba(8,13,9,.65));
+      border-radius: 14px;
+      padding:10px 12px;
+      color:rgba(230,255,242,.92);
+      text-decoration:none;
+      font-size:12px;
+      box-shadow: var(--shadow);
+    }
+    .btn.primary{ border-color: rgba(183,255,60,.34); background: linear-gradient(180deg, rgba(183,255,60,.12), rgba(10,17,12,.78)); }
+    .layout{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 340px 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    @media (max-width: 980px){ .layout{ grid-template-columns: 1fr; } }
+
+    .panel{
+      border:1px solid var(--line2);
+      border-radius: var(--r);
+      background: linear-gradient(180deg, rgba(10,17,12,.72), rgba(8,13,9,.68));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel .head{
+      padding:12px 12px;
+      border-bottom:1px solid var(--line2);
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      background: rgba(0,0,0,.22);
+    }
+    .dots{ display:flex; gap:7px; }
+    .dots span{ width:9px; height:9px; border-radius:99px; border:1px solid var(--line2); background: rgba(0,0,0,.25); }
+    .head .title{ font-size:12px; letter-spacing:.10em; color:rgba(230,255,242,.72); }
+    .body{ padding:12px; }
+    .mut{ color:var(--mut); }
+    .mono12{ font-size:12px; line-height:1.6; }
+    .list{ margin:10px 0 0; padding:0; list-style:none; }
+    .list li{
+      display:flex; justify-content:space-between; gap:10px;
+      border:1px solid var(--line2);
+      background: rgba(0,0,0,.18);
+      padding:10px 10px;
+      border-radius: 14px;
+      margin-top:10px;
+      font-size:12px;
+    }
+    .k{ color:rgba(230,255,242,.70); }
+    .v{ color:rgba(230,255,242,.92); }
+    .v.good{ color: rgba(53,255,166,.88); }
+    .v.warn{ color: rgba(255,61,127,.82); }
+
+    .main{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .hero{ grid-column: span 12; padding:16px; }
+    .hero h1{
+      margin:6px 0 10px;
+      font-size: clamp(26px, 3.4vw, 44px);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    .hero p{ margin:0; color:var(--mut); font-size:13px; line-height:1.6; max-width: 78ch; }
+    .cmdline{
+      margin-top:12px;
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(0,0,0,.22);
+      padding:12px;
+      font-size:12px;
+      line-height:1.65;
+    }
+    .prompt{ color: rgba(183,255,60,.92); }
+    .path{ color: rgba(53,255,166,.86); }
+    .blink{ display:inline-block; width:8px; height:14px; background: rgba(183,255,60,.7); margin-left:4px; vertical-align:-2px; animation: b 1.05s steps(1,end) infinite; }
+    @keyframes b{ 50%{ opacity:0; } }
+
+    .card{ grid-column: span 4; padding:14px; min-height: 150px; }
+    .card.wide{ grid-column: span 8; }
+    @media (max-width: 980px){ .card, .card.wide{ grid-column: span 12; } }
+    .card h2{
+      margin:0 0 10px;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(230,255,242,.84);
+    }
+    .pillrow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .pill{
+      border:1px solid var(--line2);
+      border-radius:999px;
+      padding:6px 10px;
+      background: rgba(0,0,0,.18);
+      font-size:12px;
+      color:rgba(230,255,242,.74);
+    }
+    .pill.hot{ border-color: rgba(183,255,60,.26); color:rgba(230,255,242,.90); }
+    footer{
+      margin-top:18px;
+      border-top:1px solid var(--line2);
+      padding:18px 0 32px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      color:rgba(230,255,242,.60);
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div class="wm">
+        <span class="badge">A83</span>
+        <div><b>ABTEILUNG</b><i>83</i></div>
+        <span class="badge" style="border-color:rgba(183,255,60,.22)">DEPLOY MODE</span>
+      </div>
+      <nav aria-label="Hauptnavigation">
+        <a href="#dash">Dashboard</a>
+        <a href="#services">Services</a>
+        <a href="#cases">Cases</a>
+        <a href="#contact">Kontakt</a>
+        <a class="btn primary" href="#contact">Projekt anstoßen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap layout" id="dash">
+    <aside class="panel">
+      <div class="head">
+        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="title">SYSTEM</div>
+        <div class="badge" style="border-color:rgba(53,255,166,.22);color:rgba(230,255,242,.85)">GREEN</div>
+      </div>
+      <div class="body mono12">
+        <div class="mut">Telemetry (demo)</div>
+        <ul class="list">
+          <li><span class="k">Perf Budget</span><span class="v good">OK</span></li>
+          <li><span class="k">JS Payload</span><span class="v good">&lt; 50kb</span></li>
+          <li><span class="k">SEO</span><span class="v good">CLEAN</span></li>
+          <li><span class="k">Tracking</span><span class="v">LEAN</span></li>
+          <li><span class="k">Bloat</span><span class="v warn">0%</span></li>
+        </ul>
+
+        <div style="margin-top:14px" class="mut">Stack</div>
+        <ul class="list">
+          <li><span class="k">Frontend</span><span class="v">Astro</span></li>
+          <li><span class="k">CSS</span><span class="v">Tailwind v4</span></li>
+          <li><span class="k">CMS</span><span class="v">StudioCMS/Directus</span></li>
+          <li><span class="k">Deploy</span><span class="v">Docker builds</span></li>
+        </ul>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn primary" href="#services">Services</a>
+          <a class="btn" href="#cases">Cases</a>
+        </div>
+      </div>
+    </aside>
+
+    <section class="main">
+      <article class="panel hero">
+        <div class="head">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="title">TERMINAL BRIEF</div>
+          <div class="badge">less-noise</div>
+        </div>
+        <div class="body">
+          <h1>Webdesign, das läuft wie Ops.</h1>
+          <p>
+            Du willst fancy + modern + cyberpunkig — aber strukturiert. Diese Startseite ist als „Dashboard“ gedacht:
+            Links Status/Stack, rechts Content/CTA. Sehr schnell erfassbar. Sehr wenig Bullshit.
+          </p>
+          <div class="cmdline" aria-label="CLI Preview">
+            <span class="prompt">a83</span>:<span class="path">~/frontend</span>$ <span id="typed"></span><span class="blink" aria-hidden="true"></span>
+            <div class="mut" style="margin-top:8px" id="out"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel card wide" id="services">
+        <div class="head">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="title">SERVICES</div>
+          <div class="badge" style="border-color:rgba(183,255,60,.22)">NO BLOAT</div>
+        </div>
+        <div class="body mono12">
+          <div>1) UI/UX → Tokens, Komponenten, klare CTAs.</div>
+          <div>2) Astro Build → TS strict, Tailwind v4, minimale Islands.</div>
+          <div>3) CMS Ops → StudioCMS oder Directus (Docker), Rollen + Workflows.</div>
+          <div class="pillrow">
+            <span class="pill hot">Audit</span><span class="pill">Wireframes</span><span class="pill">Component Kit</span>
+            <span class="pill">SEO</span><span class="pill">Deploy</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel card" id="cases">
+        <div class="head">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="title">CASE 01</div>
+          <div class="badge" style="border-color:rgba(53,255,166,.22)">KPI</div>
+        </div>
+        <div class="body mono12">
+          <div class="mut">Relaunch / Conversion</div>
+          <div style="margin-top:8px">Kurzstory + 2 KPIs. Kein Roman.</div>
+          <div class="pillrow">
+            <span class="pill hot">+XX% Leads</span><span class="pill">TTFB -XX%</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel card" id="contact">
+        <div class="head">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="title">CONTACT</div>
+          <div class="badge" style="border-color:rgba(255,61,127,.22)">PING</div>
+        </div>
+        <div class="body mono12">
+          <div class="mut">3 Punkte reichen:</div>
+          <ul style="margin:10px 0 0; padding-left:18px; color:rgba(230,255,242,.74);">
+            <li>Ziel</li><li>Deadline</li><li>Content Status</li>
+          </ul>
+          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:hello@abteilung83.com">Mail</a>
+            <a class="btn" href="/cms">CMS</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel card">
+        <div class="head">
+          <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="title">PROCESS</div>
+          <div class="badge">CLEAN</div>
+        </div>
+        <div class="body mono12">
+          <div>01 Audit → 02 Build → 03 Deploy</div>
+          <div class="mut" style="margin-top:8px">Logs zuerst. Dann Fix. Immer.</div>
+          <div class="pillrow">
+            <span class="pill">Conventional Commits</span><span class="pill hot">Docker builds</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer style="grid-column:1/-1">
+      <div>© <span id="y"></span> ABTEILUNG83</div>
+      <div>build: draft/v3</div>
+      <div>Less Noise · Nice Data · No Bloat</div>
+    </footer>
+  </main>
+
+  <script>
+    const y = document.getElementById('y');
+    if (y) y.textContent = String(new Date().getFullYear());
+
+    const typed = document.getElementById('typed');
+    const out = document.getElementById('out');
+    const seq = [
+      { cmd: "npm run build", out: "✔ build ok · dist ready" },
+      { cmd: "npm run preview", out: "➜ http://localhost:4321 · ready" },
+      { cmd: "docker compose up -d", out: "✔ services up · proxy online" },
+    ];
+
+    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function type(t){
+      typed.textContent = "";
+      for (let i=0;i<t.length;i++){
+        typed.textContent += t[i];
+        await sleep(18 + Math.random()*28);
+      }
+    }
+
+    async function loop(){
+      for (const s of seq){
+        await type(s.cmd);
+        out.textContent = "";
+        await sleep(240);
+        out.textContent = s.out;
+        await sleep(1100);
+      }
+      loop();
+    }
+    loop();
+  </script>
+</body>
+</html>

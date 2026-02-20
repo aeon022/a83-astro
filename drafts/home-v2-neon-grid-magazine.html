@@ -1,0 +1,404 @@
+<!-- Dateipfad: drafts/home-v2-neon-grid-magazine.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>ABTEILUNG83 — Modern Cyberpunk Magazin</title>
+  <style>
+    :root{
+      --bg:#050705;
+      --txt:rgba(225,255,238,.88);
+      --mut:rgba(225,255,238,.60);
+      --line:rgba(183,255,60,.18);
+      --line2:rgba(160,255,190,.10);
+      --brand:#B7FF3C;
+      --mint:#35FFA6;
+      --pink:#FF3D7F;
+      --panel:rgba(7,10,8,.62);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --r: 22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:
+        radial-gradient(1100px 700px at 10% 15%, rgba(183,255,60,.10), transparent 55%),
+        radial-gradient(900px 640px at 85% 20%, rgba(53,255,166,.10), transparent 60%),
+        radial-gradient(700px 500px at 60% 92%, rgba(255,61,127,.08), transparent 55%),
+        linear-gradient(180deg, #040604, #050705 20%, #040604);
+      color:var(--txt);
+      font-family:var(--sans);
+      overflow-x:hidden;
+    }
+    .gridbg::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(to right, rgba(183,255,60,.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(53,255,166,.06) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(closest-side at 50% 40%, rgba(0,0,0,.95), rgba(0,0,0,.15));
+      opacity:.65;
+      pointer-events:none;
+      z-index:0;
+    }
+    .wrap{ max-width:1200px; margin:0 auto; padding:24px; position:relative; z-index:1; }
+    header{
+      position:sticky; top:0; z-index:9;
+      background: linear-gradient(180deg, rgba(5,7,5,.92), rgba(5,7,5,.48));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line2);
+    }
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:14px 0;
+    }
+    .wordmark{
+      display:flex; align-items:baseline; gap:10px;
+      font-family:var(--mono);
+      letter-spacing:.06em;
+      white-space:nowrap;
+    }
+    .wordmark b{ color:rgba(225,255,238,.92); }
+    .wordmark i{ color:var(--brand); font-style:normal; }
+    .chip{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line2);
+      background: rgba(7,10,8,.35);
+      color:rgba(225,255,238,.70);
+    }
+    nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:8px 10px;
+      border-radius: 12px;
+      border:1px solid transparent;
+      color:rgba(225,255,238,.70);
+      text-decoration:none;
+    }
+    nav a:hover{ border-color:var(--line); background:rgba(7,10,8,.38); color:rgba(225,255,238,.92); }
+    .btn{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(7,10,8,.60), rgba(0,0,0,.20));
+      color:rgba(225,255,238,.92);
+      text-decoration:none;
+      display:inline-flex; gap:10px; align-items:center;
+      box-shadow: var(--shadow);
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(183,255,60,.35); }
+    .btn.primary{
+      border-color: rgba(183,255,60,.35);
+      background: linear-gradient(180deg, rgba(183,255,60,.14), rgba(7,10,8,.62));
+    }
+
+    /* Hero layout like magazine */
+    .hero{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .hero{ grid-template-columns: 1fr; } }
+
+    .card{
+      border:1px solid var(--line2);
+      background: linear-gradient(180deg, rgba(7,10,8,.60), rgba(7,10,8,.36));
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(183,255,60,.08), transparent);
+      transform: translateX(-70%);
+      animation: sweep 7s ease-in-out infinite;
+      opacity:.75;
+      pointer-events:none;
+    }
+    @keyframes sweep{
+      0%, 68%{ transform: translateX(-75%); opacity:0; }
+      76%{ opacity:.8; }
+      100%{ transform: translateX(75%); opacity:0; }
+    }
+    .hero-main{ padding:22px 22px 18px; }
+    h1{
+      margin:8px 0 10px;
+      font-size: clamp(34px, 4.3vw, 54px);
+      line-height:1.0;
+      letter-spacing:-.03em;
+    }
+    .lede{
+      margin:0;
+      color:var(--mut);
+      max-width: 70ch;
+      line-height:1.6;
+    }
+    .split{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 620px){ .split{ grid-template-columns: 1fr; } }
+    .box{
+      border:1px solid var(--line2);
+      border-radius: 18px;
+      background: rgba(0,0,0,.20);
+      padding:14px;
+    }
+    .box h3{
+      margin:0 0 8px;
+      font-family:var(--mono);
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(225,255,238,.86);
+    }
+    .box p{ margin:0; color:var(--mut); line-height:1.55; font-size:14px; }
+    .kpi{
+      margin-top:10px;
+      display:flex; gap:8px; flex-wrap:wrap;
+      font-family:var(--mono);
+      font-size:12px;
+      color:rgba(225,255,238,.72);
+    }
+    .kpi span{
+      border:1px solid var(--line2);
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(7,10,8,.35);
+    }
+
+    .hero-side{ padding:18px; display:flex; flex-direction:column; gap:12px; }
+    .mono{
+      font-family:var(--mono);
+      font-size:12px;
+      color:rgba(225,255,238,.70);
+      line-height:1.6;
+    }
+    .hr{ height:1px; background:var(--line2); margin:10px 0; }
+
+    /* sections */
+    section{ margin-top:16px; }
+    .sec{
+      display:flex; justify-content:space-between; gap:16px; align-items:flex-end;
+      margin:0 0 10px;
+    }
+    .sec h2{
+      margin:0;
+      font-family:var(--mono);
+      font-size:15px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(225,255,238,.88);
+    }
+    .sec p{ margin:0; color:var(--mut); font-size:14px; max-width:75ch; }
+
+    .tiles{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .t{ grid-column: span 4; padding:16px; border-radius: 18px; border:1px solid var(--line2); background: rgba(7,10,8,.38); }
+    .t.wide{ grid-column: span 8; }
+    @media (max-width: 980px){ .t, .t.wide{ grid-column: span 12; } }
+    .t h3{ margin:0 0 8px; font-family:var(--mono); font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
+    .t p{ margin:0; color:var(--mut); line-height:1.55; font-size:14px; }
+    .t .meta{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+    .t .meta span{ font-family:var(--mono); font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line2); background: rgba(0,0,0,.22); color:rgba(225,255,238,.74); }
+    .t .meta span.hot{ border-color: rgba(183,255,60,.28); color:rgba(225,255,238,.9); }
+
+    footer{
+      margin-top:22px;
+      padding:18px 0 32px;
+      border-top:1px solid var(--line2);
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      font-family:var(--mono);
+      font-size:12px;
+      color:rgba(225,255,238,.60);
+    }
+  </style>
+</head>
+<body class="gridbg">
+  <header>
+    <div class="wrap top">
+      <div class="wordmark">
+        <span class="chip">OPS</span>
+        <div><b>ABTEILUNG</b><i>83</i></div>
+        <span class="chip" style="border-color:rgba(183,255,60,.22);color:rgba(225,255,238,.88)">No Bloat</span>
+      </div>
+      <nav aria-label="Hauptnavigation">
+        <a href="#angebot">Angebot</a>
+        <a href="#cases">Cases</a>
+        <a href="#prozess">Prozess</a>
+        <a href="#kontakt">Kontakt</a>
+        <a class="btn primary" href="#kontakt">Projekt starten →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <article class="card hero-main">
+        <div class="mono">A83 // studio mode: <span style="color:var(--brand)">cyberpunk</span> · delivery: <span style="color:var(--mint)">clean</span> · tracking: <span style="color:var(--pink)">lean</span></div>
+        <h1>Fancy Modern.<br>Terminal Soul.</h1>
+        <p class="lede">
+          Design und Engineering für Websites, die nicht nur „nice“ aussehen, sondern laufen wie ein sauberes Deployment:
+          schnell, wartbar, konvertierend.
+        </p>
+
+        <div class="split">
+          <div class="box">
+            <h3>Was du bekommst</h3>
+            <p>Struktur, Komponenten, Content-Flow. Fokus auf Performance und klare Nutzerführung — ohne visuelles Overkill.</p>
+            <div class="kpi"><span>Audit</span><span>UI Kit</span><span>Build</span><span>Deploy</span></div>
+          </div>
+          <div class="box">
+            <h3>Wie wir liefern</h3>
+            <p>Astro + TypeScript + Tailwind v4. CMS je nach Projekt: StudioCMS oder Directus (Docker).</p>
+            <div class="kpi"><span style="border-color:rgba(183,255,60,.25)">Astro</span><span>TS strict</span><span>Docker builds</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn primary" href="#cases">Cases ansehen</a>
+          <a class="btn" href="#angebot">Leistungspaket</a>
+          <a class="btn" href="#prozess">Prozess</a>
+        </div>
+      </article>
+
+      <aside class="card hero-side">
+        <div class="mono">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
+            <strong style="color:rgba(225,255,238,.92);font-family:var(--mono);letter-spacing:.08em;">STATUS</strong>
+            <span class="chip" style="border-color:rgba(53,255,166,.22)">GREEN</span>
+          </div>
+          <div class="hr"></div>
+          <div>Frontends: <span style="color:rgba(225,255,238,.92)">Astro</span> / TypeScript / Tailwind v4</div>
+          <div>CMS: StudioCMS oder Directus (Postgres + Redis)</div>
+          <div>Server: Ubuntu 24.04 + Plesk + Nginx Proxy</div>
+          <div class="hr"></div>
+          <div style="color:rgba(225,255,238,.92)">Quick CTA</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+            <a class="btn primary" href="#kontakt">Call / Brief →</a>
+            <a class="btn" href="#kontakt">Mail</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section id="angebot">
+      <div class="sec">
+        <h2>Angebot</h2>
+        <p>Diese Kacheln sind absichtlich „magazine-clean“. Copy austauschen, fertig.</p>
+      </div>
+      <div class="tiles">
+        <div class="t">
+          <h3>Brand-UI</h3>
+          <p>Cyberpunk-Look mit klarer Hierarchie, nicht mit Chaos. Komponenten statt Pixel-Orgie.</p>
+          <div class="meta"><span class="hot">Tokens</span><span>A11y</span><span>Motion</span></div>
+        </div>
+        <div class="t">
+          <h3>Build-System</h3>
+          <p>Astro Pages + Islands. CSS effizient. Fonts sauber. Bilder optimiert.</p>
+          <div class="meta"><span class="hot">Perf</span><span>SEO</span><span>DX</span></div>
+        </div>
+        <div class="t">
+          <h3>CMS Ops</h3>
+          <p>Content-Modelle, Rollen, Workflows. Redakteure arbeiten schnell und sicher.</p>
+          <div class="meta"><span>StudioCMS</span><span class="hot">Directus</span><span>Schema</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases">
+      <div class="sec">
+        <h2>Cases</h2>
+        <p>2–4 Projekte reichen. Jedes mit KPI + kurzer Story. Show, don’t tell.</p>
+      </div>
+      <div class="tiles">
+        <div class="t wide">
+          <h3>Case: Relaunch / Conversion</h3>
+          <p>Neuer Hero + CTA-Kette, saubere Services, klare Navigation. Ergebnis: mehr Leads, weniger Absprünge.</p>
+          <div class="meta"><span class="hot">+XX% Leads</span><span>TTFB -XX%</span><span>CLS 0.0X</span></div>
+        </div>
+        <div class="t">
+          <h3>Case: CMS Setup</h3>
+          <p>Directus + Docker: Rollen, Collections, Preview-Flow. Keine „Admin-Falle“.</p>
+          <div class="meta"><span class="hot">Docker</span><span>Postgres</span><span>Redis</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prozess">
+      <div class="sec">
+        <h2>Prozess</h2>
+        <p>Einfach. Messbar. Ohne Agentur-Laberei.</p>
+      </div>
+      <div class="tiles">
+        <div class="t">
+          <h3>01 Audit</h3>
+          <p>Scope, Ziele, Content-Status. Dann Plan.</p>
+          <div class="meta"><span class="hot">MASTER_CONCEPT</span><span>Roadmap</span></div>
+        </div>
+        <div class="t">
+          <h3>02 Build</h3>
+          <p>Komponenten + Seiten. Strict TS. Wenig JS.</p>
+          <div class="meta"><span>Astro</span><span class="hot">TS</span></div>
+        </div>
+        <div class="t">
+          <h3>03 Deploy</h3>
+          <p>Docker Builds am Server. Logs zuerst.</p>
+          <div class="meta"><span class="hot">Docker</span><span>Nginx</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="sec">
+        <h2>Kontakt</h2>
+        <p>Minimal block. Später: echtes Formular + Spam-Schutz.</p>
+      </div>
+      <div class="tiles">
+        <div class="t wide">
+          <h3>Briefing</h3>
+          <p>3 Punkte reichen: Ziel, Deadline, Content. Dann bekommst du eine klare Antwort + Next Steps.</p>
+          <div class="meta"><span class="hot">Ziel</span><span>Deadline</span><span>Content</span></div>
+        </div>
+        <div class="t">
+          <h3>Kontakt</h3>
+          <p class="mono">hello@abteilung83.com<br>/cms<br>Wien / Remote</p>
+          <div class="meta"><span>Impressum</span><span>Datenschutz</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> ABTEILUNG83</div>
+      <div>build: draft/v2</div>
+      <div>Less Noise · Nice Data · No Bloat</div>
+    </footer>
+  </main>
+
+  <script>
+    const y = document.getElementById('y');
+    if (y) y.textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+---
+---
+<canvas id="neon-rain" class="fixed inset-0 -z-10 bg-black"></canvas>
+
+<script>
+  const canvas = document.getElementById('neon-rain') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    // Matrix-Charaktere (Katakana + Latin)
+    const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEF'.split('');
+    const fontSize = 16;
+    const columns = width / fontSize;
+    const drops: number[] = [];
+
+    // Initialisierung der Tropfen-Positionen
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100; // Startet versetzt oberhalb des Bildschirms
+    }
+
+    function draw() {
+      // Schwarzer Schleier für den Trail-Effekt
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, width, height);
+
+      // Neon-Grüner Text
+      ctx.fillStyle = '#00ff41';
+      ctx.font = `${fontSize}px JetBrains Mono, monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        
+        // Zeichne den Charakter
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Wenn der Tropfen unten ankommt oder zufällig zurückgesetzt wird
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    // Animation Loop
+    let animationFrame: number;
+    const frameRate = 1000 / 30; // Begrenzung auf 30 FPS für "Retro-Feeling" & Performance
+    let lastTime = 0;
+
+    function animate(currentTime: number) {
+      animationFrame = requestAnimationFrame(animate);
+      if (currentTime - lastTime >= frameRate) {
+        draw();
+        lastTime = currentTime;
+      }
+    }
+
+    animate(0);
+
+    // Resize Handler
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+  }
+</script>
+
+<style>
+  canvas {
+    filter: blur(0.5px) contrast(1.2);
+    pointer-events: none;
+  }
+</style>

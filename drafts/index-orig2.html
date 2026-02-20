@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de-AT" class="scroll-smooth bg-[#050505] text-zinc-300 antialiased" data-nav-state="closed">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABTEILUNG83 // V2.0 KERNEL</title>
+    
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-neon: #00e5ff; /* Original A83 Cyan-Neon */
+            --color-neon-dim: rgba(0, 229, 255, 0.15);
+            --font-mono: 'JetBrains Mono', monospace;
+            --br-card: 16px;
+        }
+
+        /* --- BURGER UNIT --- */
+        .a83-burger {
+            @apply relative w-10 h-10 flex items-center justify-center cursor-pointer z-[120] outline-none;
+        }
+        .a83-burger-inner, .a83-burger-inner::before, .a83-burger-inner::after {
+            @apply absolute w-5 h-0.5 bg-neon transition-all duration-300;
+            content: "";
+        }
+        .a83-burger-inner::before { transform: translateY(-7px); }
+        .a83-burger-inner::after { transform: translateY(7px); }
+        .is-open .a83-burger-inner { background: transparent; }
+        .is-open .a83-burger-inner::before { transform: rotate(45deg); }
+        .is-open .a83-burger-inner::after { transform: rotate(-45deg); }
+
+        /* --- FLOATING MENU CARD (As per Screenshot) --- */
+        #nav-overlay {
+            @apply fixed inset-0 z-[100] pointer-events-none;
+        }
+        html[data-nav-state="open"] #nav-overlay { @apply pointer-events-auto; }
+
+        .nav-backdrop {
+            @apply absolute inset-0 bg-black/20 backdrop-blur-sm opacity-0 transition-opacity duration-500;
+        }
+        html[data-nav-state="open"] .nav-backdrop { @apply opacity-100; }
+
+        .nav-card {
+            @apply absolute top-6 right-6 w-72 bg-[#0b0f14]/90 border border-white/10 rounded-[var(--br-card)] p-6 
+                   shadow-[0_20px_50px_rgba(0,0,0,0.5)] opacity-0 scale-95 transition-all duration-300 ease-out;
+            backdrop-filter: blur(20px);
+        }
+        html[data-nav-state="open"] .nav-card { @apply opacity-100 scale-100; }
+
+        /* --- MENU HEADER (Title + Close) --- */
+        .nav-head { @apply flex justify-between items-center mb-8; }
+        .menu-close-btn {
+            @apply w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-neon transition-all;
+        }
+
+        /* --- EXTERNAL TERMINAL STATUS (Bottom Left) --- */
+        #global-terminal-hint {
+            @apply fixed bottom-8 left-8 z-[110] font-mono text-[11px] text-neon opacity-40 transition-all duration-300 pointer-events-none;
+            text-shadow: 0 0 5px var(--color-neon-dim);
+        }
+        .hint-active #global-terminal-hint { @apply opacity-100; }
+
+        /* --- GLITCH LINK EFFECT --- */
+        .nav-link {
+            @apply block font-mono text-xl text-zinc-400 py-1 transition-all relative;
+        }
+        .nav-link:hover {
+            @apply text-white translate-x-2;
+            text-shadow: 2px 0 #f0f, -2px 0 var(--color-neon);
+        }
+    </style>
+</head>
+<body class="selection:bg-neon selection:text-black font-mono">
+
+    <header class="fixed top-0 w-full z-[150] px-8 h-20 flex justify-between items-center">
+        <div class="font-bold text-neon tracking-tighter text-sm uppercase">ABTEILUNG83 // KERNEL</div>
+        
+        <button id="nav-trigger" class="a83-burger" aria-label="Toggle Menu">
+            <span class="a83-burger-inner"></span>
+        </button>
+    </header>
+
+    <section id="nav-overlay">
+        <div class="nav-backdrop"></div>
+        
+        <div class="nav-card">
+            <div class="nav-head">
+                <span class="text-[10px] tracking-[0.3em] text-zinc-500 font-bold uppercase">Menu</span>
+                <button class="menu-close-btn" id="nav-close">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <nav class="nav-menu space-y-2">
+                <a href="/" class="nav-link" data-title="Home">Home</a>
+                <a href="/about" class="nav-link" data-title="About">About</a>
+                <a href="/service" class="nav-link" data-title="Service">Service</a>
+                <a href="/process" class="nav-link" data-title="Process">Process</a>
+                <a href="/work" class="nav-link" data-title="Work">Work</a>
+                <a href="/contact" class="nav-link" data-title="Contact">Contact</a>
+            </nav>
+        </div>
+    </section>
+
+    <div id="global-terminal-hint">
+        <span class="opacity-50">_ $</span> <span id="cmd-output">lynx /root</span>
+    </div>
+
+    <main class="flex items-center justify-center min-h-screen p-12 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neon/5 via-transparent to-transparent pointer-events-none"></div>
+        
+        <div class="text-center z-10">
+            <h1 class="text-5xl md:text-8xl font-bold text-white tracking-tighter mb-4 italic opacity-10">NEONLIGHT</h1>
+            <p class="text-zinc-600 text-sm tracking-widest uppercase">System ready for deployment_</p>
+        </div>
+    </main>
+
+    <script>
+        const html = document.documentElement;
+        const burger = document.getElementById('nav-trigger');
+        const closeBtn = document.getElementById('nav-close');
+        const hint = document.getElementById('global-terminal-hint');
+        const cmdOutput = document.getElementById('cmd-output');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Logic: Menu Toggle [cite: 202, 261]
+        const toggleMenu = () => {
+            const isOpen = html.getAttribute('data-nav-state') === 'open';
+            if (!isOpen) {
+                html.setAttribute('data-nav-state', 'open');
+                burger.classList.add('is-open');
+            } else {
+                html.setAttribute('data-nav-state', 'closed');
+                burger.classList.remove('is-open');
+            }
+        };
+
+        burger.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+
+        // Logic: Floating Terminal Hint [cite: 179, 301]
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                const title = link.getAttribute('data-title');
+                document.body.classList.add('hint-active');
+                cmdOutput.innerText = `lynx /${title}`;
+            });
+            link.addEventListener('mouseleave', () => {
+                document.body.classList.remove('hint-active');
+                cmdOutput.innerText = 'lynx /root';
+            });
+        });
+
+        // ESC Key Handling [cite: 263]
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && html.getAttribute('data-nav-state') === 'open') {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+</html>

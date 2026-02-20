@@ -1,17 +1,31 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NeonRainBackground from '../components/islands/NeonRainBackground.astro';
+import HeroTerminal from '../components/blocks/HeroTerminal.astro';
+import CommandPalette from '../components/islands/CommandPalette.astro';
+import Pill from '../components/ui/Pill.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Less Noise. Nice Data. No Bloat.">
+  <NeonRainBackground />
+
+  <main class="relative z-10 flex min-h-screen flex-col items-center justify-center p-6 overflow-hidden">
+    
+    <div class="w-full max-w-4xl">
+      <HeroTerminal />
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-4 justify-center interactive-element" data-sound="hover">
+      <Pill text="status: lighthouse > 90" theme="neon" />
+      <Pill text="engine: astro_v5" theme="dark" />
+      <Pill text="zero_bloat: true" theme="outline" />
+    </div>
+
+    <div class="absolute bottom-12 animate-pulse text-sm text-gray-500 font-mono tracking-widest">
+      Press <kbd class="bg-gray-800 border border-gray-700 rounded px-2 py-1 text-gray-300">Cmd</kbd> + <kbd class="bg-gray-800 border border-gray-700 rounded px-2 py-1 text-gray-300">K</kbd> to execute
+    </div>
+
+  </main>
+
+  <CommandPalette />
+</BaseLayout>

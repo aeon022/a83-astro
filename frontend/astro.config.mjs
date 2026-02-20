@@ -1,24 +1,20 @@
 // Dateipfad: frontend/astro.config.mjs
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import sitemap from '@astrojs/sitemap';
-import partytown from '@astrojs/partytown';
-import studioCMS from '@studiocms/astro';
+import studioCMS from 'studiocms';
+import node from '@astrojs/node';
 
 export default defineConfig({
+  site: 'http://localhost:4321',
+  // StudioCMS benötigt 'server' für die dynamische Middleware & Auth
+  output: 'server', 
+  adapter: node({
+    mode: 'standalone',
+  }),
+  integrations: [
+    studioCMS(),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [
-    sitemap(),
-    partytown({
-      config: { forward: ['dataLayer.push'] },
-    }),
-    studioCMS({
-      // Basis-Konfiguration für StudioCMS
-      dbStartPage: true,
-      imageService: 'astro',
-    })
-  ],
-  prefetch: true,
 });

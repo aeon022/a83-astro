@@ -1,0 +1,138 @@
+---
+---
+<canvas id="real-neon-rain" class="fixed inset-0 -z-10 bg-[#050505]"></canvas>
+
+<script>
+  const canvas = document.getElementById('real-neon-rain') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d', { alpha: false });
+
+  if (ctx) {
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    // BASIS-KALIBRIERUNG: Sattes Grün, dezentes Tempo
+    const rainColor = '0, 255, 102'; // Ein noch stechenderes Neon-Grün
+    const dropCount = 200; // Wieder etwas mehr Volumen
+    const splashCount = 20; 
+    let wind = 0.3; 
+
+    const random = (min: number, max: number) => Math.random() * (max - min) + min;
+
+    class Drop {
+      x: number = 0;
+      y: number = 0;
+      length: number = 0;
+      speed: number = 0;
+      opacity: number = 0;
+      layer: number = 0;
+
+      constructor() {
+        this.reset(true);
+      }
+
+      reset(initial = false) {
+        this.layer = Math.floor(random(1, 4));
+        this.x = random(0, width);
+        this.y = initial ? random(-height, height) : random(-100, 0);
+        
+        // TEMPO: Bleibt entspannt (Ghost in the Shell Vibe)
+        this.speed = this.layer * random(1.2, 2.5); 
+        this.length = this.layer * random(12, 25);
+        // SICHTBARKEIT: Wieder hochgeschraubt für das "Grüne" Feeling
+        this.opacity = this.layer * 0.12; 
+      }
+
+      update() {
+        this.y += this.speed;
+        this.x += wind * this.layer * 0.2;
+
+        if (this.y > height) {
+          if (this.layer > 1.5) createSplash(this.x, height); 
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        // Glow-Effekt durch leicht höhere Opacity
+        ctx.strokeStyle = `rgba(${rainColor}, ${this.opacity})`;
+        ctx.lineWidth = this.layer * 0.4; 
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x - (wind * this.layer), this.y - this.length);
+        ctx.stroke();
+      }
+    }
+
+    class Splash {
+      x: number;
+      y: number;
+      radius: number;
+      opacity: number;
+      speed: number;
+
+      constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+        this.radius = random(0.8, 2);
+        this.speed = random(0.3, 0.6);
+        this.opacity = 0.3;
+      }
+
+      update() {
+        this.radius += this.speed;
+        this.opacity -= 0.008;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${rainColor}, ${this.opacity})`;
+        ctx.lineWidth = 0.8;
+        ctx.ellipse(this.x, this.y, this.radius * 2.5, this.radius * 0.6, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    let drops: Drop[] = Array.from({ length: dropCount }, () => new Drop());
+    let splashes: Splash[] = [];
+
+    function createSplash(x: number, y: number) {
+      if (splashes.length < splashCount) {
+        splashes.push(new Splash(x, y));
+      }
+    }
+
+    function animate() {
+      ctx.fillStyle = '#050505'; 
+      ctx.fillRect(0, 0, width, height);
+
+      drops.forEach(drop => {
+        drop.update();
+        drop.draw();
+      });
+
+      splashes = splashes.filter(splash => splash.opacity > 0);
+      splashes.forEach(splash => {
+        splash.update();
+        splash.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      drops = Array.from({ length: dropCount }, () => new Drop());
+    });
+  }
+</script>
+
+<style>
+  canvas {
+    /* Minimaler Blur für den analogen Film-Look */
+    filter: blur(0.6px) drop-shadow(0 0 2px rgba(0, 255, 102, 0.2));
+    pointer-events: none;
+  }
+</style>

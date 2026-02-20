@@ -1,0 +1,710 @@
+<!-- Dateipfad: drafts/home-v1-glitch-terminal.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>ABTEILUNG83 — Webdesign / Dev / Cyberpunk Ops</title>
+  <style>
+    :root{
+      --bg:#070A08;
+      --panel:#0B110D;
+      --panel2:#090E0B;
+      --line:rgba(160,255,190,.16);
+      --line2:rgba(160,255,190,.08);
+      --txt:rgba(220,255,235,.88);
+      --muted:rgba(220,255,235,.62);
+      --brand:#B7FF3C;   /* olive neon */
+      --brand2:#35FFA6;  /* mint neon */
+      --warn:#FF3D7F;    /* magenta accent */
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--txt);
+      background:
+        radial-gradient(1200px 700px at 15% 15%, rgba(183,255,60,.12), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(53,255,166,.10), transparent 60%),
+        radial-gradient(700px 500px at 65% 95%, rgba(255,61,127,.08), transparent 60%),
+        linear-gradient(180deg, #050806, #070A08 22%, #050806);
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:1140px; margin:0 auto; padding:24px; }
+    .noise::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      opacity:.06;
+      pointer-events:none;
+      mix-blend-mode:overlay;
+      z-index:50;
+    }
+    .scanlines::after{
+      content:"";
+      position:fixed; inset:0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.02) 0px,
+        rgba(255,255,255,.02) 1px,
+        rgba(0,0,0,0) 3px,
+        rgba(0,0,0,0) 6px
+      );
+      opacity:.25;
+      pointer-events:none;
+      mix-blend-mode:overlay;
+      z-index:60;
+    }
+    header{
+      position:sticky; top:0; z-index:40;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(7,10,8,.78), rgba(7,10,8,.35));
+      border-bottom:1px solid var(--line2);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-family:var(--mono); letter-spacing:.06em;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(183,255,60,.35), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(53,255,166,.25), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.25));
+      border:1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, rgba(183,255,60,.0), rgba(183,255,60,.35), rgba(53,255,166,.35), rgba(255,61,127,.22), rgba(183,255,60,.0));
+      animation: spin 8s linear infinite;
+      filter: blur(10px);
+      opacity:.75;
+    }
+    @keyframes spin{ to{ transform:rotate(360deg);} }
+    .brand strong{ color:rgba(220,255,235,.92); }
+    .brand em{ color:var(--brand); font-style:normal; }
+    .links{
+      display:flex; gap:16px; align-items:center;
+      font-family:var(--mono); font-size:13px; color:var(--muted);
+    }
+    .links a{ padding:8px 10px; border-radius:12px; border:1px solid transparent; }
+    .links a:hover{ border-color:var(--line); color:rgba(220,255,235,.9); background:rgba(11,17,13,.55); }
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      font-family:var(--mono);
+      font-size:13px; letter-spacing:.02em;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(11,17,13,.85), rgba(9,14,11,.85));
+      box-shadow: var(--shadow);
+      display:inline-flex; gap:10px; align-items:center;
+      transition: transform .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color:rgba(183,255,60,.35); }
+    .btn.primary{
+      border-color: rgba(183,255,60,.35);
+      background: linear-gradient(180deg, rgba(183,255,60,.15), rgba(11,17,13,.85));
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: var(--brand2);
+      box-shadow: 0 0 18px rgba(53,255,166,.45);
+    }
+
+    /* Hero */
+    .hero{
+      padding:42px 0 18px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+    .card{
+      border:1px solid var(--line2);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(11,17,13,.75), rgba(9,14,11,.75));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(800px 380px at 15% 10%, rgba(183,255,60,.12), transparent 60%),
+        radial-gradient(700px 300px at 90% 40%, rgba(53,255,166,.10), transparent 60%),
+        linear-gradient(90deg, rgba(183,255,60,.0), rgba(183,255,60,.04), rgba(53,255,166,.0));
+      opacity:.85;
+      pointer-events:none;
+    }
+    .hero-main{ padding:26px 24px; min-height: 360px; }
+    .kicker{
+      font-family:var(--mono);
+      color:rgba(220,255,235,.72);
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      display:flex; gap:10px; align-items:center;
+    }
+    .kicker .tag{
+      padding:4px 8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(7,10,8,.35);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    h1 .glow{
+      color:rgba(220,255,235,.94);
+      text-shadow: 0 0 22px rgba(183,255,60,.12), 0 0 40px rgba(53,255,166,.10);
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      max-width: 60ch;
+      line-height:1.55;
+    }
+    .terminal{
+      margin-top:18px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(7,10,8,.45);
+      overflow:hidden;
+    }
+    .term-top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 12px;
+      border-bottom:1px solid var(--line2);
+      font-family:var(--mono);
+      font-size:12px;
+      color:rgba(220,255,235,.70);
+    }
+    .term-dots{ display:flex; gap:7px; }
+    .term-dots span{
+      width:9px;height:9px;border-radius:99px;border:1px solid var(--line);
+      background: rgba(11,17,13,.9);
+    }
+    .term-body{
+      padding:12px 12px 14px;
+      font-family:var(--mono);
+      font-size:13px;
+      line-height:1.55;
+      color:rgba(220,255,235,.86);
+    }
+    .prompt{ color: rgba(183,255,60,.92); }
+    .path{ color: rgba(53,255,166,.88); }
+    .cmd{ color: rgba(220,255,235,.88); }
+    .mut{ color: rgba(220,255,235,.58); }
+    .blink{
+      display:inline-block;
+      width:8px; height:14px;
+      background: rgba(183,255,60,.7);
+      margin-left:4px;
+      animation: blink 1.05s steps(1,end) infinite;
+      vertical-align:-2px;
+    }
+    @keyframes blink{ 50%{ opacity:0; } }
+
+    /* Side panel */
+    .hero-side{ padding:18px; display:flex; flex-direction:column; gap:12px; }
+    .metric{
+      border:1px solid var(--line2);
+      background: rgba(7,10,8,.30);
+      border-radius: 16px;
+      padding:14px;
+    }
+    .metric .label{
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(220,255,235,.62);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+    }
+    .metric .value{
+      margin-top:10px;
+      font-family:var(--mono);
+      font-size:18px;
+      color:rgba(220,255,235,.92);
+    }
+    .bar{
+      margin-top:10px;
+      height:10px;
+      border-radius:99px;
+      background: rgba(220,255,235,.08);
+      overflow:hidden;
+      border:1px solid var(--line2);
+    }
+    .bar > i{
+      display:block; height:100%;
+      width: 62%;
+      background: linear-gradient(90deg, rgba(183,255,60,.55), rgba(53,255,166,.55));
+      filter: blur(.0px);
+      box-shadow: 0 0 18px rgba(183,255,60,.16);
+    }
+    .stack{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:10px;
+    }
+    .pill{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line2);
+      background: rgba(11,17,13,.55);
+      color:rgba(220,255,235,.78);
+    }
+    .pill.hot{ border-color: rgba(183,255,60,.28); color: rgba(220,255,235,.9); }
+
+    /* Sections */
+    section{ margin-top:22px; }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+    .col-6{ grid-column: span 6; }
+    .col-4{ grid-column: span 4; }
+    .col-8{ grid-column: span 8; }
+    @media (max-width: 920px){
+      .col-6,.col-4,.col-8{ grid-column: span 12; }
+    }
+    .sec-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:16px; margin-bottom:12px;
+    }
+    .sec-head h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.02em;
+      font-family:var(--mono);
+      color:rgba(220,255,235,.88);
+    }
+    .sec-head p{
+      margin:0;
+      color:var(--muted);
+      max-width: 70ch;
+      font-size:14px;
+    }
+    .tile{
+      padding:16px;
+      border-radius: 18px;
+      border:1px solid var(--line2);
+      background: linear-gradient(180deg, rgba(11,17,13,.55), rgba(9,14,11,.55));
+      position:relative;
+      overflow:hidden;
+      min-height: 140px;
+    }
+    .tile::after{
+      content:"";
+      position:absolute; inset:-1px;
+      background: linear-gradient(90deg, transparent, rgba(183,255,60,.07), transparent);
+      transform: translateX(-60%);
+      animation: sweep 6s ease-in-out infinite;
+      pointer-events:none;
+      opacity:.85;
+    }
+    @keyframes sweep{
+      0%, 65%{ transform: translateX(-70%); opacity:.0; }
+      75%{ opacity:.8; }
+      100%{ transform: translateX(70%); opacity:.0; }
+    }
+    .tile h3{
+      margin:0 0 8px;
+      font-family:var(--mono);
+      font-size:14px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:rgba(220,255,235,.86);
+    }
+    .tile p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:14px;
+    }
+    .tile .meta{
+      margin-top:12px;
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .code{
+      margin-top:12px;
+      font-family:var(--mono);
+      font-size:12px;
+      color:rgba(220,255,235,.70);
+      border-top:1px dashed var(--line2);
+      padding-top:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .code b{ color:rgba(183,255,60,.9); font-weight:600; }
+
+    footer{
+      margin-top:28px;
+      padding:18px 0 32px;
+      border-top:1px solid var(--line2);
+      color:rgba(220,255,235,.60);
+      font-family:var(--mono);
+      font-size:12px;
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;
+    }
+
+    /* Glitch */
+    .glitch{
+      position:relative;
+      display:inline-block;
+    }
+    .glitch::before,
+    .glitch::after{
+      content: attr(data-text);
+      position:absolute;
+      left:0; top:0;
+      width:100%;
+      overflow:hidden;
+      color: rgba(53,255,166,.85);
+      opacity:.0;
+      pointer-events:none;
+    }
+    .glitch::before{ transform: translate(1px, 0); }
+    .glitch::after{ transform: translate(-1px, 0); color: rgba(255,61,127,.78); }
+    .glitch.on::before{ opacity:.65; clip-path: inset(0 0 58% 0); }
+    .glitch.on::after{ opacity:.55; clip-path: inset(52% 0 0 0); }
+
+    .kbd{
+      font-family:var(--mono);
+      font-size:12px;
+      border:1px solid var(--line2);
+      background: rgba(7,10,8,.35);
+      padding:4px 7px;
+      border-radius:10px;
+      color:rgba(220,255,235,.76);
+    }
+  </style>
+</head>
+
+<body class="noise scanlines">
+  <header>
+    <div class="wrap nav">
+      <div class="brand" aria-label="ABTEILUNG83">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div><strong>ABTEILUNG</strong><em>83</em></div>
+          <div style="font-size:12px;color:rgba(220,255,235,.58)">less noise · nice data · no bloat</div>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="Hauptnavigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#cases">Cases</a>
+        <a href="#stack">Stack</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn" href="#cases" title="Show, don't tell.">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Work</span>
+        </a>
+        <a class="btn primary" href="#kontakt">
+          <span class="kbd">↵</span>
+          <span>Projekt anstoßen</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <div class="card hero-main">
+        <div class="kicker">
+          <span class="tag">Cyberpunk Studio</span>
+          <span class="tag">Astro · TS · Tailwind v4</span>
+          <span class="tag">Ops-ready</span>
+        </div>
+
+        <h1>
+          <span class="glow glitch" id="glitchTitle" data-text="Websites wie ein Deploy.">
+            Websites wie ein Deploy.
+          </span>
+        </h1>
+        <p class="sub">
+          ABTEILUNG83 baut schnelle, wartbare Frontends und CMS-Setups mit Fokus auf Struktur, Performance und Conversion.
+          Kein Bloat. Kein Theater. Nur saubere Delivery.
+        </p>
+
+        <div class="terminal" role="region" aria-label="Terminal Preview">
+          <div class="term-top">
+            <div class="term-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div>session: a83@prod / status: green</div>
+            <div class="mut">press <span class="kbd">G</span> to glitch</div>
+          </div>
+          <div class="term-body">
+            <div><span class="prompt">a83</span>:<span class="path">~/frontend</span>$ <span class="cmd" id="typed"></span><span class="blink" aria-hidden="true"></span></div>
+            <div class="mut" style="margin-top:8px" id="out"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <a class="btn primary" href="#kontakt"><span>⚡</span><span>Call in 15min</span></a>
+          <a class="btn" href="#leistungen"><span>→</span><span>Leistungspaket ansehen</span></a>
+          <a class="btn" href="#cases"><span>⌁</span><span>Cases checken</span></a>
+        </div>
+      </div>
+
+      <aside class="card hero-side">
+        <div class="metric">
+          <div class="label">
+            <span>Delivery Mode</span><span class="kbd">LIVE</span>
+          </div>
+          <div class="value">Performance First</div>
+          <div class="bar" aria-hidden="true"><i></i></div>
+          <div class="stack">
+            <span class="pill hot">Audit</span>
+            <span class="pill">UX</span>
+            <span class="pill">Build</span>
+            <span class="pill">Deploy</span>
+            <span class="pill">Care</span>
+          </div>
+        </div>
+
+        <div class="metric">
+          <div class="label">
+            <span>Scope</span><span class="kbd">NO BLOAT</span>
+          </div>
+          <div class="value">Less Noise</div>
+          <div class="stack">
+            <span class="pill">Astro Islands</span>
+            <span class="pill">Edge Cache</span>
+            <span class="pill">Image Pipeline</span>
+            <span class="pill">SEO</span>
+            <span class="pill">Tracking (lean)</span>
+          </div>
+        </div>
+
+        <div class="metric">
+          <div class="label">
+            <span>Onboarding</span><span class="kbd">72h</span>
+          </div>
+          <div class="value">Kickoff → Plan → Repo</div>
+          <div class="stack">
+            <span class="pill hot">MASTER_CONCEPT</span>
+            <span class="pill">Conventional Commits</span>
+            <span class="pill">Docker Builds</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section id="leistungen">
+      <div class="sec-head">
+        <div>
+          <h2>Leistungen</h2>
+          <p>Modular, messbar, wartbar. Du bekommst ein System, kein Strohfeuer.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="tile col-4">
+          <h3>UI/UX mit System</h3>
+          <p>Cyberpunk-Ästhetik, aber sauber. Wireframes → Komponenten → UI-Kit. Fokus: Klarheit, Hierarchie, Flow.</p>
+          <div class="meta">
+            <span class="pill">Headspin.UI</span><span class="pill">Design Tokens</span><span class="pill">A11y</span>
+          </div>
+          <div class="code"><b>output</b> /frontend/src/components/*</div>
+        </div>
+
+        <div class="tile col-4">
+          <h3>Astro Frontend</h3>
+          <p>Astro (latest) + TypeScript + Tailwind v4. Inseln nur wo nötig. Lighthouse ist keine Deko.</p>
+          <div class="meta">
+            <span class="pill hot">Astro</span><span class="pill">TS strict</span><span class="pill">Tailwind v4</span>
+          </div>
+          <div class="code"><b>cmd</b> npm run build</div>
+        </div>
+
+        <div class="tile col-4">
+          <h3>CMS / Content Ops</h3>
+          <p>StudioCMS (Astro-nativ) oder Directus (Docker) — Rollen, Collections, Workflows. Content wird skalierbar.</p>
+          <div class="meta">
+            <span class="pill">StudioCMS</span><span class="pill">Directus</span><span class="pill">Postgres</span><span class="pill">Redis</span>
+          </div>
+          <div class="code"><b>policy</b> live builds via docker</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases">
+      <div class="sec-head">
+        <div>
+          <h2>Cases</h2>
+          <p>Platzhalter-Kacheln für deine echten Projekte. Ersetze Titel, KPI, Link.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <a class="tile col-6" href="#" aria-label="Case 01">
+          <h3>Case 01 — Relaunch / Conversion</h3>
+          <p>Hero-Story, klare Services, saubere CTA-Kette. Tracking nur dort, wo es zählt.</p>
+          <div class="meta">
+            <span class="pill hot">+38% Leads</span><span class="pill">TTFB -45%</span><span class="pill">SEO Fix</span>
+          </div>
+          <div class="code"><b>stack</b> Astro · TS · Tailwind v4</div>
+        </a>
+
+        <a class="tile col-6" href="#" aria-label="Case 02">
+          <h3>Case 02 — CMS Setup / Workflows</h3>
+          <p>Collections, Rollen, Preview-Flow. Redakteure arbeiten schnell, ohne dir in die Quere zu kommen.</p>
+          <div class="meta">
+            <span class="pill hot">Directus</span><span class="pill">Docker</span><span class="pill">Schema Sync</span>
+          </div>
+          <div class="code"><b>ops</b> schema apply · types gen</div>
+        </a>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="sec-head">
+        <div>
+          <h2>Stack</h2>
+          <p>Dein aktueller Rahmen: Astro + Tailwind v4 via Vite. Builds über Docker. Server: Ubuntu 24.04 + Plesk.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="tile col-8">
+          <h3>Engineering</h3>
+          <p>Strict TypeScript, keine Any-Schleichwege. Komponenten sind klein, wiederverwendbar und testbar. Assets optimiert, Fonts sauber.</p>
+          <div class="meta">
+            <span class="pill hot">TS strict</span><span class="pill">No bloat</span><span class="pill">Perf budgets</span><span class="pill">SEO</span>
+          </div>
+          <div class="code"><b>rule</b> open VS Code nur /frontend</div>
+        </div>
+        <div class="tile col-4">
+          <h3>Ops</h3>
+          <p>Docker-only builds am Server, keine npm-Orgien live. Logs zuerst, dann Fix.</p>
+          <div class="meta">
+            <span class="pill">Nginx Proxy</span><span class="pill">Plesk</span><span class="pill hot">Docker</span>
+          </div>
+          <div class="code"><b>cmd</b> docker compose up -d</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="sec-head">
+        <div>
+          <h2>Kontakt</h2>
+          <p>Minimaler Kontaktblock. Wenn du willst: Formular / Calendly / Mailto – lean.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="tile col-8">
+          <h3>Projekt anstoßen</h3>
+          <p>Schick 3 Infos: Ziel, Deadline, Content-Status. Du bekommst ein sauberes Setup + Plan.</p>
+          <div class="meta">
+            <span class="pill hot">Ziel</span><span class="pill">Deadline</span><span class="pill">Content</span>
+          </div>
+          <div class="code"><b>mail</b> hello@abteilung83.com</div>
+        </div>
+        <div class="tile col-4">
+          <h3>Quick Links</h3>
+          <p><span class="kbd">↳</span> CMS: /cms<br><span class="kbd">↳</span> Repo: private<br><span class="kbd">↳</span> Status: green</p>
+          <div class="meta">
+            <span class="pill">Impressum</span><span class="pill">Datenschutz</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> ABTEILUNG83</div>
+      <div>Less Noise · Nice Data · No Bloat</div>
+      <div>build: draft/v1</div>
+    </footer>
+  </main>
+
+  <script>
+    // Minimal JS: typing + glitch toggle. No deps.
+    const yearEl = document.getElementById('y');
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+    const title = document.getElementById('glitchTitle');
+    const typed = document.getElementById('typed');
+    const out = document.getElementById('out');
+
+    const lines = [
+      { cmd: "npm run build", out: "✔ build ok  ·  0 warnings  ·  output: /dist" },
+      { cmd: "npm run preview", out: "➜ local: http://localhost:4321  ·  ready" },
+      { cmd: "docker compose up -d", out: "✔ services up  ·  proxy online  ·  status: green" },
+    ];
+
+    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function typeLine(text){
+      if (!typed) return;
+      typed.textContent = "";
+      for (let i=0;i<text.length;i++){
+        typed.textContent += text[i];
+        await sleep(18 + Math.random()*26);
+      }
+    }
+
+    async function run(){
+      for (const l of lines){
+        await typeLine(l.cmd);
+        if (out) out.textContent = "";
+        await sleep(220);
+        if (out) out.textContent = l.out;
+        await sleep(1100);
+      }
+      run();
+    }
+    run();
+
+    function glitchPulse(){
+      if (!title) return;
+      title.classList.add('on');
+      setTimeout(()=> title.classList.remove('on'), 140);
+    }
+    // periodic subtle glitch
+    setInterval(()=> { if (Math.random() < 0.45) glitchPulse(); }, 1400);
+
+    // keyboard: G triggers hard glitch
+    window.addEventListener('keydown', (e)=>{
+      if ((e.key || "").toLowerCase() === "g"){
+        glitchPulse();
+      }
+    });
+  </script>
+</body>
+</html>

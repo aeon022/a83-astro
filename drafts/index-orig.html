@@ -1,0 +1,1052 @@
+<!-- Dateipfad: frontend/public/index.html -->
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ABTEILUNG83 – Webdesign das knallt. Wie Neonlicht im Regen!</title>
+  <meta name="description" content="Webdesign, das knallt. Wie Neonlicht im Regen. Less Noise. Nice Data. No Bloat." />
+
+  <!-- Fonts (optional, kept lean) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --fg:#d8e4ff;
+      --muted:#8aa1c3;
+      --line:rgba(0,229,255,.22);
+      --neon:#00e5ff;
+      --magenta:#ff2ef3;
+      --card:rgba(11,15,20,.72);
+      --shadow:0 0 18px rgba(0,229,255,.18), 0 0 42px rgba(0,229,255,.08);
+      --shadow-hot:0 0 18px rgba(255,46,243,.22), 0 0 42px rgba(0,229,255,.12);
+      --r:18px;
+      --max:1120px;
+      --pad:clamp(16px,3vw,28px);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:radial-gradient(1200px 800px at 20% 10%, rgba(0,229,255,.10), transparent 55%),
+                 radial-gradient(900px 600px at 80% 20%, rgba(255,46,243,.08), transparent 60%),
+                 linear-gradient(180deg, #070a0f 0%, var(--bg) 40%, #070a0f 100%);
+      color:var(--fg);
+      font-family:var(--sans);
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img,video{max-width:100%;height:auto;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+    .sr-only{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+    /* Subtle grid */
+    .grid-overlay{
+      position:fixed;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:screen;
+      background:
+        linear-gradient(to right, rgba(0,229,255,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,229,255,.06) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(closest-side at 50% 20%, #000 0, transparent 70%);
+    }
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(180deg, rgba(11,15,20,.78), rgba(11,15,20,.52));
+      border-bottom:1px solid rgba(0,229,255,.10);
+    }
+    .head{
+      display:flex;align-items:center;justify-content:space-between;
+      min-height:64px;gap:16px;
+    }
+    .brand{
+      font-family:var(--mono);
+      font-weight:700;
+      letter-spacing:.4px;
+      padding:10px 0;
+      white-space:nowrap;
+    }
+    .brand code{
+      font-family:inherit;
+      color:rgba(216,228,255,.92);
+      text-shadow:0 0 10px rgba(0,229,255,.22);
+    }
+
+    /* Burger */
+    .burger{
+      display:inline-grid;place-items:center;
+      width:44px;height:44px;border-radius:12px;
+      border:1px solid rgba(0,229,255,.25);
+      background:rgba(11,15,20,.35);
+      box-shadow:var(--shadow);
+      cursor:pointer;
+    }
+    .burger:focus-visible{outline:2px solid rgba(0,229,255,.55);outline-offset:3px}
+    .burger-box{width:18px;height:12px;position:relative}
+    .burger-box i{
+      position:absolute;left:0;right:0;height:2px;border-radius:2px;
+      background:linear-gradient(90deg, rgba(0,229,255,.95), rgba(255,46,243,.65));
+      box-shadow:0 0 10px rgba(0,229,255,.22);
+      transition:transform .22s ease, opacity .22s ease, top .22s ease;
+    }
+    .burger-box i:nth-child(1){top:0}
+    .burger-box i:nth-child(2){top:5px}
+    .burger-box i:nth-child(3){top:10px}
+    body.nav-open .burger-box i:nth-child(1){top:5px;transform:rotate(45deg)}
+    body.nav-open .burger-box i:nth-child(2){opacity:0}
+    body.nav-open .burger-box i:nth-child(3){top:5px;transform:rotate(-45deg)}
+
+    /* Nav overlay */
+    .nav{
+      position:fixed;inset:0;z-index:60;
+      display:none;
+    }
+    body.nav-open .nav{display:block}
+    .nav__backdrop{
+      position:absolute;inset:0;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+    }
+    .nav__card{
+      position:absolute;right:var(--pad);top:calc(64px + var(--pad));
+      width:min(420px, calc(100% - (var(--pad) * 2)));
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(11,15,20,.92), rgba(11,15,20,.76));
+      border:1px solid rgba(0,229,255,.28);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+    .nav__head{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;margin-bottom:10px;
+    }
+    .nav__title{
+      font-family:var(--mono);
+      font-size:18px;
+      letter-spacing:.22em;
+      margin:0;
+      opacity:.9;
+    }
+    .nav__links{display:grid;gap:8px;margin-top:10px}
+    .nav__links a{
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(0,229,255,.14);
+      background:rgba(255,255,255,.02);
+      font-family:var(--mono);
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .nav__links a:hover{transform:translateY(-1px);border-color:rgba(0,229,255,.32);background:rgba(0,229,255,.05)}
+    .nav__hint{
+      margin-top:12px;
+      color:rgba(216,228,255,.75);
+      font-size:12px;
+      font-family:var(--mono);
+      opacity:.85;
+    }
+
+    /* Sections */
+    section{padding: clamp(52px, 7vw, 96px) 0}
+    .tone-light{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      border-top:1px solid rgba(0,229,255,.08);
+      border-bottom:1px solid rgba(0,229,255,.06);
+    }
+
+    /* Hero */
+    .hero{padding-top: clamp(34px, 4vw, 54px)}
+    .hero__grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:clamp(18px, 3vw, 34px);
+      align-items:center;
+    }
+    @media (max-width: 980px){
+      .hero__grid{grid-template-columns:1fr}
+    }
+
+    .kicker{
+      font-family:var(--mono);
+      color:rgba(216,228,255,.7);
+      font-size:13px;
+      margin:0 0 8px 0;
+    }
+    .h2{
+      margin:0;
+      font-size:clamp(28px, 3.2vw, 44px);
+      letter-spacing:-.02em;
+    }
+    .h1{
+      margin:2px 0 12px 0;
+      font-size:clamp(36px, 4.6vw, 64px);
+      line-height:1.02;
+      letter-spacing:-.03em;
+      text-shadow:
+        0 0 10px rgba(0,229,255,.16),
+        0 0 28px rgba(0,229,255,.10),
+        0 0 44px rgba(255,46,243,.08);
+    }
+    .neon{
+      background:linear-gradient(90deg, rgba(0,229,255,.98), rgba(255,46,243,.9));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      filter:drop-shadow(0 0 10px rgba(0,229,255,.22));
+    }
+
+    .hero__meta{
+      margin-top:10px;
+      display:grid;gap:6px;
+      font-family:var(--mono);
+      color:rgba(216,228,255,.78);
+    }
+    .hero__meta .term{display:inline-flex;align-items:center;gap:10px}
+    .prompt{
+      color:rgba(0,229,255,.9);
+      text-shadow:0 0 10px rgba(0,229,255,.25);
+    }
+    .lead{
+      margin:16px 0 0 0;
+      color:rgba(216,228,255,.85);
+      max-width:56ch;
+      font-size:clamp(15px, 1.4vw, 18px);
+    }
+
+    .btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 14px;border-radius:14px;
+      font-family:var(--mono);
+      border:1px solid rgba(0,229,255,.24);
+      background:rgba(11,15,20,.30);
+      box-shadow:var(--shadow);
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:rgba(0,229,255,.45);background:rgba(0,229,255,.06)}
+    .btn--secondary{
+      border-color:rgba(216,228,255,.14);
+      box-shadow:none;
+      background:rgba(255,255,255,.02);
+    }
+
+    /* Stage */
+    .stage{
+      position:relative;
+      border-radius:calc(var(--r) + 6px);
+      border:1px solid rgba(0,229,255,.20);
+      background:linear-gradient(180deg, rgba(11,15,20,.76), rgba(11,15,20,.42));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-height:420px;
+    }
+    .stage::before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:radial-gradient(800px 320px at 20% 20%, rgba(0,229,255,.15), transparent 60%),
+                 radial-gradient(520px 240px at 80% 30%, rgba(255,46,243,.12), transparent 62%);
+      pointer-events:none;
+    }
+    .stage__media{
+      position:absolute;inset:0;
+      display:grid;place-items:center;
+    }
+    .stage__media video{
+      width:100%;height:100%;
+      object-fit:cover;
+      opacity:.72;
+      filter:saturate(1.1) contrast(1.02);
+    }
+    .stage__overlay{
+      position:absolute;inset:0;
+      background:
+        linear-gradient(180deg, rgba(7,10,15,.25), rgba(7,10,15,.70)),
+        radial-gradient(600px 260px at 55% 25%, rgba(0,229,255,.10), transparent 65%);
+      pointer-events:none;
+    }
+    .stage__note{
+      position:absolute;left:18px;bottom:14px;right:18px;
+      font-family:var(--mono);
+      font-size:12px;
+      color:rgba(216,228,255,.72);
+      opacity:.9;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(0,229,255,.18);
+      background:rgba(0,0,0,.18);
+    }
+    .dot{
+      width:8px;height:8px;border-radius:99px;
+      background:rgba(0,229,255,.85);
+      box-shadow:0 0 12px rgba(0,229,255,.32);
+    }
+
+    /* Cards / blocks */
+    .block-head{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .block-head .tag{
+      font-family:var(--mono);
+      font-size:13px;
+      color:rgba(216,228,255,.66);
+    }
+    .block-head h3{
+      margin:6px 0 0 0;
+      font-size:clamp(24px, 2.4vw, 34px);
+      letter-spacing:-.02em;
+    }
+    .block-head p{margin:6px 0 0 0;color:rgba(216,228,255,.78)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width: 980px){.grid-3{grid-template-columns:1fr}}
+    .card{
+      border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(11,15,20,.78), rgba(11,15,20,.58));
+      border:1px solid rgba(0,229,255,.18);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .card h5{margin:0 0 6px 0;font-family:var(--mono);letter-spacing:.02em}
+    .card .mini{margin:0;color:rgba(216,228,255,.72);font-family:var(--mono);font-size:13px}
+    .card p{margin:10px 0 0 0;color:rgba(216,228,255,.82)}
+
+    /* Timeline */
+    .timeline{display:grid;gap:12px;margin-top:14px}
+    .step{
+      display:grid;grid-template-columns: 36px 1fr;
+      gap:12px;
+      padding:14px;border-radius:var(--r);
+      border:1px solid rgba(0,229,255,.14);
+      background:rgba(255,255,255,.02);
+    }
+    .step__n{
+      width:36px;height:36px;border-radius:12px;
+      display:grid;place-items:center;
+      font-family:var(--mono);
+      border:1px solid rgba(0,229,255,.24);
+      box-shadow:0 0 10px rgba(0,229,255,.12);
+      color:rgba(0,229,255,.9);
+    }
+    .step__meta{font-family:var(--mono);color:rgba(216,228,255,.78);font-size:13px}
+    .step h4{margin:6px 0 0 0}
+    .step p{margin:6px 0 0 0;color:rgba(216,228,255,.82)}
+
+    /* Tabs (Highlights) */
+    .tabs{margin-top:14px}
+    .tabs__nav{
+      display:flex;flex-wrap:wrap;gap:10px;
+      padding:10px;border-radius:var(--r);
+      border:1px solid rgba(0,229,255,.16);
+      background:rgba(11,15,20,.40);
+    }
+    .tabbtn{
+      font-family:var(--mono);
+      font-size:13px;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(216,228,255,.12);
+      background:rgba(255,255,255,.02);
+      cursor:pointer;
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .tabbtn[aria-selected="true"]{
+      border-color:rgba(0,229,255,.35);
+      background:rgba(0,229,255,.06);
+      box-shadow:0 0 14px rgba(0,229,255,.14);
+    }
+    .tabpanel{
+      margin-top:12px;
+      display:none;
+    }
+    .tabpanel[data-show="true"]{display:block}
+    .highlight{
+      display:grid;grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:center;
+    }
+    @media (max-width: 980px){.highlight{grid-template-columns:1fr}}
+    .mock{
+      border-radius:var(--r);
+      overflow:hidden;
+      border:1px solid rgba(0,229,255,.16);
+      background:rgba(0,0,0,.22);
+    }
+    .highlight h4{margin:0 0 8px 0}
+    .highlight p{margin:0;color:rgba(216,228,255,.82)}
+    .highlight .btnrow{margin-top:12px}
+
+    /* Service pricing cards */
+    .pricegrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width: 980px){.pricegrid{grid-template-columns:1fr}}
+    ul{margin:10px 0 0 0;padding-left:18px}
+    li{margin:6px 0;color:rgba(216,228,255,.84)}
+    .price{
+      font-family:var(--mono);
+      color:rgba(216,228,255,.72);
+      margin:0;
+    }
+    .fineprint{font-size:12px;color:rgba(216,228,255,.62);margin-top:10px}
+
+    /* Contact */
+    form{display:grid;gap:10px}
+    input,textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(0,229,255,.14);
+      background:rgba(0,0,0,.18);
+      color:var(--fg);
+      font-family:var(--mono);
+    }
+    input:focus,textarea:focus{outline:2px solid rgba(0,229,255,.35);outline-offset:2px}
+    textarea{resize:vertical;min-height:120px}
+    .formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width: 720px){.formrow{grid-template-columns:1fr}}
+
+    /* Footer */
+    footer{
+      padding:34px 0;
+      border-top:1px solid rgba(0,229,255,.10);
+      background:linear-gradient(180deg, rgba(11,15,20,.65), rgba(0,0,0,.15));
+    }
+    .foot{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+      font-family:var(--mono);
+      color:rgba(216,228,255,.72);
+      font-size:13px;
+    }
+    .sys{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(0,229,255,.18);
+      background:rgba(0,0,0,.18);
+    }
+
+    /* Back-to-top */
+    .top{
+      position:fixed;right:18px;bottom:18px;z-index:55;
+      width:44px;height:44px;border-radius:14px;
+      display:grid;place-items:center;
+      border:1px solid rgba(0,229,255,.22);
+      background:rgba(11,15,20,.40);
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      opacity:0;transform:translateY(10px);
+      transition:opacity .18s ease, transform .18s ease;
+    }
+    .top.show{opacity:1;transform:translateY(0)}
+    .top svg{width:18px;height:18px;fill:rgba(0,229,255,.9)}
+
+    /* Konami glitch boost */
+    .a83-konami body{}
+    html.a83-konami{
+      --neon: var(--magenta);
+      --shadow: var(--shadow-hot);
+    }
+    html.a83-konami .neon{
+      background:linear-gradient(90deg, rgba(255,46,243,.98), rgba(0,229,255,.9));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 0 12px rgba(255,46,243,.22));
+      animation:hue 2.2s linear infinite;
+    }
+    @keyframes hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap head">
+      <a class="brand" href="#top" aria-label="ABTEILUNG83 Start">
+        <code>const firma = "ABTEILUNG83";</code>
+      </a>
+
+      <button class="burger" id="navToggle" aria-label="Menü öffnen" aria-controls="navOverlay" aria-expanded="false">
+        <span class="burger-box" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Nav overlay -->
+  <aside class="nav" id="navOverlay" aria-hidden="true">
+    <div class="nav__backdrop" data-close="true"></div>
+    <div class="nav__card" role="dialog" aria-modal="true" aria-label="Navigation">
+      <div class="nav__head">
+        <h2 class="nav__title">MENU</h2>
+        <button class="btn btn--secondary" type="button" data-close="true">Close</button>
+      </div>
+
+      <nav class="nav__links" aria-label="Hauptnavigation">
+        <a href="#top">Home</a>
+        <a href="#about">About</a>
+        <a href="#service">Service</a>
+        <a href="#process">Process</a>
+        <a href="#work">Work</a>
+        <a href="#kontakt">Contact</a>
+      </nav>
+
+      <div class="nav__hint">Tip: ESC schließt. / Less Noise. Nice Data. No Bloat.</div>
+    </div>
+  </aside>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="wrap">
+        <div class="hero__grid">
+          <div>
+            <p class="kicker">/stack → WordPress + Breakdance/Oxygen (Legacy) • build → Astro + Tailwind v4 (Next)</p>
+            <h2 class="h2">Webdesign, das knallt.</h2>
+            <h1 class="h1 neon">Wie Neonlicht im Regen.</h1>
+
+            <div class="hero__meta">
+              <div class="term"><span class="prompt">›</span> Dein System-Upgrade steht an.</div>
+              <div class="term"><span class="prompt">›</span> EXECUTE website_build_v2.0</div>
+            </div>
+
+            <p class="lead">
+              Die digitale Welt ist laut, dunkel und voller Bugs. Abteilung 83 ist dein Fixer.
+              Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link,
+              sauber wie ein frisch gewischter Serverraum. ⮐
+            </p>
+
+            <div class="btnrow">
+              <a class="btn" href="mailto:post@abteilung83.com">sh start_project.sh</a>
+              <a class="btn btn--secondary" href="#work">open_work_vault()</a>
+            </div>
+          </div>
+
+          <div class="stage" aria-label="Showcase">
+            <div class="stage__media" aria-hidden="true">
+              <video
+                autoplay
+                muted
+                playsinline
+                loop
+                preload="metadata"
+                poster="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83.webp"
+              >
+                <source src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83-01-muted.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="stage__overlay" aria-hidden="true"></div>
+            <div class="stage__note">
+              <span class="chip"><span class="dot"></span> SYSTEM: ONLINE</span>
+              <span class="chip">/* keep it glitchy, not kitschy */</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRESH -->
+    <section class="tone-light" id="about" aria-label="Fresh">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="tag">/fresh → Fesch. Frisch. Future.</div>
+            <h3>Deploy ready. Less Noise. Nice Data. No Bloat.</h3>
+            <p>Webdesign das kompiliert. Für Menschen!</p>
+          </div>
+          <a class="btn" href="#highlights">/Highlights</a>
+        </div>
+
+        <div class="grid-3" id="highlights">
+          <div class="card">
+            <h5>Schnell.</h5>
+            <p class="mini">const lcp = "&lt; 2s";</p>
+            <p>Messbar flotter Start.</p>
+          </div>
+          <div class="card">
+            <h5>Lesbar.</h5>
+            <p class="mini">humanReadable(true)</p>
+            <p>Design & Code leicht wartbar.</p>
+          </div>
+          <div class="card">
+            <h5>Konform.</h5>
+            <p class="mini">privacy.on()</p>
+            <p>DSGVO & Consent korrekt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="tone-light" id="process" aria-label="Process">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="tag">/process → Timeline</div>
+            <h3>Process</h3>
+            <p>Dein Weg. Dein Ziel: Klarer Output. Built with empathy. Measured in ms.</p>
+          </div>
+          <button class="btn" type="button" data-scroll="#process">/Process</button>
+        </div>
+
+        <div class="timeline" role="list">
+          <div class="step" role="listitem">
+            <div class="step__n">1</div>
+            <div>
+              <div class="step__meta">run /initial --mode=discovery</div>
+              <h4>Briefing</h4>
+              <p>Ziele, Inhalte, Mood. Schärfen, Umfang fixen, To-dos priorisieren.</p>
+            </div>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step__n">2</div>
+            <div>
+              <div class="step__meta">commit: design-freeze</div>
+              <h4>Design</h4>
+              <p>Wireframe → UI. Struktur & Flow definieren. Visuelles Vokabular festlegen (clean-neon).</p>
+            </div>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step__n">3</div>
+            <div>
+              <div class="step__meta">build deploy --env=prod</div>
+              <h4>Build</h4>
+              <p>Sauberes HTML, Performance, CMS-Setup. Inhalte rein, suchbar machen.</p>
+            </div>
+          </div>
+
+          <div class="step" role="listitem">
+            <div class="step__n">4</div>
+            <div>
+              <div class="step__meta">status: lighthouse &gt; 90</div>
+              <h4>Ship</h4>
+              <p>Launch → Tracking → Handover. Live schalten. QA kann nie schaden. Ruhe nach dem Ship.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK HIGHLIGHTS -->
+    <section class="tone-light" id="work" aria-label="Work Highlights">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="tag">/work → Portfolio Highlights</div>
+            <h3>Highlights</h3>
+            <p>Weniger Blabla, mehr Builds. <span style="font-family:var(--mono);opacity:.85">commit: clean-ship</span></p>
+          </div>
+          <a class="btn" href="#work">/Work</a>
+        </div>
+
+        <div class="tabs" data-tabs>
+          <div class="tabs__nav" role="tablist" aria-label="Portfolio Tabs">
+            <button class="tabbtn" role="tab" aria-selected="true" aria-controls="t1" id="b1">Bornemann und Partner</button>
+            <button class="tabbtn" role="tab" aria-selected="false" aria-controls="t2" id="b2">TiNA – Wort- und Markenatelier</button>
+            <button class="tabbtn" role="tab" aria-selected="false" aria-controls="t3" id="b3">Messner GesmbH</button>
+          </div>
+
+          <div class="tabpanel" id="t1" role="tabpanel" aria-labelledby="b1" data-show="true">
+            <div class="highlight">
+              <div class="mock">
+                <img src="https://abteilung83.at/cms/wp-content/uploads/2025/10/bornemann-und-partner-mockup-ipad.webp" alt="Bornemann & Partner Mockup" loading="lazy">
+              </div>
+              <div class="card">
+                <h4>Bornemann & Partner · Consulting</h4>
+                <p>Führende Unternehmensberatung an der Schnittstelle von HR-Tradition und KI-Innovation.</p>
+                <div class="btnrow">
+                  <a class="btn" href="https://abteilung83.at/cms/work/bornemann-und-partner-consulting/" target="_blank" rel="noopener">open ./Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabpanel" id="t2" role="tabpanel" aria-labelledby="b2" data-show="false">
+            <div class="highlight">
+              <div class="mock">
+                <img src="https://abteilung83.at/cms/wp-content/uploads/2025/10/Tina-mockup-ipad.webp" alt="TiNA Mockup" loading="lazy">
+              </div>
+              <div class="card">
+                <h4>TiNA</h4>
+                <p>Pixel-genaue Umsetzung einer individuellen Markenidentität, Bewegung und Performance.</p>
+                <div class="btnrow">
+                  <a class="btn" href="https://abteilung83.at/cms/work/tina/" target="_blank" rel="noopener">open ./Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabpanel" id="t3" role="tabpanel" aria-labelledby="b3" data-show="false">
+            <div class="highlight">
+              <div class="mock">
+                <img src="https://abteilung83.at/cms/wp-content/uploads/2025/11/messner-wall2.webp" alt="Messner GesmbH" loading="lazy">
+              </div>
+              <div class="card">
+                <h4>Messner GesmbH</h4>
+                <p>“Blättern-Gefühl” statt Scroll-Durch. Print-Qualität in den Browser übersetzt.</p>
+                <div class="btnrow">
+                  <a class="btn" href="https://abteilung83.at/cms/work/messner-graz/" target="_blank" rel="noopener">open ./Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:18px;color:rgba(216,228,255,.7);font-family:var(--mono)">
+          “A user interface is like a joke. If you have to explain it, it's not that good.” – Martin Cooper
+        </p>
+      </div>
+    </section>
+
+    <!-- TECH & STACK -->
+    <section class="tone-light" id="tech" aria-label="Tech & Stack">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="tag">/tech → Tools</div>
+            <h3>Tech & Stack</h3>
+            <p>Sauberer Code, leichte Assets. Human-readable. Machine-tested.</p>
+          </div>
+          <a class="btn" href="#tech">/More</a>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h5>[KERNEL] WordPress</h5>
+            <p class="mini">status: stable • updates: rolling</p>
+            <p>Battle-tested Content-Kernel. REST, WP-CLI, Roles/Capabilities. Ohne Vendor-Lock.</p>
+          </div>
+          <div class="card">
+            <h5>[BUILDER] Breakdance/Oxygen</h5>
+            <p class="mini">markup: clean • bloat: zero-shortcode</p>
+            <p>Component-driven, sauberes HTML/ARIA, Bild-Pipelines, Motion ohne jQuery.</p>
+          </div>
+          <div class="card">
+            <h5>[IDE] VS CODE</h5>
+            <p class="mini">schnelle Iteration • sauberer Git-Flow</p>
+            <p>Tasks, Debug, ESLint/Prettier, Docker, GitLens. Stabiler Workflow.</p>
+          </div>
+        </div>
+
+        <p style="margin-top:18px;color:rgba(216,228,255,.7);font-family:var(--mono)">
+          “If, at first, you do not succeed, call it version 1.0.” ― Khayri R.R. Woulfe
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA MAX -->
+    <section aria-label="CTA" style="position:relative;padding:86px 0">
+      <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
+        <video autoplay muted playsinline loop style="width:100%;height:100%;object-fit:cover;opacity:.55;filter:contrast(1.02) saturate(1.05)">
+          <source src="https://abteilung83.at/cms/wp-content/uploads/2024/12/cyberpunk-girl-standing-by-netting-fence-2023-11-27-05-35-08-utc.webm" type="video/webm" />
+        </video>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(7,10,15,.45), rgba(7,10,15,.82))"></div>
+      </div>
+      <div class="wrap" style="position:relative">
+        <div class="card" style="padding:22px">
+          <h3 style="margin:0 0 8px 0">“The best code is no code at all.”</h3>
+          <div class="btnrow">
+            <a class="btn" href="mailto:post@abteilung83.com">sh start_project.sh</a>
+            <a class="btn btn--secondary" href="#kontakt">POST /contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICE -->
+    <section class="tone-light" id="service" aria-label="Service">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="tag">/services → Modules</div>
+            <h3>SERVICE</h3>
+            <p>Weniger Blabla, mehr Builds. <span style="font-family:var(--mono);opacity:.85">commit: clean-ship</span></p>
+          </div>
+          <a class="btn" href="https://abteilung83.at/cms/service/" target="_blank" rel="noopener">/More</a>
+        </div>
+
+        <div class="pricegrid">
+          <div class="card">
+            <h4 style="margin:0 0 6px 0">One-Pager</h4>
+            <p class="price">// UNIT_PRICE: 1700.00 EUR</p>
+            <p style="margin:10px 0 0 0;color:rgba(216,228,255,.82)">Eine Seite, ein Ziel. Leads auf den Punkt.</p>
+
+            <p class="price" style="margin-top:12px">OUTPUT_PARAMETERS</p>
+            <ul>
+              <li>Deine Botschaft auf einer Spur – zero Noise, maximaler Impact.</li>
+              <li>Ideal für Launches & Kampagnen, die sofort zünden.</li>
+              <li>Hero-Story, Proof, Logos, CTA, Kontakt</li>
+              <li>Socials</li>
+            </ul>
+
+            <p class="price" style="margin-top:12px">BUILD_SUCCESS</p>
+            <ul>
+              <li>klare Conversion-Journey</li>
+              <li>Launch in Tagen</li>
+              <li>90+ Lighthouse</li>
+            </ul>
+
+            <div class="btnrow">
+              <a class="btn" href="mailto:post@abteilung83.com">sh start_project.sh</a>
+            </div>
+            <div class="fineprint">* Flatrate inkl. Korrekturschleife. Exkl. etwaige Lizenzen.</div>
+          </div>
+
+          <div class="card">
+            <h4 style="margin:0 0 6px 0">Multi-Pager</h4>
+            <p class="price">// BASE_PRICE: 2800.00 EUR+</p>
+            <p style="margin:10px 0 0 0;color:rgba(216,228,255,.82)">Strukturierter Markenauftritt. SEO-Breit.</p>
+
+            <p class="price" style="margin-top:12px">OUTPUT_PARAMETERS</p>
+            <ul>
+              <li>Strukturierter Auftritt mit Tiefe und klarer Navigation.</li>
+              <li>Für Wachstum: mehr Content, mehr Leads, weniger Reibung.</li>
+              <li>Landing, Leistungen, Cases, Portfolio, Team, Blog, Über uns, Kontakt</li>
+              <li>Socials</li>
+            </ul>
+
+            <p class="price" style="margin-top:12px">BUILD_SUCCESS</p>
+            <ul>
+              <li>skalierbar</li>
+              <li>sauber versioniert</li>
+              <li>Content-Wachstum</li>
+            </ul>
+
+            <div class="btnrow">
+              <a class="btn" href="mailto:post@abteilung83.com">sh start_project.sh</a>
+            </div>
+            <div class="fineprint">* Flatrate inkl. Korrekturschleife. Exkl. etwaige Lizenzen.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="tone-light" id="faq" aria-label="FAQ">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="tag">/faq → human-readable()</div>
+            <h3>## PROTOCOL: KNOWLEDGE_BASE</h3>
+            <p>? FAQ_PROTOCOL: Query_Access</p>
+          </div>
+          <a class="btn" href="https://abteilung83.at/cms/faqs/" target="_blank" rel="noopener">/Questions_overload</a>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h5>? TIMELINE: Deployment_Duration</h5>
+            <p><b>One-Pager</b><br>meist 1–2 Wochen (inkl. 1–2 Feedback-Runden). In Tagen wenn Inhalte fertig sind.</p>
+            <p><b>Multi-Pager</b><br>ca. 2–3 Wochen – abhängig von Seitenzahl & Content.</p>
+            <p><b>E-Commerce</b><br>3–5 Wochen. Integrationen/Varianten verlängern.</p>
+          </div>
+          <div class="card">
+            <h5>? DATAPACKET: Required_Payload</h5>
+            <p>Logo, CI/Farben, Kurztexte (USP, Leistungen), Bilder/Referenzen; für Shops zusätzlich Produktdaten.</p>
+          </div>
+          <div class="card">
+            <h5>? COMPLIANCE: Regulation_Check</h5>
+            <p>On-Page-Basics, schnelle Ladezeiten, Bild-Optimierung, Consent-Banner. Rechtstexte lieferst du.</p>
+          </div>
+        </div>
+
+        <p style="margin-top:18px;color:rgba(216,228,255,.7);font-family:var(--mono)">
+          “Data is a precious thing and will last longer than the systems themselves.” – Tim Berners-Lee
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="tone-light" id="kontakt" aria-label="Kontakt">
+      <div class="wrap">
+        <div class="block-head">
+          <div>
+            <div class="tag">/contact → Messages</div>
+            <h3>Kontakt & Drop_</h3>
+            <p>Human-readable. Machine-tested.</p>
+          </div>
+          <div class="sys"><span class="dot"></span> SYSTEM: ONLINE</div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card" style="grid-column:span 1">
+            <h5>DIRECT_LINE</h5>
+            <p style="font-family:var(--mono);margin:10px 0 0 0">+43 660 567 23 61</p>
+            <p style="font-family:var(--mono);margin:6px 0 0 0"><a href="mailto:post@abteilung83.com">post@abteilung83.com</a></p>
+            <p style="font-family:var(--mono);margin:6px 0 0 0">Graz, Austria</p>
+          </div>
+
+          <div class="card" style="grid-column:span 2">
+            <h5>INITIATE DATA TRANSFER</h5>
+            <form id="contactForm">
+              <div class="formrow">
+                <label class="sr-only" for="subject">SUBJECT_ID</label>
+                <input id="subject" name="subject" placeholder="SUBJECT_ID" required />
+
+                <label class="sr-only" for="email">CLIENT_EMAIL</label>
+                <input id="email" name="email" type="email" placeholder="CLIENT_EMAIL" required />
+              </div>
+
+              <label class="sr-only" for="message">MESSAGE_PAYLOAD</label>
+              <textarea id="message" name="message" placeholder="MESSAGE_PAYLOAD" required></textarea>
+
+              <button class="btn" type="submit">POST /contact</button>
+              <div id="formStatus" style="font-family:var(--mono);font-size:12px;color:rgba(216,228,255,.7)"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM READY CTA -->
+    <section aria-label="System Ready" style="padding:64px 0">
+      <div class="wrap">
+        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div>
+            <h3 style="margin:0;font-family:var(--mono)">// SYSTEM_READY</h3>
+            <p style="margin:8px 0 0 0;color:rgba(216,228,255,.72);font-family:var(--mono)">Awaiting input</p>
+          </div>
+          <a class="btn" href="mailto:post@abteilung83.com">[ INITIATE_PROJECT_PROTOCOL ]</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div>© <span id="year"></span> Abteilung83. Alle Rechte vorbehalten.</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="sys" href="https://abteilung83.at/cms/imprint/" target="_blank" rel="noopener">Impressum</a>
+        <a class="sys" href="https://abteilung83.at/cms/cookie-richtlinien/" target="_blank" rel="noopener">Cookie Richtlinien</a>
+        <a class="sys" href="https://abteilung83.at/cms/datenschutzerklaerung-eu/" target="_blank" rel="noopener">Datenschutz (EU)</a>
+      </div>
+      <div class="sys"><span class="dot"></span> SYSTEM: ONLINE</div>
+    </div>
+  </footer>
+
+  <button class="top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"/></svg>
+  </button>
+
+  <script>
+    (function () {
+      const $ = (s, r=document) => r.querySelector(s);
+      const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+      // Year
+      $("#year").textContent = String(new Date().getFullYear());
+
+      // Nav
+      const navToggle = $("#navToggle");
+      const navOverlay = $("#navOverlay");
+
+      function setNav(open){
+        document.body.classList.toggle("nav-open", open);
+        navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        navOverlay.setAttribute("aria-hidden", open ? "false" : "true");
+      }
+      navToggle.addEventListener("click", () => setNav(!document.body.classList.contains("nav-open")));
+      navOverlay.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t && t.getAttribute && t.getAttribute("data-close") === "true") setNav(false);
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setNav(false);
+      });
+      $$(".nav__links a").forEach(a => a.addEventListener("click", () => setNav(false)));
+
+      // Smooth scroll buttons
+      $$("[data-scroll]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const sel = btn.getAttribute("data-scroll");
+          const el = sel ? $(sel) : null;
+          if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+        });
+      });
+
+      // Tabs
+      const tabs = $("[data-tabs]");
+      if (tabs){
+        const btns = $$(".tabbtn", tabs);
+        const panels = $$(".tabpanel", tabs);
+
+        function activate(idx){
+          btns.forEach((b,i) => b.setAttribute("aria-selected", i===idx ? "true":"false"));
+          panels.forEach((p,i) => p.setAttribute("data-show", i===idx ? "true":"false"));
+        }
+        btns.forEach((b,i) => b.addEventListener("click", () => activate(i)));
+      }
+
+      // Back to top
+      const topBtn = $("#backToTop");
+      function onScroll(){
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+        topBtn.classList.toggle("show", y > 600);
+      }
+      window.addEventListener("scroll", onScroll, {passive:true});
+      onScroll();
+      topBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+
+      // Fake contact form handler (no backend in pure HTML)
+      const form = $("#contactForm");
+      const status = $("#formStatus");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        status.textContent = "OK: Payload captured. (Hook hier später an Mailpit/API/CMS)";
+        form.reset();
+        setTimeout(() => status.textContent = "", 3200);
+      });
+
+      // Konami (glitch boost)
+      const seq = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+      let i = 0;
+
+      function toast(msg){
+        const t = document.createElement("div");
+        t.textContent = msg;
+        t.style.cssText = [
+          "position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(10px)",
+          "background:#0b0f14;color:#e2f7ff;border:1px solid rgba(0,229,255,.5)",
+          "border-radius:12px;padding:.5rem .75rem;opacity:0;transition:all .22s ease",
+          "z-index:99999;box-shadow:0 0 12px rgba(0,229,255,.35);font:600 13px/1.2 var(--sans)"
+        ].join(";");
+        document.body.appendChild(t);
+        requestAnimationFrame(() => { t.style.opacity = "1"; t.style.transform = "translateX(-50%) translateY(0)"; });
+        setTimeout(() => { t.style.opacity="0"; t.style.transform="translateX(-50%) translateY(10px)"; }, 2200);
+        setTimeout(() => t.remove(), 2600);
+      }
+
+      function toggleKonami(){
+        const root = document.documentElement;
+        const active = root.classList.toggle("a83-konami");
+        toast(active ? "GLITCH MODE: ON" : "GLITCH MODE: OFF");
+        if (active) setTimeout(() => root.classList.remove("a83-konami"), 12000);
+      }
+
+      document.addEventListener("keydown", (e) => {
+        let k = e.key;
+        if (k && k.length === 1) k = k.toLowerCase();
+        if (k === seq[i]) {
+          i++;
+          if (i === seq.length){ i = 0; toggleKonami(); }
+        } else {
+          i = (k === "ArrowUp") ? 1 : 0;
+        }
+      }, true);
+    })();
+  </script>
+</body>
+</html>
