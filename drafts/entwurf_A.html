@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>ABTEILUNG83 — Konzept A (Clean Neon Editorial)</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:rgba(255,255,255,.03);
+      --line:rgba(255,255,255,.10);
+      --fg:#d8e4ff;
+      --muted:#8aa1c3;
+      --neon:#00e5ff;
+      --radius:18px;
+      --maxw:1120px;
+      --shadow: 0 0 18px rgba(0,229,255,.12);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; color:var(--fg); background:var(--bg);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,15,20,.92), rgba(11,15,20,.65));
+      border-bottom:1px solid var(--line);
+    }
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:14px 0;
+    }
+    .brand{
+      font-weight:700; letter-spacing:.2px;
+      padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+    }
+    .brand code{font-weight:700; color:var(--fg)}
+    .nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    .nav a{
+      padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+      color:var(--muted);
+    }
+    .nav a:hover{border-color:rgba(0,229,255,.35); color:var(--fg); box-shadow:var(--shadow)}
+    .cta{
+      padding:10px 14px; border-radius:14px;
+      border:1px solid rgba(0,229,255,.40);
+      background:rgba(0,229,255,.06);
+      color:var(--fg); font-weight:700;
+    }
+    .cta:hover{background:rgba(0,229,255,.10)}
+    .hero{
+      position:relative;
+      padding:56px 0 34px;
+    }
+    .glow{
+      position:absolute; inset:-200px -120px auto auto;
+      width:520px; height:520px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(0,229,255,.22), transparent 60%);
+      filter: blur(2px);
+      pointer-events:none;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.05fr .95fr; gap:28px;
+      align-items:center;
+    }
+    .kicker{color:var(--muted); font-weight:600}
+    h1,h2,h3{margin:0}
+    h2{font-size: clamp(20px, 2.2vw, 28px); color:var(--fg); font-weight:700}
+    h1{
+      font-size: clamp(38px, 4.5vw, 64px);
+      line-height:1.05;
+      letter-spacing:-.02em;
+      margin-top:10px;
+    }
+    .neon-underline{
+      display:inline-block;
+      padding-bottom:6px;
+      background:
+        linear-gradient(to right, rgba(0,229,255,.0), rgba(0,229,255,.0)) 0 100%/100% 6px no-repeat;
+      border-bottom: 2px solid rgba(0,229,255,.55);
+      text-shadow: 0 0 10px rgba(0,229,255,.18);
+    }
+    .sub{
+      margin-top:16px; color:var(--muted);
+      max-width:56ch;
+    }
+    .terminal{
+      margin-top:14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color:rgba(0,229,255,.9);
+      font-weight:700;
+    }
+    .btnrow{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.03);
+      color:var(--fg); font-weight:700;
+    }
+    .btn:hover{border-color:rgba(0,229,255,.35); box-shadow:var(--shadow)}
+    .btn.primary{border-color:rgba(0,229,255,.45); background:rgba(0,229,255,.06)}
+    .frame{
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      overflow:hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      position:relative;
+      min-height:320px;
+    }
+    .frame video, .frame img{width:100%; height:100%; object-fit:cover; display:block}
+    .frame .grain{
+      position:absolute; inset:0; pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.35;
+    }
+    .strip{
+      margin:26px 0 0;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+    }
+    .strip .wrap{display:flex; gap:14px; flex-wrap:wrap; padding:14px 20px}
+    .chip{
+      display:flex; gap:10px; align-items:baseline;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+    }
+    .chip b{color:var(--fg)}
+    .chip span{color:var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size:.92em}
+    section{padding:54px 0}
+    .section-title{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px}
+    .section-title small{color:var(--muted); font-weight:700}
+    .h{
+      font-size: clamp(26px, 3vw, 38px);
+      letter-spacing:-.02em;
+    }
+    .rows{display:flex; flex-direction:column; gap:14px}
+    .row{
+      display:grid; grid-template-columns: 1.1fr .9fr;
+      gap:18px; padding:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+      border-radius:var(--radius);
+    }
+    .row img{width:100%; height:220px; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,.10)}
+    .meta{color:var(--muted); font-weight:700}
+    .row h3{margin-top:6px; font-size:22px}
+    .row p{margin:10px 0 14px; color:var(--muted)}
+    .row .open{
+      display:inline-flex; align-items:center; gap:8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color:rgba(0,229,255,.92);
+      font-weight:800;
+    }
+    .row .open:hover{text-decoration:underline}
+    .twocol{
+      display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+    }
+    .plan{
+      padding:18px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+    }
+    .plan h3{font-size:22px}
+    .price{color:rgba(0,229,255,.95); font-weight:900; margin-top:8px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    ul{margin:12px 0 0; padding-left:16px; color:var(--muted)}
+    li{margin:.35em 0}
+    .footer{
+      padding:34px 0 46px;
+      border-top:1px solid var(--line);
+      background: linear-gradient(to top, rgba(255,255,255,.03), transparent);
+    }
+    .footgrid{display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; align-items:center}
+    .sys{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; color:var(--muted)}
+    .sys b{color:var(--fg)}
+    .mini{color:var(--muted); font-size:14px}
+    .smalllinks{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .smalllinks a{color:var(--muted)}
+    .smalllinks a:hover{color:var(--fg); text-decoration:underline}
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+      .row img{height:200px}
+      .twocol{grid-template-columns:1fr}
+      .footgrid{grid-template-columns:1fr}
+      .smalllinks{justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <header>
+        <a class="brand" href="#top" aria-label="Start">
+          <code>const firma = "ABTEILUNG83";</code>
+        </a>
+        <nav class="nav" aria-label="Hauptnavigation">
+          <a href="#work">Work</a>
+          <a href="#service">Service</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Kontakt</a>
+          <a class="cta" href="mailto:post@abteilung83.com">sh start_project.sh</a>
+        </nav>
+      </header>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">/landing → clean-neon editorial</div>
+            <h2>Webdesign, das knallt.</h2>
+            <h1><span class="neon-underline">Wie Neonlicht im Regen.</span></h1>
+            <p class="sub">
+              Dein System-Upgrade steht an. Weniger Noise, mehr Output: schnell, wartbar, konform — ohne Builder-Bloat.
+            </p>
+            <div class="terminal">EXECUTE website_build_v2.0</div>
+            <div class="btnrow">
+              <a class="btn primary" href="mailto:post@abteilung83.com">sh start_project.sh</a>
+              <a class="btn" href="#work">open_work_vault()</a>
+            </div>
+          </div>
+
+          <div class="frame" aria-label="Hero Visual">
+            <video autoplay muted playsinline loop>
+              <source src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83-01-muted.mp4" type="video/mp4">
+            </video>
+            <div class="grain" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="strip" role="region" aria-label="Value Strip">
+        <div class="wrap">
+          <div class="chip"><b>Schnell.</b> <span>const lcp = "&lt; 2s";</span></div>
+          <div class="chip"><b>Lesbar.</b> <span>humanReadable(true)</span></div>
+          <div class="chip"><b>Konform.</b> <span>privacy.on()</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <small>/work → Highlights</small>
+            <div class="h">Weniger Blabla, mehr Builds.</div>
+          </div>
+          <a class="btn" href="#contact">POST /contact</a>
+        </div>
+
+        <div class="rows">
+          <article class="row">
+            <img alt="Case 01" src="https://abteilung83.at/cms/wp-content/uploads/2025/10/bornemann-und-partner-mockup-ipad.webp"/>
+            <div>
+              <div class="meta">01 / Consulting</div>
+              <h3>Bornemann &amp; Partner</h3>
+              <p>Klare Struktur, starke Typo, schnelle Journey. Fokus: Vertrauen + Conversion.</p>
+              <a class="open" href="#">open ./details →</a>
+            </div>
+          </article>
+
+          <article class="row">
+            <img alt="Case 02" src="https://abteilung83.at/cms/wp-content/uploads/2025/10/Tina-mockup-ipad.webp"/>
+            <div>
+              <div class="meta">02 / Brand Atelier</div>
+              <h3>TiNA – Wort- &amp; Markenatelier</h3>
+              <p>Pixelgenaue Umsetzung einer individuellen Markenidentität. Performance ohne Kompromisse.</p>
+              <a class="open" href="#">open ./details →</a>
+            </div>
+          </article>
+
+          <article class="row">
+            <img alt="Case 03" src="https://abteilung83.at/cms/wp-content/uploads/2025/11/messner-wall2.webp"/>
+            <div>
+              <div class="meta">03 / Editorial</div>
+              <h3>Messner GesmbH</h3>
+              <p>„Blättern“-Gefühl statt „Scroll-Durch“. Ruhig, wertig, kontrolliert.</p>
+              <a class="open" href="#">open ./details →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <small>/process → Timeline</small>
+            <div class="h">Klarer Output. Gemessen in ms.</div>
+          </div>
+        </div>
+
+        <div class="twocol">
+          <div class="plan">
+            <h3>Briefing</h3>
+            <div class="price">run /initial --mode=discovery</div>
+            <ul>
+              <li>Ziele, Scope, Content, Prioritäten</li>
+              <li>Sitemap &amp; Roadmap</li>
+              <li>Setup für saubere Umsetzung</li>
+            </ul>
+          </div>
+          <div class="plan">
+            <h3>Design → Build → Ship</h3>
+            <div class="price">status: lighthouse &gt; 90</div>
+            <ul>
+              <li>UI-Manifest &amp; Komponenten</li>
+              <li>Build in Breakdance/Oxygen (lean)</li>
+              <li>Go-live + Handover + Mini-Manual</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="service">
+      <div class="wrap">
+        <div class="section-title">
+          <div>
+            <small>/services → Modules</small>
+            <div class="h">Modular as possible.</div>
+          </div>
+        </div>
+
+        <div class="twocol">
+          <div class="plan">
+            <h3>One-Pager</h3>
+            <div class="price">// UNIT_PRICE: 1700 EUR</div>
+            <ul>
+              <li>Eine Seite, ein Ziel — zero Noise</li>
+              <li>Hero, Proof, CTA, Kontakt</li>
+              <li>Launch meist 1–2 Wochen</li>
+              <li>Performance &amp; SEO Basics inklusive</li>
+            </ul>
+          </div>
+          <div class="plan">
+            <h3>Multi-Pager</h3>
+            <div class="price">// BASE_PRICE: 2800 EUR+</div>
+            <ul>
+              <li>Strukturierter Markenauftritt (SEO-breit)</li>
+              <li>Service, Work, About, Blog optional</li>
+              <li>Skalierbar &amp; sauber versioniert</li>
+              <li>Timeline ca. 2–3 Wochen (abhängig)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="footer">
+      <div class="wrap">
+        <div class="footgrid">
+          <div>
+            <div class="h">// SYSTEM_READY</div>
+            <div class="sys"><b>Awaiting input</b> → <span>post@abteilung83.com</span> · <span>+43 660 567 23 61</span></div>
+            <div class="mini">Graz, Austria · DSGVO &amp; Consent korrekt · Kein Overkill.</div>
+          </div>
+          <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap">
+            <a class="btn primary" href="mailto:post@abteilung83.com">[ INITIATE_PROJECT_PROTOCOL ]</a>
+            <a class="btn" href="#top">back_to_top()</a>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap">
+          <div class="mini">© 20?? Abteilung83. Alle Rechte vorbehalten.</div>
+          <div class="smalllinks">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
