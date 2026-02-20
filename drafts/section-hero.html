@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de-AT" class="bg-[#0b0f14] text-[#d8e4ff] antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABTEILUNG83 // KERNEL</title>
+    
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-a83-bg: #0b0f14;
+            --color-a83-fg: #d8e4ff;
+            --color-a83-neon: #00e5ff;
+            --color-a83-sub: #8aa1c3;
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body { font-family: var(--font-sans); }
+
+        /* A83 Burger Menu (Original Clone) */
+        .a83-burger {
+            @apply relative w-12 h-12 flex items-center justify-center cursor-pointer bg-transparent border-none z-50;
+        }
+        .a83-burger-inner, .a83-burger-inner::before, .a83-burger-inner::after {
+            @apply absolute w-7 h-[2px] bg-a83-neon transition-all duration-300 ease-in-out;
+            content: "";
+        }
+        .a83-burger-inner::before { transform: translateY(-8px); }
+        .a83-burger-inner::after { transform: translateY(8px); }
+
+        /* Neon Headline Effect */
+        .neon-headline {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.8),
+                         0 0 20px rgba(0, 229, 255, 0.6),
+                         0 0 30px rgba(0, 229, 255, 0.4),
+                         0 0 40px rgba(0, 229, 255, 0.2);
+        }
+
+        /* Stage Styling & Aspect Ratio */
+        .show-max {
+            @apply relative w-full rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(0,229,255,0.15)] border border-a83-neon/20;
+            aspect-ratio: 4/5;
+        }
+        @media (min-width: 1024px) {
+            .show-max { aspect-ratio: 16/10; }
+        }
+
+        /* Terminal Icon Prefix */
+        .with-icon-terminal::before {
+            content: ">_";
+            @apply mr-2 text-a83-neon font-bold;
+        }
+
+        /* Button Atoms */
+        .button-atom {
+            @apply inline-flex items-center justify-center px-6 py-3 font-mono text-sm font-bold transition-all duration-300 cursor-pointer rounded-sm;
+        }
+        .button-atom--primary {
+            @apply bg-a83-neon text-[#0b0f14] hover:bg-white hover:shadow-[0_0_15px_rgba(0,229,255,0.5)];
+        }
+        .button-atom--outline {
+            @apply border border-a83-neon/50 text-a83-fg hover:border-a83-neon hover:text-a83-neon hover:bg-a83-neon/5;
+        }
+    </style>
+</head>
+<body class="bg-a83-bg text-a83-fg antialiased selection:bg-a83-neon selection:text-black">
+
+    <header id="site-header" class="fixed top-0 w-full z-40 h-24 flex items-center px-6 md:px-12 bg-a83-bg/80 backdrop-blur-md border-b border-white/5">
+        <div class="w-full flex justify-between items-center max-w-[1600px] mx-auto">
+            <div class="brand-wordmark">
+                <a href="/" class="font-mono text-a83-neon text-sm md:text-base font-bold tracking-tight hover:text-white transition-colors">
+                    const firma = "ABTEILUNG83";
+                </a>
+            </div>
+            <div class="burger-home-slot">
+                <button id="nav-trigger" class="a83-burger" aria-label="Menü öffnen" aria-expanded="false">
+                    <span class="a83-burger-box">
+                        <span class="a83-burger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero" class="relative pt-32 pb-16 md:pt-40 md:pb-24 min-h-screen flex items-center overflow-hidden">
+        
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(0,229,255,0.05),_transparent_50%)] pointer-events-none"></div>
+
+        <div class="w-full max-w-[1600px] mx-auto px-6 md:px-12">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <div id="text" class="lg:col-span-6 xl:col-span-5 flex flex-col gap-8 z-10">
+                    
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white">
+                            Webdesign, das knallt.
+                        </h2>
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter neon-headline uppercase">
+                            Wie Neonlicht im Regen.
+                        </h1>
+                    </div>
+
+                    <div class="flex flex-col gap-1 font-mono text-sm md:text-base">
+                        <div class="text-a83-sub">Dein System-Upgrade steht an.</div>
+                        <div class="text-a83-neon with-icon-terminal">EXECUTE website_build_v2.0</div>
+                    </div>
+
+                    <div id="intro-text-div" class="max-w-xl">
+                        <p class="text-base md:text-lg text-a83-sub leading-relaxed">
+                            Die digitale Welt ist laut, dunkel und voller Bugs. Abteilung 83 ist dein Fixer. Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link, sauber wie ein frisch gewischter Serverraum. ⮐
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 mt-2">
+                        <a href="mailto:post@abteilung83.com" class="button-atom button-atom--primary">
+                            sh start_project.sh
+                        </a>
+                        <a href="#work" class="button-atom button-atom--outline">
+                            open_work_vault()
+                        </a>
+                    </div>
+
+                    <div class="flex gap-6 mt-4 text-a83-sub">
+                        <a href="#" class="hover:text-a83-neon transition-colors" aria-label="facebook">
+                            <i class="fa-brands fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-a83-neon transition-colors" aria-label="twitter">
+                            <i class="fa-brands fa-x-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-a83-neon transition-colors" aria-label="instagram">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-a83-neon transition-colors" aria-label="linkedin">
+                            <i class="fa-brands fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="hover:text-a83-neon transition-colors" aria-label="youtube">
+                            <i class="fa-brands fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div id="stage" class="lg:col-span-6 xl:col-span-7 lg:pl-12 relative z-10">
+                    
+                    <div class="absolute -inset-4 bg-a83-neon/10 blur-3xl rounded-full z-0"></div>
+
+                    <div id="show-max" class="show-max">
+                        <div class="absolute inset-0 z-10">
+                            <img src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83.webp" alt="Coding Websites Abteilung83" class="w-full h-full object-cover opacity-60">
+                        </div>
+                        
+                        <div class="absolute inset-0 z-20">
+                            <video class="w-full h-full object-cover mix-blend-screen opacity-90" src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83-01-muted.mp4" autoplay loop muted playsinline controlsList="nodownload"></video>
+                        </div>
+
+                        <div class="absolute inset-0 z-30 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))]" style="background-size: 100% 2px, 3px 100%;"></div>
+                    </div>
+
+                    <div id="hover-max" class="absolute bottom-4 right-4 z-40 bg-a83-bg/80 border border-a83-neon/30 px-3 py-1 backdrop-blur-sm rounded cursor-default">
+                        <span class="font-mono text-[10px] text-a83-neon">/* Max Headroom says: keep it glitchy, not kitschy */</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
