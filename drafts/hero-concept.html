@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de-AT" class="bg-[#05070a] text-[#d8e4ff] antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABTEILUNG83 // Cinematic Hero</title>
+    
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-a83-bg: #05070a;
+            --color-a83-neon: #00e5ff;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body { font-family: var(--font-sans); overflow-x: hidden; }
+        .font-mono { font-family: var(--font-mono); }
+
+        /* Cinematic Scanlines & Vignette */
+        .cyber-overlay {
+            background: 
+                linear-gradient(90deg, rgba(5,7,10,0.95) 0%, rgba(5,7,10,0.6) 40%, rgba(5,7,10,0.1) 100%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 100%, 100% 4px;
+        }
+
+        /* Neon Glow Effect */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.4), 0 0 40px rgba(0, 229, 255, 0.2);
+        }
+
+        /* Tech HUD Corners */
+        .hud-corner {
+            @apply absolute w-8 h-8 border-a83-neon/40 pointer-events-none;
+        }
+        
+        .button-hacker {
+            @apply relative inline-flex items-center justify-center px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest transition-all duration-300 overflow-hidden;
+        }
+    </style>
+</head>
+<body class="selection:bg-a83-neon selection:text-black">
+
+    <section class="relative min-h-screen flex items-center justify-start px-6 md:px-16 lg:px-24 overflow-hidden">
+        
+        <div class="absolute inset-0 z-0">
+            <img src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83.webp" 
+                 class="absolute inset-0 w-full h-full object-cover object-right opacity-40" alt="ABTEILUNG83">
+            
+            <video src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83-01-muted.mp4" 
+                   autoplay loop muted playsinline 
+                   class="absolute inset-0 w-full h-full object-cover object-right mix-blend-screen opacity-70"></video>
+            
+            <div class="absolute inset-0 z-10 cyber-overlay pointer-events-none"></div>
+        </div>
+
+        <div class="hud-corner top-6 left-6 border-t-2 border-l-2"></div>
+        <div class="hud-corner bottom-6 right-6 border-b-2 border-r-2"></div>
+        <div class="absolute top-8 right-8 font-mono text-[10px] text-a83-neon/50 tracking-widest">SYS.OP.ONLINE // REC</div>
+
+        <div class="relative z-20 max-w-3xl mt-20">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-2 h-2 bg-a83-neon rounded-full animate-pulse shadow-[0_0_10px_#00e5ff]"></div>
+                <p class="font-mono text-a83-neon text-sm tracking-widest uppercase">> Dein System-Upgrade steht an.</p>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-2">
+                Webdesign,<br>das knallt.
+            </h1>
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-a83-neon text-glow mb-10">
+                Wie Neonlicht im Regen.
+            </h2>
+
+            <div class="border-l-2 border-a83-neon/50 pl-6 py-2 bg-gradient-to-r from-a83-neon/5 to-transparent backdrop-blur-sm">
+                <p class="font-mono text-white/80 text-sm md:text-base mb-3">
+                    <span class="text-a83-neon font-bold">EXECUTE</span> website_build_v2.0<span class="animate-pulse">_</span>
+                </p>
+                <p class="text-zinc-400 text-sm md:text-base leading-relaxed max-w-2xl">
+                    Die digitale Welt ist laut, dunkel und voller Bugs. <strong class="text-white">Abteilung 83 ist dein Fixer.</strong> Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link, sauber wie ein frisch gewischter Serverraum. ⮐
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-6 mt-12">
+                <a href="mailto:post@abteilung83.com" class="button-hacker bg-a83-neon text-[#05070a] hover:bg-white hover:shadow-[0_0_30px_rgba(0,229,255,0.4)] group">
+                    <span class="relative z-10">> sh start_project.sh</span>
+                </a>
+                <a href="#work" class="button-hacker border border-white/20 text-white hover:border-a83-neon hover:bg-a83-neon/10 transition-colors">
+                    <span>> open_work_vault()</span>
+                </a>
+            </div>
+        </div>
+        
+    </section>
+
+</body>
+</html>
