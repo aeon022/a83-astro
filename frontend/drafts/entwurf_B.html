@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="de-AT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ABTEILUNG83 — Entwurf B</title>
+  <meta name="description" content="Webdesign, das knallt. Wie Neonlicht im Regen. — Entwurf B (Split-Hero, weniger Noise)." />
+  <style>
+    :root{
+      --bg:#070A10;
+      --panel:#0C101A;
+      --fg:#D8E4FF;
+      --muted:#8AA1C3;
+      --neon:#00E5FF;
+      --mag:#FF2EF3;
+      --br:18px;
+      --max:1120px;
+      --shadow:0 0 18px rgba(0,229,255,.20);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% 0%, rgba(0,229,255,.14), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,46,243,.10), transparent 55%),
+        var(--bg);
+      color:var(--fg);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .skip{position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip:focus{left:20px; top:14px; width:auto; height:auto; padding:.5rem .75rem; border-radius:12px; background:rgba(12,16,26,.9); border:1px solid rgba(0,229,255,.35)}
+
+    header{
+      position:sticky; top:0; z-index:50;
+      background:linear-gradient(180deg, rgba(7,10,16,.85), rgba(7,10,16,.40));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(0,229,255,.10);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px;
+      font-weight:800; letter-spacing:.5px;
+    }
+    .brand code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight:700;
+      color:rgba(216,228,255,.9);
+      opacity:.95;
+    }
+    .brand .dot{
+      width:8px; height:8px; border-radius:50%;
+      background:var(--neon);
+      box-shadow:0 0 14px rgba(0,229,255,.7);
+      translate: 0 -2px;
+    }
+    .menu{display:flex; gap:18px; align-items:center}
+    .menu a{
+      color:rgba(216,228,255,.82);
+      font-weight:650;
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    .menu a:hover{background:rgba(0,229,255,.08); color:var(--fg)}
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid rgba(0,229,255,.35);
+      background:linear-gradient(180deg, rgba(0,229,255,.12), rgba(0,229,255,.05));
+      box-shadow:var(--shadow);
+      font-weight:800;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .cta:hover{border-color: rgba(0,229,255,.6)}
+    .cta code{font-weight:900}
+
+    .hero{padding:46px 0 26px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 940px){
+      .heroGrid{grid-template-columns:1fr; gap:16px}
+      .menu{display:none}
+    }
+    .card{
+      border-radius:var(--br);
+      background:linear-gradient(180deg, rgba(12,16,26,.92), rgba(12,16,26,.70));
+      border:1px solid rgba(0,229,255,.18);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
+    }
+    .heroLeft{padding:26px}
+    .kicker{
+      display:flex; gap:10px; align-items:center;
+      color:rgba(216,228,255,.80);
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .kicker .bar{
+      width:38px; height:2px; border-radius:2px;
+      background:linear-gradient(90deg, var(--neon), transparent);
+      box-shadow:0 0 12px rgba(0,229,255,.35);
+    }
+    h1{
+      margin:14px 0 6px;
+      font-size: clamp(2.2rem, 4.3vw, 3.4rem);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    .neon{
+      display:inline-block;
+      text-shadow:
+        0 0 12px rgba(0,229,255,.35),
+        0 0 30px rgba(0,229,255,.14);
+    }
+    .sub{
+      margin:10px 0 0;
+      color:rgba(138,161,195,.95);
+      max-width:55ch;
+      font-size: clamp(1rem, 1.15vw, 1.05rem);
+    }
+    .cmd{
+      margin:16px 0 0;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:rgba(216,228,255,.86);
+      font-weight:750;
+      font-size:13px;
+    }
+    .pill strong{color:var(--fg)}
+    .pill code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; justify-content:center; align-items:center;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      font-weight:850;
+      letter-spacing:.2px;
+    }
+    .btn:hover{background:rgba(255,255,255,.06)}
+    .btnPrimary{
+      border-color: rgba(0,229,255,.45);
+      background:linear-gradient(180deg, rgba(0,229,255,.14), rgba(0,229,255,.06));
+      box-shadow:var(--shadow);
+    }
+    .btnPrimary:hover{border-color: rgba(0,229,255,.7)}
+    .btn code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight:900;
+    }
+
+    .heroRight{
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .frame{
+      border-radius: calc(var(--br) - 6px);
+      border:1px solid rgba(0,229,255,.16);
+      background: radial-gradient(900px 420px at 20% 10%, rgba(0,229,255,.10), transparent 55%),
+                  radial-gradient(700px 420px at 85% 40%, rgba(255,46,243,.10), transparent 55%),
+                  rgba(7,10,16,.55);
+      min-height: 320px;
+      display:grid;
+      place-items:center;
+      padding:18px;
+    }
+    .frameInner{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(12,16,26,.66);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .scan{
+      position:absolute; inset:-40% -20%;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(255,255,255,.05),
+        rgba(255,255,255,.05) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+      opacity:.35;
+      transform: rotate(-6deg);
+      pointer-events:none;
+      animation: drift 7s linear infinite;
+    }
+    @keyframes drift{
+      0%{translate:0 -6%}
+      100%{translate:0 6%}
+    }
+    .miniTitle{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      color:rgba(216,228,255,.86);
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+    .led{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:800;
+      color:rgba(216,228,255,.80);
+    }
+    .led i{
+      width:10px; height:10px; border-radius:50%;
+      background:var(--neon);
+      box-shadow:0 0 16px rgba(0,229,255,.75);
+      display:inline-block;
+    }
+    .mock{
+      margin:0;
+      color:rgba(216,228,255,.90);
+      font-weight:850;
+      font-size: 14px;
+      line-height:1.5;
+    }
+    .mock code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: rgba(216,228,255,.92);
+    }
+    .statRow{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 560px){ .statRow{grid-template-columns:1fr} }
+    .stat{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      padding:12px;
+    }
+    .stat .k{color:rgba(138,161,195,.95); font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:.12em}
+    .stat .v{margin-top:6px; font-weight:950; font-size:16px}
+    .stat .v span{color:var(--neon)}
+    .stat .h{margin-top:6px; color:rgba(138,161,195,.95); font-size:13px}
+
+    section{padding:34px 0}
+    .secHead{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:14px}
+    .secHead h2{margin:0; font-size:24px; letter-spacing:-.01em}
+    .secHead .tag{
+      color:rgba(138,161,195,.95);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight:800;
+      font-size:13px;
+    }
+    .grid3{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+    @media (max-width: 880px){ .grid3{grid-template-columns:1fr} }
+    .item{padding:18px}
+    .item h3{margin:0 0 6px; font-size:18px}
+    .item p{margin:0; color:rgba(138,161,195,.95)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+
+    footer{padding:36px 0 46px; border-top:1px solid rgba(0,229,255,.10)}
+    .footGrid{display:grid; grid-template-columns: 1.2fr .8fr; gap:14px}
+    @media (max-width: 860px){ .footGrid{grid-template-columns:1fr} }
+    .form{padding:18px}
+    label{display:block; font-weight:800; font-size:13px; color:rgba(216,228,255,.86); margin:10px 0 6px}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--fg);
+      outline:none;
+    }
+    input:focus, textarea:focus{border-color:rgba(0,229,255,.55); box-shadow:0 0 0 3px rgba(0,229,255,.10)}
+    .formRow{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width: 560px){ .formRow{grid-template-columns:1fr} }
+    .fine{color:rgba(138,161,195,.95); font-size:13px; margin:10px 0 0}
+    .smallLinks{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+    .smallLinks a{color:rgba(216,228,255,.82); font-weight:800; font-size:13px}
+    .smallLinks a:hover{color:var(--fg); text-decoration:underline}
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+
+  <header>
+    <div class="wrap">
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a class="brand" href="#top" aria-label="ABTEILUNG83 Start">
+          <span class="dot" aria-hidden="true"></span>
+          <span>ABTEILUNG83</span>
+          <code>landing_v2</code>
+        </a>
+
+        <div class="menu" role="navigation" aria-label="Sektionen">
+          <a href="#highlights">Highlights</a>
+          <a href="#prozess">Process</a>
+          <a href="#stack">Stack</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+
+        <a class="cta" href="mailto:post@abteilung83.com">
+          <code>sh</code> start_project.sh
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="top" class="hero">
+      <div class="wrap">
+        <div class="heroGrid">
+          <div class="card heroLeft">
+            <div class="kicker"><span class="bar" aria-hidden="true"></span><span>Less Noise. Nice Data. No Bloat.</span></div>
+            <h1>
+              Webdesign, das knallt.<br/>
+              <span class="neon">Wie Neonlicht im Regen.</span>
+            </h1>
+            <p class="sub">
+              Dein System-Upgrade steht an. Wir bauen Seiten, die schnell starten, sauber skalieren und nicht nach Plugin-Müll riechen.
+            </p>
+
+            <div class="cmd" aria-label="Key Facts">
+              <span class="pill"><strong>LCP</strong> <code>&lt; 2s</code></span>
+              <span class="pill"><strong>SEO</strong> <code>baseline+</code></span>
+              <span class="pill"><strong>DSGVO</strong> <code>privacy.on()</code></span>
+            </div>
+
+            <div class="actions" aria-label="Aktionen">
+              <a class="btn btnPrimary" href="mailto:post@abteilung83.com?subject=Projektanfrage%20%E2%80%94%20ABTEILUNG83&body=Kurz%20zu%20mir%2Funs%3A%0A%0AZiel%3A%0A%0ATimeline%3A%0A%0ALinks%20%2F%20Material%3A%0A">
+                <code>POST</code> /contact
+              </a>
+              <a class="btn" href="#highlights">
+                <code>open</code> work_vault()
+              </a>
+            </div>
+
+            <p class="fine">
+              Fokus: klare Conversion, starke Typo, echte Performance. Keine Animation-Orgie.
+            </p>
+          </div>
+
+          <aside class="card heroRight" aria-label="Live Preview Panel">
+            <div class="frame" role="img" aria-label="Preview mit Scanlines und Status-Karten">
+              <div class="frameInner">
+                <div class="scan" aria-hidden="true"></div>
+                <div class="miniTitle">
+                  <span class="mono">SYSTEM_STATUS</span>
+                  <span class="led"><i aria-hidden="true"></i> ONLINE</span>
+                </div>
+                <p class="mock">
+                  <span class="mono">// build</span><br/>
+                  <code>astro build</code> → static output<br/>
+                  <code>cdn cache</code> → hot load<br/>
+                  <code>assets</code> → webp + preload
+                </p>
+
+                <div class="statRow" aria-label="Metriken">
+                  <div class="stat">
+                    <div class="k">Performance</div>
+                    <div class="v"><span>90+</span> CWV</div>
+                    <div class="h">Messbar, nicht gefühlt.</div>
+                  </div>
+                  <div class="stat">
+                    <div class="k">Markup</div>
+                    <div class="v"><span>clean</span> HTML</div>
+                    <div class="h">Semantik & A11y.</div>
+                  </div>
+                  <div class="stat">
+                    <div class="k">Payload</div>
+                    <div class="v"><span>lean</span> JS</div>
+                    <div class="h">Nur was nötig ist.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pill" aria-label="Hinweis">
+              <strong class="mono">NOTE</strong> <span>— Split-Hero für schnelle Orientierung.</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <section id="highlights">
+      <div class="wrap">
+        <div class="secHead">
+          <h2>Highlights</h2>
+          <div class="tag">/work → Portfolio</div>
+        </div>
+
+        <div class="grid3">
+          <div class="card item">
+            <h3>Bornemann & Partner</h3>
+            <p>Consulting-Brand, klare Journey, Content sauber strukturiert.</p>
+          </div>
+          <div class="card item">
+            <h3>TiNA</h3>
+            <p>Pixelgenaues Branding im Browser. Motion: dosiert.</p>
+          </div>
+          <div class="card item">
+            <h3>Lieperts</h3>
+            <p>Fine Dining. Keine Theme-Optik, sondern echtes Gefühl.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prozess">
+      <div class="wrap">
+        <div class="secHead">
+          <h2>Process</h2>
+          <div class="tag">/process → Timeline</div>
+        </div>
+
+        <div class="grid3">
+          <div class="card item">
+            <h3><span class="mono">run</span> /initial</h3>
+            <p>Briefing + Ziele + Scope. Wir killen Feature-Creep.</p>
+          </div>
+          <div class="card item">
+            <h3><span class="mono">commit</span> design-freeze</h3>
+            <p>UI-Architektur, Tokens, Typo. Alles reproduzierbar.</p>
+          </div>
+          <div class="card item">
+            <h3><span class="mono">ship</span> prod</h3>
+            <p>Build, QA, Launch. Danach: Handover + Ruhe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="wrap">
+        <div class="secHead">
+          <h2>Stack</h2>
+          <div class="tag">/tech → Tools</div>
+        </div>
+
+        <div class="grid3">
+          <div class="card item">
+            <h3>Astro / Static</h3>
+            <p>Maximale Performance, minimale Runtime. Ideal für Landing + Content.</p>
+          </div>
+          <div class="card item">
+            <h3>CMS (optional)</h3>
+            <p>Wenn nötig: Headless/Directus. Wenn nicht: no CMS.</p>
+          </div>
+          <div class="card item">
+            <h3>DX / Deploy</h3>
+            <p>Git sauber, Builds deterministisch, Deploys reproduzierbar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="kontakt">
+      <div class="wrap">
+        <div class="secHead">
+          <h2>Kontakt</h2>
+          <div class="tag">/contact → Messages</div>
+        </div>
+
+        <div class="footGrid">
+          <div class="card item">
+            <h3 class="mono">INITIATE DATA TRANSFER</h3>
+            <p style="margin:0; color:rgba(138,161,195,.95)">
+              Kurz und konkret. Ziel, Deadline, Links. Dann gibt’s ein klares Proposal.
+            </p>
+
+            <div class="smallLinks" aria-label="Schnelllinks">
+              <a href="mailto:post@abteilung83.com">post@abteilung83.com</a>
+              <a href="tel:+436605672361">+43 660 567 23 61</a>
+              <a href="#top">Back to top</a>
+            </div>
+
+            <p class="fine">© 20?? ABTEILUNG83 — SYSTEM: ONLINE</p>
+          </div>
+
+          <div class="card form">
+            <form action="mailto:post@abteilung83.com" method="post" enctype="text/plain">
+              <div class="formRow">
+                <div>
+                  <label for="subject">SUBJECT_ID</label>
+                  <input id="subject" name="subject" placeholder="SUBJECT_ID" required />
+                </div>
+                <div>
+                  <label for="email">CLIENT_EMAIL</label>
+                  <input id="email" name="email" placeholder="CLIENT_EMAIL" type="email" required />
+                </div>
+              </div>
+
+              <label for="msg">MESSAGE_PAYLOAD</label>
+              <textarea id="msg" name="message" rows="5" placeholder="MESSAGE_PAYLOAD" required></textarea>
+
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+                <button class="btn btnPrimary" type="submit"><span class="mono">POST</span> /contact</button>
+                <a class="btn" href="mailto:post@abteilung83.com"><span class="mono">sh</span> start_project.sh</a>
+              </div>
+
+              <p class="fine">Hinweis: Mailto-Form ist ein Mock. In echt: Endpoint/Service nach Wahl.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

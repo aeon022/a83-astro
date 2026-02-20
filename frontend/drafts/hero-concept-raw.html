@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de-AT" class="bg-[#020202] text-[#d8e4ff] antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABTEILUNG83 // Raw Data Core</title>
+    
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-a83-neon: #00e5ff;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body { font-family: var(--font-sans); overflow: hidden; background: #020202; }
+        .font-mono { font-family: var(--font-mono); }
+
+        /* Matrix Code Stream Animation */
+        .code-stream {
+            @apply absolute inset-0 font-mono text-[10px] md:text-xs text-a83-neon/20 whitespace-pre overflow-hidden leading-tight;
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+        .code-content {
+            animation: scroll-up 60s linear infinite;
+        }
+        @keyframes scroll-up {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        /* Glitching Video Window */
+        .video-glitch-window {
+            @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[400px] md:w-[400px] md:h-[500px] border border-a83-neon/50 z-10 opacity-70;
+            box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.5), 0 0 30px rgba(0, 229, 255, 0.2);
+            animation: glitch-anim-2 4s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-2 {
+            0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(-50%, -50%) skew(0deg); }
+            5% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(-52%, -50%) skew(-5deg); }
+            10% { clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%); transform: translate(-48%, -50%) skew(2deg); }
+            15% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(-50%, -50%) skew(0deg); }
+        }
+
+        /* Glass Pill */
+        .glass-pill {
+            @apply relative z-20 bg-black/40 border border-white/10 p-8 md:p-12 max-w-2xl text-center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+        }
+    </style>
+</head>
+<body class="selection:bg-a83-neon selection:text-black">
+
+    <div class="code-stream pointer-events-none">
+        <div class="code-content" id="code-block">
+            </div>
+    </div>
+
+    <div class="video-glitch-window pointer-events-none">
+        <video src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83-01-muted.mp4" 
+               autoplay loop muted playsinline 
+               class="w-full h-full object-cover mix-blend-screen"></video>
+        <div class="absolute inset-0 bg-a83-neon/10 mix-blend-overlay"></div>
+    </div>
+
+    <section class="relative min-h-screen flex items-center justify-center p-6 z-20">
+        <div class="glass-pill shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            
+            <p class="font-mono text-a83-neon text-xs tracking-widest uppercase mb-6 animate-pulse">
+                > System_Upgrade_Pending
+            </p>
+
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-tight mb-2">
+                Webdesign, das knallt.
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-mono font-bold text-a83-neon mb-6">
+                Wie Neonlicht im Regen.
+            </h2>
+
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">
+                Die digitale Welt ist laut, dunkel und voller Bugs. Abteilung 83 ist dein Fixer. Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link, sauber wie ein frisch gewischter Serverraum. ⮐
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="mailto:post@abteilung83.com" class="font-mono text-sm px-8 py-4 bg-a83-neon text-black font-bold uppercase rounded-full hover:bg-white transition-colors">
+                    EXECUTE v2.0
+                </a>
+                <a href="#work" class="font-mono text-sm px-8 py-4 border border-white/20 text-white rounded-full hover:border-a83-neon hover:text-a83-neon transition-colors">
+                    sh open_vault
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const codeBlock = document.getElementById('code-block');
+        const codeSnippet = `
+import { defineCollection, z } from 'astro:content';
+import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+
+export const projects = sqliteTable('projects', {
+  id: integer('id').primaryKey(),
+  title: text('title').notNull(),
+  slug: text('slug').unique().notNull(),
+  status: text('status').default('deployed'),
+  lighthouse: integer('lighthouse_score').default(100),
+});
+
+export async function executeV2(req, res) {
+  try {
+    const sys = await System.boot({
+      mode: 'neon_rain',
+      bloat: false,
+      speed: 'neuro_link'
+    });
+    return res.status(200).json(sys.render());
+  } catch (err) {
+    console.error('Bugs detected. Calling Abteilung83.');
+    throw new CriticalFailure(err);
+  }
+}
+        `;
+        
+        // Repeat the snippet to make it long enough to scroll infinitely
+        codeBlock.innerText = codeSnippet.repeat(40);
+    </script>
+</body>
+</html>
