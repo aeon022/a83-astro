@@ -1,0 +1,28 @@
+# build output
+frontend/dist/
+
+# generated types
+frontend/.astro/
+
+# dependencies
+frontend/node_modules/
+
+# logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# environment variables
+frontend/.env
+frontend/.env.production
+frontend/local.db
+
+# macOS-specific files (global im Repo)
+.DS_Store
+
+# jetbrains setting folder (global im Repo)
+.idea/
+
+# old css, files, and assets (der Ordner im Root)
+gitignore/
