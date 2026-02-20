@@ -1,0 +1,15 @@
+/* Dateipfad: frontend/src/styles/global.css */
+@import "tailwindcss";
+
+/* System-Tokens: ABTEILUNG83 */
+@theme {
+  --color-a83-neon: #00ff66; /* Passe den exakten Hex-Wert eures Grüns an */
+  --color-a83-dark: #0a0a0a;
+}
+
+/* Base Terminal Settings */
+@layer base {
+  body {
+    @apply bg-a83-dark text-gray-300 font-mono antialiased selection:bg-a83-neon selection:text-black;
+  }
+}
