@@ -3,19 +3,22 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
+import studioCMS from '@studiocms/astro';
 
 export default defineConfig({
-  // Tailwind v4 wird als Vite-Plugin geladen
   vite: {
     plugins: [tailwindcss()],
   },
   integrations: [
     sitemap(),
     partytown({
-      // Web Worker Setup für Third-Party-Scripts
       config: { forward: ['dataLayer.push'] },
     }),
+    studioCMS({
+      // Basis-Konfiguration für StudioCMS
+      dbStartPage: true,
+      imageService: 'astro',
+    })
   ],
-  // Vorbereitung für View Transitions und sauberes Routing
   prefetch: true,
 });
