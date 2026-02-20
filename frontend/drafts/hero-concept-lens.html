@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="de-AT" class="bg-[#020305] text-[#d8e4ff] antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABTEILUNG83 // Cyber-Lens</title>
+    
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-a83-neon: #00e5ff;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        body { font-family: 'Inter', sans-serif; cursor: crosshair; overflow: hidden;}
+
+        /* The Magic: CSS Masking variable mapped to JS */
+        #lens-container {
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+            --mask-size: 350px;
+        }
+
+        /* The hidden video layer that gets revealed by the mouse */
+        .video-reveal {
+            -webkit-mask-image: radial-gradient(circle var(--mask-size) at var(--mouse-x) var(--mouse-y), black 20%, transparent 80%);
+            mask-image: radial-gradient(circle var(--mask-size) at var(--mouse-x) var(--mouse-y), black 20%, transparent 80%);
+        }
+
+        /* Reticle (Targeting Ring around the mouse) */
+        #reticle {
+            @apply fixed w-32 h-32 border border-a83-neon/40 rounded-full pointer-events-none z-50 mix-blend-screen transition-transform duration-75 ease-out;
+            transform: translate(-50%, -50%);
+        }
+        #reticle::after {
+            content: ''; @apply absolute top-1/2 left-1/2 w-1 h-1 bg-a83-neon rounded-full -translate-x-1/2 -translate-y-1/2;
+        }
+
+        /* Typography FX */
+        .hollow-text {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+        }
+        
+        .hud-border {
+            background: linear-gradient(90deg, var(--color-a83-neon) 0%, transparent 100%);
+            height: 1px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="selection:bg-a83-neon selection:text-black bg-[#020305]">
+
+    <div id="reticle"></div>
+
+    <section id="lens-container" class="relative min-h-screen w-full flex items-center justify-center">
+        
+        <div class="absolute inset-0 z-0 opacity-20 grayscale">
+            <img src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83.webp" 
+                 class="w-full h-full object-cover object-center" alt="Base">
+            <div class="absolute inset-0 bg-[#020305]/80"></div> </div>
+
+        <div class="absolute inset-0 z-10 video-reveal pointer-events-none">
+            <video src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83-01-muted.mp4" 
+                   autoplay loop muted playsinline 
+                   class="w-full h-full object-cover object-center opacity-90 mix-blend-screen"></video>
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.4)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
+        </div>
+
+        <div class="relative z-20 w-full max-w-7xl px-8 pointer-events-none flex flex-col items-center text-center">
+            
+            <div class="font-mono text-a83-neon text-xs tracking-[0.4em] uppercase mb-8 flex items-center gap-4">
+                <span class="w-12 h-px bg-a83-neon/50"></span>
+                SYSTEM_UPGRADE_PENDING
+                <span class="w-12 h-px bg-a83-neon/50"></span>
+            </div>
+
+            <div class="relative">
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] mb-2 pointer-events-auto mix-blend-difference text-white">
+                    WEBDESIGN,<br>
+                    <span class="hollow-text">DAS KNALLT.</span>
+                </h1>
+            </div>
+
+            <h2 class="text-2xl md:text-4xl font-mono font-bold text-a83-neon mt-8 mb-12 mix-blend-difference pointer-events-auto">
+                > WIE NEONLICHT IM REGEN_
+            </h2>
+
+            <div class="max-w-2xl bg-black/40 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-xl pointer-events-auto shadow-2xl">
+                <p class="font-mono text-xs text-zinc-500 mb-4 text-left">> EXECUTE website_build_v2.0</p>
+                <p class="text-sm md:text-base text-zinc-300 leading-relaxed text-left">
+                    Die digitale Welt ist laut, dunkel und voller Bugs. Abteilung 83 ist dein Fixer. Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link, sauber wie ein frisch gewischter Serverraum. ⮐
+                </p>
+                
+                <div class="mt-8 flex gap-4">
+                    <a href="#" class="inline-block border border-a83-neon text-a83-neon px-8 py-3 font-mono text-sm uppercase tracking-widest hover:bg-a83-neon hover:text-black transition-all">
+                        sh start_project.sh
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script>
+        const container = document.getElementById('lens-container');
+        const reticle = document.getElementById('reticle');
+
+        // Update CSS Variables based on mouse position
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Move the mask
+            container.style.setProperty('--mouse-x', `${x}px`);
+            container.style.setProperty('--mouse-y', `${y}px`);
+            
+            // Move the targeting reticle
+            reticle.style.left = `${x}px`;
+            reticle.style.top = `${y}px`;
+        });
+
+        // Add a slight pulse to the mask size when clicking
+        window.addEventListener('mousedown', () => {
+            container.style.setProperty('--mask-size', '450px');
+            reticle.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            reticle.style.borderColor = '#fff';
+        });
+        
+        window.addEventListener('mouseup', () => {
+            container.style.setProperty('--mask-size', '350px');
+            reticle.style.transform = 'translate(-50%, -50%) scale(1)';
+            reticle.style.borderColor = 'rgba(0, 229, 255, 0.4)';
+        });
+    </script>
+</body>
+</html>
