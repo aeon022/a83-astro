@@ -1,0 +1,71 @@
+---
+// Dateipfad: frontend/src/components/ui/GlitchText.astro
+interface Props {
+  as?: 'p' | 'span' | 'h1' | 'h2';
+  class?: string;
+  text: string;
+}
+
+const { as = 'span', class: className = '', text } = Astro.props;
+const Tag = as;
+---
+
+<Tag
+  class={`relative inline-block will-change-transform ${className}`}
+  data-glitch="off"
+  data-text={text}
+>
+  <span class="relative z-10">{text}</span>
+
+  {/* 2 Layer fürs “RGB-Split”-Glitch */}
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-150"
+    data-layer="a"
+  >
+    {text}
+  </span>
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-150"
+    data-layer="b"
+  >
+    {text}
+  </span>
+
+  <style>
+    :global([data-glitch="on"] [data-layer="a"]) {
+      opacity: 0.9;
+      transform: translate3d(calc(var(--gx, 0) * 1px), calc(var(--gy, 0) * -1px), 0);
+      filter: hue-rotate(35deg) saturate(1.2);
+      mix-blend-mode: screen;
+      clip-path: inset(0 0 65% 0);
+    }
+
+    :global([data-glitch="on"] [data-layer="b"]) {
+      opacity: 0.85;
+      transform: translate3d(calc(var(--gx, 0) * -1px), calc(var(--gy, 0) * 1px), 0);
+      filter: hue-rotate(-35deg) saturate(1.25);
+      mix-blend-mode: screen;
+      clip-path: inset(35% 0 0 0);
+    }
+
+    /* Subtiler Scanline-Look */
+    :global([data-glitch="on"])::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.02) 1px,
+        transparent 2px,
+        transparent 6px
+      );
+      opacity: 0.35;
+      transform: translate3d(0, calc(var(--scan, 0) * 1px), 0);
+      mix-blend-mode: overlay;
+    }
+  </style>
+</Tag>

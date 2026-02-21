@@ -1,0 +1,20 @@
+{
+  "title": "Bornemann und Partner Consulting",
+  "excerpt": "“Führende Unternehmensberatung an der Schnittstelle von HR-Tradition und KI-Innovation. Spezialisiert auf Organisationsentwicklung, Führungskräfte-Coaching und die strategische Implementierung künstlicher Intelligenz in Unternehmen.”",
+  "entity": "BPC",
+  "vector": "Consulting, Corporate",
+  "arch": "WP, Breakdance, Custom Code",
+  "cycle": "2025",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Bornemann & Partner. Sektor: High-Level Consulting & Organisationsentwicklung.\n\n**System Conflict**: Der Client implementierte ein neues Modul: \"KI-Strategieberatung\". Dies führte zu einer kritischen Dissonanz in der bestehenden Marken-Architektur. Wie verbindet man tiefenpsychologische Human-Expertise (Warmth) mit synthetischer Intelligenz (Tech), ohne die Glaubwürdigkeit im Core-Segment zu gefährden?\n\n### Mission Objectives:\n\n**Re-Architecture**: Erschaffung einer hybriden UX, die Tradition und Innovation nahtlos verschmilzt.\n\n**Performance Optimization**: Die Content-Datenbank (Seminare, Workshops) musste ohne Ladezeit-Verluste (Latency) abrufbar sein.",
+  "stackDeployed": [
+    "[KERNEL] WordPress 6.x (Custom Build)",
+    "[VISUAL_ENGINE] Breakdance",
+    "[PROTOCOL] DSGVO-Consent Enforcement",
+    "[DATA] Custom Reference Structure.",
+    "[OPTIMIZATION] WEBP / Caching / Minification"
+  ],
+  "fixExecuted": "Frontend komplett refactored. Statt monolithischen Designs ist eine \"Dual-Focus-Architektur\" implementiert. Visuelle Anker (Typografie, Whitespace) schaffen Vertrauen, während subtile Tech-Elemente die KI-Kompetenz unterstreichen.\n\n**Custom Data Injection**: Die Seminar-Verwaltung wird auf Custom Post Types umgestellt. Das ermöglicht dem Client, neue Module per Backend-Injektion zu deployen, ohne den Quellcode zu berühren.\n\n**Latency Kill**: Durch den Einsatz von Breakdance haben wir den DOM-Tree um 40% reduziert. Das Ergebnis ist eine \"Instant-Load\"-Erfahrung, die Professionalität signalisiert, bevor der User das erste Wort gelesen hat.",
+  "finalStatus": "KI-Modul: Integriert. UX-Response: Immediate. Client-Trust: Verified. Scalability: Unlocked.",
+  "gatewayUri": "https://bornemannundpartner.at"
+}

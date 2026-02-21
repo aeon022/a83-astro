@@ -1,0 +1,219 @@
+---
+// src/components/blocks/Hero.astro
+import TerminalButton from '../ui/TerminalButton.astro';
+---
+<section id="hero-section" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-a83-surface transition-colors duration-500">
+  
+  <div class="absolute inset-0 bg-[linear-gradient(var(--a83-accent)_1px,transparent_1px),linear-gradient(90deg,var(--a83-accent)_1px,transparent_1px)] bg-[size:40px_40px] opacity-5 pointer-events-none z-0"></div>
+  
+  <canvas id="hero-rain" class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-80"></canvas>
+
+  <div class="relative w-full px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center z-10">
+    
+    <div class="flex flex-col items-start text-left">
+      
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-a83-bg border border-a83-accent/30 shadow-[2px_2px_0px_var(--a83-accent)] mb-8">
+        <span class="w-2 h-2 bg-a83-accent animate-pulse"></span>
+        <span class="font-mono text-xs text-a83-text-bold uppercase tracking-widest font-bold">Dein System-Upgrade steht an_</span>
+      </div>
+
+      <h2 class="text-2xl md:text-3xl font-mono font-bold text-a83-text uppercase tracking-tight mb-2">
+        Webdesign, das knallt.
+      </h2>
+      
+      <h1 id="hero-headline" class="text-5xl md:text-7xl font-black text-a83-text-bold uppercase tracking-tighter leading-tight mb-10 glitch-accent cursor-crosshair transition-all" data-text="Wie Neonlicht im Regen.">
+        Wie Neonlicht <br/>im Regen.
+      </h1>
+
+      <div class="w-full bg-a83-bg/90 backdrop-blur-md border border-a83-sub/20 p-6 mb-10 relative overflow-hidden group hover:border-a83-accent/50 transition-colors shadow-lg">
+        <div class="absolute top-0 left-0 w-1 h-full bg-a83-accent"></div>
+        
+        <p class="font-mono text-a83-text-bold text-sm mb-3 flex items-center font-bold">
+          <span class="text-a83-accent mr-2">></span>EXECUTE website_build_v2.0<span class="text-a83-accent animate-pulse">_</span>
+        </p>
+        
+        <p class="text-a83-text text-sm md:text-base leading-relaxed pl-2">
+          Die digitale Welt ist laut, dunkel und voller Bugs. <strong class="text-a83-text-bold">Abteilung 83 ist dein Fixer.</strong> Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link, sauber wie ein frisch gewischter Serverraum.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-5 w-full sm:w-auto mt-4">
+        
+        <TerminalButton 
+          variant="primary" 
+          href="mailto:post@abteilung83.at" 
+          prefix="[root]" 
+          text="./init_contact" 
+        />
+
+        <div onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})" class="w-full sm:w-auto">
+          <TerminalButton 
+            variant="secondary" 
+            prefix=">_" 
+            text="sys.open_vault()" 
+            class="w-full"
+          />
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="relative flex justify-center items-center lg:justify-end w-full mt-12 lg:mt-0">
+      <div class="absolute inset-0 bg-a83-accent/10 blur-[80px] rounded-full scale-75 animate-pulse-slow"></div>
+      <div class="relative z-10 w-full max-w-[560px] aspect-square floating-element">
+        <div class="absolute inset-0 border border-a83-accent/30 bg-a83-bg/40 backdrop-blur-[2px]">
+          <video src="/video/hero/hero.webm" autoplay loop muted playsinline class="w-full h-full object-cover mix-blend-luminosity opacity-80"></video>
+          <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px]"></div>
+        </div>
+        <div class="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-a83-accent"></div>
+        <div class="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-a83-accent"></div>
+        <div class="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-a83-accent"></div>
+        <div class="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-a83-accent"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // ==========================================
+  // REGEN & HOVER-LOGIK (Direkt im Hero)
+  // ==========================================
+  const canvas = document.getElementById('hero-rain') as HTMLCanvasElement;
+  const headline = document.getElementById('hero-headline');
+  const section = document.getElementById('hero-section');
+  const ctx = canvas?.getContext('2d');
+
+  if (canvas && ctx && section) {
+    let width = canvas.width = section.offsetWidth;
+    let height = canvas.height = section.offsetHeight;
+    let isIntense = false;
+
+    // Hover Event: Glitch & Sturm an
+    if (headline) {
+      headline.addEventListener('mouseenter', () => { 
+        isIntense = true; 
+        headline.classList.add('is-glitching-hard'); 
+      });
+      headline.addEventListener('mouseleave', () => { 
+        isIntense = false; 
+        headline.classList.remove('is-glitching-hard'); 
+      });
+    }
+
+    // Kojima Orange als RGB für den Regen
+    const rainColor = '255, 75, 18'; 
+    const getDropCount = () => isIntense ? 250 : 60;
+    
+    class Drop {
+      x: number = 0;
+      y: number = 0;
+      length: number = 0;
+      speed: number = 0;
+      opacity: number = 0;
+      layer: number = 0;
+
+      constructor() { this.reset(true); }
+
+      reset(initial = false) {
+        this.layer = Math.random() > 0.5 ? 1 : 2;
+        this.x = Math.random() * width;
+        this.y = initial ? Math.random() * -height : -50;
+        
+        if (isIntense) {
+            // STURM MODUS
+            this.speed = this.layer * (Math.random() * 4 + 4); 
+            this.length = this.layer * (Math.random() * 20 + 20);
+            this.opacity = this.layer * 0.4; 
+        } else {
+            // DEZENTER MODUS
+            this.speed = this.layer * (Math.random() * 1 + 1); 
+            this.length = this.layer * (Math.random() * 10 + 10);
+            this.opacity = this.layer * 0.15; 
+        }
+      }
+
+      update() {
+        this.y += this.speed;
+        this.x += (isIntense ? 0.3 : 0.05); // Wind-Drift
+        if (this.y > height) this.reset();
+      }
+
+      draw() {
+        ctx!.beginPath();
+        ctx!.strokeStyle = `rgba(${rainColor}, ${this.opacity})`;
+        ctx!.lineWidth = this.layer * (isIntense ? 1.5 : 0.5); 
+        ctx!.moveTo(this.x, this.y);
+        ctx!.lineTo(this.x - (isIntense ? 5 : 1), this.y - this.length);
+        ctx!.stroke();
+      }
+    }
+
+    let drops: Drop[] = Array.from({ length: getDropCount() }, () => new Drop());
+
+    function animate() {
+      ctx!.clearRect(0, 0, width, height);
+
+      // Drops flüssig anpassen
+      const targetCount = getDropCount();
+      if (drops.length < targetCount) drops.push(new Drop());
+      else if (drops.length > targetCount) drops.pop();
+
+      drops.forEach(drop => {
+        drop.update();
+        drop.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = section.offsetWidth;
+      height = canvas.height = section.offsetHeight;
+    });
+  }
+</script>
+
+<style>
+  /* Der normale, subtile Dauer-Glitch */
+  .glitch-accent {
+    position: relative;
+    text-shadow: 0 0 15px color-mix(in srgb, var(--a83-accent) 30%, transparent);
+    animation: text-flicker-subtle 4s linear infinite;
+  }
+
+  /* Der harte Glitch! Ohne clip-path. Zittert aggressiv hin und her */
+  .is-glitching-hard {
+      animation: text-flicker-hard 0.15s linear infinite !important;
+  }
+  
+  @keyframes text-flicker-subtle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.9; }
+    52% { opacity: 0.8; text-shadow: none; }
+    54% { opacity: 1; }
+  }
+
+  /* Nutzt transform und text-shadow statt den Text abzuschneiden */
+  @keyframes text-flicker-hard {
+    0% { transform: translate(0, 0); text-shadow: 3px 0 var(--a83-accent), -3px 0 var(--a83-text); }
+    25% { transform: translate(-2px, 1px); text-shadow: -3px 0 var(--a83-accent), 3px 0 var(--a83-text); }
+    50% { transform: translate(2px, -1px); text-shadow: 3px 0 var(--a83-accent), -3px 0 var(--a83-text); }
+    75% { transform: translate(-1px, 2px); text-shadow: -3px 0 var(--a83-accent), 3px 0 var(--a83-text); }
+    100% { transform: translate(1px, -2px); text-shadow: 3px 0 var(--a83-accent), -3px 0 var(--a83-text); }
+  }
+
+  .floating-element { animation: float 6s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .animate-pulse-slow { animation: pulse-glow 5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; transform: scale(0.85); }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+// src/components/ui/TerminalButton.astro
+interface Props {
+  text: string;
+  href?: string;
+  variant?: 'primary' | 'secondary';
+  prefix?: string;
+  class?: string;
+}
+
+const { 
+  text, 
+  href, 
+  variant = 'primary', 
+  prefix,
+  class: className = ''
+} = Astro.props;
+
+// Tag-Switch: Wenn href da ist -> <a>, sonst -> <button>
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag 
+  href={href}
+  class:list={[
+    "group relative inline-flex items-center justify-center px-6 py-4 font-mono text-sm font-bold tracking-widest transition-all duration-300 w-full sm:w-auto cursor-pointer",
+    {
+/* PRIMARY STYLE (Orange, Tactical) */
+"text-[#2b3224] bg-a83-accent border border-a83-accent hover:bg-a83-bg hover:text-a83-text-bold hover:shadow-[0_0_20px_color-mix(in_srgb,var(--a83-accent)_40%,transparent)]": variant === 'primary',
+      /* SECONDARY STYLE (Outline, Stealth) */
+      "text-a83-text border border-a83-sub/30 bg-a83-surface/30 backdrop-blur-sm hover:border-a83-accent hover:bg-a83-accent/10": variant === 'secondary',
+    },
+    className
+  ]}
+>
+  
+  {/* Tactical Brackets (Nur bei Primary) */}
+  {variant === 'primary' && (
+    <>
+      <span class="absolute top-1 left-1 w-2 h-2 border-t-2 border-l-2 border-a83-surface group-hover:border-a83-accent transition-colors"></span>
+      <span class="absolute bottom-1 right-1 w-2 h-2 border-b-2 border-r-2 border-a83-surface group-hover:border-a83-accent transition-colors"></span>
+    </>
+  )}
+
+  {/* Prefix (z.B. [root] oder >_ ) */}
+  {prefix && (
+    <span class:list={[
+      "mr-3",
+      variant === 'primary' ? "opacity-70 font-normal" : "text-a83-accent font-normal"
+    ]}>
+      {prefix}
+    </span>
+  )}
+
+  {/* Haupttext */}
+  <span>{text}</span>
+
+  {/* Cursor Logic */}
+  {variant === 'primary' ? (
+    <span class="ml-2 w-2.5 h-4 bg-a83-surface group-hover:bg-a83-accent animate-cursor-blink inline-block align-middle"></span>
+  ) : (
+    <span class="ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-a83-accent animate-cursor-blink">_</span>
+  )}
+
+</Tag>

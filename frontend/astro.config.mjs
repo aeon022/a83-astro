@@ -1,21 +1,18 @@
-// Dateipfad: frontend/astro.config.mjs
-import { defineConfig, passthroughImageService } from 'astro/config'; // <-- Import anpassen
+import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import studioCMS from 'studiocms';
 import node from '@astrojs/node';
+import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
 
 export default defineConfig({
   site: 'http://localhost:4321',
-  output: 'server', 
+  output: 'server', // Wichtig für die Keystatic API-Routen
   adapter: node({
     mode: 'standalone',
   }),
-  // Schaltet Sharp ab und leitet Bilder einfach 1:1 durch:
-  image: {
-    service: passthroughImageService(),
-  },
   integrations: [
-    studioCMS(),
+    react(),     // Rendert das Admin-Dashboard
+    keystatic(), // Das CMS selbst
   ],
   vite: {
     plugins: [tailwindcss()],

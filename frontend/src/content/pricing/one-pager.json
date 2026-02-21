@@ -1,0 +1,18 @@
+{
+  "name": "One-Pager",
+  "description": "Focus Mode.\nEine Seite, ein Ziel",
+  "price": "1700",
+  "clearance": "L1",
+  "outputParameters": [
+    "Deine Botschaft auf einer Spur – zero Noise, maximaler Impact.",
+    "Ideal für Launches & Kampagnen, die sofort zünden.",
+    "Hero-Story, Proof, Logos, CTA, Kontakt",
+    "Socials"
+  ],
+  "buildSuccess": [
+    "klare Conversion-Journey",
+    "Launch in Tagen",
+    "90+ Lighthouse"
+  ],
+  "actionLink": "#"
+}

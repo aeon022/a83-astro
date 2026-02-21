@@ -1,0 +1,221 @@
+---
+// Dateipfad: frontend/src/components/blocks/HeroVideoGlitch.astro
+import GlitchText from '../ui/GlitchText.astro';
+
+interface Props {
+  videoMp4: string;
+  videoWebm?: string;
+  poster?: string;
+}
+
+const { videoMp4, videoWebm, poster } = Astro.props;
+---
+
+<section
+  id="hero"
+  class="relative min-h-[100svh] overflow-hidden bg-black"
+  data-hero="root"
+>
+  {/* Video Background */}
+  <div class="absolute inset-0 -z-10">
+    <video
+      class="h-full w-full object-cover opacity-80"
+      data-hero="video"
+      playsinline
+      muted
+      preload="metadata"
+      poster={poster}
+    >
+      {videoWebm ? <source src={videoWebm} type="video/webm" /> : null}
+      <source src={videoMp4} type="video/mp4" />
+    </video>
+
+    {/* Neon + Vignette */}
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/90"></div>
+    <div class="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.25),transparent_45%),radial-gradient(circle_at_70%_60%,rgba(16,185,129,0.18),transparent_50%)]"></div>
+
+    {/* Video-Glitch Layer (wird per JS “aufgedreht”) */}
+    <div
+      class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-150"
+      data-hero="glitchLayer"
+    ></div>
+  </div>
+
+  {/* Content */}
+  <div class="mx-auto flex min-h-[100svh] max-w-6xl items-center px-6 py-20">
+    <div class="max-w-3xl font-mono">
+      <div class="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-white/70 backdrop-blur">
+        <span class="inline-block h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.8)]"></span>
+        <span>EXECUTE website_build_v2.0</span>
+      </div>
+
+      <GlitchText
+        as="p"
+        class="text-sm tracking-wide text-white/70"
+        text="Webdesign, das knallt."
+      />
+
+      <h1 class="mt-3 text-balance text-5xl font-semibold leading-[0.95] tracking-tight text-white sm:text-7xl">
+        <GlitchText as="span" class="block" text="Wie Neonlicht im Regen." />
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-white/75 sm:text-lg">
+        <span class="block">Dein System-Upgrade steht an.</span>
+        <span class="block mt-3">
+          Die digitale Welt ist laut, dunkel und voller Bugs. Abteilung 83 ist dein Fixer.
+          Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link,
+          sauber wie ein frisch gewischter Serverraum.
+        </span>
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center rounded-xl bg-emerald-400 px-5 py-3 text-sm font-semibold text-black shadow-[0_0_30px_rgba(52,211,153,0.35)] transition hover:translate-y-[-1px] hover:shadow-[0_0_40px_rgba(52,211,153,0.55)]"
+        >
+          Projekt starten
+        </a>
+        <a
+          href="/work"
+          class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white/80 backdrop-blur transition hover:bg-white/10"
+        >
+          Work ansehen
+        </a>
+      </div>
+
+      <p class="mt-10 text-xs text-white/45">
+        Scroll = Trigger. Glitch = Handshake. Wenn Video endet: Free Scroll.
+      </p>
+    </div>
+  </div>
+
+  <style>
+    /* Glitch Layer: “CRT + Noise + RGB shift” */
+    [data-hero="glitchLayer"] {
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.03),
+          rgba(255,255,255,0.03) 1px,
+          transparent 2px,
+          transparent 7px
+        ),
+        radial-gradient(circle at 50% 50%, rgba(34,197,94,0.22), transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      transform: translate3d(calc(var(--vx, 0) * 1px), calc(var(--vy, 0) * 1px), 0);
+      filter: saturate(1.2) contrast(1.1);
+    }
+
+    /* Video Filter wird beim Glitch kurz “aufgedreht” */
+    :global([data-hero-glitch="on"] [data-hero="video"]) {
+      filter: saturate(1.25) contrast(1.2) brightness(0.95) hue-rotate(8deg);
+      transform: scale(1.01);
+    }
+  </style>
+
+  <script>
+    // Zero-Bloat Scroll Trigger: Startet Video + Glitch beim ersten echten Scroll/Wheel.
+    const root = document.querySelector('[data-hero="root"]');
+    const video = document.querySelector('[data-hero="video"]');
+    const glitchLayer = document.querySelector('[data-hero="glitchLayer"]');
+    const glitchTexts = root?.querySelectorAll('[data-text]');
+
+    if (!(root instanceof HTMLElement) || !(video instanceof HTMLVideoElement) || !(glitchLayer instanceof HTMLElement)) {
+      // Silent fail, nichts crashen.
+    } else {
+      let armed = true;
+      let lastY = window.scrollY;
+      let lastT = performance.now();
+      let raf = 0;
+      let ended = false;
+
+      const setGlitch = (on) => {
+        root.setAttribute('data-hero-glitch', on ? 'on' : 'off');
+        glitchLayer.style.opacity = on ? '1' : '0';
+        glitchTexts?.forEach((el) => el.setAttribute('data-glitch', on ? 'on' : 'off'));
+      };
+
+      const microGlitch = (intensity) => {
+        // intensity: 0..1
+        const gx = Math.round((Math.random() - 0.5) * 18 * intensity);
+        const gy = Math.round((Math.random() - 0.5) * 12 * intensity);
+        const scan = Math.round(Math.random() * 40 * intensity);
+
+        root.style.setProperty('--gx', String(gx));
+        root.style.setProperty('--gy', String(gy));
+        root.style.setProperty('--scan', String(scan));
+        root.style.setProperty('--vx', String(gx * 0.6));
+        root.style.setProperty('--vy', String(gy * 0.4));
+      };
+
+      const armTrigger = () => {
+        if (!armed || ended) return;
+        armed = false;
+
+        // Start-Handshake: kurzer harter Glitch
+        setGlitch(true);
+        microGlitch(1);
+
+        // Video starten (muted + playsinline => meist erlaubt)
+        video.play().catch(() => {
+          // Wenn Browser blockt: trotzdem weiter, Seite bleibt nutzbar.
+        });
+
+        window.setTimeout(() => setGlitch(false), 220);
+      };
+
+      const onScroll = () => {
+        if (ended) return;
+
+        const y = window.scrollY;
+        const t = performance.now();
+        const dy = Math.abs(y - lastY);
+        const dt = Math.max(16, t - lastT);
+        const v = Math.min(1, (dy / dt) * 18); // “Velocity” normalisiert
+
+        lastY = y;
+        lastT = t;
+
+        // Während Scroll: leichte Glitches + Video an
+        if (!raf) {
+          raf = requestAnimationFrame(() => {
+            raf = 0;
+            if (v > 0.05) {
+              setGlitch(true);
+              microGlitch(v);
+              // “scroll trigger”: play sobald User scrollt
+              if (video.paused) video.play().catch(() => {});
+              window.setTimeout(() => setGlitch(false), 80);
+            }
+          });
+        }
+      };
+
+      const onWheel = () => armTrigger();
+      const onTouchMove = () => armTrigger();
+      const onKey = (e) => {
+        // Arrow/PageDown/Space als “Scroll Intent”
+        const keys = ['ArrowDown', 'PageDown', ' ', 'Spacebar'];
+        if (keys.includes(e.key)) armTrigger();
+      };
+
+      const onEnded = () => {
+        ended = true;
+        setGlitch(false);
+        // Video ist aus → Seite scrollt normal weiter. Keine “Pinning”-Magie, kein Lock-in.
+        window.removeEventListener('scroll', onScroll, { passive: true });
+        window.removeEventListener('wheel', onWheel, { passive: true });
+        window.removeEventListener('touchmove', onTouchMove, { passive: true });
+        window.removeEventListener('keydown', onKey);
+      };
+
+      // Hooks
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('wheel', onWheel, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+      window.addEventListener('keydown', onKey);
+      video.addEventListener('ended', onEnded);
+    }
+  </script>
+</section>

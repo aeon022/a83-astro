@@ -1,15 +1,73 @@
-/* Dateipfad: frontend/src/styles/global.css */
+/* src/styles/global.css */
 @import "tailwindcss";
 
-/* System-Tokens: ABTEILUNG83 */
 @theme {
-  --color-a83-neon: #00ff66; /* Passe den exakten Hex-Wert eures Grüns an */
-  --color-a83-dark: #0a0a0a;
+  /* Wir mappen unsere logischen Design-Tokens für Tailwind */
+  --color-a83-bg: var(--a83-bg);
+  --color-a83-surface: var(--a83-surface);
+  --color-a83-accent: var(--a83-accent);
+  --color-a83-text: var(--a83-text);
+  --color-a83-text-bold: var(--a83-text-bold);
+  --color-a83-sub: var(--a83-sub);
+
+  /* Wir machen deine Original-Farben auch direkt als Tailwind-Klassen verfügbar 
+     (z.B. text-kojima-orange), falls du sie mal zwingend brauchst */
+  --color-tactical-olive: #414a38;
+  --color-deep-canvas: #2b3224;
+  --color-kojima-orange: #ff4b12;
+  --color-bone-white: #e4e8df;
+  --color-veranda-green: #8c9980;
 }
 
-/* Base Terminal Settings */
 @layer base {
+  :root {
+    /* =========================================================
+       DIE BASIS-PALETTE (RONIN MIL-TEC)
+       ========================================================= */
+    --tactical-olive: #414a38;
+    --deep-canvas: #2b3224;
+    --kojima-orange: #ff4b12;
+    --bone-white: #e4e8df;
+    --veranda-green: #8c9980;
+
+    /* =========================================================
+       LIGHT MODE (Tag-Akte)
+       Heller Hintergrund, tiefdunkle Schrift.
+       ========================================================= */
+    --a83-bg: var(--bone-white);         /* Heller, sauberer Akten-Hintergrund */
+    --a83-surface: var(--veranda-green); /* Boxen heben sich in sanftem Grün ab */
+    --a83-accent: var(--kojima-orange);  /* Der Knall bleibt! */
+    --a83-text: var(--tactical-olive);   /* Dunkle, entspannte Schrift */
+    --a83-text-bold: var(--deep-canvas); /* Fast schwarzer Kontrast für Headlines */
+    --a83-sub: var(--tactical-olive);    /* Subtile Metadaten */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      /* =========================================================
+         DARK MODE (Nacht-Operation)
+         Die echten, tiefen Tactical-Farben für die Nacht.
+         ========================================================= */
+      --a83-bg: var(--tactical-olive);       /* Das matte Haupt-Grün */
+      --a83-surface: var(--deep-canvas);     /* Dunklere Terminal-Boxen für Tiefe */
+      --a83-accent: var(--kojima-orange);    
+      --a83-text: var(--bone-white);         /* Weiße, blendfreie Schrift */
+      --a83-text-bold: #ffffff;              /* Pures Weiß nur für knallende Headlines */
+      --a83-sub: var(--veranda-green);       /* Helle, abgetönte Metadaten */
+    }
+  }
+
+  /* Das globale Body-Setup */
   body {
-    @apply bg-a83-dark text-gray-300 font-mono antialiased selection:bg-a83-neon selection:text-black;
+    @apply bg-a83-bg text-a83-text font-mono antialiased transition-colors duration-500 selection:bg-a83-accent selection:text-white;
   }
 }
+
+/* Harter iTerm / Terminal Cursor Blink (Global) */
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .animate-cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }

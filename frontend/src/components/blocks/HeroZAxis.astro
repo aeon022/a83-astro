@@ -1,0 +1,75 @@
+---
+// src/components/blocks/HeroZAxis.astro
+---
+<div id="hero-scroll-track" class="relative w-full h-[200vh]">
+  
+  <div class="sticky top-0 w-full h-screen overflow-hidden bg-[#020305]" style="perspective: 1000px;">
+    
+    <div id="hero-scene" class="w-full h-full absolute inset-0 flex items-center justify-center transform-style-3d will-change-transform">
+      
+      <div class="absolute inset-[-10%] pointer-events-none" style="transform: translateZ(-100px) scale(1.1);">
+        <video id="hero-video" 
+               src="https://abteilung83.at/cms/wp-content/uploads/2025/11/Coding-Websites-Abteilung83-01-muted.mp4" 
+               loop muted playsinline 
+               class="w-full h-full object-cover opacity-50 mix-blend-screen"></video>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#020305_90%)]"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .transform-style-3d { transform-style: preserve-3d; }
+</style>
+
+<script>
+  const track = document.getElementById('hero-scroll-track');
+  const scene = document.getElementById('hero-scene');
+  const video = document.getElementById('hero-video') as HTMLVideoElement;
+
+  if (track && scene && video) {
+    let targetRotX = 0, targetRotY = 0;
+    let currentRotX = 0, currentRotY = 0;
+    let scrollZ = 0;
+    let videoHasStarted = false; // Flag, damit wir .play() nicht tausendmal aufrufen
+
+    window.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      targetRotX = y * -10; 
+      targetRotY = x * 10;
+    });
+
+    window.addEventListener('scroll', () => {
+      // 1. VIDEO TRIGGER: Startet das Video, sobald gescrollt wird
+      if (!videoHasStarted && window.scrollY > 5) {
+        video.play().catch(e => console.log("Video play blocked by browser:", e));
+        videoHasStarted = true;
+      }
+
+      // 2. SCROLL ENGINE
+      const rect = track.getBoundingClientRect();
+      const scrolled = -rect.top; 
+      const maxScroll = track.offsetHeight - window.innerHeight; 
+      let progress = Math.max(0, Math.min(1, scrolled / maxScroll));
+      
+      scrollZ = progress * 600; 
+
+      if (progress > 0.8) {
+         scene.style.opacity = (1 - ((progress - 0.8) / 0.2)).toString();
+      } else {
+         scene.style.opacity = '1';
+      }
+    });
+
+    function animate() {
+      currentRotX += (targetRotX - currentRotX) * 0.05;
+      currentRotY += (targetRotY - currentRotY) * 0.05;
+      
+      scene.style.transform = `translateZ(${scrollZ}px) rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+</script>
