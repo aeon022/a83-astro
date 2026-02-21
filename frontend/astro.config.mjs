@@ -1,16 +1,19 @@
 // Dateipfad: frontend/astro.config.mjs
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config'; // <-- Import anpassen
 import tailwindcss from '@tailwindcss/vite';
 import studioCMS from 'studiocms';
 import node from '@astrojs/node';
 
 export default defineConfig({
   site: 'http://localhost:4321',
-  // StudioCMS benötigt 'server' für die dynamische Middleware & Auth
   output: 'server', 
   adapter: node({
     mode: 'standalone',
   }),
+  // Schaltet Sharp ab und leitet Bilder einfach 1:1 durch:
+  image: {
+    service: passthroughImageService(),
+  },
   integrations: [
     studioCMS(),
   ],
