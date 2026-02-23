@@ -31,78 +31,99 @@ import TerminalButton from '../ui/TerminalButton.astro';
        <span class="hidden md:block font-mono text-[9px] text-white/50 uppercase tracking-widest">A83_Mainframe // Orbital_Sync</span>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <div id="hero-content-block" class="flex flex-col items-start transform-style-3d transition-transform duration-100 ease-out will-change-transform">
       
-      <div class="lg:col-span-10 flex flex-col items-start">
-        
-        <h1 id="hero-headline" class="relative group leading-none mb-12">
-          <span class="block font-black text-white uppercase tracking-tighter whitespace-nowrap headline-fluid-size neon-outline glitch-accent" data-text="Wie Neonlicht">
-            Wie Neonlicht
-          </span>
-          
-          <span class="block font-black text-a83-accent uppercase tracking-tighter headline-fluid-size neon-glow glitch-accent" data-text="im Regen.">
-            im Regen.
-          </span>
-        </h1>
-
-        <div class="flex flex-col sm:flex-row gap-8 items-start pl-2">
-            <TerminalButton 
-              variant="primary" 
-              href="mailto:post@abteilung83.at" 
-              prefix="EXEC" 
-              text="init_contact" 
-            />
-            <button onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})" class="group flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.4em] text-white hover:text-a83-accent transition-all">
-              <span class="w-12 h-[1px] bg-white group-hover:w-20 group-hover:bg-a83-accent transition-all"></span>
-              Enter_Vault
-            </button>
-        </div>
-
+      <div class="mb-6 translate-z-20 border-l-2 border-a83-accent pl-4">
+        <span class="font-mono text-xs md:text-sm text-a83-sub uppercase tracking-[0.3em]">// Webdesign, das knallt.</span>
       </div>
+
+      <h1 id="hero-headline" class="relative group leading-none mb-12 translate-z-50 cursor-crosshair">
+        
+        <span class="block font-black text-white uppercase tracking-tighter whitespace-nowrap headline-fluid-size neon-outline glitch-accent" data-text="Wie Neonlicht">
+          Wie Neonlicht
+        </span>
+        
+        <span class="block font-black text-white uppercase tracking-tighter headline-fluid-size blazing-neon glitch-accent" data-text="im Regen.">
+          im Regen.
+        </span>
+      </h1>
+
+      <div class="flex flex-col sm:flex-row gap-8 items-start pl-2 translate-z-30">
+          <TerminalButton 
+            variant="primary" 
+            href="mailto:post@abteilung83.at" 
+            prefix="EXEC" 
+            text="init_contact" 
+          />
+          <button onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})" class="group flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.4em] text-white hover:text-a83-accent transition-all">
+            <span class="w-12 h-[1px] bg-white group-hover:w-20 group-hover:bg-a83-accent transition-all"></span>
+            Enter_Vault
+          </button>
+      </div>
+
     </div>
   </div>
 </section>
 
 <style>
-  /* --- MENU SYNC (Cinematic Fade Out) --- */
-  /* Reagiert auf das HTML-Attribut, das vom Header.astro gesetzt wird */
-  :global(html[data-nav-state="opening"]) #hero-visibility-layer,
-  :global(html[data-nav-state="open"]) #hero-visibility-layer {
-    opacity: 0;
-    filter: blur(12px);
-    transform: scale(0.98);
+  /* --- 3D KERNEL --- */
+  .perspective-container { perspective: 1500px; }
+  .transform-style-3d { transform-style: preserve-3d; }
+  .translate-z-20 { transform: translateZ(20px); }
+  .translate-z-30 { transform: translateZ(40px); }
+  .translate-z-50 { transform: translateZ(80px); }
+
+  /* --- MENU SYNC: KINETIC GLITCH IN/OUT --- */
+  :global(html[data-nav-state="opening"]) #hero-visibility-layer {
+    animation: system-collapse 0.6s cubic-bezier(0.86, 0, 0.07, 1) forwards;
     pointer-events: none;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  :global(html[data-nav-state="open"]) #hero-visibility-layer {
+    opacity: 0; filter: blur(20px); transform: scale(0.95); pointer-events: none;
+  }
+  
+  :global(html[data-nav-state="closing"]) #hero-visibility-layer {
+    animation: system-reboot 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    pointer-events: auto;
   }
 
-  :global(html[data-nav-state="closing"]) #hero-visibility-layer,
   :global(html:not([data-nav-state])) #hero-visibility-layer {
-    opacity: 1;
-    filter: blur(0px);
-    transform: scale(1);
-    pointer-events: auto;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+    opacity: 1; filter: blur(0px); transform: scale(1); pointer-events: auto;
   }
+
+  /* Glitch Out: Signal reißt ab, Farben verschieben sich, Text crasht nach innen */
+  @keyframes system-collapse {
+    0% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1); }
+    15% { opacity: 0.8; transform: scale(1.02) skewX(5deg) translate3d(5px, 0, 0); filter: blur(1px) brightness(1.5) contrast(1.2); }
+    30% { opacity: 0.3; transform: scale(0.98) skewX(-15deg) translate3d(-10px, 5px, 0); filter: invert(0.2) hue-rotate(45deg); }
+    45% { opacity: 0.9; transform: scale(1.05) skewX(10deg); filter: brightness(2) contrast(1.5); }
+    60% { opacity: 0; transform: scale(0.95); filter: blur(10px); }
+    100% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
+  }
+
+  /* Glitch In: Harter Boot, kurzes Aufblitzen, Schärfe zieht sich rein */
+  @keyframes system-reboot {
+    0% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
+    30% { opacity: 0.8; transform: scale(1.05) skewX(-10deg) translate3d(-5px, -2px, 0); filter: brightness(2) contrast(1.5) hue-rotate(-20deg); }
+    50% { opacity: 0.3; transform: scale(0.98) skewX(15deg) translate3d(8px, 2px, 0); filter: invert(0.1); }
+    70% { opacity: 1; transform: scale(1.01) skewX(-2deg); filter: brightness(1.2); }
+    100% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1) contrast(1); }
+  }
+
 
   /* --- VIDEO FUSION --- */
   .video-fusion-container {
-    position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 80vw;
-    z-index: -1;
-    overflow: hidden;
+    position: absolute; top: 0; right: 0; bottom: 0; width: 80vw; z-index: -1; overflow: hidden;
     mask-image: radial-gradient(ellipse at center right, black 20%, transparent 80%);
     -webkit-mask-image: radial-gradient(ellipse at center right, black 20%, transparent 80%);
   }
-
   .video-fusion-element {
-    width: 100%; height: 100%; object-fit: cover;
-    mix-blend-mode: screen; 
-    filter: contrast(140%) brightness(0.7) saturate(1.2);
-    opacity: 0.8;
+    width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; 
+    filter: contrast(140%) brightness(0.7) saturate(1.2); opacity: 0.8;
   }
 
-  /* --- NEON TYPOGRAPHY --- */
+  /* --- HIGH-END NEON TYPOGRAPHY --- */
   .headline-fluid-size {
     font-size: clamp(3rem, 10vw, 9rem);
     line-height: 0.82;
@@ -110,35 +131,44 @@ import TerminalButton from '../ui/TerminalButton.astro';
 
   .neon-outline {
     color: transparent;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
   }
 
-  .neon-glow {
+  /* Der echte Neon-Look: Weißer Kern, stark brennende Corona */
+  .blazing-neon {
+    color: #ffffff;
     text-shadow: 
-      0 0 10px rgba(255, 75, 18, 0.8),
-      0 0 30px rgba(255, 75, 18, 0.4),
-      0 0 60px rgba(255, 75, 18, 0.2);
+      0 0 5px #fff,
+      0 0 15px var(--a83-accent),
+      0 0 30px var(--a83-accent),
+      0 0 60px var(--a83-accent),
+      0 0 100px color-mix(in srgb, var(--a83-accent) 50%, red);
+    animation: neon-pulse 3s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
   }
 
-  .perspective-container { perspective: 2000px; }
+  @keyframes neon-pulse {
+    0% { opacity: 0.9; filter: brightness(1); }
+    100% { opacity: 1; filter: brightness(1.2) contrast(1.1); text-shadow: 0 0 10px #fff, 0 0 20px var(--a83-accent), 0 0 40px var(--a83-accent), 0 0 80px var(--a83-accent), 0 0 120px color-mix(in srgb, var(--a83-accent) 60%, red); }
+  }
 
-  /* Glitch Styles */
+  /* Glitch Overlay */
   .glitch-accent { position: relative; }
   .is-glitching-hard { animation: text-flicker-hard 0.1s linear infinite !important; }
   
   @keyframes text-flicker-hard {
-    0% { transform: translate(0, 0); text-shadow: 5px 0 var(--a83-accent), -5px 0 #fff; }
-    50% { transform: translate(-3px, 2px); text-shadow: -5px 0 var(--a83-accent), 5px 0 #fff; opacity: 0.8; }
-    100% { transform: translate(2px, -1px); text-shadow: 3px 0 var(--a83-accent), -3px 0 #fff; }
+    0% { transform: translate(0, 0); text-shadow: 5px 0 var(--a83-accent), -5px 0 #fff; color: transparent; -webkit-text-stroke: 1.5px var(--a83-accent); }
+    50% { transform: translate(-4px, 2px); text-shadow: -5px 0 var(--a83-accent), 5px 0 #fff; opacity: 0.8; color: #fff;}
+    100% { transform: translate(3px, -2px); text-shadow: 3px 0 var(--a83-accent), -3px 0 #fff; color: transparent; -webkit-text-stroke: 1.5px #fff; }
   }
 </style>
 
 <script>
-  // FIX: Alle TypeScript Assertions ("as Type" und "!") entfernt für reines Vanilla JS
+  // 1. NEON RAIN ENGINE
   const canvas = document.getElementById('hero-rain');
   const headline = document.getElementById('hero-headline');
   const section = document.getElementById('hero-section');
+  const contentBlock = document.getElementById('hero-content-block');
   const ctx = canvas ? canvas.getContext('2d') : null;
 
   if (canvas && ctx && section) {
@@ -194,5 +224,17 @@ import TerminalButton from '../ui/TerminalButton.astro';
       width = canvas.width = section.offsetWidth;
       height = canvas.height = section.offsetHeight;
     });
+
+    // 2. TARGETED 3D PARALLAX (Nur der Textblock)
+    if (contentBlock) {
+      window.addEventListener('mousemove', (e) => {
+        const xRotate = (e.clientY / window.innerHeight - 0.5) * -10; 
+        const yRotate = (e.clientX / window.innerWidth - 0.5) * 10;
+        
+        requestAnimationFrame(() => {
+          contentBlock.style.transform = `rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
+        });
+      });
+    }
   }
 </script>
