@@ -2,87 +2,129 @@
 // src/components/blocks/Hero.astro
 import TerminalButton from '../ui/TerminalButton.astro';
 ---
-<section id="hero-section" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-a83-surface transition-colors duration-500">
-  
-  <div class="absolute inset-0 bg-[linear-gradient(var(--a83-accent)_1px,transparent_1px),linear-gradient(90deg,var(--a83-accent)_1px,transparent_1px)] bg-[size:40px_40px] opacity-5 pointer-events-none z-0"></div>
-  
-  <canvas id="hero-rain" class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-80"></canvas>
 
-  <div class="relative w-full px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center z-10">
+<section id="hero-section" class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-a83-surface perspective-2000">
+  
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,transparent_0%,var(--deep-canvas)_90%)] opacity-95"></div>
     
-    <div class="flex flex-col items-start text-left">
+    <div class="video-fusion-container">
+      <video 
+        src="/video/hero/hero.webm" 
+        autoplay loop muted playsinline 
+        class="video-fusion-element"
+      ></video>
+    </div>
+
+    <div class="absolute inset-0 bg-[linear-gradient(var(--a83-text)_1px,transparent_1px),linear-gradient(90deg,var(--a83-text)_1px,transparent_1px)] bg-[size:100px_100px] opacity-[0.04] mix-blend-overlay"></div>
+  </div>
+
+  <canvas id="hero-rain" class="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-60"></canvas>
+
+  <div class="relative w-full px-6 lg:px-16 z-20 flex flex-col h-full justify-center">
+    
+    <div id="hero-content-block" class="flex flex-col items-start transform-style-3d transition-transform duration-200 ease-out">
       
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-a83-bg border border-a83-accent/30 shadow-[2px_2px_0px_var(--a83-accent)] mb-8">
-        <span class="w-2 h-2 bg-a83-accent animate-pulse"></span>
-        <span class="font-mono text-xs text-a83-text-bold uppercase tracking-widest font-bold">Dein System-Upgrade steht an_</span>
+      <div class="flex items-center gap-4 mb-10 translate-z-20">
+         <div class="flex items-center gap-3 bg-black/50 backdrop-blur-xl px-4 py-2 border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+            <span class="w-2 h-2 bg-a83-accent animate-pulse shadow-[0_0_8px_var(--a83-accent)]"></span>
+            <span class="font-mono text-xs text-white uppercase tracking-[0.5em] font-black">Link_Established</span>
+         </div>
+         <span class="hidden md:block font-mono text-[10px] text-white/40 uppercase tracking-[0.3em]">A83_Orbital_Node // Stable</span>
       </div>
 
-      <h2 class="text-2xl md:text-3xl font-mono font-bold text-a83-text uppercase tracking-tight mb-2">
-        Webdesign, das knallt.
-      </h2>
-      
-      <h1 id="hero-headline" class="text-5xl md:text-7xl font-black text-a83-text-bold uppercase tracking-tighter leading-tight mb-10 glitch-accent cursor-crosshair transition-all" data-text="Wie Neonlicht im Regen.">
-        Wie Neonlicht <br/>im Regen.
+      <h1 id="hero-headline" class="relative group leading-none mb-14 translate-z-50">
+        <span class="block font-black text-white uppercase tracking-tighter whitespace-nowrap headline-fluid-size neon-outline glitch-accent" data-text="Wie Neonlicht">
+          Wie Neonlicht
+        </span>
+        <span class="block font-black text-a83-accent uppercase tracking-tighter headline-fluid-size neon-glow glitch-accent" data-text="im Regen.">
+          im Regen.
+        </span>
       </h1>
 
-      <div class="w-full bg-a83-bg/90 backdrop-blur-md border border-a83-sub/20 p-6 mb-10 relative overflow-hidden group hover:border-a83-accent/50 transition-colors shadow-lg">
-        <div class="absolute top-0 left-0 w-1 h-full bg-a83-accent"></div>
-        
-        <p class="font-mono text-a83-text-bold text-sm mb-3 flex items-center font-bold">
-          <span class="text-a83-accent mr-2">></span>EXECUTE website_build_v2.0<span class="text-a83-accent animate-pulse">_</span>
-        </p>
-        
-        <p class="text-a83-text text-sm md:text-base leading-relaxed pl-2">
-          Die digitale Welt ist laut, dunkel und voller Bugs. <strong class="text-a83-text-bold">Abteilung 83 ist dein Fixer.</strong> Websites, die nicht nur funktionieren, sondern leuchten. Schnell wie ein Neuro-Link, sauber wie ein frisch gewischter Serverraum.
-        </p>
-      </div>
-
-      <div class="flex flex-col sm:flex-row gap-5 w-full sm:w-auto mt-4">
-        
-        <TerminalButton 
-          variant="primary" 
-          href="mailto:post@abteilung83.at" 
-          prefix="[root]" 
-          text="./init_contact" 
-        />
-
-        <div onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})" class="w-full sm:w-auto">
+      <div class="flex flex-col sm:flex-row gap-8 items-start pl-2 translate-z-30">
           <TerminalButton 
-            variant="secondary" 
-            prefix=">_" 
-            text="sys.open_vault()" 
-            class="w-full"
+            variant="primary" 
+            href="mailto:post@abteilung83.at" 
+            prefix="EXEC" 
+            text="init_contact" 
           />
-        </div>
-
+          <button onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})" class="group flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.5em] text-white hover:text-a83-accent transition-all">
+            <span class="w-12 h-[1px] bg-white group-hover:w-20 group-hover:bg-a83-accent transition-all"></span>
+            Enter_Vault
+          </button>
       </div>
 
     </div>
-
-    <div class="relative flex justify-center items-center lg:justify-end w-full mt-12 lg:mt-0">
-      <div class="absolute inset-0 bg-a83-accent/10 blur-[80px] rounded-full scale-75 animate-pulse-slow"></div>
-      <div class="relative z-10 w-full max-w-[560px] aspect-square floating-element">
-        <div class="absolute inset-0 border border-a83-accent/30 bg-a83-bg/40 backdrop-blur-[2px]">
-          <video src="/video/hero/hero.webm" autoplay loop muted playsinline class="w-full h-full object-cover mix-blend-luminosity opacity-80"></video>
-          <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.15)_50%)] bg-[length:100%_4px]"></div>
-        </div>
-        <div class="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-a83-accent"></div>
-        <div class="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-a83-accent"></div>
-        <div class="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-a83-accent"></div>
-        <div class="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-a83-accent"></div>
-      </div>
-    </div>
-
   </div>
 </section>
 
+<style>
+  /* --- 3D UTILS --- */
+  .perspective-2000 { perspective: 2000px; }
+  .transform-style-3d { transform-style: preserve-3d; }
+  .translate-z-20 { transform: translateZ(40px); }
+  .translate-z-30 { transform: translateZ(60px); }
+  .translate-z-50 { transform: translateZ(100px); }
+
+  /* --- VIDEO FUSION: Keine sichtbaren Ränder mehr --- */
+  .video-fusion-container {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 80vw;
+    z-index: -1;
+    /* Kombinierte Maske für weiche Ränder links und außen */
+    mask-image: linear-gradient(to right, transparent 0%, black 45%),
+                radial-gradient(ellipse at center right, black 30%, transparent 85%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 45%),
+                        radial-gradient(ellipse at center right, black 30%, transparent 85%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+  }
+
+  .video-fusion-element {
+    width: 100%; height: 100%; object-fit: cover;
+    mix-blend-mode: screen; 
+    filter: contrast(135%) brightness(0.75) saturate(1.2);
+    opacity: 0.8;
+  }
+
+  /* --- NEON TYPOGRAPHY --- */
+  .headline-fluid-size {
+    font-size: clamp(3.5rem, 11vw, 10rem);
+    line-height: 0.82;
+  }
+
+  .neon-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .neon-glow {
+    text-shadow: 
+      0 0 10px rgba(255, 75, 18, 0.9),
+      0 0 30px rgba(255, 75, 18, 0.5),
+      0 0 70px rgba(255, 75, 18, 0.2);
+  }
+
+  /* --- GLITCH --- */
+  .glitch-accent { position: relative; }
+  .is-glitching-hard { animation: text-flicker-hard 0.1s linear infinite !important; }
+  
+  @keyframes text-flicker-hard {
+    0% { transform: translate(0, 0); text-shadow: 6px 0 var(--a83-accent), -6px 0 #fff; }
+    50% { transform: translate(-3px, 1px); text-shadow: -6px 0 var(--a83-accent), 6px 0 #fff; }
+    100% { transform: translate(2px, -2px); text-shadow: 4px 0 var(--a83-accent), -4px 0 #fff; }
+  }
+</style>
+
 <script>
-  // ==========================================
-  // REGEN & HOVER-LOGIK (Direkt im Hero)
-  // ==========================================
+  // 1. NEON RAIN ENGINE
   const canvas = document.getElementById('hero-rain') as HTMLCanvasElement;
   const headline = document.getElementById('hero-headline');
   const section = document.getElementById('hero-section');
+  const contentBlock = document.getElementById('hero-content-block');
   const ctx = canvas?.getContext('2d');
 
   if (canvas && ctx && section) {
@@ -90,7 +132,6 @@ import TerminalButton from '../ui/TerminalButton.astro';
     let height = canvas.height = section.offsetHeight;
     let isIntense = false;
 
-    // Hover Event: Glitch & Sturm an
     if (headline) {
       headline.addEventListener('mouseenter', () => { 
         isIntense = true; 
@@ -102,72 +143,49 @@ import TerminalButton from '../ui/TerminalButton.astro';
       });
     }
 
-    // Kojima Orange als RGB für den Regen
     const rainColor = '255, 75, 18'; 
-    const getDropCount = () => isIntense ? 250 : 60;
-    
     class Drop {
-      x: number = 0;
-      y: number = 0;
-      length: number = 0;
-      speed: number = 0;
-      opacity: number = 0;
-      layer: number = 0;
-
+      x=0; y=0; length=0; speed=0; opacity=0; layer=0;
       constructor() { this.reset(true); }
-
       reset(initial = false) {
         this.layer = Math.random() > 0.5 ? 1 : 2;
         this.x = Math.random() * width;
         this.y = initial ? Math.random() * -height : -50;
-        
-        if (isIntense) {
-            // STURM MODUS
-            this.speed = this.layer * (Math.random() * 4 + 4); 
-            this.length = this.layer * (Math.random() * 20 + 20);
-            this.opacity = this.layer * 0.4; 
-        } else {
-            // DEZENTER MODUS
-            this.speed = this.layer * (Math.random() * 1 + 1); 
-            this.length = this.layer * (Math.random() * 10 + 10);
-            this.opacity = this.layer * 0.15; 
-        }
+        this.speed = this.layer * (isIntense ? 14 : 4); 
+        this.length = this.layer * (isIntense ? 45 : 18);
+        this.opacity = this.layer * (isIntense ? 0.6 : 0.15); 
       }
-
       update() {
         this.y += this.speed;
-        this.x += (isIntense ? 0.3 : 0.05); // Wind-Drift
         if (this.y > height) this.reset();
       }
-
       draw() {
         ctx!.beginPath();
         ctx!.strokeStyle = `rgba(${rainColor}, ${this.opacity})`;
-        ctx!.lineWidth = this.layer * (isIntense ? 1.5 : 0.5); 
+        ctx!.lineWidth = this.layer * 0.5; 
         ctx!.moveTo(this.x, this.y);
-        ctx!.lineTo(this.x - (isIntense ? 5 : 1), this.y - this.length);
+        ctx!.lineTo(this.x, this.y - this.length);
         ctx!.stroke();
       }
     }
 
-    let drops: Drop[] = Array.from({ length: getDropCount() }, () => new Drop());
-
+    let drops = Array.from({ length: 200 }, () => new Drop());
     function animate() {
       ctx!.clearRect(0, 0, width, height);
-
-      // Drops flüssig anpassen
-      const targetCount = getDropCount();
-      if (drops.length < targetCount) drops.push(new Drop());
-      else if (drops.length > targetCount) drops.pop();
-
-      drops.forEach(drop => {
-        drop.update();
-        drop.draw();
-      });
-
+      drops.forEach(drop => { drop.update(); drop.draw(); });
       requestAnimationFrame(animate);
     }
     animate();
+
+    // 2. TARGETED 3D PARALLAX (Nur der Textblock)
+    window.addEventListener('mousemove', (e) => {
+      const xRotate = (e.clientY / window.innerHeight - 0.5) * -15; // Neigung
+      const yRotate = (e.clientX / window.innerWidth - 0.5) * 15;
+      
+      if (contentBlock) {
+        contentBlock.style.transform = `rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
+      }
+    });
 
     window.addEventListener('resize', () => {
       width = canvas.width = section.offsetWidth;
@@ -175,45 +193,3 @@ import TerminalButton from '../ui/TerminalButton.astro';
     });
   }
 </script>
-
-<style>
-  /* Der normale, subtile Dauer-Glitch */
-  .glitch-accent {
-    position: relative;
-    text-shadow: 0 0 15px color-mix(in srgb, var(--a83-accent) 30%, transparent);
-    animation: text-flicker-subtle 4s linear infinite;
-  }
-
-  /* Der harte Glitch! Ohne clip-path. Zittert aggressiv hin und her */
-  .is-glitching-hard {
-      animation: text-flicker-hard 0.15s linear infinite !important;
-  }
-  
-  @keyframes text-flicker-subtle {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.9; }
-    52% { opacity: 0.8; text-shadow: none; }
-    54% { opacity: 1; }
-  }
-
-  /* Nutzt transform und text-shadow statt den Text abzuschneiden */
-  @keyframes text-flicker-hard {
-    0% { transform: translate(0, 0); text-shadow: 3px 0 var(--a83-accent), -3px 0 var(--a83-text); }
-    25% { transform: translate(-2px, 1px); text-shadow: -3px 0 var(--a83-accent), 3px 0 var(--a83-text); }
-    50% { transform: translate(2px, -1px); text-shadow: 3px 0 var(--a83-accent), -3px 0 var(--a83-text); }
-    75% { transform: translate(-1px, 2px); text-shadow: -3px 0 var(--a83-accent), 3px 0 var(--a83-text); }
-    100% { transform: translate(1px, -2px); text-shadow: 3px 0 var(--a83-accent), -3px 0 var(--a83-text); }
-  }
-
-  .floating-element { animation: float 6s ease-in-out infinite; }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .animate-pulse-slow { animation: pulse-glow 5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.8; transform: scale(0.85); }
-  }
-</style>

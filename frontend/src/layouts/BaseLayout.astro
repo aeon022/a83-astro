@@ -1,5 +1,6 @@
 ---
-// src/layouts/BaseLayout.astro
+// Dateipfad: frontend/src/layouts/BaseLayout.astro
+
 import '../styles/global.css'; 
 import Header from './Header.astro';
 
@@ -28,9 +29,9 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
   
   <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500">
     
-    <Header />
-    
     <slot />
+    
+    <Header />
     
   </body>
 </html>

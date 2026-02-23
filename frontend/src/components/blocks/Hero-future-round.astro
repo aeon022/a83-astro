@@ -1,0 +1,137 @@
+---
+// src/components/blocks/Hero.astro
+import TerminalButton from '../ui/TerminalButton.astro';
+---
+
+<section id="hero-section" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-[#050505] transition-colors duration-1000">
+  
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-radial-gradient from-a83-accent/5 via-transparent to-transparent opacity-30"></div>
+    <div class="stars-container absolute inset-0"></div>
+  </div>
+  
+  <div class="absolute right-[-10%] top-[20%] w-[600px] h-[600px] bg-a83-accent/10 rounded-full blur-[120px] animate-pulse-slow pointer-events-none"></div>
+
+  <div class="relative w-full px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center z-10">
+    
+    <div class="flex flex-col items-start text-left">
+      
+      <div class="inline-flex items-center gap-3 px-3 py-1 bg-transparent border-l-2 border-a83-accent mb-8">
+        <span class="font-mono text-[10px] text-a83-accent uppercase tracking-[0.5em] font-bold">Orbital Status: Synchronized</span>
+      </div>
+
+      <h2 class="text-lg md:text-xl font-mono text-a83-sub uppercase tracking-[0.3em] mb-4 opacity-70">
+        Future-Proof Architectures.
+      </h2>
+      
+      <h1 id="hero-headline" class="text-6xl md:text-9xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-12 monolith-text" data-text="A83//VISION">
+        A83//<br/><span class="text-a83-accent">VISION</span>
+      </h1>
+
+      <div class="relative max-w-lg">
+        <div class="absolute -left-6 top-0 bottom-0 w-[1px] bg-gradient-to-b from-a83-accent via-a83-sub/20 to-transparent"></div>
+        <p class="text-a83-text text-lg md:text-xl font-light leading-relaxed mb-12 tracking-tight">
+          Wir bauen keine Websites. Wir erschaffen <span class="text-white font-mono uppercase text-sm border-b border-a83-accent/50">digitale Monolithen</span>. Hochpräzise Interfaces für eine Welt nach dem Rauschen.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-8">
+        <TerminalButton 
+          variant="primary" 
+          href="mailto:post@abteilung83.at" 
+          prefix="RUN" 
+          text="system_init" 
+        />
+        <button class="group flex items-center gap-4 font-mono text-xs uppercase tracking-[0.3em] text-a83-sub hover:text-white transition-all">
+          <span class="w-12 h-[1px] bg-a83-sub group-hover:w-20 group-hover:bg-a83-accent transition-all"></span>
+          Explore the Vault
+        </button>
+      </div>
+    </div>
+
+    <div class="relative flex justify-center items-center h-full">
+      <div class="quantum-orb-container relative">
+        <div class="relative w-80 h-80 md:w-[500px] md:h-[500px] rounded-full overflow-hidden border border-white/10 shadow-2xl">
+          <video 
+            src="/video/hero/hero.webm" 
+            autoplay loop muted playsinline 
+            class="w-full h-full object-cover scale-150 mix-blend-screen opacity-40 blur-sm hover:blur-none transition-all duration-1000"
+          ></video>
+          
+          <div class="absolute inset-0 bg-gradient-to-tr from-[#050505] via-transparent to-transparent"></div>
+          <canvas id="orb-interface" class="absolute inset-0 w-full h-full"></canvas>
+        </div>
+        
+        <div class="absolute inset-[-20px] border border-a83-accent/20 rounded-full animate-spin-slow pointer-events-none"></div>
+        <div class="absolute inset-[-40px] border border-white/5 rounded-full animate-reverse-spin pointer-events-none"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Monolith Text-Effect */
+  .monolith-text {
+    filter: drop-shadow(0 0 30px rgba(255, 75, 18, 0.1));
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+  
+  .monolith-text:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(-5deg) translateZ(50px);
+  }
+
+  /* Starfield / Shards Logic */
+  .stars-container {
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+      radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+      radial-gradient(2px 2px at 50px 160px, var(--a83-accent), rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: drift 100s linear infinite;
+    opacity: 0.2;
+  }
+
+  @keyframes drift {
+    from { background-position: 0 0; }
+    to { background-position: 1000px 500px; }
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+
+  .animate-reverse-spin {
+    animation: spin-slow 35s linear infinite reverse;
+  }
+
+  /* Orb Interface Details */
+  #orb-interface {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    mask-image: radial-gradient(circle, black, transparent 70%);
+  }
+</style>
+
+<script>
+  // Hover-Interaktion für den Orbital-Vibe
+  const section = document.getElementById('hero-section');
+  const orb = document.querySelector('.quantum-orb-container');
+
+  section.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    
+    if (orb) {
+      orb.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    }
+  });
+</script>
