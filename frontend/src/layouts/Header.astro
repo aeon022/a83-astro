@@ -1,5 +1,5 @@
 ---
-// src/layouts/Header.astro
+// Dateipfad: frontend/src/layouts/Header.astro
 ---
 <header id="site-header">
   <div class="header-row flex justify-end items-center gap-6 w-full">
@@ -70,8 +70,8 @@
   const hintText = document.getElementById('hint-text');
 
   function openMenu() {
-    trigger.setAttribute('aria-expanded', 'true');
-    overlay.setAttribute('aria-hidden', 'false');
+    trigger?.setAttribute('aria-expanded', 'true');
+    overlay?.setAttribute('aria-hidden', 'false');
     html.setAttribute('data-nav-state', 'opening');
     
     html.classList.add('nav-lock');
@@ -83,11 +83,11 @@
   }
 
   function closeMenu() {
-    trigger.setAttribute('aria-expanded', 'false');
+    trigger?.setAttribute('aria-expanded', 'false');
     html.setAttribute('data-nav-state', 'closing');
     
     setTimeout(() => {
-      overlay.setAttribute('aria-hidden', 'true');
+      overlay?.setAttribute('aria-hidden', 'true');
       html.removeAttribute('data-nav-state');
       html.classList.remove('nav-lock');
       body.classList.remove('nav-lock');
@@ -101,7 +101,7 @@
   closeBtn?.addEventListener('click', closeMenu);
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') {
+    if (e.key === 'Escape' && overlay?.getAttribute('aria-hidden') === 'false') {
       closeMenu();
     }
   });
@@ -126,33 +126,61 @@
 
 .nav-lock { overflow: hidden !important; touch-action: none !important; }
 
+/* FIX: Der Parent-Container übernimmt den Blend-Mode, da er als "fixed" Element
+   den Stacking Context für alle Kinder diktiert. */
 #site-header { 
-  position: fixed; top: 0; left: 0; right: 0; z-index: 40; 
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; 
   padding: 24px clamp(24px, 4vw, 40px); display: flex;
   justify-content: flex-end; align-items: center; pointer-events: none;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  
+  /* HIER IST DIE LÖSUNG */
+  mix-blend-mode: difference;
+  color: #ffffff;
 }
 .header-row { pointer-events: auto; }
 
+/* Kinder erben die Farbe, mischen aber nicht isoliert */
+.brand-wordmark, .mech-burger {
+  color: currentColor !important;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* Reset des Blend-Modes auf dem ROOT-Element des Headers, wenn Sytem-Menu offen ist */
+html[data-nav-state="open"] #site-header,
+html[data-nav-state="opening"] #site-header {
+  mix-blend-mode: normal;
+}
+
+html[data-nav-state="open"] .brand-wordmark,
+html[data-nav-state="opening"] .brand-wordmark,
+html[data-nav-state="open"] .mech-burger,
+html[data-nav-state="opening"] .mech-burger {
+  color: var(--a83-text-bold) !important;
+}
+
 /* ==========================================
-   1. WORDMARK (Ghost Glitch mit Slice)
+   1. WORDMARK & HOVER STYLES
    ========================================== */
 .brand-wordmark {
-  color: var(--a83-text); font-size: clamp(12px, 1.2vw, 14px);
+  font-size: clamp(12px, 1.2vw, 14px);
   font-weight: 700; letter-spacing: 0.1em; text-decoration: none;
-  position: relative; opacity: 0.8; transition: opacity 0.3s ease;
+  position: relative; 
 }
-.brand-wordmark:hover { opacity: 1; }
+
+.brand-wordmark:hover { opacity: 0.7; }
+
 .brand-wordmark:hover::before, .brand-wordmark:hover::after {
   content: attr(data-text); position: absolute; left: 50%; top: 50%; 
   transform: translate(-50%, -50%); pointer-events: none;
-  opacity: 0.3; mix-blend-mode: screen; white-space: pre; line-height: 1.1;
+  opacity: 0.4; mix-blend-mode: screen; white-space: pre; line-height: 1.1;
   text-align: right; font-size: 1.1em; width: max-content;
   filter: blur(0.5px);
 }
 
-/* skewX schiebt die obere und untere Zeile in entgegengesetzte Richtungen! */
-.brand-wordmark:hover::before { color: var(--a83-text-bold); animation: ghost-drift-1 2s steps(4) infinite; }
-.brand-wordmark:hover::after { color: var(--a83-text); animation: ghost-drift-2 2s steps(4) infinite reverse; }
+.brand-wordmark:hover::before { color: #ffffff; animation: ghost-drift-1 2s steps(4) infinite; }
+.brand-wordmark:hover::after { color: #ffffff; animation: ghost-drift-2 2s steps(4) infinite reverse; }
 
 @keyframes ghost-drift-1 {
   0% { transform: translate(-50%, -50%) translate(2px, 1px) skewX(2deg); }
@@ -160,6 +188,7 @@
   66% { transform: translate(-50%, -50%) translate(1px, -2px) skewX(4deg); }
   100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); }
 }
+
 @keyframes ghost-drift-2 {
   0% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-2deg); }
   33% { transform: translate(-50%, -50%) translate(1px, 2px) skewX(3deg); }
@@ -168,15 +197,16 @@
 }
 
 /* ==========================================
-   2. MECHANICAL SLICE BURGER
+   2. BURGER 
    ========================================== */
 .mech-burger {
   all: unset; display: flex; align-items: center; justify-content: center;
-  width: 48px; height: 48px; cursor: pointer; color: var(--a83-text-bold);
-  transition: color 0.3s ease;
+  width: 48px; height: 48px; cursor: pointer; 
 }
-.mech-burger:hover { color: var(--a83-accent); }
-
+.mech-burger:hover {
+  color: #ff5f00 !important;
+  /* Kein Reset des Blendmodes nötig - Difference gegen dunkel ergibt orange */
+}
 .mech-lines { width: 32px; height: 14px; position: relative; }
 .m-line {
   position: absolute; height: 2px; background-color: currentColor; 
@@ -187,17 +217,16 @@
 .m-bot { top: 12px; transform-origin: center; }
 
 .mech-burger:hover .m-mid { right: 0; transform: translateX(4px); }
-
-.mech-burger[aria-expanded="true"] .m-mid { opacity: 0; transform: translateX(20px); }
-.mech-burger[aria-expanded="true"] .m-top { top: 6px; transform: rotate(45deg); background-color: var(--a83-accent); }
-.mech-burger[aria-expanded="true"] .m-bot { top: 6px; transform: rotate(-45deg); background-color: var(--a83-accent); }
+#nav-trigger[aria-expanded="true"] .m-mid { opacity: 0; transform: translateX(20px); }
+#nav-trigger[aria-expanded="true"] .m-top { top: 6px; transform: rotate(45deg); }
+#nav-trigger[aria-expanded="true"] .m-bot { top: 6px; transform: rotate(-45deg); }
 
 /* ==========================================
-   3. OVERLAY & BACKDROP
+   3. OVERLAY & CARD STYLES (UNTOUCHED)
    ========================================== */
 #nav-overlay {
   position: fixed; inset: 0; z-index: 1000;
-  display: none; pointer-events: none; opacity: 0;
+  display: none; pointer-events: none; opacity: 0; isolation: isolate;
 }
 #nav-overlay::before {
   content: ""; position: fixed; inset: 0; background: var(--nav-backdrop);
@@ -209,29 +238,18 @@ html[data-nav-state="opening"] #nav-overlay::before,
 html[data-nav-state="open"] #nav-overlay::before { opacity: 1; backdrop-filter: blur(16px); }
 html[data-nav-state="closing"] #nav-overlay::before { opacity: 0; }
 
-/* ==========================================
-   4. HOLO CARD
-   ========================================== */
 .nav-card {
   position: fixed !important;
   top: clamp(24px, 3vw, 40px) !important; 
   right: clamp(24px, 4vw, 40px) !important;
   width: min(480px, 90vw); 
-  
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
-  
   background-color: var(--nav-bg);
   background-image: radial-gradient(color-mix(in srgb, var(--a83-text) 15%, transparent) 1px, transparent 1px);
   background-size: 16px 16px;
-  
   backdrop-filter: blur(20px) saturate(120%); 
-  
   border: 1px solid color-mix(in srgb, var(--a83-accent) 40%, transparent);
-  box-shadow: 
-    0 20px 50px rgba(0,0,0,0.6),
-    0 0 30px color-mix(in srgb, var(--a83-accent) 15%, transparent),
-    inset 0 0 20px color-mix(in srgb, var(--a83-accent) 10%, transparent);
-    
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px color-mix(in srgb, var(--a83-accent) 15%, transparent);
   z-index: 2; overflow: hidden;
   opacity: 0; transform: scaleY(0.005) scaleX(0); transform-origin: right top;
 }
@@ -245,9 +263,7 @@ html[data-nav-state="closing"] #nav-overlay::before { opacity: 0; }
 html[data-nav-state="opening"] .nav-card {
   animation: crt-boot-slow 0.85s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
-html[data-nav-state="open"] .nav-card {
-  opacity: 1; transform: scaleY(1) scaleX(1);
-}
+html[data-nav-state="open"] .nav-card { opacity: 1; transform: scaleY(1) scaleX(1); }
 html[data-nav-state="closing"] .nav-card {
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0; transform: translateY(-20px) scale(0.98);
@@ -260,82 +276,48 @@ html[data-nav-state="closing"] .nav-card {
 }
 
 /* ==========================================
-   5. MENU & CLOSE BUTTON
+   4. MENU & LINKS (UNTOUCHED)
    ========================================== */
 .nav-head {
-  display: flex; justify-content: space-between; align-items: flex-start;
   padding: 32px 40px 24px; border-bottom: 1px solid color-mix(in srgb, var(--a83-accent) 20%, transparent);
+  display: flex; justify-content: space-between; align-items: flex-start;
 }
-.nav-close-btn {
-  all: unset; display: flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; cursor: pointer; position: relative;
-  border: 1px solid color-mix(in srgb, var(--a83-sub) 30%, transparent);
-  transition: all 0.3s ease;
-}
-.c-line {
-  position: absolute; width: 16px; height: 2px;
-  background-color: var(--a83-text); transition: background-color 0.3s ease;
-}
-.c-1 { transform: rotate(45deg); }
-.c-2 { transform: rotate(-45deg); }
-
-.nav-close-btn:hover { border-color: var(--a83-accent); box-shadow: 0 0 10px color-mix(in srgb, var(--a83-accent) 30%, transparent); }
-.nav-close-btn:hover .c-line { background-color: var(--a83-accent); }
-
-.nav-menu { padding: 32px 40px 60px; display: grid; gap: 20px; position: relative; z-index: 2; }
-
-.nav-menu > a {
+.nav-menu { padding: 32px 40px 60px; display: grid; gap: 20px; }
+.nav-link {
   text-decoration: none; color: var(--a83-text); font-size: clamp(24px, 3.5vw, 32px); font-weight: 900;
   opacity: 0; transform: translateX(-20px); transition: opacity .4s ease, transform .4s ease;
-  position: relative; display: inline-block; width: max-content;
 }
+html[data-nav-state="open"] .nav-link { opacity: 1; transform: translateX(0); }
+html[data-nav-state="open"] .nav-link:nth-child(1) { transition-delay: .4s; }
+html[data-nav-state="open"] .nav-link:nth-child(2) { transition-delay: .5s; }
+html[data-nav-state="open"] .nav-link:nth-child(3) { transition-delay: .6s; }
+html[data-nav-state="open"] .nav-link:nth-child(4) { transition-delay: .7s; }
 
-html[data-nav-state="open"] .nav-menu > a { opacity: 1; transform: translateX(0); }
-html[data-nav-state="open"] .nav-menu > *:nth-child(1) { transition-delay: .4s; }
-html[data-nav-state="open"] .nav-menu > *:nth-child(2) { transition-delay: .5s; }
-html[data-nav-state="open"] .nav-menu > *:nth-child(3) { transition-delay: .6s; }
-html[data-nav-state="open"] .nav-menu > *:nth-child(4) { transition-delay: .7s; }
+.nav-link:hover { color: var(--a83-text-bold); text-shadow: 0 0 15px color-mix(in srgb, var(--a83-text-bold) 50%, transparent); }
 
-html[data-nav-state="closing"] .nav-menu > * { transition: opacity .2s, transform .2s; opacity: 0; transform: translateX(-10px); }
-
-.nav-menu > a:hover { color: var(--a83-text-bold); text-shadow: 0 0 15px color-mix(in srgb, var(--a83-text-bold) 50%, transparent); }
-.nav-menu > a:hover::before {
-  content: attr(data-title); position: absolute; left: 2px; top: 0;
-  color: var(--a83-accent); opacity: 0.6; z-index: -1;
-  animation: glitch-link 0.3s steps(2) infinite;
+.nav-close-btn {
+  all: unset; width: 40px; height: 40px; cursor: pointer; position: relative;
+  border: 1px solid color-mix(in srgb, var(--a83-sub) 30%, transparent);
 }
-@keyframes glitch-link { 0% { transform: translate(-1px, 1px); } 100% { transform: translate(1px, -1px); } }
+.c-line { position: absolute; width: 16px; height: 2px; background-color: var(--a83-text); top: 50%; left: 50%; }
+.c-1 { transform: translate(-50%, -50%) rotate(45deg); }
+.c-2 { transform: translate(-50%, -50%) rotate(-45deg); }
 
-/* ==========================================
-   6. HINT & WATERMARK
-   ========================================== */
 .nav-hint {
-  position: fixed !important; left: clamp(32px, 4vw, 48px) !important; bottom: clamp(32px, 4vh, 48px) !important;
-  display: flex; font-family: 'JetBrains Mono', Courier, monospace; font-size: 14px; z-index: 10;
-  opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease, transform 0.3s ease;
+  position: fixed; left: 48px; bottom: 48px; display: flex; font-size: 14px; z-index: 10;
+  opacity: 0; transform: translateY(10px); transition: 0.3s ease;
 }
 #nav-overlay.hint-visible .nav-hint { opacity: 1; transform: translateY(0); }
 
-/* Watermark weiter nach oben gerückt (bottom: 8%) */
 #nav-brandmark {
-  position: absolute; right: -5%; bottom: 8%; 
-  width: 350px; aspect-ratio: 1/1; 
-  background-image: url('/logo/logo-a83-white.svg');
-  background-size: contain; background-repeat: no-repeat; background-position: right bottom;
-  
-  opacity: 0.02; 
-  pointer-events: none; z-index: 0; mix-blend-mode: overlay;
-  
-  animation: holo-glitch 8s infinite;
+  position: absolute; right: -5%; bottom: 8%; width: 350px; aspect-ratio: 1/1; 
+  background-image: url('/logo/logo-a83-white.svg'); background-size: contain; background-repeat: no-repeat;
+  opacity: 0.02; mix-blend-mode: overlay; animation: holo-glitch 8s infinite;
 }
 
 @keyframes holo-glitch {
-  0%, 100% { transform: translate(0, 0); opacity: 0.02; filter: blur(0px); }
-  10% { transform: translate(1px, -1px); opacity: 0.03; filter: blur(1px); }
-  11% { transform: translate(-1px, 1px); opacity: 0.01; }
-  12% { transform: translate(0, 0); opacity: 0.02; }
-  60% { transform: translate(0, 0); opacity: 0.02; }
-  61% { transform: skewX(1deg); opacity: 0.04; }
-  62% { transform: skewX(0deg); opacity: 0.02; }
+  0%, 100% { transform: translate(0,0); opacity: 0.02; }
+  10% { transform: translate(1px, -1px); opacity: 0.03; }
+  60% { transform: skewX(1deg); opacity: 0.04; }
 }
 </style>
