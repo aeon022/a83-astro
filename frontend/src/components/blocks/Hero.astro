@@ -1,5 +1,5 @@
 ---
-// src/components/blocks/Hero.astro
+// Dateipfad: frontend/src/components/blocks/Hero.astro
 import TerminalButton from '../ui/TerminalButton.astro';
 ---
 
@@ -21,7 +21,7 @@ import TerminalButton from '../ui/TerminalButton.astro';
 
   <canvas id="hero-rain" class="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-60"></canvas>
 
-  <div class="relative w-full px-6 lg:px-16 z-20 flex flex-col h-full justify-center">
+  <div id="hero-visibility-layer" class="relative w-full px-6 lg:px-16 z-20 flex flex-col h-full justify-center">
     
     <div class="absolute top-10 left-6 lg:left-16 flex gap-6 items-center">
        <div class="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1 border border-white/10">
@@ -64,6 +64,26 @@ import TerminalButton from '../ui/TerminalButton.astro';
 </section>
 
 <style>
+  /* --- MENU SYNC (Cinematic Fade Out) --- */
+  /* Reagiert auf das HTML-Attribut, das vom Header.astro gesetzt wird */
+  :global(html[data-nav-state="opening"]) #hero-visibility-layer,
+  :global(html[data-nav-state="open"]) #hero-visibility-layer {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(0.98);
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(html[data-nav-state="closing"]) #hero-visibility-layer,
+  :global(html:not([data-nav-state])) #hero-visibility-layer {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+    pointer-events: auto;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  }
+
   /* --- VIDEO FUSION --- */
   .video-fusion-container {
     position: absolute;
@@ -78,25 +98,22 @@ import TerminalButton from '../ui/TerminalButton.astro';
   .video-fusion-element {
     width: 100%; height: 100%; object-fit: cover;
     mix-blend-mode: screen; 
-    /* FARBEN ZULASSEN: Grayscale entfernt, nur Kontrast/Brightness */
     filter: contrast(140%) brightness(0.7) saturate(1.2);
     opacity: 0.8;
   }
 
   /* --- NEON TYPOGRAPHY --- */
   .headline-fluid-size {
-    font-size: clamp(3rem, 10vw, 9rem); /* Etwas kleiner für besseren Frame */
+    font-size: clamp(3rem, 10vw, 9rem);
     line-height: 0.82;
   }
 
-  /* Neon Outline Style */
   .neon-outline {
     color: transparent;
     -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
   }
 
-  /* Neon Glow Style (Kojima Orange) */
   .neon-glow {
     text-shadow: 
       0 0 10px rgba(255, 75, 18, 0.8),
@@ -118,10 +135,11 @@ import TerminalButton from '../ui/TerminalButton.astro';
 </style>
 
 <script>
-  const canvas = document.getElementById('hero-rain') as HTMLCanvasElement;
+  // FIX: Alle TypeScript Assertions ("as Type" und "!") entfernt für reines Vanilla JS
+  const canvas = document.getElementById('hero-rain');
   const headline = document.getElementById('hero-headline');
   const section = document.getElementById('hero-section');
-  const ctx = canvas?.getContext('2d');
+  const ctx = canvas ? canvas.getContext('2d') : null;
 
   if (canvas && ctx && section) {
     let width = canvas.width = section.offsetWidth;
@@ -141,7 +159,6 @@ import TerminalButton from '../ui/TerminalButton.astro';
 
     const rainColor = '255, 75, 18'; 
     class Drop {
-      x=0; y=0; length=0; speed=0; opacity=0; layer=0;
       constructor() { this.reset(true); }
       reset(initial = false) {
         this.layer = Math.random() > 0.5 ? 1 : 2;
@@ -156,18 +173,18 @@ import TerminalButton from '../ui/TerminalButton.astro';
         if (this.y > height) this.reset();
       }
       draw() {
-        ctx!.beginPath();
-        ctx!.strokeStyle = `rgba(${rainColor}, ${this.opacity})`;
-        ctx!.lineWidth = this.layer * 0.5; 
-        ctx!.moveTo(this.x, this.y);
-        ctx!.lineTo(this.x, this.y - this.length);
-        ctx!.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${rainColor}, ${this.opacity})`;
+        ctx.lineWidth = this.layer * 0.5; 
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y - this.length);
+        ctx.stroke();
       }
     }
 
     let drops = Array.from({ length: 180 }, () => new Drop());
     function animate() {
-      ctx!.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
       drops.forEach(drop => { drop.update(); drop.draw(); });
       requestAnimationFrame(animate);
     }

@@ -1,7 +1,7 @@
 ---
 // Dateipfad: frontend/src/layouts/Header.astro
 // Vibe: Spatial UI + Tactical Terminal
-// Tech: Deep Background Fade, Kinetic Typography, Fullscreen Media, Typing Hints
+// Tech: Deep Background Fade, Kinetic Typography, Vanilla JS Fix
 ---
 <header id="site-header">
   <div class="header-row flex justify-end items-center gap-6 w-full">
@@ -101,16 +101,19 @@
   const body = document.body;
   const navLinks = document.querySelectorAll('.spatial-link');
   const actionLinks = document.querySelectorAll('.spatial-action');
+  
+  // Array Spread via ES6 (wird von Astro problemlos gebundled)
   const allLinks = [...navLinks, ...actionLinks];
   
-  const mediaLayer = document.getElementById('spatial-media-layer') as HTMLImageElement;
+  // FIX: TS Types entfernt. Reines Vanilla JS.
+  const mediaLayer = document.getElementById('spatial-media-layer');
   const hintText = document.getElementById('hint-text');
 
   const defaultHint = "> System idle.\n> Awaiting input...";
 
   function openMenu() {
-    trigger?.setAttribute('aria-expanded', 'true');
-    overlay?.setAttribute('aria-hidden', 'false');
+    if (trigger) trigger.setAttribute('aria-expanded', 'true');
+    if (overlay) overlay.setAttribute('aria-hidden', 'false');
     html.setAttribute('data-nav-state', 'opening');
     html.classList.add('nav-lock');
     body.classList.add('nav-lock');
@@ -121,47 +124,47 @@
   }
 
   function closeMenu() {
-    trigger?.setAttribute('aria-expanded', 'false');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
     html.setAttribute('data-nav-state', 'closing');
     
     setTimeout(() => {
-      overlay?.setAttribute('aria-hidden', 'true');
+      if (overlay) overlay.setAttribute('aria-hidden', 'true');
       html.removeAttribute('data-nav-state');
       html.classList.remove('nav-lock');
       body.classList.remove('nav-lock');
     }, 400); 
   }
 
-  trigger?.addEventListener('click', () => {
-    if (trigger.getAttribute('aria-expanded') === 'true') closeMenu();
-    else openMenu();
-  });
+  if (trigger) {
+    trigger.addEventListener('click', () => {
+      if (trigger.getAttribute('aria-expanded') === 'true') closeMenu();
+      else openMenu();
+    });
+  }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay?.getAttribute('aria-hidden') === 'false') {
+    if (e.key === 'Escape' && overlay && overlay.getAttribute('aria-hidden') === 'false') {
       closeMenu();
     }
   });
 
-  // Hover Logik: Media Inject + Terminal Hints
   allLinks.forEach(link => {
     link.addEventListener('mouseenter', (e) => {
-      const target = e.currentTarget as HTMLElement;
+      // FIX: Keine Casts mehr
+      const target = e.currentTarget;
       const imgSrc = target.getAttribute('data-img');
       const hint = target.getAttribute('data-hint') || '';
 
-      // Media Inject
       if (mediaLayer && imgSrc) {
         mediaLayer.src = imgSrc;
         mediaLayer.classList.remove('opacity-0');
-        mediaLayer.classList.add('opacity-40'); // Stärkere Präsenz im dunklen Hintergrund
+        mediaLayer.classList.add('opacity-40');
       }
 
-      // Terminal Hint Typing
       if (hintText) {
         hintText.innerHTML = ''; 
         hintText.classList.remove('typing-effect');
-        void hintText.offsetWidth; // Force Reflow
+        void hintText.offsetWidth; 
         
         setTimeout(() => {
           hintText.textContent = hint;
@@ -171,13 +174,11 @@
     });
     
     link.addEventListener('mouseleave', () => {
-      // Hide Media
       if (mediaLayer) {
         mediaLayer.classList.remove('opacity-40');
         mediaLayer.classList.add('opacity-0');
       }
 
-      // Reset Terminal
       if (hintText) {
         hintText.textContent = defaultHint;
         hintText.classList.remove('typing-effect');
@@ -189,7 +190,6 @@
 <style is:global>
 .nav-lock { overflow: hidden !important; touch-action: none !important; }
 
-/* HEADER BASE */
 #site-header { 
   position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
   padding: 24px clamp(24px, 4vw, 40px); display: flex;
@@ -205,7 +205,6 @@
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-/* Reset Blend Mode wenn Overlay aktiv ist */
 html[data-nav-state="open"] #site-header,
 html[data-nav-state="opening"] #site-header { mix-blend-mode: normal; }
 html[data-nav-state="open"] .brand-wordmark,
@@ -213,7 +212,6 @@ html[data-nav-state="opening"] .brand-wordmark,
 html[data-nav-state="open"] .mech-burger,
 html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !important; }
 
-/* WORDMARK & BURGER ANIMATIONS */
 .brand-wordmark { font-size: clamp(12px, 1.2vw, 14px); font-weight: 700; letter-spacing: 0.1em; text-decoration: none; position: relative; }
 .brand-wordmark:hover { opacity: 0.7; }
 .brand-wordmark:hover::before, .brand-wordmark:hover::after {
@@ -239,17 +237,12 @@ html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !impor
 #nav-trigger[aria-expanded="true"] .m-top { top: 6px; transform: rotate(45deg); }
 #nav-trigger[aria-expanded="true"] .m-bot { top: 6px; transform: rotate(-45deg); }
 
-
-/* ==========================================
-   SPATIAL UI OVERLAY
-   ========================================== */
 #nav-overlay {
   position: fixed; inset: 0; z-index: 1000;
   display: none; opacity: 0; pointer-events: none;
 }
 #nav-overlay[aria-hidden="false"] { display: block; opacity: 1; pointer-events: auto; }
 
-/* DEEP DARK FADE: Blendet die Seite massiv aus */
 .spatial-backdrop {
   position: absolute; inset: 0;
   backdrop-filter: blur(0px) brightness(1);
@@ -261,7 +254,7 @@ html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !impor
 html[data-nav-state="opening"] .spatial-backdrop,
 html[data-nav-state="open"] .spatial-backdrop {
   backdrop-filter: blur(40px) brightness(0.1); 
-  background: rgba(0, 0, 0, 0.85); /* Fast completely opaque black */
+  background: rgba(0, 0, 0, 0.85); 
 }
 
 .spatial-grid {
@@ -283,9 +276,6 @@ html[data-nav-state="open"] .spatial-grid {
   transition-delay: 0.1s;
 }
 
-/* ==========================================
-   KINETIC TYPOGRAPHY LINKS
-   ========================================== */
 .spatial-link {
   display: flex; align-items: center; gap: clamp(16px, 2vw, 32px);
   text-decoration: none;
@@ -335,7 +325,6 @@ html[data-nav-state="open"] .spatial-link:nth-child(5) { transition-delay: 0.3s;
   color: var(--a83-accent);
 }
 
-/* TERMINAL HINTS ANIMATION */
 .typing-effect {
   overflow: hidden;
   display: inline-block;
