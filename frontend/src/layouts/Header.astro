@@ -1,5 +1,7 @@
 ---
 // Dateipfad: frontend/src/layouts/Header.astro
+// Vibe: Spatial UI + Tactical Terminal
+// Tech: Deep Background Fade, Kinetic Typography, Fullscreen Media, Typing Hints
 ---
 <header id="site-header">
   <div class="header-row flex justify-end items-center gap-6 w-full">
@@ -22,58 +24,94 @@
 </header>
 
 <div id="nav-overlay" aria-hidden="true">
-  <div class="nav-backdrop"></div>
+  <div class="spatial-backdrop"></div>
   
-  <div class="nav-card">
-    <div class="card-accent-bar"></div>
+  <img id="spatial-media-layer" src="" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000 mix-blend-overlay z-0 pointer-events-none" />
 
-    <div class="nav-head">
-      <div class="flex flex-col gap-1">
-        <h1 class="font-mono text-a83-text-bold text-xl tracking-widest uppercase">System_Menu</h1>
-        <div class="flex items-center gap-2">
-          <span class="w-1.5 h-1.5 bg-a83-accent rounded-full animate-pulse shadow-[0_0_8px_var(--a83-accent)]"></span>
-          <span class="font-mono text-[10px] text-a83-text uppercase tracking-widest opacity-80">Secure Connection Active</span>
+  <div class="spatial-grid">
+    
+    <nav class="flex flex-col justify-center h-full gap-2 relative z-10 w-full md:w-auto">
+      <a href="/work" class="spatial-link group" data-img="/images/nav-work.webp" data-hint="> Accessing vault/portfolio...&#xa;> 14 entries found.&#xa;> Awaiting selection.">
+        <span class="spatial-num">01</span>
+        <span class="spatial-text">Work</span>
+      </a>
+      <a href="/services" class="spatial-link group" data-img="/images/nav-services.webp" data-hint="> Scanning tech-stack & modules...&#xa;> High-Performance nodes available.&#xa;> Clearance level verified.">
+        <span class="spatial-num">02</span>
+        <span class="spatial-text">Services</span>
+      </a>
+      <a href="/process" class="spatial-link group" data-img="/images/nav-process.webp" data-hint="> Loading standard operating procedures...&#xa;> Zero Bloat directive active.&#xa;> Execution path ready.">
+        <span class="spatial-num">03</span>
+        <span class="spatial-text">Process</span>
+      </a>
+      <a href="/blog" class="spatial-link group" data-img="/images/nav-blog.webp" data-hint="> Fetching latest system logs and intel...&#xa;> Decrypting data packets...&#xa;> 100% complete.">
+        <span class="spatial-num">04</span>
+        <span class="spatial-text">Log</span>
+      </a>
+      <a href="/about" class="spatial-link group" data-img="/images/nav-about.webp" data-hint="> cat whoami.txt&#xa;> Entity: ABTEILUNG83&#xa;> Mission: Less Noise. Nice Data.">
+        <span class="spatial-num">05</span>
+        <span class="spatial-text">About</span>
+      </a>
+    </nav>
+
+    <div class="flex flex-col justify-end pb-8 h-full relative z-10 font-mono text-a83-text pointer-events-auto w-full md:w-80 gap-10">
+      
+      <div class="hidden md:block">
+        <span class="block text-[10px] text-a83-sub uppercase tracking-widest mb-4 border-b border-a83-sub/20 pb-2">// TERMINAL_OUTPUT</span>
+        <div class="console-output text-sm leading-relaxed text-a83-text/80 min-h-[80px] flex flex-col justify-end">
+          <div id="hint-text" class="whitespace-pre-wrap">> System idle.&#xa;> Awaiting input...</div>
+          <div class="mt-2 text-a83-accent text-xs">
+            <span class="font-bold mr-2">root@a83:~ $</span>
+            <span class="animate-cursor-blink bg-a83-accent w-2 h-3 inline-block align-middle"></span>
+          </div>
         </div>
       </div>
-      <div class="nav-close-slot">
-        <button class="nav-close-btn" aria-label="Menü schließen">
-          <span class="c-line c-1"></span>
-          <span class="c-line c-2"></span>
-        </button>
+
+      <div>
+        <span class="block text-[10px] text-a83-sub uppercase tracking-widest mb-4 border-b border-a83-sub/20 pb-2">// EXECUTABLES</span>
+        <div class="flex flex-col gap-4">
+          <a href="/#roi-calculator" class="spatial-action flex items-center gap-3 text-sm hover:text-a83-accent transition-colors group" data-hint="> Execute /sys/calc/roi_simulator.sh&#xa;> Booting projection engine...&#xa;> Ready for input.">
+            <span class="w-2 h-2 border border-current group-hover:bg-a83-accent transition-colors"></span>
+            ROI_CALCULATOR.sh
+          </a>
+          <a href="/contact" class="spatial-action flex items-center gap-3 text-sm hover:text-a83-accent transition-colors group" data-hint="> init_connection()&#xa;> Establishing secure handshake...&#xa;> Ping: 12ms. Ready.">
+            <span class="w-2 h-2 border border-current bg-a83-text group-hover:bg-a83-accent transition-colors"></span>
+            INIT_CONNECTION()
+          </a>
+        </div>
       </div>
+
+      <div class="hidden md:block">
+        <span class="block text-[10px] text-a83-sub uppercase tracking-widest mb-4 border-b border-a83-sub/20 pb-2">// SYS_STATUS</span>
+        <div class="text-xs space-y-2 opacity-60">
+          <div class="flex justify-between gap-8"><span>Node:</span> <span>A83-Main</span></div>
+          <div class="flex justify-between gap-8"><span>Uptime:</span> <span>99.99%</span></div>
+          <div class="flex justify-between gap-8"><span>Latency:</span> <span class="text-a83-accent">12ms</span></div>
+        </div>
+      </div>
+
     </div>
-    
-    <div class="nav-menu font-mono">
-      <a href="/work" class="nav-link" data-title="[01_WORK]" data-hint="> open ./vault/portfolio"> [01_WORK] </a>
-      <a href="/services" class="nav-link" data-title="[02_SERVICES]" data-hint="> execute services.sh"> [02_SERVICES] </a>
-      <a href="/about" class="nav-link" data-title="[03_ABOUT]" data-hint="> read whoami.txt"> [03_ABOUT] </a>
-      <a href="/contact" class="nav-link" data-title="[04_CONTACT]" data-hint="> init_connection()"> [04_CONTACT] </a>
-    </div>
-    
-    <div id="nav-brandmark"></div>
-  </div>
-  
-  <div class="nav-hint">
-    <span style="color: var(--a83-accent); opacity: 0.9; margin-right: 8px; font-weight: bold;">root@a83:~ $</span> 
-    <span id="hint-text" class="cmd" style="color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.5); font-weight: bold;"></span>
-    <span class="animate-cursor-blink" style="color: var(--a83-accent); font-weight: bold;">_</span>
+
   </div>
 </div>
 
 <script>
   const trigger = document.getElementById('nav-trigger');
-  const closeBtn = document.querySelector('.nav-close-btn');
   const overlay = document.getElementById('nav-overlay');
   const html = document.documentElement;
   const body = document.body;
-  const links = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.spatial-link');
+  const actionLinks = document.querySelectorAll('.spatial-action');
+  const allLinks = [...navLinks, ...actionLinks];
+  
+  const mediaLayer = document.getElementById('spatial-media-layer') as HTMLImageElement;
   const hintText = document.getElementById('hint-text');
+
+  const defaultHint = "> System idle.\n> Awaiting input...";
 
   function openMenu() {
     trigger?.setAttribute('aria-expanded', 'true');
     overlay?.setAttribute('aria-hidden', 'false');
     html.setAttribute('data-nav-state', 'opening');
-    
     html.classList.add('nav-lock');
     body.classList.add('nav-lock');
     
@@ -91,14 +129,13 @@
       html.removeAttribute('data-nav-state');
       html.classList.remove('nav-lock');
       body.classList.remove('nav-lock');
-    }, 400);
+    }, 400); 
   }
 
   trigger?.addEventListener('click', () => {
     if (trigger.getAttribute('aria-expanded') === 'true') closeMenu();
     else openMenu();
   });
-  closeBtn?.addEventListener('click', closeMenu);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay?.getAttribute('aria-hidden') === 'false') {
@@ -106,112 +143,93 @@
     }
   });
 
-  links.forEach(link => {
+  // Hover Logik: Media Inject + Terminal Hints
+  allLinks.forEach(link => {
     link.addEventListener('mouseenter', (e) => {
-      const hint = (e.target as HTMLElement).getAttribute('data-hint') || '';
-      if(hintText) hintText.textContent = hint;
-      overlay?.classList.add('hint-visible');
+      const target = e.currentTarget as HTMLElement;
+      const imgSrc = target.getAttribute('data-img');
+      const hint = target.getAttribute('data-hint') || '';
+
+      // Media Inject
+      if (mediaLayer && imgSrc) {
+        mediaLayer.src = imgSrc;
+        mediaLayer.classList.remove('opacity-0');
+        mediaLayer.classList.add('opacity-40'); // Stärkere Präsenz im dunklen Hintergrund
+      }
+
+      // Terminal Hint Typing
+      if (hintText) {
+        hintText.innerHTML = ''; 
+        hintText.classList.remove('typing-effect');
+        void hintText.offsetWidth; // Force Reflow
+        
+        setTimeout(() => {
+          hintText.textContent = hint;
+          hintText.classList.add('typing-effect');
+        }, 30);
+      }
     });
+    
     link.addEventListener('mouseleave', () => {
-      overlay?.classList.remove('hint-visible');
+      // Hide Media
+      if (mediaLayer) {
+        mediaLayer.classList.remove('opacity-40');
+        mediaLayer.classList.add('opacity-0');
+      }
+
+      // Reset Terminal
+      if (hintText) {
+        hintText.textContent = defaultHint;
+        hintText.classList.remove('typing-effect');
+      }
     });
   });
 </script>
 
 <style is:global>
-:root {
-  --nav-bg: color-mix(in srgb, var(--a83-surface) 45%, transparent);
-  --nav-backdrop: color-mix(in srgb, var(--deep-canvas) 92%, transparent);
-}
-
 .nav-lock { overflow: hidden !important; touch-action: none !important; }
 
-/* FIX: Der Parent-Container übernimmt den Blend-Mode, da er als "fixed" Element
-   den Stacking Context für alle Kinder diktiert. */
+/* HEADER BASE */
 #site-header { 
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100; 
+  position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
   padding: 24px clamp(24px, 4vw, 40px); display: flex;
   justify-content: flex-end; align-items: center; pointer-events: none;
   background: transparent !important;
-  backdrop-filter: none !important;
-  
-  /* HIER IST DIE LÖSUNG */
   mix-blend-mode: difference;
   color: #ffffff;
 }
 .header-row { pointer-events: auto; }
 
-/* Kinder erben die Farbe, mischen aber nicht isoliert */
 .brand-wordmark, .mech-burger {
   color: currentColor !important;
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-/* Reset des Blend-Modes auf dem ROOT-Element des Headers, wenn Sytem-Menu offen ist */
+/* Reset Blend Mode wenn Overlay aktiv ist */
 html[data-nav-state="open"] #site-header,
-html[data-nav-state="opening"] #site-header {
-  mix-blend-mode: normal;
-}
-
+html[data-nav-state="opening"] #site-header { mix-blend-mode: normal; }
 html[data-nav-state="open"] .brand-wordmark,
 html[data-nav-state="opening"] .brand-wordmark,
 html[data-nav-state="open"] .mech-burger,
-html[data-nav-state="opening"] .mech-burger {
-  color: var(--a83-text-bold) !important;
-}
+html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !important; }
 
-/* ==========================================
-   1. WORDMARK & HOVER STYLES
-   ========================================== */
-.brand-wordmark {
-  font-size: clamp(12px, 1.2vw, 14px);
-  font-weight: 700; letter-spacing: 0.1em; text-decoration: none;
-  position: relative; 
-}
-
+/* WORDMARK & BURGER ANIMATIONS */
+.brand-wordmark { font-size: clamp(12px, 1.2vw, 14px); font-weight: 700; letter-spacing: 0.1em; text-decoration: none; position: relative; }
 .brand-wordmark:hover { opacity: 0.7; }
-
 .brand-wordmark:hover::before, .brand-wordmark:hover::after {
-  content: attr(data-text); position: absolute; left: 50%; top: 50%; 
-  transform: translate(-50%, -50%); pointer-events: none;
-  opacity: 0.4; mix-blend-mode: screen; white-space: pre; line-height: 1.1;
-  text-align: right; font-size: 1.1em; width: max-content;
-  filter: blur(0.5px);
+  content: attr(data-text); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none;
+  opacity: 0.4; mix-blend-mode: screen; white-space: pre; line-height: 1.1; text-align: right; font-size: 1.1em; width: max-content; filter: blur(0.5px);
 }
-
 .brand-wordmark:hover::before { color: #ffffff; animation: ghost-drift-1 2s steps(4) infinite; }
 .brand-wordmark:hover::after { color: #ffffff; animation: ghost-drift-2 2s steps(4) infinite reverse; }
 
-@keyframes ghost-drift-1 {
-  0% { transform: translate(-50%, -50%) translate(2px, 1px) skewX(2deg); }
-  33% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-3deg); }
-  66% { transform: translate(-50%, -50%) translate(1px, -2px) skewX(4deg); }
-  100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); }
-}
+@keyframes ghost-drift-1 { 0% { transform: translate(-50%, -50%) translate(2px, 1px) skewX(2deg); } 33% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-3deg); } 66% { transform: translate(-50%, -50%) translate(1px, -2px) skewX(4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
+@keyframes ghost-drift-2 { 0% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-2deg); } 33% { transform: translate(-50%, -50%) translate(1px, 2px) skewX(3deg); } 66% { transform: translate(-50%, -50%) translate(-1px, 1px) skewX(-4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
 
-@keyframes ghost-drift-2 {
-  0% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-2deg); }
-  33% { transform: translate(-50%, -50%) translate(1px, 2px) skewX(3deg); }
-  66% { transform: translate(-50%, -50%) translate(-1px, 1px) skewX(-4deg); }
-  100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); }
-}
-
-/* ==========================================
-   2. BURGER 
-   ========================================== */
-.mech-burger {
-  all: unset; display: flex; align-items: center; justify-content: center;
-  width: 48px; height: 48px; cursor: pointer; 
-}
-.mech-burger:hover {
-  color: #ff5f00 !important;
-  /* Kein Reset des Blendmodes nötig - Difference gegen dunkel ergibt orange */
-}
+.mech-burger { all: unset; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; cursor: pointer; }
+.mech-burger:hover { color: #ff5f00 !important; }
 .mech-lines { width: 32px; height: 14px; position: relative; }
-.m-line {
-  position: absolute; height: 2px; background-color: currentColor; 
-  left: 0; right: 0; transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-}
+.m-line { position: absolute; height: 2px; background-color: currentColor; left: 0; right: 0; transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1); }
 .m-top { top: 0; transform-origin: center; }
 .m-mid { top: 6px; right: 8px; }
 .m-bot { top: 12px; transform-origin: center; }
@@ -221,103 +239,112 @@ html[data-nav-state="opening"] .mech-burger {
 #nav-trigger[aria-expanded="true"] .m-top { top: 6px; transform: rotate(45deg); }
 #nav-trigger[aria-expanded="true"] .m-bot { top: 6px; transform: rotate(-45deg); }
 
+
 /* ==========================================
-   3. OVERLAY & CARD STYLES (UNTOUCHED)
+   SPATIAL UI OVERLAY
    ========================================== */
 #nav-overlay {
   position: fixed; inset: 0; z-index: 1000;
-  display: none; pointer-events: none; opacity: 0; isolation: isolate;
+  display: none; opacity: 0; pointer-events: none;
 }
-#nav-overlay::before {
-  content: ""; position: fixed; inset: 0; background: var(--nav-backdrop);
-  opacity: 0; transition: opacity 0.5s ease;
-}
-#nav-overlay[aria-hidden="false"] { display: block; pointer-events: auto; opacity: 1; }
+#nav-overlay[aria-hidden="false"] { display: block; opacity: 1; pointer-events: auto; }
 
-html[data-nav-state="opening"] #nav-overlay::before,
-html[data-nav-state="open"] #nav-overlay::before { opacity: 1; backdrop-filter: blur(16px); }
-html[data-nav-state="closing"] #nav-overlay::before { opacity: 0; }
-
-.nav-card {
-  position: fixed !important;
-  top: clamp(24px, 3vw, 40px) !important; 
-  right: clamp(24px, 4vw, 40px) !important;
-  width: min(480px, 90vw); 
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
-  background-color: var(--nav-bg);
-  background-image: radial-gradient(color-mix(in srgb, var(--a83-text) 15%, transparent) 1px, transparent 1px);
-  background-size: 16px 16px;
-  backdrop-filter: blur(20px) saturate(120%); 
-  border: 1px solid color-mix(in srgb, var(--a83-accent) 40%, transparent);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px color-mix(in srgb, var(--a83-accent) 15%, transparent);
-  z-index: 2; overflow: hidden;
-  opacity: 0; transform: scaleY(0.005) scaleX(0); transform-origin: right top;
+/* DEEP DARK FADE: Blendet die Seite massiv aus */
+.spatial-backdrop {
+  position: absolute; inset: 0;
+  backdrop-filter: blur(0px) brightness(1);
+  background: rgba(0, 0, 0, 0);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
 }
 
-.card-accent-bar {
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background-color: var(--a83-accent);
-  box-shadow: 0 0 20px var(--a83-accent);
+html[data-nav-state="opening"] .spatial-backdrop,
+html[data-nav-state="open"] .spatial-backdrop {
+  backdrop-filter: blur(40px) brightness(0.1); 
+  background: rgba(0, 0, 0, 0.85); /* Fast completely opaque black */
 }
 
-html[data-nav-state="opening"] .nav-card {
-  animation: crt-boot-slow 0.85s cubic-bezier(0.86, 0, 0.07, 1) forwards;
-}
-html[data-nav-state="open"] .nav-card { opacity: 1; transform: scaleY(1) scaleX(1); }
-html[data-nav-state="closing"] .nav-card {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0; transform: translateY(-20px) scale(0.98);
+.spatial-grid {
+  position: relative;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(32px, 8vw, 100px) clamp(24px, 5vw, 60px);
+  opacity: 0; transform: scale(1.02);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes crt-boot-slow {
-  0% { transform: scaleY(0.005) scaleX(0); opacity: 1; }
-  35% { transform: scaleY(0.005) scaleX(1); opacity: 1; } 
-  100% { transform: scaleY(1) scaleX(1); opacity: 1; } 
+@media (min-width: 768px) {
+  .spatial-grid { flex-direction: row; align-items: center; }
+}
+
+html[data-nav-state="opening"] .spatial-grid,
+html[data-nav-state="open"] .spatial-grid {
+  opacity: 1; transform: scale(1);
+  transition-delay: 0.1s;
 }
 
 /* ==========================================
-   4. MENU & LINKS (UNTOUCHED)
+   KINETIC TYPOGRAPHY LINKS
    ========================================== */
-.nav-head {
-  padding: 32px 40px 24px; border-bottom: 1px solid color-mix(in srgb, var(--a83-accent) 20%, transparent);
-  display: flex; justify-content: space-between; align-items: flex-start;
-}
-.nav-menu { padding: 32px 40px 60px; display: grid; gap: 20px; }
-.nav-link {
-  text-decoration: none; color: var(--a83-text); font-size: clamp(24px, 3.5vw, 32px); font-weight: 900;
-  opacity: 0; transform: translateX(-20px); transition: opacity .4s ease, transform .4s ease;
-}
-html[data-nav-state="open"] .nav-link { opacity: 1; transform: translateX(0); }
-html[data-nav-state="open"] .nav-link:nth-child(1) { transition-delay: .4s; }
-html[data-nav-state="open"] .nav-link:nth-child(2) { transition-delay: .5s; }
-html[data-nav-state="open"] .nav-link:nth-child(3) { transition-delay: .6s; }
-html[data-nav-state="open"] .nav-link:nth-child(4) { transition-delay: .7s; }
-
-.nav-link:hover { color: var(--a83-text-bold); text-shadow: 0 0 15px color-mix(in srgb, var(--a83-text-bold) 50%, transparent); }
-
-.nav-close-btn {
-  all: unset; width: 40px; height: 40px; cursor: pointer; position: relative;
-  border: 1px solid color-mix(in srgb, var(--a83-sub) 30%, transparent);
-}
-.c-line { position: absolute; width: 16px; height: 2px; background-color: var(--a83-text); top: 50%; left: 50%; }
-.c-1 { transform: translate(-50%, -50%) rotate(45deg); }
-.c-2 { transform: translate(-50%, -50%) rotate(-45deg); }
-
-.nav-hint {
-  position: fixed; left: 48px; bottom: 48px; display: flex; font-size: 14px; z-index: 10;
-  opacity: 0; transform: translateY(10px); transition: 0.3s ease;
-}
-#nav-overlay.hint-visible .nav-hint { opacity: 1; transform: translateY(0); }
-
-#nav-brandmark {
-  position: absolute; right: -5%; bottom: 8%; width: 350px; aspect-ratio: 1/1; 
-  background-image: url('/logo/logo-a83-white.svg'); background-size: contain; background-repeat: no-repeat;
-  opacity: 0.02; mix-blend-mode: overlay; animation: holo-glitch 8s infinite;
+.spatial-link {
+  display: flex; align-items: center; gap: clamp(16px, 2vw, 32px);
+  text-decoration: none;
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes holo-glitch {
-  0%, 100% { transform: translate(0,0); opacity: 0.02; }
-  10% { transform: translate(1px, -1px); opacity: 0.03; }
-  60% { transform: skewX(1deg); opacity: 0.04; }
+html[data-nav-state="open"] .spatial-link { opacity: 1; transform: translateX(0); }
+html[data-nav-state="open"] .spatial-link:nth-child(1) { transition-delay: 0.1s; }
+html[data-nav-state="open"] .spatial-link:nth-child(2) { transition-delay: 0.15s; }
+html[data-nav-state="open"] .spatial-link:nth-child(3) { transition-delay: 0.2s; }
+html[data-nav-state="open"] .spatial-link:nth-child(4) { transition-delay: 0.25s; }
+html[data-nav-state="open"] .spatial-link:nth-child(5) { transition-delay: 0.3s; }
+
+.spatial-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(12px, 1.5vw, 16px);
+  color: rgba(255,255,255,0.3);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transition: color 0.4s ease;
+}
+
+.spatial-text {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(60px, 10vw, 140px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  text-transform: uppercase;
+  
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.spatial-link:hover .spatial-text {
+  color: #ffffff;
+  -webkit-text-stroke: 0px transparent;
+  transform: translateX(2vw);
+  text-shadow: 0 0 40px rgba(255,255,255,0.15);
+}
+
+.spatial-link:hover .spatial-num {
+  color: var(--a83-accent);
+}
+
+/* TERMINAL HINTS ANIMATION */
+.typing-effect {
+  overflow: hidden;
+  display: inline-block;
+  white-space: pre-wrap;
+  animation: typing 0.4s steps(30, end) forwards;
+}
+
+@keyframes typing {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
 }
 </style>

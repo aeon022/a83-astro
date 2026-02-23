@@ -1,0 +1,408 @@
+---
+// Dateipfad: frontend/src/layouts/Header_V2.astro
+// Vibe: High-End Industrial Tech / Minimal Cyberdeck
+// Tech: Deep Glassmorphism, Precision Hovers, Mix-Blend Difference
+---
+<header id="site-header">
+  <div class="header-row flex justify-end items-center gap-6 w-full">
+    
+    <a href="/" class="brand-wordmark font-mono" data-text="const firma =&#xa;&quot;ABTEILUNG83&quot;;">
+      const firma = "ABTEILUNG83";
+    </a>
+
+    <div class="burger-home-slot">
+      <button id="nav-trigger" class="mech-burger" aria-label="Menü öffnen" aria-expanded="false">
+        <div class="mech-lines">
+          <span class="m-line m-top"></span>
+          <span class="m-line m-mid"></span>
+          <span class="m-line m-bot"></span>
+        </div>
+      </button>
+    </div>
+    
+  </div>
+</header>
+
+<div id="nav-overlay" aria-hidden="true">
+  <div class="nav-backdrop"></div>
+  
+  <div class="cyber-card">
+    
+    <div class="cyber-head">
+      <div class="flex items-center gap-4">
+        <div class="w-2 h-2 rounded-full bg-a83-accent shadow-[0_0_8px_var(--a83-accent)]"></div>
+        <span class="font-mono text-xs text-white/50 tracking-widest uppercase">A83 // Interface_V3</span>
+      </div>
+      
+      <button class="nav-close-btn group" aria-label="Menü schließen">
+        <span class="font-mono text-[10px] tracking-widest text-white/30 group-hover:text-white transition-colors mr-4 uppercase">Close</span>
+        <div class="relative w-5 h-5">
+          <span class="c-line c-1 bg-white/50 group-hover:bg-white"></span>
+          <span class="c-line c-2 bg-white/50 group-hover:bg-white"></span>
+        </div>
+      </button>
+    </div>
+    
+    <div class="cyber-body flex flex-col md:flex-row h-full">
+      
+      <div class="nav-menu font-mono flex-1 border-b md:border-b-0 md:border-r border-white/5 p-8 md:p-14 flex flex-col justify-between relative">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(255,255,255,0.02)_0%,transparent_60%)] pointer-events-none"></div>
+
+        <div class="flex flex-col gap-2">
+          <a href="/work" class="nav-link group" data-img="/images/nav-missions.webp" data-hint="> Accessing vault/portfolio...&#xa;> 14 entries found.&#xa;> Awaiting selection."> 
+            <span class="nav-indicator"></span>
+            <span class="nav-num text-white/30 text-xs w-8 tracking-widest transition-colors group-hover:text-a83-accent">01</span>
+            <span class="nav-text relative tracking-wide">MISSIONS</span>
+          </a>
+          <a href="/services" class="nav-link group" data-img="/images/nav-capabilities.webp" data-hint="> Scanning tech-stack & modules...&#xa;> High-Performance nodes available.&#xa;> Clearance level verified."> 
+            <span class="nav-indicator"></span>
+            <span class="nav-num text-white/30 text-xs w-8 tracking-widest transition-colors group-hover:text-a83-accent">02</span>
+            <span class="nav-text relative tracking-wide">CAPABILITIES</span>
+          </a>
+          <a href="/process" class="nav-link group" data-img="/images/nav-protocol.webp" data-hint="> Loading standard operating procedures...&#xa;> Zero Bloat directive active.&#xa;> Execution path ready."> 
+            <span class="nav-indicator"></span>
+            <span class="nav-num text-white/30 text-xs w-8 tracking-widest transition-colors group-hover:text-a83-accent">03</span>
+            <span class="nav-text relative tracking-wide">PROTOCOL</span>
+          </a>
+          <a href="/blog" class="nav-link group" data-img="/images/nav-transmissions.webp" data-hint="> Fetching latest system logs and intel...&#xa;> Decrypting data packets...&#xa;> 100% complete."> 
+            <span class="nav-indicator"></span>
+            <span class="nav-num text-white/30 text-xs w-8 tracking-widest transition-colors group-hover:text-a83-accent">04</span>
+            <span class="nav-text relative tracking-wide">TRANSMISSIONS</span>
+          </a>
+          <a href="/about" class="nav-link group" data-img="/images/nav-whoami.webp" data-hint="> cat whoami.txt&#xa;> Entity: ABTEILUNG83&#xa;> Mission: Less Noise. Nice Data."> 
+            <span class="nav-indicator"></span>
+            <span class="nav-num text-white/30 text-xs w-8 tracking-widest transition-colors group-hover:text-a83-accent">05</span>
+            <span class="nav-text relative tracking-wide">WHOAMI</span>
+          </a>
+        </div>
+
+        <div class="flex flex-col gap-3 mt-12 pt-8 border-t border-white/5 relative">
+          <span class="absolute -top-[7px] left-0 text-[9px] text-white/30 uppercase tracking-[0.2em] bg-[#0c0c0e] px-2 leading-none">Executable_Nodes</span>
+          
+          <a href="/#roi-calculator" class="action-link group flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 hover:border-a83-accent/50 hover:bg-a83-accent/5 transition-all rounded-lg" data-img="/images/nav-roi.webp" data-hint="> Execute /sys/calc/roi_simulator.sh&#xa;> Booting projection engine...&#xa;> Ready for input."> 
+            <div class="flex items-center">
+              <span class="nav-text-action text-white/70 text-sm tracking-widest group-hover:text-white transition-colors">ROI_CALCULATOR</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-white/30 font-mono tracking-widest group-hover:text-a83-accent transition-colors">EXEC</span>
+              <span class="w-1 h-1 bg-white/30 rounded-full group-hover:bg-a83-accent transition-colors"></span>
+            </div>
+          </a>
+
+          <a href="/contact" class="action-link group flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 hover:border-a83-accent/50 hover:bg-a83-accent/5 transition-all rounded-lg" data-img="/images/nav-contact.webp" data-hint="> init_connection()&#xa;> Establishing secure handshake...&#xa;> Ping: 12ms. Ready."> 
+            <div class="flex items-center">
+              <span class="nav-text-action text-white/70 text-sm tracking-widest group-hover:text-white transition-colors">INIT_CONNECTION</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-white/30 font-mono tracking-widest group-hover:text-a83-accent transition-colors">EXEC</span>
+              <span class="w-1 h-1 bg-white/30 rounded-full group-hover:bg-a83-accent transition-colors"></span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="nav-console w-full md:w-[45%] bg-[#050505] p-6 md:p-10 flex flex-col relative overflow-hidden rounded-r-2xl">
+        
+        <div class="font-mono text-[9px] text-white/30 mb-6 flex justify-between z-10 uppercase tracking-[0.2em]">
+          <span>Data_Feed</span>
+          <span>Status: Standby</span>
+        </div>
+
+        <div class="media-slot w-full aspect-video border border-white/10 bg-[#0a0a0a] rounded-lg relative overflow-hidden mb-8 z-10 flex items-center justify-center">
+          
+          <div id="media-idle" class="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-500">
+            <div class="w-full h-full absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:12px_12px]"></div>
+            <span class="font-mono text-[10px] text-white/20 tracking-[0.3em] uppercase relative z-10">No Signal</span>
+          </div>
+
+          <img id="media-feed-img" src="" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0 scale-105 transition-all duration-700 ease-out mix-blend-luminosity opacity-80" />
+          
+          <div class="absolute inset-0 pointer-events-none shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] z-20"></div>
+        </div>
+        
+        <div class="font-mono text-[9px] text-white/30 mb-4 flex justify-between z-10 uppercase tracking-[0.2em]">
+          <span>Output_Log</span>
+          <span>Buffer: Clear</span>
+        </div>
+
+        <div class="console-output font-mono text-xs leading-relaxed text-white/60 relative z-10 flex-1 flex flex-col justify-end">
+          <div id="hint-text" class="whitespace-pre-wrap">> System idle.&#xa;> Awaiting input...</div>
+          <div class="mt-3 flex items-center text-white/40 text-[10px] border-t border-white/10 pt-3">
+            <span class="mr-2">a83-core_</span>
+            <span class="animate-cursor-blink bg-white/40 w-1.5 h-3 inline-block"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const trigger = document.getElementById('nav-trigger');
+  const closeBtn = document.querySelector('.nav-close-btn');
+  const overlay = document.getElementById('nav-overlay');
+  const html = document.documentElement;
+  const body = document.body;
+  const coreLinks = document.querySelectorAll('.nav-link');
+  const actionLinks = document.querySelectorAll('.action-link');
+  const allLinks = [...coreLinks, ...actionLinks];
+  
+  const hintText = document.getElementById('hint-text');
+  const mediaImg = document.getElementById('media-feed-img') as HTMLImageElement;
+  const mediaIdle = document.getElementById('media-idle');
+
+  const defaultHint = "> System idle.\n> Awaiting input...";
+
+  function openMenu() {
+    trigger?.setAttribute('aria-expanded', 'true');
+    overlay?.setAttribute('aria-hidden', 'false');
+    html.setAttribute('data-nav-state', 'opening');
+    html.classList.add('nav-lock');
+    body.classList.add('nav-lock');
+    
+    setTimeout(() => {
+      html.setAttribute('data-nav-state', 'open');
+    }, 850);
+  }
+
+  function closeMenu() {
+    trigger?.setAttribute('aria-expanded', 'false');
+    html.setAttribute('data-nav-state', 'closing');
+    
+    setTimeout(() => {
+      overlay?.setAttribute('aria-hidden', 'true');
+      html.removeAttribute('data-nav-state');
+      html.classList.remove('nav-lock');
+      body.classList.remove('nav-lock');
+    }, 400);
+  }
+
+  trigger?.addEventListener('click', () => {
+    if (trigger.getAttribute('aria-expanded') === 'true') closeMenu();
+    else openMenu();
+  });
+  closeBtn?.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay?.getAttribute('aria-hidden') === 'false') {
+      closeMenu();
+    }
+  });
+
+  allLinks.forEach(link => {
+    link.addEventListener('mouseenter', (e) => {
+      const currentLink = e.currentTarget as HTMLElement;
+      const hint = currentLink.getAttribute('data-hint') || '';
+      const imgSrc = currentLink.getAttribute('data-img');
+
+      if(hintText) {
+        hintText.innerHTML = ''; 
+        hintText.classList.remove('typing-effect');
+        void hintText.offsetWidth; 
+        
+        setTimeout(() => {
+          hintText.textContent = hint;
+          hintText.classList.add('typing-effect');
+        }, 30);
+      }
+
+      if (mediaImg && mediaIdle && imgSrc) {
+        mediaImg.src = imgSrc;
+        mediaImg.classList.remove('opacity-0', 'scale-105');
+        mediaImg.classList.add('opacity-100', 'scale-100');
+        mediaIdle.classList.add('opacity-0');
+      }
+    });
+    
+    link.addEventListener('mouseleave', () => {
+      if(hintText) {
+        hintText.textContent = defaultHint;
+        hintText.classList.remove('typing-effect');
+      }
+
+      if (mediaImg && mediaIdle) {
+        mediaImg.classList.remove('opacity-100', 'scale-100');
+        mediaImg.classList.add('opacity-0', 'scale-105');
+        mediaIdle.classList.remove('opacity-0');
+        
+        setTimeout(() => {
+          if (mediaImg.classList.contains('opacity-0')) {
+             mediaImg.src = '';
+          }
+        }, 500);
+      }
+    });
+  });
+</script>
+
+<style is:global>
+:root {
+  --nav-backdrop: color-mix(in srgb, var(--deep-canvas) 85%, transparent);
+}
+
+.nav-lock { overflow: hidden !important; touch-action: none !important; }
+
+/* HEADER BASE */
+#site-header { 
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; 
+  padding: 24px clamp(24px, 4vw, 40px); display: flex;
+  justify-content: flex-end; align-items: center; pointer-events: none;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  mix-blend-mode: difference;
+  color: #ffffff;
+}
+.header-row { pointer-events: auto; }
+
+.brand-wordmark, .mech-burger {
+  color: currentColor !important;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+html[data-nav-state="open"] #site-header,
+html[data-nav-state="opening"] #site-header { mix-blend-mode: normal; }
+
+html[data-nav-state="open"] .brand-wordmark,
+html[data-nav-state="opening"] .brand-wordmark,
+html[data-nav-state="open"] .mech-burger,
+html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !important; }
+
+/* WORDMARK ANIMATIONEN */
+.brand-wordmark { font-size: clamp(12px, 1.2vw, 14px); font-weight: 700; letter-spacing: 0.1em; text-decoration: none; position: relative; }
+.brand-wordmark:hover { opacity: 0.7; }
+.brand-wordmark:hover::before, .brand-wordmark:hover::after {
+  content: attr(data-text); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none;
+  opacity: 0.4; mix-blend-mode: screen; white-space: pre; line-height: 1.1; text-align: right; font-size: 1.1em; width: max-content; filter: blur(0.5px);
+}
+.brand-wordmark:hover::before { color: #ffffff; animation: ghost-drift-1 2s steps(4) infinite; }
+.brand-wordmark:hover::after { color: #ffffff; animation: ghost-drift-2 2s steps(4) infinite reverse; }
+
+@keyframes ghost-drift-1 { 0% { transform: translate(-50%, -50%) translate(2px, 1px) skewX(2deg); } 33% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-3deg); } 66% { transform: translate(-50%, -50%) translate(1px, -2px) skewX(4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
+@keyframes ghost-drift-2 { 0% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-2deg); } 33% { transform: translate(-50%, -50%) translate(1px, 2px) skewX(3deg); } 66% { transform: translate(-50%, -50%) translate(-1px, 1px) skewX(-4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
+
+/* BURGER */
+.mech-burger { all: unset; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; cursor: pointer; }
+.mech-burger:hover { color: #ff5f00 !important; }
+.mech-lines { width: 32px; height: 14px; position: relative; }
+.m-line { position: absolute; height: 2px; background-color: currentColor; left: 0; right: 0; transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1); }
+.m-top { top: 0; transform-origin: center; }
+.m-mid { top: 6px; right: 8px; }
+.m-bot { top: 12px; transform-origin: center; }
+
+.mech-burger:hover .m-mid { right: 0; transform: translateX(4px); }
+#nav-trigger[aria-expanded="true"] .m-mid { opacity: 0; transform: translateX(20px); }
+#nav-trigger[aria-expanded="true"] .m-top { top: 6px; transform: rotate(45deg); }
+#nav-trigger[aria-expanded="true"] .m-bot { top: 6px; transform: rotate(-45deg); }
+
+/* ==========================================
+   HIGH-END TECH HUD
+   ========================================== */
+#nav-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  display: none; pointer-events: none; opacity: 0; isolation: isolate;
+  padding: clamp(16px, 3vw, 40px);
+}
+#nav-overlay::before {
+  content: ""; position: fixed; inset: 0; background: var(--nav-backdrop);
+  opacity: 0; transition: opacity 0.5s ease;
+}
+#nav-overlay[aria-hidden="false"] { display: block; pointer-events: auto; opacity: 1; }
+
+html[data-nav-state="opening"] #nav-overlay::before,
+html[data-nav-state="open"] #nav-overlay::before { opacity: 1; backdrop-filter: blur(40px) saturate(120%); }
+html[data-nav-state="closing"] #nav-overlay::before { opacity: 0; }
+
+.cyber-card {
+  position: relative;
+  width: 100%; max-width: 900px; height: 100%; max-height: 700px;
+  margin: 40px auto 0;
+  
+  /* High-End Glassmorphism statt Cyberpunk-Borders */
+  background-color: rgba(12, 12, 14, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+  
+  display: flex; 
+  flex-direction: column;
+  opacity: 0; transform: translateY(30px) scale(0.99);
+}
+
+html[data-nav-state="opening"] .cyber-card {
+  animation: elegant-boot 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.05s;
+}
+html[data-nav-state="open"] .cyber-card { opacity: 1; transform: translateY(0) scale(1); }
+html[data-nav-state="closing"] .cyber-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0; transform: translateY(-20px) scale(0.99);
+}
+
+@keyframes elegant-boot {
+  0% { opacity: 0; transform: translateY(30px) scale(0.99); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.cyber-head {
+  padding: 24px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+/* HIGH-END LINKS: PRECISION HOVER */
+.nav-link {
+  display: flex; align-items: center;
+  color: white; font-size: clamp(18px, 2vw, 24px); font-weight: 400;
+  opacity: 0; transform: translateX(-15px); transition: opacity .4s ease, transform .4s ease;
+  padding: 12px 0;
+  position: relative;
+}
+html[data-nav-state="open"] .nav-link,
+html[data-nav-state="open"] .action-link { opacity: 1; transform: translateX(0); }
+html[data-nav-state="open"] .nav-link:nth-child(1) { transition-delay: .1s; }
+html[data-nav-state="open"] .nav-link:nth-child(2) { transition-delay: .15s; }
+html[data-nav-state="open"] .nav-link:nth-child(3) { transition-delay: .2s; }
+html[data-nav-state="open"] .nav-link:nth-child(4) { transition-delay: .25s; }
+html[data-nav-state="open"] .nav-link:nth-child(5) { transition-delay: .3s; }
+html[data-nav-state="open"] .action-link:nth-child(2) { transition-delay: .4s; }
+html[data-nav-state="open"] .action-link:nth-child(3) { transition-delay: .45s; }
+
+/* Subtiler Linien-Indikator statt Klammern */
+.nav-indicator {
+  position: absolute; left: -20px; top: 50%; transform: translateY(-50%);
+  width: 0; height: 2px; background-color: var(--a83-accent);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover .nav-indicator { width: 12px; }
+.nav-link:hover .nav-text { transform: translateX(4px); text-shadow: 0 0 15px rgba(255,255,255,0.3); }
+.nav-text { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ACTION LINKS */
+.action-link {
+  opacity: 0; transform: translateX(-15px); transition: opacity .4s ease, transform .4s ease;
+}
+
+/* CLOSE BTN */
+.nav-close-btn { all: unset; display: flex; align-items: center; cursor: pointer; }
+.c-line { position: absolute; width: 100%; height: 1.5px; top: 50%; left: 0; transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.c-1 { transform: translateY(-50%) rotate(45deg); }
+.c-2 { transform: translateY(-50%) rotate(-45deg); }
+.nav-close-btn:hover .c-1 { transform: translateY(-50%) rotate(135deg); }
+.nav-close-btn:hover .c-2 { transform: translateY(-50%) rotate(45deg); }
+
+/* CONSOLE ANIMATIONS */
+.typing-effect {
+  overflow: hidden;
+  display: inline-block;
+  white-space: pre-wrap;
+  animation: typing 0.4s steps(30, end) forwards;
+}
+
+@keyframes typing {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+</style>
