@@ -1,80 +1,92 @@
 ---
 // Dateipfad: frontend/src/components/blocks/Manifesto.astro
-// Vibe: Editorial Cyberpunk / High-End Agency
-// Tech: CSS Grid (Bento), CSS Glitch Animation, nav-content-sync
+// Vibe: Signal to Noise / Brutalist / No Bloat
+// Tech: Tailwind Dark Mode Modifiers, Transition Colors
 ---
 
-<section id="manifesto" class="nav-content-sync relative w-full px-6 lg:px-16 py-32 md:py-48 bg-a83-bg border-t border-white/5 overflow-hidden">
+<section id="manifesto" class="nav-content-sync relative w-full px-6 lg:px-16 py-40 md:py-56 bg-[#f4f4f6] dark:bg-a83-bg border-t border-black/5 dark:border-white/10 overflow-hidden transition-colors duration-500">
   
-  <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--a83-accent)_3%,transparent)_0%,transparent_70%)] pointer-events-none"></div>
+  <div class="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none dark:hidden"></div>
 
-  <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center relative z-10">
+  <div class="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--a83-accent)_3%,transparent)_0%,transparent_60%)] pointer-events-none opacity-0 dark:opacity-50 mix-blend-screen transition-opacity duration-500"></div>
+
+  <div class="max-w-[1600px] mx-auto grid grid-cols-1 xl:grid-cols-12 gap-24 xl:gap-16 items-center relative z-10">
     
-    <div class="lg:col-span-6 flex flex-col items-start pr-0 lg:pr-12">
+    <div class="xl:col-span-6 flex flex-col items-start pr-0 xl:pr-12">
       
-      <div class="flex items-center gap-3 mb-8">
-        <span class="w-1.5 h-1.5 bg-white/50"></span>
-        <span class="font-mono text-[10px] text-white/50 uppercase tracking-[0.3em]">// CORE_DIRECTIVE</span>
+      <div class="flex items-center gap-4 mb-12">
+        <span class="w-2 h-2 bg-a83-accent shadow-[0_0_8px_var(--a83-accent)]"></span>
+        <span class="font-mono text-xs text-black/50 dark:text-white/50 uppercase tracking-[0.4em] font-bold transition-colors">// SIGNAL_TO_NOISE</span>
       </div>
 
-      <h2 class="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[1.1] mb-8 font-sans">
-        Fesch. Frisch.<br />
-        <span class="text-transparent" style="-webkit-text-stroke: 1px var(--a83-accent);">Future.</span>
+      <h2 class="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.05] mb-12 font-sans text-black dark:text-white transition-colors duration-500">
+        Cut the Noise.<br />
+        <span class="text-transparent relative" style="-webkit-text-stroke: 2px var(--a83-accent);">
+          Own the Data.
+          <span class="absolute inset-0 blur-md opacity-0 dark:opacity-50 mix-blend-screen text-a83-accent transition-opacity duration-500" style="-webkit-text-stroke: 0;">Own the Data.</span>
+        </span>
       </h2>
 
-      <p class="text-xl md:text-3xl text-white/70 font-medium tracking-tight mb-6">
-        Webdesign, das kompiliert.<br />
-        <span class="text-white">Für Menschen.</span>
+      <p class="text-2xl sm:text-4xl text-black dark:text-white font-bold tracking-tight mb-10 leading-tight transition-colors duration-500">
+        High Performance.<br />
+        <span class="text-a83-accent">Kein Bullshit.</span>
       </p>
 
-      <p class="text-sm md:text-base text-white/40 font-mono max-w-md leading-relaxed mb-12">
-        Wir bauen keine monolithischen Bloatware-Templates. Wir konstruieren maßgeschneiderte, asynchrone Architekturen. Deploy ready. Less Noise. Nice Data. No Bloat.
+      <p class="text-lg sm:text-xl text-black/70 dark:text-white/70 font-sans max-w-2xl leading-relaxed mb-16 transition-colors duration-500">
+        Das Web erstickt an überladenen Templates und Ladebalken. Wir sind der Filter. ABTEILUNG83 konstruiert High-Performance-Assets, die messbar konvertieren. <strong class="text-black dark:text-white font-black transition-colors">Reduziert auf das absolute Maximum.</strong>
       </p>
 
-      <div class="font-mono text-xs md:text-sm text-a83-accent bg-a83-accent/10 border border-a83-accent/20 px-4 py-2 inline-flex relative overflow-hidden group">
-        <span class="raw-glitch inline-block tracking-[0.2em]">R^^t_ /to/!eb#_></span>
+      <div class="font-mono text-sm text-black dark:text-a83-accent bg-white dark:bg-black border border-black/10 dark:border-a83-accent/40 shadow-lg dark:shadow-[0_0_20px_rgba(0,0,0,0.5)] px-6 py-4 inline-flex relative overflow-hidden group rounded-md transition-colors duration-500">
+        <span class="w-2 h-4 bg-a83-accent mr-3 animate-pulse block dark:hidden"></span>
+        <span class="raw-glitch inline-block tracking-[0.2em] font-bold">SIG > NOISE // ACTV</span>
       </div>
 
     </div>
 
 
-    <div class="lg:col-span-6 grid grid-cols-2 gap-4 md:gap-6">
+    <div class="xl:col-span-6 grid grid-cols-2 gap-6 lg:gap-8">
       
-      <div class="col-span-2 bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-8 hover:border-white/20 transition-colors">
-        <div class="flex justify-between items-start mb-8">
-          <span class="font-mono text-[10px] text-white/40 uppercase tracking-widest">Sys_Architecture</span>
-          <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></span>
+      <div class="col-span-2 bg-white dark:bg-[#0c0c0e] border border-black/5 dark:border-white/10 rounded-3xl p-10 lg:p-12 shadow-2xl hover:border-a83-accent/50 dark:hover:border-a83-accent/50 transition-colors duration-500 relative overflow-hidden group">
+        
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--a83-accent)_5%,transparent)_0%,transparent_70%)] opacity-0 dark:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+        <div class="flex justify-between items-start mb-10 relative z-10">
+          <span class="font-mono text-[11px] text-black/40 dark:text-white/50 uppercase tracking-[0.2em] font-bold transition-colors">Sys_Architecture</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)] dark:shadow-[0_0_12px_rgba(34,197,94,0.8)] animate-pulse"></span>
         </div>
-        <div class="font-mono text-sm md:text-base text-white/80 space-y-2">
-          <div class="flex items-center gap-4"><span class="text-a83-accent w-4">-></span> Engine: Astro_v5</div>
-          <div class="flex items-center gap-4"><span class="text-a83-accent w-4">-></span> Styling: Tailwind_v4</div>
-          <div class="flex items-center gap-4"><span class="text-a83-accent w-4">-></span> Data: StudioCMS_Native</div>
-          <div class="flex items-center gap-4 text-white/40 line-through decoration-red-500"><span class="text-red-500 w-4">x</span> Legacy: WordPress</div>
+        
+        <div class="font-mono text-base lg:text-lg text-black/70 dark:text-white space-y-4 relative z-10 font-medium transition-colors">
+          <div class="flex items-center gap-6"><span class="text-a83-accent w-6 font-bold">-></span> <span>Engine: <strong class="text-black dark:text-white font-bold transition-colors">Astro_v5</strong></span></div>
+          <div class="flex items-center gap-6"><span class="text-a83-accent w-6 font-bold">-></span> <span>Styling: <strong class="text-black dark:text-white font-bold transition-colors">Tailwind_v4</strong></span></div>
+          <div class="flex items-center gap-6"><span class="text-a83-accent w-6 font-bold">-></span> <span>Data: <strong class="text-black dark:text-white font-bold transition-colors">StudioCMS_Native</strong></span></div>
+          </div>
+      </div>
+
+      <div class="col-span-2 sm:col-span-1 aspect-square bg-black border border-black/10 dark:border-white/10 rounded-3xl relative overflow-hidden group shadow-2xl transition-colors duration-500">
+        <img src="/images/manifesto-photo.webp" alt="ABTEILUNG83 Workspace" class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-60 mix-blend-luminosity group-hover:scale-105 group-hover:opacity-100 dark:group-hover:opacity-90 transition-all duration-1000 ease-out" />
+        
+        <div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.5)_2px,rgba(0,0,0,0.5)_4px)] pointer-events-none z-10 mix-blend-overlay"></div>
+        <div class="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] dark:shadow-[inset_0_0_60px_rgba(0,0,0,1)] pointer-events-none z-10 transition-shadow"></div>
+        
+        <div class="absolute bottom-6 left-6 z-20">
+          <span class="font-mono text-[10px] bg-white dark:bg-black/80 dark:backdrop-blur-md text-black dark:text-white px-3 py-1.5 border border-transparent dark:border-white/20 tracking-widest shadow-lg dark:shadow-none transition-colors">VISUAL_ASSET_01</span>
         </div>
       </div>
 
-      <div class="col-span-2 sm:col-span-1 aspect-square bg-black border border-white/10 rounded-2xl relative overflow-hidden group">
-        <img src="/images/manifesto-photo.webp" alt="ABTEILUNG83 Workspace" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-out" />
+      <a href="/work" class="col-span-2 sm:col-span-1 aspect-square bg-a83-accent dark:bg-a83-accent/10 border border-a83-accent dark:border-a83-accent/30 rounded-3xl p-8 lg:p-10 flex flex-col justify-between hover:bg-black dark:hover:bg-a83-accent hover:border-black dark:hover:border-a83-accent transition-all duration-500 group cursor-pointer text-decoration-none shadow-2xl relative overflow-hidden">
         
-        <div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.3)_2px,rgba(0,0,0,0.3)_4px)] pointer-events-none"></div>
-        <div class="absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.8)] pointer-events-none"></div>
-        
-        <div class="absolute bottom-4 left-4">
-          <span class="font-mono text-[9px] bg-black/60 backdrop-blur text-white px-2 py-1 border border-white/10">VISUAL_ASSET_01</span>
-        </div>
-      </div>
+        <div class="absolute inset-0 bg-radial-accent opacity-0 dark:group-hover:opacity-40 transition-opacity duration-700 hidden dark:block"></div>
 
-      <a href="/work" class="col-span-2 sm:col-span-1 aspect-square bg-a83-accent/10 border border-a83-accent/30 rounded-2xl p-6 flex flex-col justify-between hover:bg-a83-accent hover:border-a83-accent transition-all duration-300 group cursor-pointer text-decoration-none">
-        <div class="flex justify-between items-center">
-          <span class="font-mono text-[10px] text-a83-accent group-hover:text-black uppercase tracking-widest transition-colors">Access_Vault</span>
-          <svg class="w-4 h-4 text-a83-accent group-hover:text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 4h16v16M4 20L20 4"></path>
+        <div class="flex justify-between items-center relative z-10">
+          <span class="font-mono text-[10px] text-black dark:text-a83-accent group-hover:text-white dark:group-hover:text-black uppercase tracking-[0.2em] transition-colors font-bold">Access_Vault</span>
+          <svg class="w-6 h-6 text-black dark:text-a83-accent group-hover:text-white dark:group-hover:text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2.5" d="M4 4h16v16M4 20L20 4"></path>
           </svg>
         </div>
         
-        <div>
-          <h3 class="font-sans text-2xl md:text-3xl font-bold text-white group-hover:text-black tracking-tight transition-colors mb-2">Highlights</h3>
-          <p class="font-mono text-xs text-a83-accent group-hover:text-black/70 transition-colors">> Init protocol</p>
+        <div class="relative z-10">
+          <h3 class="font-sans text-4xl lg:text-5xl font-black text-black dark:text-white group-hover:text-white dark:group-hover:text-black tracking-tight transition-colors mb-3">Highlights</h3>
+          <p class="font-mono text-sm text-black/70 dark:text-a83-accent group-hover:text-white/80 dark:group-hover:text-black/80 transition-colors font-bold">> Init protocol</p>
         </div>
       </a>
 
@@ -83,10 +95,9 @@
 </section>
 
 <style>
-  /* Rohe Glitch-Animation für den Hacker-String */
   .raw-glitch {
     display: inline-block;
-    animation: text-clip 3s linear infinite;
+    animation: text-clip 4s linear infinite;
   }
 
   @keyframes text-clip {
@@ -97,5 +108,9 @@
     50% { clip-path: inset(60% 0 10% 0); transform: translateX(-2px); }
     55% { clip-path: inset(0 0 0 0); transform: translateX(0); }
     100% { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  }
+
+  .bg-radial-accent {
+    background: radial-gradient(circle at center, var(--a83-accent), transparent 70%);
   }
 </style>
