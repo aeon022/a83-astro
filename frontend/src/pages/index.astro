@@ -6,6 +6,7 @@ import Pill from '../components/ui/Pill.astro';
 import Hero from '../components/blocks/Hero.astro';
 import Manifesto from '../components/blocks/Manifesto.astro';
 import Process from '../components/blocks/Process.astro';
+import Highlights from '../components/blocks/Highlights.astro';
 
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
@@ -14,6 +15,11 @@ const reader = createReader(process.cwd(), keystaticConfig);
 const settings = await reader.singletons.globalSettings.read();
 const showcaseProjects = await reader.collections.showcase.all();
 const pricingModels = await reader.collections.pricing.all();
+
+// Filterung: Nur Projekte, die im Keystatic-Backend als Highlight markiert wurden
+const highlightProjects = showcaseProjects.filter(
+  project => project.entry.isHighlighted === true
+);
 
 const headline = settings?.headline || 'Less Noise. Nice Data. No Bloat.';
 const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANCE_MODE';
@@ -57,65 +63,19 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
         ========================================= */}   
     <Process />
 
-    {/* =========================================
-        DYNAMIC DATA SECTIONS (Missions & Contracts)
-        ========================================= */}
-    <main class="nav-content-sync w-full max-w-[1600px] px-6 lg:px-16 py-32 flex flex-col gap-40">
+    <main class="w-full bg-white dark:bg-a83-bg transition-colors duration-500">
+      
+      {/* =========================================
+          HIGHLIGHTS (Priority Dossiers / Horizontal Slider)
+          ========================================= */}
+      {highlightProjects.length > 0 && (
+        <Highlights projects={highlightProjects} />
+      )}
 
-      {/* --- SHOWCASE --- */}
-      <section class="flex flex-col gap-10">
-        <div class="inline-block bg-a83-surface/50 px-4 py-2 border-l-2 border-a83-accent w-max">
-          <h2 class="text-xl md:text-2xl uppercase tracking-[0.2em] font-bold text-white">// DECLASSIFIED_MISSIONS</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {showcaseProjects.map((project) => (
-            <article class="border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] p-8 md:p-10 hover:border-a83-accent/50 transition-all duration-300 group relative overflow-hidden">
-              
-              <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--a83-accent)_10%,transparent)_0%,transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-              <h3 class="text-2xl md:text-3xl font-bold mb-6 text-white tracking-tight">> {project.slug}</h3>
-              
-              <div class="grid grid-cols-2 gap-y-4 gap-x-8 mb-8 text-sm md:text-base border-b border-white/10 pb-8 text-white/60">
-                <div><span class="opacity-40 block text-xs tracking-widest uppercase mb-1">Entity</span> <span class="text-white">{project.entry.entity}</span></div>
-                <div><span class="opacity-40 block text-xs tracking-widest uppercase mb-1">Vector</span> <span class="text-white">{project.entry.vector}</span></div>
-                <div><span class="opacity-40 block text-xs tracking-widest uppercase mb-1">Arch</span> <span class="text-white">{project.entry.arch}</span></div>
-                <div><span class="opacity-40 block text-xs tracking-widest uppercase mb-1">Cycle</span> <span class="text-white">{project.entry.cycle}</span></div>
-              </div>
-
-              <div class="space-y-6 text-sm md:text-base opacity-80 mb-10">
-                <p class="italic whitespace-pre-wrap text-a83-accent/80 font-mono text-xs">[{project.entry.protocolReadout}]</p>
-                
-                <div class="pl-4 border-l border-white/20">
-                  <span class="opacity-40 block mb-2 text-xs tracking-widest uppercase">Task_Protocol</span>
-                  <div class="text-white/80 whitespace-pre-wrap leading-relaxed">{project.entry.taskProtocol}</div>
-                </div>
-
-                <div class="pl-4 border-l border-a83-accent/40">
-                  <span class="opacity-40 block mb-2 text-xs tracking-widest uppercase">Fix_Executed</span>
-                  <div class="text-white whitespace-pre-wrap leading-relaxed">{project.entry.fixExecuted}</div>
-                </div>
-              </div>
-
-              <div class="flex flex-wrap justify-between items-center text-xs mt-auto pt-4 border-t border-white/10">
-                <div class="flex gap-3 items-center">
-                  <span class="opacity-40 tracking-widest uppercase">Status:</span> 
-                  <span class="bg-green-500/10 text-green-400 px-3 py-1 border border-green-500/20 font-bold tracking-widest">{project.entry.finalStatus}</span>
-                </div>
-                {project.entry.gatewayUri && (
-                  <a href={project.entry.gatewayUri} target="_blank" class="text-a83-accent hover:text-white transition-colors tracking-[0.2em] uppercase font-bold flex items-center gap-2">
-                    INIT_GATEWAY 
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                  </a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* --- PRICING --- */}
-      <section class="flex flex-col gap-10">
+      {/* =========================================
+          CONTRACTS (Pricing Models)
+          ========================================= */}
+      <section class="nav-content-sync w-full max-w-[1600px] mx-auto px-6 lg:px-16 py-32 flex flex-col gap-10">
         <div class="inline-block bg-a83-surface/50 px-4 py-2 border-l-2 border-a83-accent w-max">
           <h2 class="text-xl md:text-2xl uppercase tracking-[0.2em] font-bold text-white">// CONTRACT_DEFINITIONS</h2>
         </div>

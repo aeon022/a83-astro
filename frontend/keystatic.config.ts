@@ -103,6 +103,10 @@ export default config({
           label: '// GATEWAY_URI', 
           description: 'Link zur Live-Seite (inkl. https://)' 
         }),
+        isHighlighted: fields.checkbox({ 
+          label: 'Highlight on Startpage', 
+          defaultValue: false 
+        }),
       },
     }),
   },

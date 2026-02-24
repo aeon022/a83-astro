@@ -1,0 +1,250 @@
+---
+// Dateipfad: frontend/src/components/blocks/Highlights.astro
+// Update: FIXED Overscroll-Lock (Aggressive Mode) & 3D Boundaries
+
+interface ProjectEntry {
+  entity: string;
+  arch: string;
+  protocolReadout: string;
+}
+
+interface Project {
+  slug: string;
+  entry: ProjectEntry;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props as Props;
+---
+
+<section id="highlights" class="nav-content-sync relative w-full max-w-[100vw] bg-white dark:bg-a83-bg py-32 lg:py-56 overflow-hidden transition-colors duration-500 contain-paint">
+  
+  <div class="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-0">
+    <div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#000_2px,#000_4px)] dark:bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_2px,#fff_4px)]"></div>
+  </div>
+
+  <div class="max-w-[1600px] mx-auto px-10 lg:px-24 mb-24 relative z-10">
+    <div class="flex flex-col md:flex-row justify-between items-end gap-12">
+      <div class="reveal-3d">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-2 h-2 bg-a83-accent shadow-[0_0_12px_var(--a83-accent)]"></span>
+          <span class="font-mono text-[10px] text-black/50 dark:text-white/50 uppercase tracking-[0.5em] font-bold">// KINETIC_ASSET_PIPELINE</span>
+        </div>
+        <h2 class="text-7xl md:text-9xl font-black text-black dark:text-white tracking-tighter leading-none">
+          Selected<br />
+          <span class="text-transparent" style="-webkit-text-stroke: 1.5px var(--a83-accent);">Missions.</span>
+        </h2>
+      </div>
+      
+      <div class="flex items-center gap-12 font-mono reveal-3d delay-200">
+         <div class="hidden lg:flex flex-col items-end">
+            <span class="text-[9px] text-black/40 dark:text-white/30 uppercase tracking-[0.3em] mb-1">Status: Monitoring_Active</span>
+            <div class="text-2xl font-black text-black dark:text-white flex items-baseline gap-2">
+               <span id="slider-idx">01</span>
+               <span class="text-xs text-a83-accent opacity-50">/</span>
+               <span class="text-xs opacity-30">{projects.length.toString().padStart(2, '0')}</span>
+            </div>
+         </div>
+         <div class="flex gap-4">
+            <button id="nav-prev" aria-label="Previous Slide" class="w-16 h-16 border border-black/10 dark:border-white/10 flex items-center justify-center group hover:bg-black dark:hover:bg-white transition-all duration-500 cursor-pointer z-50">
+               <span class="group-hover:text-white dark:group-hover:text-black transition-colors font-bold text-xl"><</span>
+            </button>
+            <button id="nav-next" aria-label="Next Slide" class="w-16 h-16 border border-black/10 dark:border-white/10 flex items-center justify-center group hover:bg-black dark:hover:bg-white transition-all duration-500 cursor-pointer z-50">
+               <span class="group-hover:text-white dark:group-hover:text-black transition-colors font-bold text-xl">></span>
+            </button>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <div 
+    id="highlights-track" 
+    class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-16 lg:gap-40 cursor-grab active:cursor-grabbing pb-32 perspective-container w-full touch-pan-y"
+  >
+    <div class="min-w-[5vw] lg:min-w-[10vw] h-full shrink-0 snap-align-none"></div>
+
+    {projects.map((project, index) => (
+      <article class="snap-center min-w-[85vw] lg:min-w-[1400px] relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-32 items-center transform-style-3d slider-item">
+        
+        <span class="absolute -left-16 -top-20 text-[20rem] lg:text-[35rem] font-black text-black/[0.03] dark:text-white/[0.03] pointer-events-none select-none z-0 watermark">
+          { (index + 1).toString().padStart(2, '0') }
+        </span>
+
+        <div class="lg:col-span-5 relative z-10 flex flex-col gap-12 order-2 lg:order-1 content-layer px-4 lg:px-0">
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+               <span class="font-mono text-a83-accent text-xs tracking-[0.4em] font-bold uppercase">Mission_Dossier_{index + 1}</span>
+               <span class="h-px flex-1 bg-a83-accent/20"></span>
+            </div>
+            <h3 class="text-6xl md:text-8xl font-black text-black dark:text-white tracking-tighter leading-[0.85]">
+              {project.entry.entity}
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12 border-y border-black/10 dark:border-white/10 py-12 font-mono">
+            <div class="space-y-2">
+              <span class="block text-[10px] text-black/40 dark:text-white/40 uppercase tracking-widest">Stack_Architecture</span>
+              <span class="text-sm font-bold text-black dark:text-white">{project.entry.arch}</span>
+            </div>
+            <div class="space-y-2">
+              <span class="block text-[10px] text-black/40 dark:text-white/40 uppercase tracking-widest">Performance_Audit</span>
+              <div class="flex items-center gap-3">
+                 <div class="w-full bg-black/5 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-green-500 h-full w-[98%] shadow-[0_0_12px_rgba(34,197,94,0.6)]"></div>
+                 </div>
+                 <span class="text-xs font-bold text-green-500">98%</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-2xl lg:text-3xl text-black/70 dark:text-white/70 leading-relaxed font-sans italic max-w-2xl">
+            "{project.entry.protocolReadout}"
+          </p>
+
+          <div class="flex items-center gap-10 mt-6">
+             <a href={`/work/${project.slug}`} class="group/btn relative bg-black dark:bg-white text-white dark:text-black px-16 py-6 font-bold uppercase tracking-widest text-xs overflow-hidden transition-all hover:bg-a83-accent hover:text-white dark:hover:bg-a83-accent">
+                <span class="relative z-10">Access_Full_Log</span>
+             </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 relative order-1 lg:order-2 visual-layer transform-style-3d">
+          <div class="aspect-[16/10] bg-black rounded-[2.5rem] overflow-hidden border-2 border-black/5 dark:border-white/10 relative shadow-[0_60px_120px_rgba(0,0,0,0.3)] dark:shadow-[0_60px_120px_rgba(0,0,0,0.7)] group">
+             <img 
+               src={`/images/showcase/${project.slug}.webp`} 
+               alt={project.entry.entity}
+               loading="lazy"
+               class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-[2s] ease-out will-change-transform"
+             />
+             <div class="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+          </div>
+        </div>
+      </article>
+    ))}
+    
+    <div class="min-w-[40vw] lg:min-w-[50vw] h-full shrink-0 snap-align-none"></div>
+  </div>
+
+  <div class="max-w-[1600px] mx-auto px-10 lg:px-24 mt-4 relative z-10">
+     <div class="w-full h-1 bg-black/5 dark:bg-white/10 relative rounded-full overflow-hidden">
+        <div id="prog-bar" class="absolute top-0 left-0 h-full bg-a83-accent transition-all duration-300 shadow-[0_0_20px_var(--a83-accent)]" style="width: 0%"></div>
+     </div>
+  </div>
+
+</section>
+
+<style>
+  /* 1. Hard Overscroll Lock - NUCLEAR OPTION */
+  #highlights-track {
+    /* Erlaubt vertikales Scrollen & Zoom, blockt Swipe-Nav */
+    touch-action: pan-y pinch-zoom;
+    
+    /* 'none' ist strikter als 'contain'. Es killt den Bounce-Effekt komplett. */
+    overscroll-behavior-x: none;
+    overscroll-behavior-inline: none;
+    
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-padding-inline: 5vw;
+  }
+  
+  @media (min-width: 1024px) {
+    #highlights-track {
+      scroll-padding-inline: 10vw;
+    }
+  }
+
+  #highlights-track::-webkit-scrollbar { display: none; }
+
+  /* 2. 3D Engine */
+  .perspective-container {
+    perspective: 3000px;
+    perspective-origin: center;
+    will-change: scroll-position;
+  }
+  
+  .transform-style-3d { transform-style: preserve-3d; }
+  
+  .slider-item { 
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); 
+    will-change: transform;
+  }
+
+  .content-layer { transform: translateZ(80px); }
+  .visual-layer { transform: translateZ(150px); }
+  .watermark { transform: translateZ(-120px); }
+
+  @media (max-width: 1024px) {
+    .content-layer, .visual-layer, .watermark { transform: none !important; }
+    .perspective-container { perspective: none; }
+  }
+  
+  /* Utility für Containment */
+  .contain-paint {
+      contain: paint layout;
+  }
+</style>
+
+<script>
+  const track = document.getElementById('highlights-track') as HTMLElement;
+  const idxText = document.getElementById('slider-idx');
+  const progBar = document.getElementById('prog-bar');
+  const nextBtn = document.getElementById('nav-next');
+  const prevBtn = document.getElementById('nav-prev');
+
+  let rafId: number | null = null;
+
+  if (track && idxText && progBar) {
+    const updateSlider = () => {
+      const scrollWidth = track.scrollWidth - track.clientWidth;
+      const progress = scrollWidth > 0 ? (track.scrollLeft / scrollWidth) * 100 : 0;
+      
+      if(progBar) progBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+
+      if (window.innerWidth > 1024) {
+          const items = track.querySelectorAll('.slider-item');
+          const center = window.innerWidth / 2;
+          
+          items.forEach((item, i) => {
+            const el = item as HTMLElement;
+            const rect = el.getBoundingClientRect();
+            const distanceFromCenter = rect.left + rect.width / 2 - center;
+            
+            const rotation = distanceFromCenter * 0.008; 
+            const scale = 1 - Math.min(Math.abs(distanceFromCenter) * 0.00015, 0.08);
+            
+            el.style.transform = `rotateY(${rotation * -1}deg) scale(${scale})`;
+
+            if (Math.abs(distanceFromCenter) < rect.width / 3 && idxText) {
+               const newIdx = (i + 1).toString().padStart(2, '0');
+               if (idxText.innerText !== newIdx) idxText.innerText = newIdx;
+            }
+          });
+      }
+    };
+
+    const onScroll = () => {
+        if (!rafId) {
+            rafId = window.requestAnimationFrame(() => {
+                updateSlider();
+                rafId = null;
+            });
+        }
+    };
+
+    track.addEventListener('scroll', onScroll, { passive: true });
+    updateSlider();
+
+    const scrollAmount = () => {
+       const firstItem = track.querySelector('article');
+       return firstItem ? firstItem.clientWidth + (window.innerWidth > 1024 ? 128 : 64) : window.innerWidth;
+    };
+
+    nextBtn?.addEventListener('click', () => track.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+    prevBtn?.addEventListener('click', () => track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+  }
+</script>

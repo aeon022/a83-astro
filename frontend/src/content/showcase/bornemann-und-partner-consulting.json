@@ -16,5 +16,6 @@
   ],
   "fixExecuted": "Frontend komplett refactored. Statt monolithischen Designs ist eine \"Dual-Focus-Architektur\" implementiert. Visuelle Anker (Typografie, Whitespace) schaffen Vertrauen, während subtile Tech-Elemente die KI-Kompetenz unterstreichen.\n\n**Custom Data Injection**: Die Seminar-Verwaltung wird auf Custom Post Types umgestellt. Das ermöglicht dem Client, neue Module per Backend-Injektion zu deployen, ohne den Quellcode zu berühren.\n\n**Latency Kill**: Durch den Einsatz von Breakdance haben wir den DOM-Tree um 40% reduziert. Das Ergebnis ist eine \"Instant-Load\"-Erfahrung, die Professionalität signalisiert, bevor der User das erste Wort gelesen hat.",
   "finalStatus": "KI-Modul: Integriert. UX-Response: Immediate. Client-Trust: Verified. Scalability: Unlocked.",
-  "gatewayUri": "https://bornemannundpartner.at"
+  "gatewayUri": "https://bornemannundpartner.at",
+  "isHighlighted": true
 }

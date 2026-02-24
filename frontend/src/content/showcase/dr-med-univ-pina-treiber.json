@@ -1,0 +1,21 @@
+{
+  "title": "Dr. med. univ. Pina Treiber",
+  "excerpt": "Horizontale User Journey für eine Fachpraxis. Ein experimentelles Oxygen-Design, das Desktop-User seitwärts durch die Inhalte führt, um Entschleunigung und Fokus zu fördern.",
+  "entity": "Dr. Pina Treiber",
+  "vector": "Medical",
+  "arch": "WP, OxygenBuilder, Custom Design",
+  "cycle": "2023",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Dr. med. univ. Pina Treiber. Fachärztin für Psychiatrie & Psychotherapeutische Medizin (Graz). Spezialisierung: Essstörungen (\"Essen & Psyche\").\n\n**System Conflict**: Das Thema \"Psychische Gesundheit\" erfordert maximale Sensibilität und Klarheit. Eine Standard-Website (Scroll-Down) wirkte zu beliebig. Die Anforderung war eine digitale Umgebung, die Ruhe ausstrahlt und den User nicht mit Informationen erschlägt, sondern ihn an die Hand nimmt.\n\n## Mission Objectives:\n\n**UX-Experiment**: Implementierung eines Horizontal Scroll Konzepts auf Desktop, um eine lineare, geführte Story zu erzählen (wie in einem Buch oder einer Timeline).\n\n**Safe Space Design**: Visuelle Beruhigung durch sanfte Übergänge und Fokus auf den \"M.I.L.K.\"-Behandlungsansatz.\n\n**Hybrid Navigation**: Nahtloser Switch zwischen horizontaler (Desktop) und vertikaler (Mobile) Navigation ohne Code-Duplizierung.",
+  "stackDeployed": [
+    "[CORE]: WordPress",
+    "[ENGINE]: Oxygen Builder",
+    "[LOGIC]: Custom Horizontal Scroll Engine",
+    "[MODULE]: Responsive Behavior Switch",
+    "[DESIGN]: Custom Medical UI"
+  ],
+  "fixExecuted": "### Oxygen und Dual-State-Layout\n\n**The Horizontal Flow (Desktop)**: Statt nach unten zu scrollen, bewegt sich der User seitwärts durch die Praxis-Bereiche. Das entschleunigt die Experience bewusst. Wir haben wheel-Events gekapert und in eine smoothe horizontale Translation übersetzt, die sich natürlich anfühlt, nicht erzwungen.\n\n**Responsive Adaptation**: Auf Mobile-Devices (\"Touch-First\") bricht das Layout automatisch in einen klassischen vertikalen Stream um, um die gewohnte Usability nicht zu gefährden. Der Content passt sich flüssig an beide Achsen an.",
+  "finalStatus": "SYSTEM STATUS: BALANCED. Eine Website, die sich abhebt, ohne zu überfordern. Journey: Guided (Horizontal). Atmosphere: Calming. Technique: Custom.",
+  "gatewayUri": "https://psychiaterin-graz.at",
+  "isHighlighted": true
+}
