@@ -1,0 +1,240 @@
+---
+// Dateipfad: frontend/src/components/blocks/Process.astro
+// Vibe: Technical, Sticky-Scroll, SUPERNOVA + GOD MODE AFTERMATH
+// Tech: Scroll-driven animations, DOM Teleporting, CSS Keyframes
+---
+
+<section id="process" class="nav-content-sync relative bg-a83-bg border-t border-black/5 dark:border-white/10 transition-colors duration-500 overflow-visible">
+  
+  <div class="max-w-[1800px] mx-auto relative flex flex-col-reverse lg:flex-row">
+    
+    <div class="w-full lg:w-1/2 relative z-20 pb-40 lg:pt-20 lg:pb-60 px-6 lg:px-16 flex flex-col gap-[10vh] lg:gap-[80vh]">
+      
+      <div class="step-trigger mb-32 lg:mb-0 pt-10 lg:pt-20 min-h-[60vh] flex flex-col justify-center" data-step="0">
+         <div class="flex items-center gap-4 mb-6">
+            <span class="w-2 h-2 bg-a83-accent shadow-[0_0_8px_var(--a83-accent)]"></span>
+            <span class="font-mono text-xs text-black/50 dark:text-white/50 uppercase tracking-[0.4em] font-bold transition-colors">// EXECUTION_PIPELINE</span>
+         </div>
+         <h2 class="text-5xl md:text-7xl font-black text-black dark:text-white tracking-tighter mb-6 transition-colors duration-500">
+           The Compile<br>
+           <span class="text-transparent" style="-webkit-text-stroke: 1.5px var(--a83-accent);">Protocol.</span>
+         </h2>
+         <p class="text-xl text-black/60 dark:text-white/60 max-w-md transition-colors duration-500">Vom Rohdaten-Chaos zum High-Performance Asset. Unser Prozess ist kein Meeting-Marathon, sondern eine präzise Pipeline.</p>
+         <div class="mt-8 flex gap-4"><div class="font-mono text-xs text-a83-accent bg-a83-accent/10 px-3 py-1 rounded border border-a83-accent/20 animate-pulse">> SYSTEM_READY</div></div>
+      </div>
+
+      <div class="lg:hidden h-[10vh]"></div>
+
+      <div class="step-trigger group min-h-[90vh] lg:min-h-auto flex flex-col justify-center" data-step="1">
+        <div class="font-mono text-a83-accent text-sm mb-4 tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">01_INIT_PROTOCOL</div>
+        <h3 class="text-3xl md:text-4xl font-black text-black dark:text-white mb-6 group-hover:translate-x-4 transition-transform duration-500 transition-colors">Discovery &<br>Briefing</h3>
+        <p class="text-lg text-black/60 dark:text-white/60 max-w-sm leading-relaxed border-l-2 border-black/10 dark:border-white/10 pl-6 group-hover:border-a83-accent transition-colors duration-500">
+          Wir definieren Ziele, nicht Wünsche. Wir schärfen den Scope und priorisieren Tasks. Kein Feature-Creep, nur Kern-Funktionalität.
+        </p>
+        <code class="block mt-6 text-xs text-black/50 dark:text-white/50 font-mono bg-black/5 dark:bg-white/5 p-3 rounded w-fit transition-colors">fn init_details() -> scoped</code>
+      </div>
+
+      <div class="step-trigger group min-h-[90vh] lg:min-h-auto flex flex-col justify-center" data-step="2">
+        <div class="font-mono text-a83-accent text-sm mb-4 tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">02_VISUAL_SYNTHESIS</div>
+        <h3 class="text-3xl md:text-4xl font-black text-black dark:text-white mb-6 group-hover:translate-x-4 transition-transform duration-500 transition-colors">Design &<br>Architecture</h3>
+        <p class="text-lg text-black/60 dark:text-white/60 max-w-sm leading-relaxed border-l-2 border-black/10 dark:border-white/10 pl-6 group-hover:border-a83-accent transition-colors duration-500">
+          Wireframe zu UI. Wir entwickeln visuelle Vokabulare, die skalieren. "Clean-Neon" statt überladener Deko. Struktur trifft Ästhetik.
+        </p>
+        <code class="block mt-6 text-xs text-black/50 dark:text-white/50 font-mono bg-black/5 dark:bg-white/5 p-3 rounded w-fit transition-colors">const style = "systematic"</code>
+      </div>
+
+      <div class="step-trigger group min-h-[150vh] lg:min-h-auto flex flex-col justify-center" data-step="3">
+        <div class="font-mono text-a83-accent text-sm mb-4 tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">03_HARD_COMPILE</div>
+        <h3 class="text-3xl md:text-4xl font-black text-black dark:text-white mb-6 group-hover:translate-x-4 transition-transform duration-500 transition-colors">Development &<br>Build</h3>
+        <p class="text-lg text-black/60 dark:text-white/60 max-w-sm leading-relaxed border-l-2 border-black/10 dark:border-white/10 pl-6 group-hover:border-a83-accent transition-colors duration-500">
+          Astro + Tailwind + Keystatic. Wir schreiben Code, den Maschinen lieben und Menschen verstehen. Keine Plugins, pure Performance.
+        </p>
+        <code class="block mt-6 text-xs text-black/50 dark:text-white/50 font-mono bg-black/5 dark:bg-white/5 p-3 rounded w-fit transition-colors">npm run build --prod</code>
+      </div>
+
+      <div class="step-trigger group min-h-[90vh] lg:min-h-auto flex flex-col justify-center" data-step="4">
+        <div class="font-mono text-a83-accent text-sm mb-4 tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">04_ORBITAL_LAUNCH</div>
+        <h3 class="text-3xl md:text-4xl font-black text-black dark:text-white mb-6 group-hover:translate-x-4 transition-transform duration-500 transition-colors">Deploy &<br>Tracking</h3>
+        <p class="text-lg text-black/60 dark:text-white/60 max-w-sm leading-relaxed border-l-2 border-black/10 dark:border-white/10 pl-6 group-hover:border-a83-accent transition-colors duration-500">
+          Live-Schaltung via Edge Network. Automatisierte Tests, Tracking-Setup und Handover. Ruhe nach dem Ship.
+        </p>
+        <code class="block mt-6 text-xs text-black/50 dark:text-white/50 font-mono bg-black/5 dark:bg-white/5 p-3 rounded w-fit transition-colors">fn protocol_ship_details()</code>
+      </div>
+
+    </div>
+
+    <div class="w-full lg:w-1/2 h-[45vh] lg:h-screen sticky top-16 lg:top-0 z-10 lg:z-auto flex items-center justify-center pointer-events-none lg:pointer-events-auto mix-blend-hard-light lg:mix-blend-normal">
+      
+      <div class="hidden lg:block absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] transition-colors duration-500"></div>
+      <div class="lg:hidden absolute inset-0 bg-gradient-to-b from-a83-bg via-a83-bg/90 to-transparent backdrop-blur-[2px]"></div>
+
+      <div id="process-core" class="relative w-[400px] h-[400px] transition-all duration-700 ease-out preserve-3d scale-[0.55] lg:scale-100 origin-center lg:origin-center" data-state="0">
+        
+        <div class="core-aftermath absolute inset-[-50%] pointer-events-none opacity-0 transition-opacity duration-1000">
+            <div class="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,var(--a83-accent)_20deg,transparent_40deg,transparent_100deg,var(--a83-accent)_140deg,transparent_180deg)] opacity-10 animate-spin-slow rounded-full blur-2xl"></div>
+            <div class="absolute inset-[25%] bg-a83-accent/20 blur-3xl rounded-full animate-pulse-slow"></div>
+        </div>
+
+        <div class="core-layer layer-ingest absolute inset-0 flex justify-between px-10 opacity-0 transition-opacity duration-500"><div class="w-[1px] h-full bg-gradient-to-b from-transparent via-black/20 dark:via-white/20 to-transparent relative overflow-hidden"><div class="absolute inset-0 animate-data-stream text-[10px] font-mono text-black dark:text-white writing-vertical opacity-50">0101010100101011010101010010110</div></div><div class="w-[1px] h-full bg-gradient-to-b from-transparent via-a83-accent/50 to-transparent relative overflow-hidden"><div class="absolute inset-0 animate-data-stream-fast text-[10px] font-mono text-a83-accent writing-vertical opacity-80">RAW_DATA_INPUT_STREAM_DETECTED_A83</div></div><div class="w-[1px] h-full bg-gradient-to-b from-transparent via-black/20 dark:via-white/20 to-transparent relative overflow-hidden"><div class="absolute inset-0 animate-data-stream text-[10px] font-mono text-black dark:text-white writing-vertical opacity-50 animation-delay-500">AFX_89_PROCESS_INIT_PROTOCOL_V5</div></div></div>
+        <div class="core-layer layer-noise absolute inset-0 flex flex-wrap gap-2 items-center justify-center opacity-0 transition-opacity duration-500">{Array.from({ length: 64 }).map(() => (<span class="w-2 h-2 bg-black/20 dark:bg-white/20 rounded-full animate-pulse-random transition-colors"></span>))}</div>
+        <div class="core-layer layer-blueprint absolute inset-0 border-2 border-a83-accent/50 bg-a83-accent/5 opacity-0 transition-opacity duration-500 rotate-12 scale-90"><div class="absolute inset-0 bg-[linear-gradient(var(--a83-accent)_1px,transparent_1px),linear-gradient(90deg,var(--a83-accent)_1px,transparent_1px)] bg-[size:50px_50px] opacity-20"></div><div class="absolute inset-0 border-[20px] border-black/5 dark:border-white/5 transition-colors"></div><div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-a83-accent"></div><div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-a83-accent"></div></div>
+        <div class="core-layer layer-build absolute inset-0 bg-[#1e1e1e] border border-black/10 dark:border-white/20 overflow-hidden opacity-0 transition-opacity duration-500 shadow-2xl flex flex-col"><div class="h-6 bg-[#2d2d2d] w-full flex items-center px-3 gap-1.5 border-b border-white/5"><div class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div><div class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div><div class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div><div class="ml-2 text-[9px] font-mono text-white/30 tracking-widest">TERM_ROOT // A83</div></div><div class="flex-1 p-4 font-mono text-[11px] md:text-xs leading-loose text-green-400 overflow-hidden relative"><div class="absolute inset-0 bg-green-500/5 pointer-events-none"></div><span id="typewriter-output"></span><span class="animate-pulse bg-green-400 text-black px-0.5 ml-1"> </span></div></div>
+        
+        <div class="core-layer layer-ship absolute inset-0 rounded-full bg-black dark:bg-white opacity-0 transition-opacity duration-500 scale-50">
+           <div class="absolute inset-0 rounded-full bg-black dark:bg-white blur-xl opacity-20 dark:opacity-50 animate-pulse"></div>
+           <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-a83-accent to-transparent opacity-90 mix-blend-overlay"></div>
+           <div class="absolute inset-0 flex items-center justify-center">
+             <span id="ship-status-text" class="font-black text-white dark:text-black tracking-widest text-xl transition-all">GO_LIVE</span>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="supernova-overlay" style="display: none;" class="fixed inset-0 w-screen h-screen z-[999999] pointer-events-none items-center justify-center overflow-hidden top-0 left-0">
+      <div id="supernova-bg" class="absolute inset-0 bg-a83-accent opacity-0 mix-blend-hard-light"></div>
+      <div id="supernova-text" class="relative z-10 text-white dark:text-black font-black text-4xl md:text-7xl tracking-tighter opacity-0 scale-50">DEPLOYMENT_SUCCESS</div>
+      <div id="supernova-ring" class="absolute w-[50px] h-[50px] rounded-full border-[20px] border-white dark:border-black opacity-0 scale-0 origin-center"></div>
+  </div>
+
+</section>
+
+<style is:global>
+  /* Basic Styles */
+  .preserve-3d { transform-style: preserve-3d; perspective: 1000px; }
+  .writing-vertical { writing-mode: vertical-rl; text-orientation: mixed; }
+  [data-state="0"] .layer-ingest { opacity: 1; transform: scale(1); }
+  [data-state="1"] .layer-noise { opacity: 1; transform: scale(1); }
+  [data-state="2"] .layer-blueprint { opacity: 1; transform: rotateX(20deg) rotateY(-20deg) scale(1); border-color: var(--a83-accent); }
+  [data-state="3"] .layer-build { opacity: 1; transform: scale(1.1); box-shadow: 0 0 30px rgba(0,255,100,0.1); }
+  [data-state="4"] .layer-ship { opacity: 1; transform: scale(1); box-shadow: 0 0 50px rgba(0,0,0,0.2), 0 0 100px var(--a83-accent); }
+  
+  /* --- AFTERMATH STATE (The God Mode) --- */
+  .is-deployed .core-aftermath { opacity: 1; }
+  .is-deployed .layer-ship { 
+      transform: scale(1.1) translateY(-10px); 
+      box-shadow: 0 0 80px var(--a83-accent), 0 0 20px white;
+      animation: levitate 4s ease-in-out infinite;
+  }
+  
+  @keyframes levitate {
+      0%, 100% { transform: scale(1.1) translateY(-10px); }
+      50% { transform: scale(1.1) translateY(10px); }
+  }
+  
+  @keyframes spin-slow {
+      from { transform: rotate(0deg) scale(2); }
+      to { transform: rotate(360deg) scale(2); }
+  }
+  .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+  .animate-pulse-slow { animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+  /* Standard Animations */
+  @keyframes data-stream { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  .animate-data-stream { animation: data-stream 3s linear infinite; }
+  .animate-data-stream-fast { animation: data-stream 1.5s linear infinite; }
+  .animation-delay-500 { animation-delay: 0.5s; }
+  @keyframes pulse-random { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+  .animate-pulse-random { animation: pulse-random 2s infinite ease-in-out; animation-delay: calc(var(--i) * 0.1s); }
+
+  /* --- SUPERNOVA KEYFRAMES --- */
+  .run-flash-bg { animation: flash-bg 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .run-text-pop { animation: text-pop 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+  .run-shock-ring { animation: shock-ring 1s ease-out forwards; }
+
+  @keyframes flash-bg {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes text-pop {
+    0% { opacity: 0; transform: scale(0.5); letter-spacing: -0.1em; }
+    40% { opacity: 1; transform: scale(1.2); letter-spacing: 0.1em; }
+    100% { opacity: 0; transform: scale(2); letter-spacing: 0.5em; filter: blur(10px); }
+  }
+  @keyframes shock-ring {
+    0% { transform: scale(0); opacity: 1; border-width: 50px; }
+    100% { transform: scale(20); opacity: 0; border-width: 0px; }
+  }
+</style>
+
+<script>
+  const core = document.getElementById('process-core');
+  const triggers = document.querySelectorAll('.step-trigger');
+  const shipText = document.getElementById('ship-status-text');
+  
+  // TELEPORT OVERLAY
+  const overlay = document.getElementById('supernova-overlay');
+  if (overlay && document.body) { document.body.appendChild(overlay); }
+
+  const bg = document.getElementById('supernova-bg');
+  const text = document.getElementById('supernova-text');
+  const ring = document.getElementById('supernova-ring');
+  
+  let hasFiredSupernova = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const step = entry.target.getAttribute('data-step');
+        if (core && step) {
+          core.setAttribute('data-state', step);
+
+          // TRIGGER STEP 4
+          if (step === '4') {
+             if (!hasFiredSupernova && overlay) {
+                console.log('🚀 SUPERNOVA & AFTERMATH: ENGAGED');
+                hasFiredSupernova = true;
+                
+                // 1. SHOW OVERLAY
+                overlay.style.display = 'flex';
+                
+                // 2. RUN ANIMATIONS
+                requestAnimationFrame(() => {
+                    if(bg) { bg.classList.remove('run-flash-bg'); void bg.offsetWidth; bg.classList.add('run-flash-bg'); }
+                    if(text) { text.classList.remove('run-text-pop'); void text.offsetWidth; text.classList.add('run-text-pop'); }
+                    if(ring) { ring.classList.remove('run-shock-ring'); void ring.offsetWidth; ring.classList.add('run-shock-ring'); }
+                });
+
+                // 3. TRIGGER AFTERMATH (GOD MODE) NACH 1 SEKUNDE
+                setTimeout(() => {
+                    core.classList.add('is-deployed');
+                    if (shipText) {
+                        shipText.innerText = "ONLINE";
+                        shipText.style.color = "var(--a83-accent)";
+                        shipText.style.textShadow = "0 0 20px var(--a83-accent)";
+                    }
+                }, 800);
+
+                // 4. HIDE OVERLAY
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 2000);
+             }
+          } else if (step === '2') {
+              hasFiredSupernova = false; 
+              core.classList.remove('is-deployed'); // Reset God Mode for Demo
+              if(shipText) { shipText.innerText = "GO_LIVE"; shipText.style.color = ""; shipText.style.textShadow = ""; }
+          }
+        }
+      }
+    });
+  }, { root: null, rootMargin: '-30% 0px -30% 0px', threshold: 0 });
+
+  triggers.forEach(trigger => observer.observe(trigger));
+
+  // Terminal Script
+  const terminalElement = document.getElementById('typewriter-output');
+  const sequence = [{ text: "sndmsg tomlinson@bbn-tenexa", action: 'type', speed: 50 }, { action: 'wait', speed: 400 }, { action: 'break' }, { text: "CONTENT: QWERTYUIOP", action: 'type', speed: 80 }, { action: 'wait', speed: 800 }, { action: 'break' }, { text: "> WARN: PROTOCOL_ANCIENT", action: 'type', speed: 10 }, { action: 'wait', speed: 600 }, { action: 'clear', speed: 30 }, { text: "> init modern_stack...", action: 'type', speed: 30 }, { action: 'break' }, { text: "> rm -rf /wordpress_bloat", action: 'type', speed: 40 }, { action: 'wait', speed: 400 }, { action: 'break' }, { text: "> installing: @astrojs/perf", action: 'type', speed: 20 }, { action: 'break' }, { text: "  [OK] Core loaded (12ms)", action: 'type', speed: 10 }, { action: 'break' }, { text: "> compiling masterpiece...", action: 'type', speed: 30 }, { action: 'wait', speed: 3000 }, { action: 'clear', speed: 20 }];
+  let seqIndex = 0; let charIndex = 0;
+  function runTerminal() {
+    if (!terminalElement) return;
+    const coreState = document.getElementById('process-core')?.getAttribute('data-state');
+    if (coreState !== '3') { requestAnimationFrame(runTerminal); return; }
+    if (seqIndex >= sequence.length) seqIndex = 0;
+    const currentStep = sequence[seqIndex];
+    if (currentStep.action === 'type') { const txt = currentStep.text; if (charIndex < txt.length) { terminalElement.innerHTML += txt.charAt(charIndex); charIndex++; setTimeout(runTerminal, currentStep.speed); } else { seqIndex++; charIndex = 0; runTerminal(); } } else if (currentStep.action === 'wait') { setTimeout(() => { seqIndex++; runTerminal(); }, currentStep.speed); } else if (currentStep.action === 'break') { terminalElement.innerHTML += '<br/>'; seqIndex++; runTerminal(); } else if (currentStep.action === 'clear') { terminalElement.innerHTML = ''; seqIndex++; setTimeout(runTerminal, currentStep.speed); }
+  }
+  runTerminal();
+</script>

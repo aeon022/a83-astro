@@ -5,6 +5,7 @@ import CommandPalette from '../components/islands/CommandPalette.astro';
 import Pill from '../components/ui/Pill.astro';
 import Hero from '../components/blocks/Hero.astro';
 import Manifesto from '../components/blocks/Manifesto.astro';
+import Process from '../components/blocks/Process.astro';
 
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
@@ -49,6 +50,12 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
         MANIFESTO (System Core / Hero 2)
         ========================================= */}
     <Manifesto />
+
+
+    {/* =========================================
+        PROCESS (System Core / Hero 3)
+        ========================================= */}   
+    <Process />
 
     {/* =========================================
         DYNAMIC DATA SECTIONS (Missions & Contracts)
