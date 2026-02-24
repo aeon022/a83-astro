@@ -9,7 +9,6 @@ export default config({
     brand: { name: 'ABTEILUNG83 // CORE' },
   },
   singletons: {
-    // ... (Global Settings bleiben gleich)
     globalSettings: singleton({
       label: 'Global Settings',
       path: 'src/content/settings/global',
@@ -28,7 +27,6 @@ export default config({
     }),
   },
   collections: {
-    // ... (Pricing bleibt gleich)
     pricing: collection({
       label: 'Pricing Models (Contract Definitions)',
       slugField: 'name',
@@ -62,7 +60,6 @@ export default config({
       },
     }),
 
-    // UPDATE HIER: Showcase Collection
     showcase: collection({
       label: 'Showcase (Mission Logs)',
       slugField: 'title',
@@ -70,26 +67,16 @@ export default config({
       format: { data: 'json' },
       schema: {
         title: fields.slug({ name: { label: 'Project Title' } }),
-        
-        // --- VISUAL ASSET ---
-        // Speichert das Bild in public/images/showcase
-        // Gibt im JSON den Pfad '/images/showcase/filename.webp' zurück
         coverImage: fields.image({
           label: 'Mission Visual // COVER',
           directory: 'public/images/showcase',
           publicPath: '/images/showcase/',
-          // validation: { isRequired: true },
         }),
-
         excerpt: fields.text({ label: 'Excerpt (Kurzbeschreibung)', multiline: true }),
-        
-        // --- MISSION METADATA ---
         entity: fields.text({ label: 'ENTITY (Kunde/Auftraggeber)' }),
         vector: fields.text({ label: 'VECTOR (Branche/Zielsetzung)' }),
         arch: fields.text({ label: 'ARCH (Architektur/Tech-Stack Summary)' }),
         cycle: fields.text({ label: 'CYCLE (Zeitrahmen/Jahr)' }),
-
-        // --- PROTOKOLL DATEN ---
         protocolReadout: fields.text({ 
           label: '// PROTOCOL_READOUT', 
           description: 'Zwei Zeilen Intro-Text',
@@ -122,6 +109,29 @@ export default config({
           defaultValue: false 
         }),
       },
+    }),
+
+    // FIX: Hinzugefügte Services Collection
+    services: collection({
+      label: 'Services (System Modules)',
+      slugField: 'title',
+      path: 'src/content/services/*',
+      format: { data: 'json' },
+      schema: {
+        title: fields.slug({ name: { label: 'Service Title' } }),
+        id: fields.text({ label: 'Module ID (e.g. MOD_01)' }),
+        status: fields.text({ label: 'Status (e.g. STABLE)' }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        size: fields.select({
+          label: 'Grid Size',
+          options: [
+            { label: 'Large (8 Cols)', value: 'lg:col-span-8' },
+            { label: 'Small (4 Cols)', value: 'lg:col-span-4' },
+          ],
+          defaultValue: 'lg:col-span-4',
+        }),
+        specs: fields.array(fields.text({ label: 'Spec' }), { label: 'Specs' }),
+      }
     }),
   },
 });

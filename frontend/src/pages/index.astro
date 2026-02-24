@@ -5,6 +5,7 @@ import CommandPalette from '../components/islands/CommandPalette.astro';
 import Pill from '../components/ui/Pill.astro';
 import Hero from '../components/blocks/Hero.astro';
 import Manifesto from '../components/blocks/Manifesto.astro';
+import Services from '../components/blocks/Services.astro'; // Neu integriert
 import Process from '../components/blocks/Process.astro';
 import Highlights from '../components/blocks/Highlights.astro';
 
@@ -12,9 +13,14 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 
 const reader = createReader(process.cwd(), keystaticConfig);
-const settings = await reader.singletons.globalSettings.read();
-const showcaseProjects = await reader.collections.showcase.all();
-const pricingModels = await reader.collections.pricing.all();
+
+// Parallel Data Fetching
+const [settings, showcaseProjects, pricingModels, serviceModules] = await Promise.all([
+  reader.singletons.globalSettings.read(),
+  reader.collections.showcase.all(),
+  reader.collections.pricing.all(),
+  reader.collections.services.all() // Fetching der Module
+]);
 
 // Filterung: Nur Projekte, die im Keystatic-Backend als Highlight markiert wurden
 const highlightProjects = showcaseProjects.filter(
@@ -53,20 +59,24 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
     </div>
 
     {/* =========================================
-        MANIFESTO (System Core / Hero 2)
+        MANIFESTO (System Core / Identity)
         ========================================= */}
     <Manifesto />
 
+    {/* =========================================
+        SERVICES (System Modules / Bento Grid)
+        ========================================= */}
+    <Services modules={serviceModules} />
 
     {/* =========================================
-        PROCESS (System Core / Hero 3)
+        PROCESS (Execution Pipeline / Sticky)
         ========================================= */}   
     <Process />
 
     <main class="w-full bg-white dark:bg-a83-bg transition-colors duration-500">
       
       {/* =========================================
-          HIGHLIGHTS (Priority Dossiers / Horizontal Slider)
+          HIGHLIGHTS (Cinematic Showcase)
           ========================================= */}
       {highlightProjects.length > 0 && (
         <Highlights projects={highlightProjects} />
@@ -75,7 +85,7 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
       {/* =========================================
           CONTRACTS (Pricing Models)
           ========================================= */}
-      <section class="nav-content-sync w-full max-w-[1600px] mx-auto px-6 lg:px-16 py-32 flex flex-col gap-10">
+      <section id="pricing" class="nav-content-sync w-full max-w-[1600px] mx-auto px-6 lg:px-16 py-32 flex flex-col gap-10">
         <div class="inline-block bg-a83-surface/50 px-4 py-2 border-l-2 border-a83-accent w-max">
           <h2 class="text-xl md:text-2xl uppercase tracking-[0.2em] font-bold text-white">// CONTRACT_DEFINITIONS</h2>
         </div>
