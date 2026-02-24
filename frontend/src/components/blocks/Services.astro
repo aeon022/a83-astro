@@ -1,46 +1,46 @@
 ---
-// Dateipfad: src/components/blocks/Services.astro
+// Dateipfad: frontend/src/components/blocks/Services.astro
 // Vibe: Hardware-Rack / Bento Grid / System Modules
-// Tech: CSS Grid, Tailwind v4, Glow-Effects
+// Tech: Keystatic Reader, Tailwind v4, CSS Grid, Native Vertical Writing
 
-const services = [
-  {
-    id: "MOD_01",
-    title: "Performance_Audit",
-    status: "STABLE",
-    size: "lg:col-span-8",
-    description: "Wir sezieren dein aktuelles System. Bottlenecks werden isoliert, Bloatware wird eliminiert. Ziel: Lighthouse > 98.",
-    specs: ["Core Web Vitals", "LCP_Optimization", "Payload_Reduction"],
-    accent: "var(--a83-accent)"
-  },
-  {
-    id: "SYS_02",
-    title: "Stack_Transition",
-    status: "READY",
-    size: "lg:col-span-4",
-    description: "Migration von WordPress/PHP auf Astro & Modern CMS. Null JS-Overhead.",
-    specs: ["Astro_SSG", "Keystatic_Sync", "Edge_Deployment"],
-    accent: "#3b82f6"
-  },
-  {
-    id: "UX_03",
-    title: "Kinetic_UI",
-    status: "ACTIVE",
-    size: "lg:col-span-4",
-    description: "Interfaces, die atmen. Hochperformante Animationen ohne Frame-Drops.",
-    specs: ["Motion_Canvas", "GSAP_Hard_Coded", "Micro_Interactions"],
-    accent: "#a855f7"
-  },
-  {
-    id: "OPS_04",
-    title: "Infrastructure",
-    status: "ONLINE",
-    size: "lg:col-span-8",
-    description: "Skalierbare Server-Architekturen auf Ubuntu & Docker Basis. Plesk Obsidian Integration.",
-    specs: ["Docker_Compose", "Redis_Caching", "Nginx_Proxy_Pass"],
-    accent: "#10b981"
-  }
-];
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
+// Keystatic Reader initialisieren
+const reader = createReader(process.cwd(), keystaticConfig);
+
+// Daten abrufen aus der konsolidierten Services-Collection
+const serviceEntries = await reader.collections.services.all();
+
+interface Props {
+  allServices?: boolean;
+}
+
+const { allServices = false } = Astro.props;
+
+// Mapping und Filterung der Services
+const allMappedServices = serviceEntries.map(item => ({
+  id: item.entry.id,
+  title: item.entry.title,
+  status: item.entry.status,
+  size: item.entry.size,
+  tagline: item.entry.tagline,
+  description: item.entry.description,
+  price: item.entry.price,
+  priceLabel: item.entry.priceLabel,
+  outputParameters: item.entry.outputParameters,
+  buildSuccess: item.entry.buildSuccess,
+  specs: item.entry.specs,
+  accent: item.entry.accent || 'var(--a83-accent)',
+  actionLink: item.entry.actionLink,
+  buttonLabel: item.entry.buttonLabel,
+  footnote: item.entry.footnote,
+  showOnStartpage: item.entry.showOnStartpage
+}));
+
+const displayServices = allServices 
+  ? allMappedServices 
+  : allMappedServices.filter(s => s.showOnStartpage);
 ---
 
 <section id="services" class="nav-content-sync relative w-full bg-white dark:bg-a83-bg py-24 lg:py-40 transition-colors duration-500 overflow-hidden">
@@ -58,40 +58,80 @@ const services = [
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
-      {services.map((service) => (
-        <div class={`${service.size} group relative min-h-[320px] bg-gray-50 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/5 overflow-hidden transition-all duration-500 hover:border-a83-accent/30`}>
+      {displayServices.map((service) => (
+        <div class={`${service.size} group relative min-h-[450px] bg-gray-50 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/5 overflow-hidden transition-all duration-500 hover:border-a83-accent/30 flex flex-col`}>
           
+          {/* Spotlight Effekt */}
           <div class="absolute inset-0 bg-[radial-gradient(600px_circle_at_var(--m-x)_var(--m-y),var(--a83-accent),transparent_40%)] opacity-0 group-hover:opacity-[0.07] pointer-events-none transition-opacity duration-500"></div>
 
-          <div class="absolute top-4 right-6 font-mono text-[9px] text-black/20 dark:text-white/10 select-none group-hover:text-a83-accent/30 transition-colors">
-            {service.id} // STAT: {service.status}
-          </div>
-          
-          <div class="absolute bottom-0 right-0 p-4 opacity-50">
-             <div class="w-12 h-12 border-b border-r border-black/10 dark:border-white/10 group-hover:border-a83-accent/40 transition-colors duration-500"></div>
+          {/* Header Info */}
+          <div class="p-8 lg:p-12 pb-0 flex justify-between items-start relative z-10">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)] animate-pulse"></span>
+              <span class="font-mono text-[10px] text-black/40 dark:text-white/30 uppercase tracking-widest">{service.status}</span>
+            </div>
+            <span class="font-mono text-[10px] text-black/20 dark:text-white/10">{service.id}</span>
           </div>
 
-          <div class="relative z-10 p-8 lg:p-12 h-full flex flex-col justify-between">
+          <div class="relative z-10 p-8 lg:p-12 pt-6 h-full flex flex-col justify-between flex-grow">
             
             <div class="max-w-xl">
-              <div class="flex items-center gap-2 mb-6">
-                <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)] animate-pulse"></span>
-                <h3 class="text-3xl lg:text-4xl font-black text-black dark:text-white tracking-tight uppercase group-hover:text-a83-accent transition-colors">
-                  {service.title.replace('_', ' ')}
-                </h3>
-              </div>
+              <h3 class="text-3xl lg:text-4xl font-black text-black dark:text-white tracking-tight uppercase group-hover:text-a83-accent transition-colors">
+                {service.title.replace('_', ' ')}
+              </h3>
+              <p class="font-mono text-a83-accent text-xs mt-1 mb-6 uppercase tracking-widest">{service.tagline}</p>
               
               <p class="text-black/60 dark:text-white/60 text-lg leading-relaxed mb-8 group-hover:text-black dark:group-hover:text-white/90 transition-colors">
                 {service.description}
               </p>
+
+              {/* Pricing & Parameters */}
+              <div class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <span class="text-[9px] font-mono text-black/40 dark:text-white/30 uppercase block mb-3">Output_Parameters:</span>
+                  <ul class="space-y-2">
+                    {service.outputParameters?.map((param: string) => (
+                      <li class="text-[11px] font-mono text-black/60 dark:text-white/50 flex gap-2">
+                        <span class="text-a83-accent opacity-50">├─</span> {param}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                   <span class="text-[9px] font-mono text-black/40 dark:text-white/30 uppercase block mb-3">Build_Success:</span>
+                   <ul class="space-y-2">
+                    {service.buildSuccess?.map((metric: string) => (
+                      <li class="text-[11px] font-mono text-green-600 dark:text-green-400 flex gap-2">
+                        <span class="opacity-50">└─</span> {metric}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
 
-            <div class="flex flex-wrap gap-2">
-              {service.specs.map(spec => (
-                <span class="font-mono text-[9px] px-3 py-1 border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 text-black/40 dark:text-white/40 group-hover:border-a83-accent/20 group-hover:text-a83-accent transition-all">
-                  > {spec}
-                </span>
-              ))}
+            {/* Bottom Section: Price & Action */}
+            <div class="mt-auto pt-8 border-t border-black/5 dark:border-white/5 flex flex-col gap-6">
+              <div class="flex justify-between items-end">
+                <div>
+                  <span class="text-[9px] font-mono text-black/40 dark:text-white/30 uppercase block mb-1">{service.priceLabel}</span>
+                  <span class="text-2xl font-black text-black dark:text-white">{service.price}</span>
+                </div>
+                <div class="flex flex-wrap gap-2 justify-end">
+                  {service.specs.map((spec: string) => (
+                    <span class="font-mono text-[9px] px-2 py-1 border border-black/10 dark:border-white/10 text-black/40 dark:text-white/40">
+                      > {spec}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              <a href={service.actionLink} class="group/btn relative overflow-hidden border border-a83-accent/30 py-4 text-center font-mono text-xs uppercase tracking-[0.2em] text-a83-accent hover:text-black transition-colors duration-300">
+                <span class="relative z-10">{service.buttonLabel}_</span>
+                <div class="absolute inset-0 -translate-x-full bg-a83-accent transition-transform duration-300 group-hover/btn:translate-x-0"></div>
+              </a>
+              
+              {service.footnote && <p class="text-[9px] font-mono text-black/30 dark:text-white/20 italic">*{service.footnote}</p>}
             </div>
           </div>
 
@@ -101,21 +141,24 @@ const services = [
     </div>
   </div>
 
-  <div class="absolute right-0 top-1/2 -rotate-90 translate-x-1/2 pointer-events-none opacity-5 hidden xl:block">
-     <span class="text-[120px] font-black tracking-tighter text-black dark:text-white uppercase whitespace-nowrap">Core_Capabilities</span>
+  {/* WATERMARK: Klebt am rechten Rand durch native vertical writing-mode & rotate-180 */}
+  <div class="absolute top-0 right-0 h-full hidden xl:flex items-center pointer-events-none select-none z-0">
+     <span class="[writing-mode:vertical-rl] rotate-180 text-[90px] font-black tracking-tighter text-black/5 dark:text-white/[0.03] uppercase leading-none">
+        Core_Capabilities
+     </span>
   </div>
 
 </section>
 
 <script>
-  // Spotlight Cursor Tracking für alle Service Cards
+  // Spotlight Cursor Tracking
   const cards = document.querySelectorAll('#services .group');
   
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = (e as MouseEvent).clientX - rect.left;
+      const y = (e as MouseEvent).clientY - rect.top;
       
       (card as HTMLElement).style.setProperty('--m-x', `${x}px`);
       (card as HTMLElement).style.setProperty('--m-y', `${y}px`);

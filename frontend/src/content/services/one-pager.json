@@ -1,0 +1,29 @@
+{
+  "title": "One-Pager",
+  "id": "MOD_01",
+  "status": "AVAILABLE",
+  "showOnStartpage": true,
+  "size": "lg:col-span-8",
+  "tagline": "Focus Mode",
+  "description": "Eine Seite, ein Ziel\nLeads auf den Punkt.",
+  "price": "1700",
+  "priceLabel": "UNIT_PRICE",
+  "outputParameters": [
+    "Ideal für Launches & Kampagnen, die sofort zünden.",
+    "Deine Botschaft auf einer Spur – zero Noise, maximaler Impact.",
+    "Hero-Story, Proof, Logos, CTA, Kontakt",
+    "Socials"
+  ],
+  "buildSuccess": [
+    "klare Conversion-Journey",
+    "Launch in Tagen",
+    "90+ Lighthouse"
+  ],
+  "buttonLabel": "More",
+  "footnote": "* Flatrate inkl. Korrekturschleife. Exkl. etwaige Lizenzen.",
+  "specs": [
+    "Core Web Vitals",
+    "LCP_Optimization",
+    "Payload_Reduction"
+  ]
+}
