@@ -1,7 +1,7 @@
 ---
 // Dateipfad: frontend/src/components/blocks/Manifesto.astro
-// Vibe: Signal to Noise / Brutalist / No Bloat
-// Tech: Tailwind Dark Mode Modifiers, Transition Colors
+// Vibe: Signal to Noise / Brutalist / Max Headroom Easter Egg
+// Tech: Tailwind Dark Mode, Reveal Engine, CSS Glitch Keyframes
 ---
 
 <section id="manifesto" class="nav-content-sync relative w-full px-6 lg:px-16 py-40 md:py-56 bg-[#f4f4f6] dark:bg-a83-bg border-t border-black/5 dark:border-white/10 overflow-hidden transition-colors duration-500">
@@ -14,12 +14,12 @@
     
     <div class="xl:col-span-6 flex flex-col items-start pr-0 xl:pr-12">
       
-      <div class="flex items-center gap-4 mb-12">
+      <div class="reveal-3d flex items-center gap-4 mb-12">
         <span class="w-2 h-2 bg-a83-accent shadow-[0_0_8px_var(--a83-accent)]"></span>
-        <span class="font-mono text-xs text-black/50 dark:text-white/50 uppercase tracking-[0.4em] font-bold transition-colors">// SIGNAL_TO_NOISE</span>
+        <span class="scramble-text font-mono text-xs text-black/50 dark:text-white/50 uppercase tracking-[0.4em] font-bold transition-colors" data-text="// SIGNAL_TO_NOISE">// SIGNAL_TO_NOISE</span>
       </div>
 
-      <h2 class="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.05] mb-12 font-sans text-black dark:text-white transition-colors duration-500">
+      <h2 class="reveal-3d delay-100 text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.05] mb-12 font-sans text-black dark:text-white transition-colors duration-500">
         Cut the Noise.<br />
         <span class="text-transparent relative" style="-webkit-text-stroke: 2px var(--a83-accent);">
           Own the Data.
@@ -27,18 +27,18 @@
         </span>
       </h2>
 
-      <p class="text-2xl sm:text-4xl text-black dark:text-white font-bold tracking-tight mb-10 leading-tight transition-colors duration-500">
+      <p class="reveal-3d delay-200 text-2xl sm:text-4xl text-black dark:text-white font-bold tracking-tight mb-10 leading-tight transition-colors duration-500">
         High Performance.<br />
-        <span class="text-a83-accent">Kein Bullshit.</span>
+        <span class="text-a83-accent">Radikale Klarheit.</span>
       </p>
 
-      <p class="text-lg sm:text-xl text-black/70 dark:text-white/70 font-sans max-w-2xl leading-relaxed mb-16 transition-colors duration-500">
-        Das Web erstickt an überladenen Templates und Ladebalken. Wir sind der Filter. ABTEILUNG83 konstruiert High-Performance-Assets, die messbar konvertieren. <strong class="text-black dark:text-white font-black transition-colors">Reduziert auf das absolute Maximum.</strong>
+      <p class="reveal-3d delay-300 text-lg sm:text-xl text-black/70 dark:text-white/70 font-sans max-w-2xl leading-relaxed mb-16 transition-colors duration-500">
+        Wir befreien das Web von unnötigem Ballast. Statt monolithischer Templates entwickeln wir präzise, asynchrone Architekturen. ABTEILUNG83 liefert digitale Assets, die nicht nur laden, sondern leisten. <strong class="text-black dark:text-white font-black transition-colors">Reduziert auf das Wesentliche.</strong>
       </p>
 
-      <div class="font-mono text-sm text-black dark:text-a83-accent bg-white dark:bg-black border border-black/10 dark:border-a83-accent/40 shadow-lg dark:shadow-[0_0_20px_rgba(0,0,0,0.5)] px-6 py-4 inline-flex relative overflow-hidden group rounded-md transition-colors duration-500">
+      <div class="reveal-3d delay-300 font-mono text-sm text-black dark:text-a83-accent bg-white dark:bg-black border border-black/10 dark:border-a83-accent/40 shadow-lg dark:shadow-[0_0_20px_rgba(0,0,0,0.5)] px-6 py-4 inline-flex relative overflow-hidden group rounded-md transition-colors duration-500">
         <span class="w-2 h-4 bg-a83-accent mr-3 animate-pulse block dark:hidden"></span>
-        <span class="raw-glitch inline-block tracking-[0.2em] font-bold">SIG > NOISE // ACTV</span>
+        <span class="scramble-text inline-block tracking-[0.2em] font-bold" data-text="SIG > NOISE // ACTV">SIG > NOISE // ACTV</span>
       </div>
 
     </div>
@@ -46,44 +46,70 @@
 
     <div class="xl:col-span-6 grid grid-cols-2 gap-6 lg:gap-8">
       
-      <div class="col-span-2 bg-white dark:bg-[#0c0c0e] border border-black/5 dark:border-white/10 rounded-3xl p-10 lg:p-12 shadow-2xl hover:border-a83-accent/50 dark:hover:border-a83-accent/50 transition-colors duration-500 relative overflow-hidden group">
+      <div class="reveal-3d delay-200 col-span-2 bg-white dark:bg-[#0c0c0e] border border-black/5 dark:border-white/10 rounded-3xl p-8 lg:p-10 shadow-2xl hover:border-a83-accent/50 dark:hover:border-a83-accent/50 transition-colors duration-500 relative overflow-hidden group flex flex-col justify-between">
         
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--a83-accent)_5%,transparent)_0%,transparent_70%)] opacity-0 dark:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 
-        <div class="flex justify-between items-start mb-10 relative z-10">
-          <span class="font-mono text-[11px] text-black/40 dark:text-white/50 uppercase tracking-[0.2em] font-bold transition-colors">Sys_Architecture</span>
-          <span class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)] dark:shadow-[0_0_12px_rgba(34,197,94,0.8)] animate-pulse"></span>
-        </div>
-        
-        <div class="font-mono text-base lg:text-lg text-black/70 dark:text-white space-y-4 relative z-10 font-medium transition-colors">
-          <div class="flex items-center gap-6"><span class="text-a83-accent w-6 font-bold">-></span> <span>Engine: <strong class="text-black dark:text-white font-bold transition-colors">Astro_v5</strong></span></div>
-          <div class="flex items-center gap-6"><span class="text-a83-accent w-6 font-bold">-></span> <span>Styling: <strong class="text-black dark:text-white font-bold transition-colors">Tailwind_v4</strong></span></div>
-          <div class="flex items-center gap-6"><span class="text-a83-accent w-6 font-bold">-></span> <span>Data: <strong class="text-black dark:text-white font-bold transition-colors">StudioCMS_Native</strong></span></div>
+        <div class="flex justify-between items-start mb-8 relative z-10">
+          <span class="font-mono text-[11px] text-black/40 dark:text-white/50 uppercase tracking-[0.2em] font-bold transition-colors">Value_Snapshot</span>
+          <div class="flex items-center gap-2">
+            <span class="scramble-text text-[9px] font-mono text-black/30 dark:text-white/30 tracking-widest uppercase" data-text="All_Systems_Go">All_Systems_Go</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)] dark:shadow-[0_0_12px_rgba(34,197,94,0.8)] animate-pulse"></span>
           </div>
-      </div>
+        </div>
+        
+        <div class="relative z-10 font-mono text-sm">
+          
+          <div class="mb-8 p-4 rounded bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-xs text-black/40 dark:text-white/30 italic">
+            <div class="flex items-center gap-2 mb-2 not-italic text-red-500/60 dark:text-red-400/60 font-bold uppercase tracking-widest text-[9px]">
+              <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> [LOG: DEPRECATED_MINDSET]
+            </div>
+            "Uh, well, okay Biff, uh, I'll finish that on up tonight and I'll bring it over first thing tomorrow..."
+          </div>
 
-      <div class="col-span-2 sm:col-span-1 aspect-square bg-black border border-black/10 dark:border-white/10 rounded-3xl relative overflow-hidden group shadow-2xl transition-colors duration-500">
-        <img src="/images/manifesto-photo.webp" alt="ABTEILUNG83 Workspace" class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-60 mix-blend-luminosity group-hover:scale-105 group-hover:opacity-100 dark:group-hover:opacity-90 transition-all duration-1000 ease-out" />
-        
-        <div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.5)_2px,rgba(0,0,0,0.5)_4px)] pointer-events-none z-10 mix-blend-overlay"></div>
-        <div class="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] dark:shadow-[inset_0_0_60px_rgba(0,0,0,1)] pointer-events-none z-10 transition-shadow"></div>
-        
-        <div class="absolute bottom-6 left-6 z-20">
-          <span class="font-mono text-[10px] bg-white dark:bg-black/80 dark:backdrop-blur-md text-black dark:text-white px-3 py-1.5 border border-transparent dark:border-white/20 tracking-widest shadow-lg dark:shadow-none transition-colors">VISUAL_ASSET_01</span>
+          <div class="space-y-4 font-medium">
+            <div class="flex items-center gap-4 group/item">
+              <div class="w-8 h-8 rounded flex items-center justify-center bg-a83-accent/10 border border-a83-accent/30 text-a83-accent shrink-0"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div>
+              <span class="text-black/70 dark:text-white/80 font-bold tracking-tight">Schnell.</span>
+              <code class="ml-auto text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 px-2 py-1 rounded text-[10px] md:text-xs border border-black/5 dark:border-white/10 tracking-wide">const lcp = "&lt; 2s"</code>
+            </div>
+            <div class="flex items-center gap-4 group/item">
+              <div class="w-8 h-8 rounded flex items-center justify-center bg-a83-accent/10 border border-a83-accent/30 text-a83-accent shrink-0"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></div>
+              <span class="text-black/70 dark:text-white/80 font-bold tracking-tight">Lesbar.</span>
+              <code class="ml-auto text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 px-2 py-1 rounded text-[10px] md:text-xs border border-black/5 dark:border-white/10 tracking-wide">humanReadable(true)</code>
+            </div>
+            <div class="flex items-center gap-4 group/item">
+              <div class="w-8 h-8 rounded flex items-center justify-center bg-a83-accent/10 border border-a83-accent/30 text-a83-accent shrink-0"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg></div>
+              <span class="text-black/70 dark:text-white/80 font-bold tracking-tight">Konform.</span>
+              <code class="ml-auto text-black/60 dark:text-white/60 bg-black/5 dark:bg-white/5 px-2 py-1 rounded text-[10px] md:text-xs border border-black/5 dark:border-white/10 tracking-wide">privacy.on()</code>
+            </div>
+          </div>
         </div>
       </div>
 
-      <a href="/work" class="col-span-2 sm:col-span-1 aspect-square bg-a83-accent dark:bg-a83-accent/10 border border-a83-accent dark:border-a83-accent/30 rounded-3xl p-8 lg:p-10 flex flex-col justify-between hover:bg-black dark:hover:bg-a83-accent hover:border-black dark:hover:border-a83-accent transition-all duration-500 group cursor-pointer text-decoration-none shadow-2xl relative overflow-hidden">
+      <div class="reveal-3d delay-400 col-span-2 sm:col-span-1 aspect-square relative group z-10">
         
-        <div class="absolute inset-0 bg-radial-accent opacity-0 dark:group-hover:opacity-40 transition-opacity duration-700 hidden dark:block"></div>
+        <div class="absolute inset-0 bg-black border border-black/10 dark:border-white/10 rounded-3xl overflow-hidden shadow-2xl transition-colors duration-500">
+             <img src="/images/manifesto-photo.webp" alt="ABTEILUNG83 Workspace" class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-60 mix-blend-luminosity group-hover:scale-105 transition-all duration-1000 ease-out" />
+             <div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.5)_2px,rgba(0,0,0,0.5)_4px)] pointer-events-none z-10 mix-blend-overlay"></div>
+             <div class="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] dark:shadow-[inset_0_0_60px_rgba(0,0,0,1)] pointer-events-none z-10 transition-shadow"></div>
+             <div class="absolute bottom-6 left-6 z-20">
+               <span class="font-mono text-[10px] bg-white dark:bg-black/80 dark:backdrop-blur-md text-black dark:text-white px-3 py-1.5 border border-transparent dark:border-white/20 tracking-widest shadow-lg dark:shadow-none transition-colors">VISUAL_ASSET_01</span>
+             </div>
+        </div>
 
+        <div class="max-headroom-entity absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 z-50">
+            <div class="glitch-image w-full h-full bg-cover bg-center" style="background-image: url('/images/manifesto-photo.webp')"></div>
+        </div>
+
+      </div>
+
+      <a href="/work" class="reveal-3d delay-500 col-span-2 sm:col-span-1 aspect-square bg-a83-accent dark:bg-a83-accent/10 border border-a83-accent dark:border-a83-accent/30 rounded-3xl p-8 lg:p-10 flex flex-col justify-between hover:bg-black dark:hover:bg-a83-accent hover:border-black dark:hover:border-a83-accent transition-all duration-500 group cursor-pointer text-decoration-none shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 bg-radial-accent opacity-0 dark:group-hover:opacity-40 transition-opacity duration-700 hidden dark:block"></div>
         <div class="flex justify-between items-center relative z-10">
           <span class="font-mono text-[10px] text-black dark:text-a83-accent group-hover:text-white dark:group-hover:text-black uppercase tracking-[0.2em] transition-colors font-bold">Access_Vault</span>
-          <svg class="w-6 h-6 text-black dark:text-a83-accent group-hover:text-white dark:group-hover:text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2.5" d="M4 4h16v16M4 20L20 4"></path>
-          </svg>
+          <svg class="w-6 h-6 text-black dark:text-a83-accent group-hover:text-white dark:group-hover:text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2.5" d="M4 4h16v16M4 20L20 4"></path></svg>
         </div>
-        
         <div class="relative z-10">
           <h3 class="font-sans text-4xl lg:text-5xl font-black text-black dark:text-white group-hover:text-white dark:group-hover:text-black tracking-tight transition-colors mb-3">Highlights</h3>
           <p class="font-mono text-sm text-black/70 dark:text-a83-accent group-hover:text-white/80 dark:group-hover:text-black/80 transition-colors font-bold">> Init protocol</p>
@@ -95,22 +121,111 @@
 </section>
 
 <style>
-  .raw-glitch {
-    display: inline-block;
-    animation: text-clip 4s linear infinite;
+  /* --- 3D CINEMATIC REVEAL --- */
+  .reveal-3d {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96) rotateX(10deg);
+    filter: blur(8px);
+    transform-origin: center top;
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity, filter;
+  }
+  .reveal-3d.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0);
+  }
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
+  .bg-radial-accent { background: radial-gradient(circle at center, var(--a83-accent), transparent 70%); }
+
+  /* --- MAX HEADROOM GLITCH EFFECT --- */
+  .max-headroom-entity {
+    /* Ermöglicht das Ausbrechen aus der Box */
+    transform: scale(1.2) translateZ(50px);
+    transition: opacity 0.2s ease-in, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    mix-blend-mode: hard-light; /* Aggressiver Blend-Mode für den digitalen Look */
   }
 
-  @keyframes text-clip {
-    0% { clip-path: inset(0 0 0 0); transform: translateX(0); }
-    5% { clip-path: inset(10% 0 80% 0); transform: translateX(2px); }
-    10% { clip-path: inset(0 0 0 0); transform: translateX(0); }
-    45% { clip-path: inset(0 0 0 0); transform: translateX(0); }
-    50% { clip-path: inset(60% 0 10% 0); transform: translateX(-2px); }
-    55% { clip-path: inset(0 0 0 0); transform: translateX(0); }
-    100% { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  /* Der eigentliche Glitch-Container */
+  .glitch-image {
+    /* RGB Split Effekt via Text-Shadow Hack (funktioniert auch auf Boxen) */
+    box-shadow: -5px 0 var(--a83-accent), 5px 0 blue;
+    /* Scanlines und Stottern */
+    animation: max-headroom-stutter 0.2s infinite linear alternate-reverse;
+    filter: contrast(1.5) brightness(1.2) hue-rotate(90deg);
   }
 
-  .bg-radial-accent {
-    background: radial-gradient(circle at center, var(--a83-accent), transparent 70%);
+  @keyframes max-headroom-stutter {
+    0% {
+      clip-path: inset(10% 0 80% 0);
+      transform: translate(-2px, 2px) skewX(5deg);
+    }
+    20% {
+      clip-path: inset(60% 0 20% 0);
+      transform: translate(2px, -2px) skewX(-5deg);
+      filter: contrast(2) brightness(1.5) hue-rotate(0deg) invert(0.1);
+    }
+    40% {
+      clip-path: inset(30% 0 50% 0);
+      transform: translate(-5px, 0) scale(1.05);
+    }
+    60% {
+      clip-path: inset(80% 0 5% 0);
+      transform: translate(5px, 5px) skewX(2deg);
+       filter: contrast(1.5) brightness(1.2) hue-rotate(180deg);
+    }
+    80% {
+      clip-path: inset(5% 0 90% 0);
+      transform: translate(0, -5px);
+    }
+    100% {
+      clip-path: inset(40% 0 40% 0);
+      transform: translate(2px, 2px) skewX(-2deg);
+    }
   }
 </style>
+
+<script>
+  // --- CINEMATIC REVEAL & SCRAMBLE ENGINE (Vanilla JS) ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        
+        const scrambles = entry.target.querySelectorAll('.scramble-text');
+        scrambles.forEach(el => scrambleText(el));
+
+        if (entry.target.classList.contains('scramble-text')) {
+          scrambleText(entry.target);
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal-3d').forEach((el) => observer.observe(el));
+
+  const chars = '!<>-_\\/[]{}—=+*^?#________';
+  function scrambleText(element) {
+    const originalText = element.getAttribute('data-text') || element.innerText;
+    let iteration = 0;
+    if (!element.style.width) element.style.width = `${element.offsetWidth}px`;
+
+    const interval = setInterval(() => {
+      element.innerText = originalText.split('').map((letter, index) => {
+        if (index < iteration) return originalText[index];
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      if (iteration >= originalText.length) { 
+        clearInterval(interval);
+        element.style.width = 'auto';
+      }
+      iteration += 1 / 2;
+    }, 40);
+  }
+</script>
