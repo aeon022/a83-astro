@@ -1,11 +1,13 @@
 ---
-// Dateipfad: frontend/src/components/blocks/Highlights.astro
-// Update: FIXED Overscroll-Lock (Aggressive Mode) & 3D Boundaries
+// Dateipfad: src/components/blocks/Highlights.astro
+// Version: V8.3 - COMPACT, SNAPPY & SAFE ASSETS
+// Feature: Fallback "Blueprint" Pattern for missing images
 
 interface ProjectEntry {
   entity: string;
   arch: string;
   protocolReadout: string;
+  coverImage?: string; // Optional typing
 }
 
 interface Project {
@@ -20,231 +22,251 @@ interface Props {
 const { projects } = Astro.props as Props;
 ---
 
-<section id="highlights" class="nav-content-sync relative w-full max-w-[100vw] bg-white dark:bg-a83-bg py-32 lg:py-56 overflow-hidden transition-colors duration-500 contain-paint">
+<section id="highlights" class="snap-center relative w-full h-screen max-h-[1080px] min-h-[700px] bg-white dark:bg-[#030303] overflow-hidden border-b border-black/5 dark:border-white/5 flex flex-col justify-between py-8 lg:py-10 transition-colors duration-500 cursor-none">
   
-  <div class="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] z-0">
-    <div class="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#000_2px,#000_4px)] dark:bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_2px,#fff_4px)]"></div>
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#030303] dark:via-transparent dark:to-[#030303]"></div>
   </div>
 
-  <div class="max-w-[1600px] mx-auto px-10 lg:px-24 mb-24 relative z-10">
-    <div class="flex flex-col md:flex-row justify-between items-end gap-12">
-      <div class="reveal-3d">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="w-2 h-2 bg-a83-accent shadow-[0_0_12px_var(--a83-accent)]"></span>
-          <span class="font-mono text-[10px] text-black/50 dark:text-white/50 uppercase tracking-[0.5em] font-bold">// KINETIC_ASSET_PIPELINE</span>
+  <div class="w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 flex justify-between items-end pointer-events-none shrink-0">
+      <div class="pointer-events-auto">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="relative w-1.5 h-1.5">
+            <div class="absolute inset-0 bg-a83-accent rounded-full animate-ping opacity-75"></div>
+            <div class="relative w-1.5 h-1.5 bg-a83-accent rounded-full shadow-[0_0_10px_var(--a83-accent)]"></div>
+          </div>
+          <span class="font-mono text-[9px] text-a83-accent uppercase tracking-[0.4em] font-bold">
+            // VISUAL_LOGS
+          </span>
         </div>
-        <h2 class="text-7xl md:text-9xl font-black text-black dark:text-white tracking-tighter leading-none">
-          Selected<br />
-          <span class="text-transparent" style="-webkit-text-stroke: 1.5px var(--a83-accent);">Missions.</span>
+        <h2 class="text-3xl md:text-5xl font-black text-black dark:text-white tracking-tighter leading-none">
+          Deployments.
         </h2>
       </div>
-      
-      <div class="flex items-center gap-12 font-mono reveal-3d delay-200">
-         <div class="hidden lg:flex flex-col items-end">
-            <span class="text-[9px] text-black/40 dark:text-white/30 uppercase tracking-[0.3em] mb-1">Status: Monitoring_Active</span>
-            <div class="text-2xl font-black text-black dark:text-white flex items-baseline gap-2">
-               <span id="slider-idx">01</span>
-               <span class="text-xs text-a83-accent opacity-50">/</span>
-               <span class="text-xs opacity-30">{projects.length.toString().padStart(2, '0')}</span>
+
+      <div class="flex gap-3 pointer-events-auto">
+        <button id="nav-prev" class="group relative w-16 h-12 flex items-center justify-center bg-transparent focus:outline-none">
+            <div class="absolute inset-0 border border-black/10 dark:border-white/20 group-hover:border-a83-accent transition-colors duration-300 [clip-path:polygon(0_0,100%_0,100%_70%,85%_100%,0_100%)] bg-white/50 dark:bg-black/50 backdrop-blur-sm"></div>
+            <div class="relative flex items-center gap-2 z-10 opacity-60 group-hover:opacity-100 transition-opacity">
+                <svg class="w-3 h-3 text-black dark:text-white group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                <span class="font-mono text-[9px] font-bold tracking-widest hidden md:block">PREV</span>
             </div>
-         </div>
-         <div class="flex gap-4">
-            <button id="nav-prev" aria-label="Previous Slide" class="w-16 h-16 border border-black/10 dark:border-white/10 flex items-center justify-center group hover:bg-black dark:hover:bg-white transition-all duration-500 cursor-pointer z-50">
-               <span class="group-hover:text-white dark:group-hover:text-black transition-colors font-bold text-xl"><</span>
-            </button>
-            <button id="nav-next" aria-label="Next Slide" class="w-16 h-16 border border-black/10 dark:border-white/10 flex items-center justify-center group hover:bg-black dark:hover:bg-white transition-all duration-500 cursor-pointer z-50">
-               <span class="group-hover:text-white dark:group-hover:text-black transition-colors font-bold text-xl">></span>
-            </button>
-         </div>
+            <div class="absolute top-0 left-0 w-1 h-1 border-t border-l border-current opacity-50"></div>
+        </button>
+
+        <button id="nav-next" class="group relative w-16 h-12 flex items-center justify-center bg-transparent focus:outline-none">
+            <div class="absolute inset-0 border border-black/10 dark:border-white/20 group-hover:border-a83-accent transition-colors duration-300 [clip-path:polygon(15%_0,100%_0,100%_100%,0_100%,0_30%)] bg-white/50 dark:bg-black/50 backdrop-blur-sm"></div>
+            <div class="relative flex items-center gap-2 z-10 opacity-60 group-hover:opacity-100 transition-opacity">
+                <span class="font-mono text-[9px] font-bold tracking-widest hidden md:block">NEXT</span>
+                <svg class="w-3 h-3 text-black dark:text-white group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </div>
+            <div class="absolute bottom-0 right-0 w-1 h-1 border-b border-r border-current opacity-50"></div>
+        </button>
       </div>
-    </div>
   </div>
 
-  <div 
-    id="highlights-track" 
-    class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-16 lg:gap-40 cursor-grab active:cursor-grabbing pb-32 perspective-container w-full touch-pan-y"
-  >
-    <div class="min-w-[5vw] lg:min-w-[10vw] h-full shrink-0 snap-align-none"></div>
+  <div class="flex-1 flex items-center w-full relative z-10 overflow-hidden my-2 lg:my-4">
+      <div 
+        id="highlights-track" 
+        class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 md:gap-8 px-4 md:px-16 w-full touch-pan-y h-full items-center"
+      >
+        <div class="min-w-[5vw] h-full shrink-0 snap-align-none"></div>
 
-    {projects.map((project, index) => (
-      <article class="snap-center min-w-[85vw] lg:min-w-[1400px] relative grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-32 items-center transform-style-3d slider-item">
+        {projects.map((project, index) => (
+          <article 
+            class="group snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[900px] h-[85%] md:h-[90%] relative cinematic-card"
+            data-index={index}
+          >
+            <div class="glitch-wrapper relative w-full h-full bg-gray-100 dark:bg-[#080808] overflow-hidden border border-black/5 dark:border-white/5 transition-transform duration-500 hover:scale-[1.01]">
+                
+                {/* --- IMAGE OR PLACEHOLDER LOGIC --- */}
+                {project.entry.coverImage ? (
+                    <>
+                        <img 
+                            src={project.entry.coverImage} 
+                            alt={project.entry.entity}
+                            loading={index < 2 ? "eager" : "lazy"}
+                            class="absolute inset-0 w-full h-full object-cover grayscale opacity-100 lg:opacity-70 lg:group-hover:opacity-100 lg:group-hover:grayscale-0 transition-all duration-700 ease-out"
+                        />
+                         {/* Glitch Layers (Nur wenn Bild da ist) */}
+                        <div class="glitch-layer layer-r absolute inset-0 bg-transparent opacity-0 pointer-events-none mix-blend-difference" style={`background-image: url('${project.entry.coverImage}'); background-size: cover; background-position: center;`}></div>
+                        <div class="glitch-layer layer-g absolute inset-0 bg-transparent opacity-0 pointer-events-none mix-blend-difference" style={`background-image: url('${project.entry.coverImage}'); background-size: cover; background-position: center;`}></div>
+                        <div class="glitch-layer layer-b absolute inset-0 bg-transparent opacity-0 pointer-events-none mix-blend-difference" style={`background-image: url('${project.entry.coverImage}'); background-size: cover; background-position: center;`}></div>
+                    </>
+                ) : (
+                    /* PLACEHOLDER PATTERN "NO SIGNAL" */
+                    <div class="absolute inset-0 w-full h-full bg-[#111] flex items-center justify-center overflow-hidden">
+                        {/* Technical Grid Pattern */}
+                        <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 40px 40px;"></div>
+                        {/* Diagonal Hazard Lines */}
+                        <div class="absolute inset-0 opacity-5" style="background: repeating-linear-gradient(45deg, #000, #000 10px, #333 10px, #333 20px);"></div>
+                        
+                        <div class="relative z-10 text-center">
+                            <div class="w-16 h-16 border border-white/20 mx-auto mb-4 flex items-center justify-center rounded-full animate-pulse">
+                                <span class="font-mono text-xs text-white/50">!</span>
+                            </div>
+                            <span class="block font-mono text-[10px] tracking-[0.3em] text-white/40 uppercase mb-1">Asset_Missing</span>
+                            <span class="block font-mono text-xs text-a83-accent font-bold animate-pulse">AWAITING_UPLINK</span>
+                        </div>
+                    </div>
+                )}
+
+                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-black dark:via-black/50 dark:to-transparent opacity-90 lg:opacity-60 transition-opacity duration-500"></div>
+
+                <div class="absolute inset-0 p-6 md:p-10 flex flex-col justify-end">
+                    
+                    <div class="absolute top-6 left-6 flex items-center gap-3 fade-in-element">
+                        <span class="bg-black text-white dark:bg-white dark:text-black font-mono text-[9px] uppercase px-2 py-0.5 font-bold">
+                            #{ (index + 1).toString().padStart(2, '0') }
+                        </span>
+                        <span class="text-[9px] font-mono text-black/60 dark:text-white/60 tracking-widest uppercase">
+                            {project.entry.arch}
+                        </span>
+                    </div>
+
+                    <div class="relative overflow-hidden">
+                        <h3 class="glitch-text-target text-3xl md:text-5xl lg:text-6xl font-black text-black dark:text-white tracking-tighter leading-[0.9] mb-3 transform translate-y-0 lg:translate-y-8 transition-transform duration-500 slide-up-element">
+                            {project.entry.entity}
+                        </h3>
+                        
+                        <div class="border-t border-black/10 dark:border-white/10 pt-4 flex flex-col md:flex-row gap-4 justify-between md:items-end opacity-100 lg:opacity-0 transition-opacity duration-500 fade-in-element delay-100">
+                            <p class="text-black/70 dark:text-white/70 text-sm max-w-md line-clamp-2 font-medium">
+                                {project.entry.protocolReadout}
+                            </p>
+                            <div class="font-mono text-[9px] text-a83-accent whitespace-nowrap hidden md:block border border-a83-accent/30 px-2 py-1 rounded-sm">
+                                STATUS: OPTIMAL
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href={`/work/${project.slug}`} class="absolute inset-0 z-30 focus:outline-none cursor-none"></a>
+            </div>
+          </article>
+        ))}
         
-        <span class="absolute -left-16 -top-20 text-[20rem] lg:text-[35rem] font-black text-black/[0.03] dark:text-white/[0.03] pointer-events-none select-none z-0 watermark">
-          { (index + 1).toString().padStart(2, '0') }
-        </span>
-
-        <div class="lg:col-span-5 relative z-10 flex flex-col gap-12 order-2 lg:order-1 content-layer px-4 lg:px-0">
-          <div class="space-y-6">
-            <div class="flex items-center gap-4">
-               <span class="font-mono text-a83-accent text-xs tracking-[0.4em] font-bold uppercase">Mission_Dossier_{index + 1}</span>
-               <span class="h-px flex-1 bg-a83-accent/20"></span>
-            </div>
-            <h3 class="text-6xl md:text-8xl font-black text-black dark:text-white tracking-tighter leading-[0.85]">
-              {project.entry.entity}
-            </h3>
-          </div>
-
-          <div class="grid grid-cols-2 gap-12 border-y border-black/10 dark:border-white/10 py-12 font-mono">
-            <div class="space-y-2">
-              <span class="block text-[10px] text-black/40 dark:text-white/40 uppercase tracking-widest">Stack_Architecture</span>
-              <span class="text-sm font-bold text-black dark:text-white">{project.entry.arch}</span>
-            </div>
-            <div class="space-y-2">
-              <span class="block text-[10px] text-black/40 dark:text-white/40 uppercase tracking-widest">Performance_Audit</span>
-              <div class="flex items-center gap-3">
-                 <div class="w-full bg-black/5 dark:bg-white/10 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-green-500 h-full w-[98%] shadow-[0_0_12px_rgba(34,197,94,0.6)]"></div>
-                 </div>
-                 <span class="text-xs font-bold text-green-500">98%</span>
-              </div>
-            </div>
-          </div>
-
-          <p class="text-2xl lg:text-3xl text-black/70 dark:text-white/70 leading-relaxed font-sans italic max-w-2xl">
-            "{project.entry.protocolReadout}"
-          </p>
-
-          <div class="flex items-center gap-10 mt-6">
-             <a href={`/work/${project.slug}`} class="group/btn relative bg-black dark:bg-white text-white dark:text-black px-16 py-6 font-bold uppercase tracking-widest text-xs overflow-hidden transition-all hover:bg-a83-accent hover:text-white dark:hover:bg-a83-accent">
-                <span class="relative z-10">Access_Full_Log</span>
-             </a>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 relative order-1 lg:order-2 visual-layer transform-style-3d">
-          <div class="aspect-[16/10] bg-black rounded-[2.5rem] overflow-hidden border-2 border-black/5 dark:border-white/10 relative shadow-[0_60px_120px_rgba(0,0,0,0.3)] dark:shadow-[0_60px_120px_rgba(0,0,0,0.7)] group">
-             <img 
-               src={`/images/showcase/${project.slug}.webp`} 
-               alt={project.entry.entity}
-               loading="lazy"
-               class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-[2s] ease-out will-change-transform"
-             />
-             <div class="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-transparent opacity-80 pointer-events-none"></div>
-          </div>
-        </div>
-      </article>
-    ))}
-    
-    <div class="min-w-[40vw] lg:min-w-[50vw] h-full shrink-0 snap-align-none"></div>
+        <div class="min-w-[5vw] h-full shrink-0 snap-align-none"></div>
+      </div>
   </div>
 
-  <div class="max-w-[1600px] mx-auto px-10 lg:px-24 mt-4 relative z-10">
-     <div class="w-full h-1 bg-black/5 dark:bg-white/10 relative rounded-full overflow-hidden">
-        <div id="prog-bar" class="absolute top-0 left-0 h-full bg-a83-accent transition-all duration-300 shadow-[0_0_20px_var(--a83-accent)]" style="width: 0%"></div>
+  <div class="w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 pointer-events-none shrink-0">
+     <div class="w-full h-px bg-black/10 dark:bg-white/10 flex items-center">
+        <div id="prog-bar" class="h-[2px] bg-a83-accent shadow-[0_0_15px_var(--a83-accent)] w-0 relative transition-all duration-100 ease-out">
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-a83-accent rotate-45"></div>
+        </div>
      </div>
+  </div>
+
+  <div id="magnetic-cursor" class="fixed top-0 left-0 w-16 h-16 pointer-events-none z-50 opacity-0 transition-opacity duration-300 hidden lg:flex items-center justify-center mix-blend-difference text-white">
+     <div class="absolute inset-0 border border-current rounded-full animate-[spin_10s_linear_infinite] opacity-50"></div>
+     <div class="absolute inset-1 border border-current rounded-full scale-75 opacity-30"></div>
+     <div class="w-1 h-1 bg-current rounded-full"></div>
+     <span id="cursor-text" class="absolute top-full mt-2 font-mono text-[9px] tracking-[0.2em] font-bold">VIEW</span>
   </div>
 
 </section>
 
-<style>
-  /* 1. Hard Overscroll Lock - NUCLEAR OPTION */
-  #highlights-track {
-    /* Erlaubt vertikales Scrollen & Zoom, blockt Swipe-Nav */
-    touch-action: pan-y pinch-zoom;
-    
-    /* 'none' ist strikter als 'contain'. Es killt den Bounce-Effekt komplett. */
-    overscroll-behavior-x: none;
-    overscroll-behavior-inline: none;
-    
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scroll-padding-inline: 5vw;
+<style is:global>
+  html {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 0;
   }
-  
-  @media (min-width: 1024px) {
-    #highlights-track {
-      scroll-padding-inline: 10vw;
-    }
-  }
+</style>
 
+<style>
+  #highlights-track {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: none;
+  }
   #highlights-track::-webkit-scrollbar { display: none; }
 
-  /* 2. 3D Engine */
-  .perspective-container {
-    perspective: 3000px;
-    perspective-origin: center;
-    will-change: scroll-position;
-  }
-  
-  .transform-style-3d { transform-style: preserve-3d; }
-  
-  .slider-item { 
-    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); 
-    will-change: transform;
-  }
+  .active-slide .glitch-layer { animation: glitch-anim 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  .active-slide .glitch-layer.layer-r { animation-delay: 0ms; transform: translate(5px, -5px); }
+  .active-slide .glitch-layer.layer-g { animation-delay: 50ms; transform: translate(-5px, 5px); }
+  .active-slide .glitch-layer.layer-b { animation-delay: 100ms; transform: translate(5px, 5px); }
 
-  .content-layer { transform: translateZ(80px); }
-  .visual-layer { transform: translateZ(150px); }
-  .watermark { transform: translateZ(-120px); }
+  .active-slide .slide-up-element { transform: translateY(0) !important; }
+  .active-slide .fade-in-element { opacity: 1 !important; }
+  .group:hover .slide-up-element { transform: translateY(0) !important; }
+  .group:hover .fade-in-element { opacity: 1 !important; }
 
-  @media (max-width: 1024px) {
-    .content-layer, .visual-layer, .watermark { transform: none !important; }
-    .perspective-container { perspective: none; }
-  }
-  
-  /* Utility für Containment */
-  .contain-paint {
-      contain: paint layout;
+  @keyframes glitch-anim {
+    0% { opacity: 0; clip-path: inset(50% 0 50% 0); transform: translate(0); }
+    20% { opacity: 0.8; clip-path: inset(10% 0 60% 0); transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+    40% { opacity: 0.8; clip-path: inset(40% 0 20% 0); transform: translate(5px, -5px); filter: hue-rotate(180deg); }
+    60% { opacity: 0.8; clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
+    80% { opacity: 0.8; clip-path: inset(10% 0 80% 0); transform: translate(2px, -2px); }
+    100% { opacity: 0; clip-path: inset(50% 0 50% 0); transform: translate(0); }
   }
 </style>
 
 <script>
+  const section = document.getElementById('highlights');
   const track = document.getElementById('highlights-track') as HTMLElement;
-  const idxText = document.getElementById('slider-idx');
   const progBar = document.getElementById('prog-bar');
-  const nextBtn = document.getElementById('nav-next');
   const prevBtn = document.getElementById('nav-prev');
+  const nextBtn = document.getElementById('nav-next');
+  const cards = document.querySelectorAll('.cinematic-card');
+  
+  const cursor = document.getElementById('magnetic-cursor');
+  const cursorText = document.getElementById('cursor-text');
 
-  let rafId: number | null = null;
-
-  if (track && idxText && progBar) {
-    const updateSlider = () => {
-      const scrollWidth = track.scrollWidth - track.clientWidth;
-      const progress = scrollWidth > 0 ? (track.scrollLeft / scrollWidth) * 100 : 0;
-      
-      if(progBar) progBar.style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
-
-      if (window.innerWidth > 1024) {
-          const items = track.querySelectorAll('.slider-item');
-          const center = window.innerWidth / 2;
-          
-          items.forEach((item, i) => {
-            const el = item as HTMLElement;
-            const rect = el.getBoundingClientRect();
-            const distanceFromCenter = rect.left + rect.width / 2 - center;
-            
-            const rotation = distanceFromCenter * 0.008; 
-            const scale = 1 - Math.min(Math.abs(distanceFromCenter) * 0.00015, 0.08);
-            
-            el.style.transform = `rotateY(${rotation * -1}deg) scale(${scale})`;
-
-            if (Math.abs(distanceFromCenter) < rect.width / 3 && idxText) {
-               const newIdx = (i + 1).toString().padStart(2, '0');
-               if (idxText.innerText !== newIdx) idxText.innerText = newIdx;
-            }
+  if (section && cursor && window.matchMedia("(pointer: fine)").matches) {
+      const moveCursor = (e: MouseEvent) => {
+          cursor.style.transform = `translate3d(${e.clientX - 32}px, ${e.clientY - 32}px, 0)`;
+      };
+      section.addEventListener('mouseenter', () => {
+          cursor.classList.remove('opacity-0');
+          window.addEventListener('mousemove', moveCursor);
+      });
+      section.addEventListener('mouseleave', () => {
+          cursor.classList.add('opacity-0');
+          window.removeEventListener('mousemove', moveCursor);
+      });
+      cards.forEach(card => {
+          card.addEventListener('mouseenter', () => {
+              cursor.classList.add('scale-125');
+              cursor.querySelector('.border')?.classList.add('border-a83-accent');
+              if(cursorText) cursorText.innerText = "OPEN";
           });
+          card.addEventListener('mouseleave', () => {
+              cursor.classList.remove('scale-125');
+              cursor.querySelector('.border')?.classList.remove('border-a83-accent');
+              if(cursorText) cursorText.innerText = "VIEW";
+          });
+      });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('active-slide');
+        void (entry.target as HTMLElement).offsetWidth; 
+        entry.target.classList.add('active-slide');
+      } else {
+        entry.target.classList.remove('active-slide');
       }
-    };
+    });
+  }, { root: track, threshold: 0.6 });
+  cards.forEach(c => observer.observe(c));
 
-    const onScroll = () => {
-        if (!rafId) {
-            rafId = window.requestAnimationFrame(() => {
-                updateSlider();
-                rafId = null;
-            });
-        }
-    };
-
-    track.addEventListener('scroll', onScroll, { passive: true });
-    updateSlider();
-
-    const scrollAmount = () => {
-       const firstItem = track.querySelector('article');
-       return firstItem ? firstItem.clientWidth + (window.innerWidth > 1024 ? 128 : 64) : window.innerWidth;
-    };
-
-    nextBtn?.addEventListener('click', () => track.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
-    prevBtn?.addEventListener('click', () => track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+  if (track && progBar) {
+     track.addEventListener('scroll', () => {
+        const max = track.scrollWidth - track.clientWidth;
+        const percent = (track.scrollLeft / max) * 100;
+        progBar.style.width = `${percent}%`;
+     }, { passive: true });
+     prevBtn?.addEventListener('click', () => {
+        const card = track.querySelector('article');
+        const w = card ? card.clientWidth : 800;
+        track.scrollBy({ left: -(w + 32), behavior: 'smooth' });
+     });
+     nextBtn?.addEventListener('click', () => {
+        const card = track.querySelector('article');
+        const w = card ? card.clientWidth : 800;
+        track.scrollBy({ left: (w + 32), behavior: 'smooth' });
+     });
   }
 </script>

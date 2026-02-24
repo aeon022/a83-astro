@@ -1,0 +1,124 @@
+---
+// Dateipfad: src/components/blocks/Services.astro
+// Vibe: Hardware-Rack / Bento Grid / System Modules
+// Tech: CSS Grid, Tailwind v4, Glow-Effects
+
+const services = [
+  {
+    id: "MOD_01",
+    title: "Performance_Audit",
+    status: "STABLE",
+    size: "lg:col-span-8",
+    description: "Wir sezieren dein aktuelles System. Bottlenecks werden isoliert, Bloatware wird eliminiert. Ziel: Lighthouse > 98.",
+    specs: ["Core Web Vitals", "LCP_Optimization", "Payload_Reduction"],
+    accent: "var(--a83-accent)"
+  },
+  {
+    id: "SYS_02",
+    title: "Stack_Transition",
+    status: "READY",
+    size: "lg:col-span-4",
+    description: "Migration von WordPress/PHP auf Astro & Modern CMS. Null JS-Overhead.",
+    specs: ["Astro_SSG", "Keystatic_Sync", "Edge_Deployment"],
+    accent: "#3b82f6"
+  },
+  {
+    id: "UX_03",
+    title: "Kinetic_UI",
+    status: "ACTIVE",
+    size: "lg:col-span-4",
+    description: "Interfaces, die atmen. Hochperformante Animationen ohne Frame-Drops.",
+    specs: ["Motion_Canvas", "GSAP_Hard_Coded", "Micro_Interactions"],
+    accent: "#a855f7"
+  },
+  {
+    id: "OPS_04",
+    title: "Infrastructure",
+    status: "ONLINE",
+    size: "lg:col-span-8",
+    description: "Skalierbare Server-Architekturen auf Ubuntu & Docker Basis. Plesk Obsidian Integration.",
+    specs: ["Docker_Compose", "Redis_Caching", "Nginx_Proxy_Pass"],
+    accent: "#10b981"
+  }
+];
+---
+
+<section id="services" class="nav-content-sync relative w-full bg-white dark:bg-a83-bg py-24 lg:py-40 transition-colors duration-500 overflow-hidden">
+  
+  <div class="max-w-[1600px] mx-auto px-6 lg:px-16 relative z-10">
+    
+    <div class="mb-20">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="w-1 h-4 bg-a83-accent shadow-[0_0_10px_var(--a83-accent)]"></span>
+        <span class="font-mono text-[10px] text-black/50 dark:text-white/50 uppercase tracking-[0.4em] font-bold">// SYSTEM_UPGRADES_AVAILABLE</span>
+      </div>
+      <h2 class="text-5xl md:text-7xl font-black text-black dark:text-white tracking-tighter uppercase">
+        Available_Modules.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
+      {services.map((service) => (
+        <div class={`${service.size} group relative min-h-[320px] bg-gray-50 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/5 overflow-hidden transition-all duration-500 hover:border-a83-accent/30`}>
+          
+          <div class="absolute inset-0 bg-[radial-gradient(600px_circle_at_var(--m-x)_var(--m-y),var(--a83-accent),transparent_40%)] opacity-0 group-hover:opacity-[0.07] pointer-events-none transition-opacity duration-500"></div>
+
+          <div class="absolute top-4 right-6 font-mono text-[9px] text-black/20 dark:text-white/10 select-none group-hover:text-a83-accent/30 transition-colors">
+            {service.id} // STAT: {service.status}
+          </div>
+          
+          <div class="absolute bottom-0 right-0 p-4 opacity-50">
+             <div class="w-12 h-12 border-b border-r border-black/10 dark:border-white/10 group-hover:border-a83-accent/40 transition-colors duration-500"></div>
+          </div>
+
+          <div class="relative z-10 p-8 lg:p-12 h-full flex flex-col justify-between">
+            
+            <div class="max-w-xl">
+              <div class="flex items-center gap-2 mb-6">
+                <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)] animate-pulse"></span>
+                <h3 class="text-3xl lg:text-4xl font-black text-black dark:text-white tracking-tight uppercase group-hover:text-a83-accent transition-colors">
+                  {service.title.replace('_', ' ')}
+                </h3>
+              </div>
+              
+              <p class="text-black/60 dark:text-white/60 text-lg leading-relaxed mb-8 group-hover:text-black dark:group-hover:text-white/90 transition-colors">
+                {service.description}
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              {service.specs.map(spec => (
+                <span class="font-mono text-[9px] px-3 py-1 border border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 text-black/40 dark:text-white/40 group-hover:border-a83-accent/20 group-hover:text-a83-accent transition-all">
+                  > {spec}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-a83-accent to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="absolute right-0 top-1/2 -rotate-90 translate-x-1/2 pointer-events-none opacity-5 hidden xl:block">
+     <span class="text-[120px] font-black tracking-tighter text-black dark:text-white uppercase whitespace-nowrap">Core_Capabilities</span>
+  </div>
+
+</section>
+
+<script>
+  // Spotlight Cursor Tracking für alle Service Cards
+  const cards = document.querySelectorAll('#services .group');
+  
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      (card as HTMLElement).style.setProperty('--m-x', `${x}px`);
+      (card as HTMLElement).style.setProperty('--m-y', `${y}px`);
+    });
+  });
+</script>

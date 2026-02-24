@@ -9,6 +9,7 @@ export default config({
     brand: { name: 'ABTEILUNG83 // CORE' },
   },
   singletons: {
+    // ... (Global Settings bleiben gleich)
     globalSettings: singleton({
       label: 'Global Settings',
       path: 'src/content/settings/global',
@@ -27,6 +28,7 @@ export default config({
     }),
   },
   collections: {
+    // ... (Pricing bleibt gleich)
     pricing: collection({
       label: 'Pricing Models (Contract Definitions)',
       slugField: 'name',
@@ -60,6 +62,7 @@ export default config({
       },
     }),
 
+    // UPDATE HIER: Showcase Collection
     showcase: collection({
       label: 'Showcase (Mission Logs)',
       slugField: 'title',
@@ -67,6 +70,17 @@ export default config({
       format: { data: 'json' },
       schema: {
         title: fields.slug({ name: { label: 'Project Title' } }),
+        
+        // --- VISUAL ASSET ---
+        // Speichert das Bild in public/images/showcase
+        // Gibt im JSON den Pfad '/images/showcase/filename.webp' zurück
+        coverImage: fields.image({
+          label: 'Mission Visual // COVER',
+          directory: 'public/images/showcase',
+          publicPath: '/images/showcase/',
+          // validation: { isRequired: true },
+        }),
+
         excerpt: fields.text({ label: 'Excerpt (Kurzbeschreibung)', multiline: true }),
         
         // --- MISSION METADATA ---
