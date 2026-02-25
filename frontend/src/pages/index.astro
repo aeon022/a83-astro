@@ -1,7 +1,7 @@
 ---
 // Dateipfad: frontend/src/pages/index.astro
 // Vibe: Central Command / Dashboard
-// Update: Tactical Styles & Optimized Data Fetching
+// Update: Integrated KnowledgeBase (FAQ) & Pipeline Sync
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CommandPalette from '../components/islands/CommandPalette.astro';
@@ -10,9 +10,10 @@ import Pill from '../components/ui/Pill.astro';
 // Content Blocks
 import Hero from '../components/blocks/Hero.astro';
 import Manifesto from '../components/blocks/Manifesto.astro';
-import Process from '../components/blocks/Process.astro';
+import Process from '../components/blocks/Process.astro'; // HINWEIS: Falls du das hyper-kinetische Update nutzt, nenne es Pipeline.astro
 import Highlights from '../components/blocks/Highlights.astro';
 import Services from '../components/blocks/Services.astro';
+import KnowledgeBase from '../components/blocks/KnowledgeBase.astro'; // NEU
 import ContactCTA from '../components/blocks/ContactCTA.astro';
 
 // Data Layer (Keystatic)
@@ -22,8 +23,6 @@ import keystaticConfig from '../../keystatic.config';
 const reader = createReader(process.cwd(), keystaticConfig);
 
 // Parallel Data Fetching
-// HINWEIS: Wir fetchen hier NUR Settings & Showcase. 
-// Services fetched sich selbst (Self-Contained).
 const [settings, showcaseProjects] = await Promise.all([
   reader.singletons.globalSettings.read(),
   reader.collections.showcase.all(),
@@ -50,15 +49,12 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
         
         {/* Status Pills */}
         <div class="flex flex-wrap gap-4 justify-center pointer-events-auto interactive-element" data-sound="hover">
-          {/* status: Active -> Neon (Orange) */}
           <Pill text={`status: ${systemStatus}`} theme="neon" />
-          {/* engine: Info -> Dark (Green Border) */}
           <Pill text="engine: astro_v5" theme="dark" />
-          {/* meta: Outline (Green Text) */}
           <Pill text="zero_bloat: true" theme="outline" />
         </div>
 
-        {/* Command Hint (Tactical Style: Deep Canvas + Bone White) */}
+        {/* Command Hint */}
         <div class="flex justify-center mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-500">
            <div class="text-[10px] text-veranda-green font-mono tracking-widest text-center uppercase">
               Press <kbd class="bg-deep-canvas border border-veranda-green/30 rounded-sm px-1.5 py-0.5 text-bone-white font-bold font-mono">Cmd</kbd> + <kbd class="bg-deep-canvas border border-veranda-green/30 rounded-sm px-1.5 py-0.5 text-bone-white font-bold font-mono">K</kbd> to execute
@@ -70,10 +66,10 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
     {/* 2. MANIFESTO */}
     <Manifesto />
 
-    {/* 3. PROCESS */}   
+    {/* 3. PIPELINE / PROCESS */}   
     <Process />
 
-    {/* 4. HIGHLIGHTS (Conditional) */}
+    {/* 4. HIGHLIGHTS */}
     {highlightProjects.length > 0 && (
       <Highlights projects={highlightProjects} />
     )}
@@ -81,7 +77,10 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
     {/* 5. SERVICES */}
     <Services />
 
-    {/* 6. CONTACT SECTION */}
+    {/* 6. KNOWLEDGE BASE (FAQ) */}
+    <KnowledgeBase />
+
+    {/* 7. CONTACT SECTION */}
     <ContactCTA />
 
   </div>

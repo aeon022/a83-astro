@@ -1,0 +1,111 @@
+---
+// Version: V20.6 - TACTICAL KNOWLEDGE BASE (PURE BONE WHITE)
+// Vibe: Technical Manual / High-Contrast Readout
+---
+
+<section id="faq-intel" class="nav-content-sync py-32 px-6 lg:px-16 bg-bone-white relative overflow-hidden border-y border-black/10">
+  
+  <div class="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>
+
+  <div class="max-w-[1200px] mx-auto relative z-10">
+    
+    <header class="mb-20 border-l-4 border-a83-accent pl-8">
+        <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
+            <span>// KNOWLEDGE_BASE_v2.6</span>
+            <span class="opacity-20 text-black">|</span>
+            <span class="text-black/40">SYSTEM_SPECIFICATIONS</span>
+        </div>
+        <h2 class="text-6xl lg:text-8xl font-black text-black tracking-tighter uppercase leading-none">
+            Common_<br class="md:hidden"/>Queries.
+        </h2>
+    </header>
+
+    <div class="grid grid-cols-1 gap-4">
+      {[
+        { 
+          id: 'TIMELINE', 
+          q: 'Wie lange dauert ein Deployment?', 
+          a: 'Ein One-Pager steht meist in 1–2 Wochen. Für komplexe Multi-Pager oder Shops planen wir ca. 3–5 Wochen ein. Wenn du deine Inhalte schon bereit hast, schalten wir den Turbo ein.' 
+        },
+        { 
+          id: 'PAYLOAD', 
+          q: 'Welche Inhalte muss ich liefern?', 
+          a: 'Im Idealfall hast du Logo, CI-Farben und deine Grundtexte parat. Falls nicht: Kein Stress. Ich unterstütze dich bei der Recherche, beim Texten und bei der Bildauswahl.' 
+        },
+        { 
+          id: 'HOSTING', 
+          q: 'Was ist mit Domain und Server?', 
+          a: 'Ich entwickle deine Seite zuerst in einer gesicherten Testumgebung. Währenddessen finden wir gemeinsam den passenden Host. Ich gebe dir klare Empfehlungen für volle Datenhoheit.' 
+        },
+        { 
+          id: 'SEO_DSGVO', 
+          q: 'Sind SEO und DSGVO inklusive?', 
+          a: 'Absolut. On-Page-Basics (Speed, Struktur, Meta-Tags) und ein sauberer Consent-Banner sind Standard. Das System ist auf Leistung und Konformität getrimmt.' 
+        },
+        { 
+          id: 'CONTROL', 
+          q: 'Kann ich Inhalte später selbst ändern?', 
+          a: 'Ja. Durch den Einsatz von WordPress als Kern kannst du Texte, Bilder und Produkte einfach selbst verwalten. Du bekommst von mir ein kurzes Manual für dein Interface.' 
+        }
+      ].map((item) => (
+        <div class="faq-item group bg-black/[0.04] border border-black/10 overflow-hidden transition-all duration-300 hover:border-a83-accent/40 hover:bg-black/[0.06]">
+          <button class="w-full text-left p-8 lg:p-10 flex items-center justify-between gap-6 cursor-none relative">
+            <div class="flex items-center gap-8">
+                <span class="font-mono text-[10px] text-a83-accent font-black opacity-60 group-hover:opacity-100 transition-opacity shrink-0">
+                    ? {item.id}_QUERY
+                </span>
+                <span class="text-xl lg:text-2xl font-black text-black uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">
+                    {item.q}
+                </span>
+            </div>
+            <div class="faq-icon w-8 h-[2px] bg-black/20 relative transition-transform duration-500 group-data-[open=true]:rotate-180">
+                <div class="absolute inset-0 bg-a83-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+            </div>
+          </button>
+          
+          <div class="faq-content max-h-0 opacity-0 transition-all duration-500 ease-in-out">
+            <div class="p-8 lg:p-10 pt-0 font-mono text-sm text-black/70 leading-relaxed uppercase border-t border-black/5 bg-black/[0.02]">
+                <span class="block text-[10px] text-a83-accent mb-4 font-black tracking-widest">// DECRYPTING_RESPONSE...</span>
+                <p class="max-w-3xl border-l-2 border-a83-accent/20 pl-6">
+                  {item.a}
+                </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const button = item.querySelector('button');
+    const content = item.querySelector('.faq-content') as HTMLElement;
+
+    button?.addEventListener('click', () => {
+      const isOpen = item.getAttribute('data-open') === 'true';
+      
+      faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+              otherItem.setAttribute('data-open', 'false');
+              const otherContent = otherItem.querySelector('.faq-content') as HTMLElement;
+              otherContent.style.maxHeight = '0';
+              otherContent.style.opacity = '0';
+          }
+      });
+
+      if (isOpen) {
+        item.setAttribute('data-open', 'false');
+        content.style.maxHeight = '0';
+        content.style.opacity = '0';
+      } else {
+        item.setAttribute('data-open', 'true');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+      }
+    });
+  });
+</script>
