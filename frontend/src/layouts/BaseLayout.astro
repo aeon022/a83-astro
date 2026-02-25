@@ -2,6 +2,8 @@
 // Dateipfad: frontend/src/layouts/BaseLayout.astro
 import '../styles/global.css'; 
 import Header from './Header.astro';
+import Footer from '../components/blocks/Footer.astro';
+import GlobalCursor from '../components/ui/GlobalCursor.astro';
 
 interface Props {
   title: string;
@@ -26,12 +28,21 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   </head>
   
-  <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500">
+  <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500 flex flex-col min-h-screen">
     
-    <slot />
-    
+    {/* Header ist fixed, Position im DOM ist für z-index relevant, aber für Layout egal */}
     <Header />
+
+    {/* MAIN WRAPPER: Wichtig, damit der Footer nicht hochrutscht, wenn wenig Content da ist */}
+    <main class="flex-grow">
+        <slot />
+    </main>
     
+    {/* Footer Section */}
+    <Footer />
+    {/* Lädt Global Cursor */}
+    <GlobalCursor />
+
   </body>
 </html>
 
@@ -47,8 +58,6 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
 
   /* ==============================================================
      GLOBAL SPATIAL NAV SYNC ENGINE
-     Füge die Klasse .nav-content-sync zu jedem Element hinzu, 
-     das beim Öffnen des Menüs ausglitchen soll.
      ============================================================== */
   
   html[data-nav-state="opening"] .nav-content-sync {

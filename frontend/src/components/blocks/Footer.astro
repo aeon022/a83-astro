@@ -1,0 +1,146 @@
+---
+// Dateipfad: frontend/src/components/blocks/Footer.astro
+// Vibe: Machine Type Plate / Technical Readout
+// Features: Live UTC Clock, CSS Barcode, Tactical Grid
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="relative w-full bg-deep-canvas border-t border-veranda-green/30 text-veranda-green pt-16 pb-8 overflow-hidden">
+  
+  <div class="absolute inset-0 pointer-events-none opacity-[0.03]" 
+       style="background-image: linear-gradient(var(--veranda-green) 1px, transparent 1px), linear-gradient(90deg, var(--veranda-green) 1px, transparent 1px); background-size: 20px 20px;">
+  </div>
+
+  <div class="max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10">
+    
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
+      
+      <div class="md:col-span-4 flex flex-col justify-between">
+        <div>
+          <a href="/" class="block font-black text-2xl text-bone-white tracking-tighter uppercase mb-4 hover:text-a83-accent transition-colors">
+            ABTEILUNG83
+          </a>
+          <p class="font-mono text-xs max-w-xs leading-relaxed opacity-80">
+            Less Noise. Nice Data. No Bloat.<br>
+            Advanced Web Architecture & <br>
+            Digital Systems Engineering.
+          </p>
+        </div>
+        
+        <div class="mt-8 flex items-center gap-3 border border-veranda-green/20 bg-veranda-green/5 w-fit px-3 py-2 rounded-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-a83-accent opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-a83-accent"></span>
+          </span>
+          <span class="font-mono text-[9px] uppercase tracking-widest text-bone-white">
+            Systems: Nominal
+          </span>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 md:col-start-7">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] mb-6 text-veranda-green/50 border-b border-veranda-green/20 pb-2">Directory</h4>
+        <ul class="space-y-3 font-mono text-xs">
+          <li><a href="/work" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/Work</a></li>
+          <li><a href="/services" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/Services</a></li>
+          <li><a href="/process" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/Process</a></li>
+          <li><a href="/about" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/About</a></li>
+        </ul>
+      </div>
+
+      <div class="md:col-span-2">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] mb-6 text-veranda-green/50 border-b border-veranda-green/20 pb-2">Protocol</h4>
+        <ul class="space-y-3 font-mono text-xs">
+          <li><a href="/imprint" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">Impressum</a></li>
+          <li><a href="/privacy" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">Datenschutz</a></li>
+          <li><a href="/agb" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">AGB</a></li>
+        </ul>
+      </div>
+
+      <div class="md:col-span-2">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] mb-6 text-veranda-green/50 border-b border-veranda-green/20 pb-2">Comms</h4>
+        <ul class="space-y-3 font-mono text-xs">
+          <li>
+            <a href="mailto:contact@abteilung83.com" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
+              Email Uplink
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/aeon022" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
+              LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="border-t border-veranda-green/20 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+      
+      <div class="font-mono text-[10px] uppercase tracking-wider opacity-60">
+        <p>&copy; {currentYear} ABTEILUNG83 Digital Architecture.</p>
+        <p class="mt-1">HQ: Graz, Austria [47.0707° N, 15.4395° E]</p>
+      </div>
+
+      <div class="hidden md:flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity" title="A83-ID-TAG">
+        <div class="flex h-8 items-end gap-[2px]">
+            <div class="w-[2px] h-full bg-veranda-green"></div>
+            <div class="w-[1px] h-3/4 bg-veranda-green"></div>
+            <div class="w-[3px] h-full bg-veranda-green"></div>
+            <div class="w-[1px] h-1/2 bg-veranda-green"></div>
+            <div class="w-[4px] h-full bg-veranda-green"></div>
+            <div class="w-[2px] h-2/3 bg-veranda-green"></div>
+            <div class="w-[1px] h-full bg-veranda-green"></div>
+            <div class="w-[3px] h-1/2 bg-veranda-green"></div>
+            <div class="w-[1px] h-3/4 bg-veranda-green"></div>
+            <div class="w-[2px] h-full bg-veranda-green"></div>
+            <div class="w-[4px] h-1/3 bg-veranda-green"></div>
+            <div class="w-[1px] h-full bg-veranda-green"></div>
+            <div class="w-[2px] h-full bg-veranda-green"></div>
+        </div>
+        <span class="text-[8px] font-mono tracking-[0.3em] mt-1">A83-SYS-V2</span>
+      </div>
+
+      <div class="text-right">
+        <p class="font-mono text-[10px] uppercase tracking-widest text-veranda-green/50 mb-1">Server Time (UTC)</p>
+        <p id="utc-clock" class="font-mono text-sm text-a83-accent font-bold">00:00:00</p>
+      </div>
+
+    </div>
+  </div>
+
+  <button id="back-to-top" class="absolute right-6 top-0 -translate-y-1/2 bg-deep-canvas border border-veranda-green/30 p-3 hover:border-a83-accent hover:text-a83-accent transition-all group z-20" aria-label="Back to Top">
+    <svg class="w-4 h-4 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+  </button>
+
+</footer>
+
+<script>
+  // 1. LIVE UTC CLOCK
+  const clock = document.getElementById('utc-clock');
+  
+  if (clock) {
+    const updateTime = () => {
+      const now = new Date();
+      const timeString = now.toISOString().split('T')[1].split('.')[0];
+      clock.innerText = timeString;
+    };
+    setInterval(updateTime, 1000);
+    updateTime();
+  }
+
+  // 2. BACK TO TOP LOGIC
+  const btn = document.getElementById('back-to-top');
+  btn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

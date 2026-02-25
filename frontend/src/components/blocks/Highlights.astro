@@ -1,7 +1,7 @@
 ---
 // Dateipfad: src/components/blocks/Highlights.astro
-// Version: V9.1 - TACTICAL OPS / KOJIMA THEME + NAV SYNC FIX
-// Feature: Fallback "Blueprint" Pattern & Semantic Color Tokens
+// Version: V9.2 - GLOBAL CURSOR INTEGRATION
+// Changes: Removed local cursor, added data-cursor-text, cleaned up script
 
 interface ProjectEntry {
   entity: string;
@@ -75,6 +75,7 @@ const { projects } = Astro.props as Props;
           <article 
             class="group snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[900px] h-[85%] md:h-[90%] relative cinematic-card"
             data-index={index}
+            data-cursor-text="OPEN"
           >
             <div class="glitch-wrapper relative w-full h-full bg-deep-canvas overflow-hidden border border-veranda-green/20 transition-all duration-500 hover:border-a83-accent/50">
                 
@@ -153,14 +154,7 @@ const { projects } = Astro.props as Props;
      </div>
   </div>
 
-  <div id="magnetic-cursor" class="nav-content-sync fixed top-0 left-0 w-16 h-16 pointer-events-none z-50 opacity-0 transition-opacity duration-300 hidden lg:flex items-center justify-center text-a83-accent">
-     <div class="absolute inset-0 border border-current rounded-full animate-[spin_10s_linear_infinite] opacity-80 border-dashed"></div>
-     <div class="absolute inset-1 border border-current rounded-full scale-50 opacity-40"></div>
-     <div class="w-1 h-1 bg-current rounded-full"></div>
-     <span id="cursor-text" class="absolute top-full mt-4 font-mono text-[9px] tracking-[0.2em] font-bold bg-a83-bg px-1 border border-a83-accent/30">VIEW</span>
-  </div>
-
-</section>
+  </section>
 
 <style is:global>
   html {
@@ -204,34 +198,7 @@ const { projects } = Astro.props as Props;
   const nextBtn = document.getElementById('nav-next');
   const cards = document.querySelectorAll('.cinematic-card');
   
-  const cursor = document.getElementById('magnetic-cursor');
-  const cursorText = document.getElementById('cursor-text');
-
-  if (section && cursor && window.matchMedia("(pointer: fine)").matches) {
-      const moveCursor = (e: MouseEvent) => {
-          cursor.style.transform = `translate3d(${e.clientX - 32}px, ${e.clientY - 32}px, 0)`;
-      };
-      section.addEventListener('mouseenter', () => {
-          cursor.classList.remove('opacity-0');
-          window.addEventListener('mousemove', moveCursor);
-      });
-      section.addEventListener('mouseleave', () => {
-          cursor.classList.add('opacity-0');
-          window.removeEventListener('mousemove', moveCursor);
-      });
-      cards.forEach(card => {
-          card.addEventListener('mouseenter', () => {
-              cursor.classList.add('scale-125');
-              cursor.querySelector('.border')?.classList.add('border-a83-accent');
-              if(cursorText) cursorText.innerText = "OPEN";
-          });
-          card.addEventListener('mouseleave', () => {
-              cursor.classList.remove('scale-125');
-              cursor.querySelector('.border')?.classList.remove('border-a83-accent');
-              if(cursorText) cursorText.innerText = "VIEW";
-          });
-      });
-  }
+  // NOTE: Lokaler Cursor Code wurde entfernt. GlobalCursor übernimmt.
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

@@ -1,0 +1,106 @@
+---
+// Dateipfad: frontend/src/components/ui/GlobalCursor.astro
+// Vibe: Tactical HUD / Hard-Sync
+// Tech: Zero Latency Tracking via Direct Transform
+---
+
+<div id="tactical-cursor" class="fixed top-0 left-0 w-6 h-6 pointer-events-none z-[9999] opacity-0 hidden lg:flex items-center justify-center text-a83-accent mix-blend-difference will-change-transform">
+  
+  <div id="cursor-ring" class="absolute inset-0 border border-current rounded-full transition-all duration-150 ease-out"></div>
+  
+  <div id="cursor-dot" class="w-1 h-1 bg-current rounded-full"></div>
+
+  <span id="cursor-label" class="absolute top-6 left-1/2 -translate-x-1/2 font-mono text-[9px] font-bold tracking-widest bg-a83-accent text-deep-canvas px-1.5 py-0.5 opacity-0 transition-opacity duration-150 whitespace-nowrap hidden"></span>
+
+</div>
+
+<script>
+  const cursor = document.getElementById('tactical-cursor');
+  const ring = document.getElementById('cursor-ring');
+  const dot = document.getElementById('cursor-dot');
+  const label = document.getElementById('cursor-label');
+
+  // Nur Desktop
+  if (window.matchMedia("(pointer: fine)").matches && cursor) {
+    
+    // VARIABLES
+    let mouseX = -100;
+    let mouseY = -100;
+    let isVisible = false;
+
+    // 1. HARD SYNC TRACKING (Kein Lerp, Kein Lag)
+    const moveCursor = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // Direct Hardware Sync
+      // Wir nutzen translate3d für GPU Beschleunigung, aber ohne Interpolations-Mathe
+      cursor.style.transform = `translate3d(${mouseX - 12}px, ${mouseY - 12}px, 0)`;
+
+      if (!isVisible) {
+        cursor.classList.remove('opacity-0');
+        isVisible = true;
+      }
+    };
+
+    window.addEventListener('mousemove', moveCursor, { passive: true });
+
+    // 2. INTERACTION ENGINE
+    const handleHover = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      
+      // Detektiere klickbare Elemente
+      const interactive = target.closest('a, button, [role="button"], input, textarea, select, .interactive-element');
+      const customTextEl = target.closest('[data-cursor-text]');
+
+      if (interactive || customTextEl) {
+        // Active State
+        ring?.classList.add('scale-[2.5]', 'border-a83-accent', 'opacity-100');
+        dot?.classList.add('opacity-0'); // Dot ausblenden für besseren Fokus
+        
+        // Text Logic
+        if (customTextEl) {
+          const text = customTextEl.getAttribute('data-cursor-text');
+          if (label && text) {
+            label.innerText = text;
+            label.classList.remove('hidden', 'opacity-0');
+          }
+        }
+      } else {
+        // Reset State
+        ring?.classList.remove('scale-[2.5]', 'border-a83-accent', 'opacity-100');
+        ring?.classList.add('opacity-60');
+        dot?.classList.remove('opacity-0');
+        
+        if (label) {
+          label.classList.add('hidden', 'opacity-0');
+        }
+      }
+    };
+
+    // 3. CLICK FEEDBACK (Instant Snappy)
+    document.addEventListener('mousedown', () => {
+      ring?.classList.add('scale-75', 'bg-a83-accent/20');
+    });
+    
+    document.addEventListener('mouseup', () => {
+      ring?.classList.remove('scale-75', 'bg-a83-accent/20');
+    });
+
+    // 4. VISIBILITY MANAGEMENT
+    document.addEventListener('mouseleave', () => cursor.classList.add('opacity-0'));
+    document.addEventListener('mouseenter', () => cursor.classList.remove('opacity-0'));
+
+    // Global Listeners
+    document.addEventListener('mouseover', handleHover);
+    document.addEventListener('mouseout', handleHover);
+  }
+</script>
+
+<style>
+  /* Verhindert jegliche CSS-Verzögerung auf der Bewegung */
+  #tactical-cursor {
+    transition: none !important; 
+    pointer-events: none;
+  }
+</style>

@@ -106,3 +106,15 @@
 @utility border-tactical {
   @apply border border-veranda-green/30;
 }
+
+
+/* HIDE SYSTEM CURSOR ON DESKTOP */
+
+@media (pointer: fine) {
+  /* Wir zwingen JEDES Element (auch Links und Buttons), 
+     den System-Mauszeiger zu verstecken */
+  html, body, *, 
+  a, button, input, select, textarea, [role="button"] {
+    cursor: none !important;
+  }
+}
