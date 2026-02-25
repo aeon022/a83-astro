@@ -53,11 +53,11 @@
       </a>
     </nav>
 
-    <div class="flex flex-col justify-end pb-8 h-full relative z-10 font-mono text-a83-text pointer-events-auto w-full md:w-80 gap-10">
+    <div class="flex flex-col justify-end pb-8 h-full relative z-10 font-mono text-bone-white pointer-events-auto w-full md:w-80 gap-10">
       
       <div class="hidden md:block">
-        <span class="block text-[10px] text-a83-sub uppercase tracking-widest mb-4 border-b border-a83-sub/20 pb-2">// TERMINAL_OUTPUT</span>
-        <div class="console-output text-sm leading-relaxed text-a83-text/80 min-h-[80px] flex flex-col justify-end">
+        <span class="block text-[10px] text-veranda-green uppercase tracking-widest mb-4 border-b border-veranda-green/20 pb-2">// TERMINAL_OUTPUT</span>
+        <div class="console-output text-sm leading-relaxed text-bone-white/80 min-h-[80px] flex flex-col justify-end">
           <div id="hint-text" class="whitespace-pre-wrap">> System idle.&#xa;> Awaiting input...</div>
           <div class="mt-2 text-a83-accent text-xs">
             <span class="font-bold mr-2">root@a83:~ $</span>
@@ -67,21 +67,21 @@
       </div>
 
       <div>
-        <span class="block text-[10px] text-a83-sub uppercase tracking-widest mb-4 border-b border-a83-sub/20 pb-2">// EXECUTABLES</span>
+        <span class="block text-[10px] text-veranda-green uppercase tracking-widest mb-4 border-b border-veranda-green/20 pb-2">// EXECUTABLES</span>
         <div class="flex flex-col gap-4">
           <a href="/#roi-calculator" class="spatial-action flex items-center gap-3 text-sm hover:text-a83-accent transition-colors group" data-hint="> Execute /sys/calc/roi_simulator.sh&#xa;> Booting projection engine...&#xa;> Ready for input.">
             <span class="w-2 h-2 border border-current group-hover:bg-a83-accent transition-colors"></span>
             ROI_CALCULATOR.sh
           </a>
           <a href="/contact" class="spatial-action flex items-center gap-3 text-sm hover:text-a83-accent transition-colors group" data-hint="> init_connection()&#xa;> Establishing secure handshake...&#xa;> Ping: 12ms. Ready.">
-            <span class="w-2 h-2 border border-current bg-a83-text group-hover:bg-a83-accent transition-colors"></span>
+            <span class="w-2 h-2 border border-current bg-bone-white group-hover:bg-a83-accent transition-colors"></span>
             INIT_CONNECTION()
           </a>
         </div>
       </div>
 
       <div class="hidden md:block">
-        <span class="block text-[10px] text-a83-sub uppercase tracking-widest mb-4 border-b border-a83-sub/20 pb-2">// SYS_STATUS</span>
+        <span class="block text-[10px] text-veranda-green uppercase tracking-widest mb-4 border-b border-veranda-green/20 pb-2">// SYS_STATUS</span>
         <div class="text-xs space-y-2 opacity-60">
           <div class="flex justify-between gap-8"><span>Node:</span> <span>A83-Main</span></div>
           <div class="flex justify-between gap-8"><span>Uptime:</span> <span>99.99%</span></div>
@@ -195,6 +195,7 @@
   padding: 24px clamp(24px, 4vw, 40px); display: flex;
   justify-content: flex-end; align-items: center; pointer-events: none;
   background: transparent !important;
+  /* Keep difference to be visible on both light/dark backgrounds initially */
   mix-blend-mode: difference;
   color: #ffffff;
 }
@@ -205,12 +206,14 @@
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 
+/* When Menu is Open: Switch to Normal Blend Mode & Bone White to contrast Deep Canvas */
 html[data-nav-state="open"] #site-header,
 html[data-nav-state="opening"] #site-header { mix-blend-mode: normal; }
+
 html[data-nav-state="open"] .brand-wordmark,
 html[data-nav-state="opening"] .brand-wordmark,
 html[data-nav-state="open"] .mech-burger,
-html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !important; }
+html[data-nav-state="opening"] .mech-burger { color: var(--bone-white) !important; }
 
 .brand-wordmark { font-size: clamp(12px, 1.2vw, 14px); font-weight: 700; letter-spacing: 0.1em; text-decoration: none; position: relative; }
 .brand-wordmark:hover { opacity: 0.7; }
@@ -218,14 +221,14 @@ html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !impor
   content: attr(data-text); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none;
   opacity: 0.4; mix-blend-mode: screen; white-space: pre; line-height: 1.1; text-align: right; font-size: 1.1em; width: max-content; filter: blur(0.5px);
 }
-.brand-wordmark:hover::before { color: #ffffff; animation: ghost-drift-1 2s steps(4) infinite; }
-.brand-wordmark:hover::after { color: #ffffff; animation: ghost-drift-2 2s steps(4) infinite reverse; }
+.brand-wordmark:hover::before { color: var(--a83-accent); animation: ghost-drift-1 2s steps(4) infinite; }
+.brand-wordmark:hover::after { color: var(--a83-accent); animation: ghost-drift-2 2s steps(4) infinite reverse; }
 
 @keyframes ghost-drift-1 { 0% { transform: translate(-50%, -50%) translate(2px, 1px) skewX(2deg); } 33% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-3deg); } 66% { transform: translate(-50%, -50%) translate(1px, -2px) skewX(4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
 @keyframes ghost-drift-2 { 0% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-2deg); } 33% { transform: translate(-50%, -50%) translate(1px, 2px) skewX(3deg); } 66% { transform: translate(-50%, -50%) translate(-1px, 1px) skewX(-4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
 
 .mech-burger { all: unset; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; cursor: pointer; }
-.mech-burger:hover { color: #ff5f00 !important; }
+.mech-burger:hover { color: var(--a83-accent) !important; }
 .mech-lines { width: 32px; height: 14px; position: relative; }
 .m-line { position: absolute; height: 2px; background-color: currentColor; left: 0; right: 0; transition: all 0.4s cubic-bezier(0.86, 0, 0.07, 1); }
 .m-top { top: 0; transform-origin: center; }
@@ -253,8 +256,10 @@ html[data-nav-state="opening"] .mech-burger { color: var(--a83-text-bold) !impor
 
 html[data-nav-state="opening"] .spatial-backdrop,
 html[data-nav-state="open"] .spatial-backdrop {
-  backdrop-filter: blur(40px) brightness(0.1); 
-  background: rgba(0, 0, 0, 0.85); 
+  backdrop-filter: blur(40px) brightness(0.5); 
+  /* Tactical Palette: Deep Canvas as Background */
+  background: var(--deep-canvas); 
+  opacity: 0.95;
 }
 
 .spatial-grid {
@@ -293,7 +298,9 @@ html[data-nav-state="open"] .spatial-link:nth-child(5) { transition-delay: 0.3s;
 .spatial-num {
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(12px, 1.5vw, 16px);
-  color: rgba(255,255,255,0.3);
+  /* Veranda Green for Subtlety */
+  color: var(--veranda-green);
+  opacity: 0.5;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   transition: color 0.4s ease;
@@ -308,21 +315,25 @@ html[data-nav-state="open"] .spatial-link:nth-child(5) { transition-delay: 0.3s;
   text-transform: uppercase;
   
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  /* Bone White Outline */
+  -webkit-text-stroke: 1px rgba(228, 232, 223, 0.2);
   
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .spatial-link:hover .spatial-text {
-  color: #ffffff;
+  /* Solid Bone White on Hover */
+  color: var(--bone-white);
   -webkit-text-stroke: 0px transparent;
   transform: translateX(2vw);
   text-shadow: 0 0 40px rgba(255,255,255,0.15);
 }
 
 .spatial-link:hover .spatial-num {
+  /* Kojima Orange for Activity */
   color: var(--a83-accent);
+  opacity: 1;
 }
 
 .typing-effect {

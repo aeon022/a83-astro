@@ -1,17 +1,201 @@
 ---
+// Dateipfad: frontend/src/components/islands/CommandPalette.astro
+// Vibe: Tactical HUD / Field Operator Console
+// Features: Keyboard First, Dusty Watermark, Kojima-Style
+
+const commands = [
+  { id: 'nav-01', label: 'Go to: Portfolio', href: '/work', type: 'NAV' },
+  { id: 'nav-02', label: 'Go to: Services', href: '/services', type: 'NAV' },
+  { id: 'nav-03', label: 'Go to: Process', href: '/process', type: 'NAV' },
+  { id: 'act-01', label: 'Run: ROI Calculator', href: '/#roi-calculator', type: 'EXEC' },
+  { id: 'act-02', label: 'Init: Connection Protocol', href: '/contact', type: 'EXEC' },
+  { id: 'sys-01', label: 'System: Toggle Theme', action: 'theme', type: 'SYS' },
+];
 ---
-<div id="cmd-palette" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-  <div class="w-full max-w-xl bg-[#111] border border-gray-800 rounded-xl p-4 shadow-2xl">
-    <input type="text" placeholder="Search commands..." class="w-full bg-transparent border-none outline-none text-white font-mono" />
+
+<div 
+  id="cmd-overlay" 
+  class="fixed inset-0 z-[9999] hidden bg-deep-canvas/90 backdrop-blur-sm flex items-start justify-center pt-[15vh] transition-opacity duration-200 opacity-0"
+  aria-hidden="true"
+>
+  <div 
+    id="cmd-container"
+    class="relative w-full max-w-2xl bg-deep-canvas border border-veranda-green/40 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden transform scale-95 transition-all duration-200 ease-out opacity-0"
+  >
+    
+    <div class="absolute top-2 right-4 pointer-events-none select-none z-0 text-right opacity-20 mix-blend-overlay">
+       <pre class="font-mono text-[10px] leading-tight text-bone-white blur-[0.5px]">
+const sys_root = "COMMAND_MODE";
+const permission = "ROOT_ACCESS";
+       </pre>
+    </div>
+
+    <div class="h-1 w-full bg-veranda-green/20 flex items-center justify-between px-1">
+       <div class="w-1/3 h-full bg-veranda-green/40"></div>
+       <div class="w-12 h-full bg-a83-accent opacity-50"></div>
+    </div>
+
+    <div class="relative p-4 border-b border-veranda-green/20 z-10 bg-deep-canvas/50">
+      <div class="flex items-center gap-4">
+        <span class="text-a83-accent font-mono text-lg animate-pulse">></span>
+        <input 
+          type="text" 
+          id="cmd-input" 
+          placeholder="Enter command..." 
+          class="w-full bg-transparent border-none outline-none text-bone-white font-mono text-lg placeholder-veranda-green/30 caret-a83-accent uppercase tracking-wider"
+          autocomplete="off"
+        />
+        <span class="text-[10px] font-mono text-veranda-green/60 border border-veranda-green/20 px-2 py-1 rounded-sm hidden sm:block">
+          ESC TO ABORT
+        </span>
+      </div>
+    </div>
+
+    <ul id="cmd-list" class="max-h-[60vh] overflow-y-auto py-2 z-10 relative">
+      {commands.map((cmd) => (
+        <li class="px-2">
+          <a 
+            href={cmd.href || '#'} 
+            class="cmd-item group flex items-center justify-between p-3 border-l-2 border-transparent hover:border-a83-accent hover:bg-white/5 transition-all cursor-pointer"
+            data-label={cmd.label.toLowerCase()}
+            data-action={cmd.action}
+          >
+            <div class="flex items-center gap-4">
+               <span class={`font-mono text-[9px] px-1.5 py-0.5 border ${cmd.type === 'EXEC' ? 'border-a83-accent text-a83-accent' : 'border-veranda-green/50 text-veranda-green'}`}>
+                 {cmd.type}
+               </span>
+               <span class="font-mono text-sm text-a83-text group-hover:text-bone-white group-hover:tracking-wide transition-all">
+                 {cmd.label}
+               </span>
+            </div>
+            <span class="opacity-0 group-hover:opacity-100 text-a83-accent text-xs font-mono">
+              [EXECUTE] ↵
+            </span>
+          </a>
+        </li>
+      ))}
+      
+      <li id="cmd-empty" class="hidden p-8 text-center text-veranda-green/50 font-mono text-sm italic">
+        > No matching protocols found.
+      </li>
+    </ul>
+
+    <div class="bg-black/40 p-2 flex justify-between items-center text-[9px] font-mono text-veranda-green/40 border-t border-veranda-green/10">
+       <span>A83_CONSOLE_V2.4</span>
+       <div class="flex gap-4">
+          <span>NAV: ↑↓</span>
+          <span>SELECT: ENTER</span>
+       </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-  // Simple Toggle Logic
+  const overlay = document.getElementById('cmd-overlay');
+  const container = document.getElementById('cmd-container');
+  const input = document.getElementById('cmd-input') as HTMLInputElement;
+  const listItems = document.querySelectorAll('.cmd-item');
+  const emptyMsg = document.getElementById('cmd-empty');
+
+  let isOpen = false;
+
+  function openPalette() {
+    if (isOpen) return;
+    isOpen = true;
+    overlay?.classList.remove('hidden');
+    // Force Reflow für Transition
+    void overlay?.offsetWidth;
+    
+    overlay?.classList.remove('opacity-0');
+    container?.classList.remove('opacity-0', 'scale-95');
+    container?.classList.add('scale-100');
+    
+    input.value = '';
+    filterItems('');
+    input?.focus();
+    
+    document.body.style.overflow = 'hidden'; // Scroll Lock
+  }
+
+  function closePalette() {
+    if (!isOpen) return;
+    isOpen = false;
+    
+    overlay?.classList.add('opacity-0');
+    container?.classList.remove('scale-100');
+    container?.classList.add('opacity-0', 'scale-95');
+    
+    setTimeout(() => {
+      overlay?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 200);
+  }
+
+  // --- SHORTCUTS LOGIC ---
   window.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault();
-      document.getElementById('cmd-palette')?.classList.toggle('hidden');
+    // Open: Cmd+K OR Shift + / (Question Mark)
+    if (
+        (e.metaKey && e.key === 'k') || 
+        (e.ctrlKey && e.key === 'k') ||
+        (e.key === '?') || // Shift + / auf US Layouts oft ?
+        (e.shiftKey && e.key === '7') // Shift + 7 ist / auf DE Layouts (Check ist loose)
+    ) {
+      // Wir prüfen "Shift + /" generisch über e.key
+      // Auf DE Tastatur ist '/' Shift+7. Auf US ist es direkt '/'. 
+      // Wir erlauben einfach '?' (was Shift+/ ist) oder explizit Shift+/
     }
   });
+  
+  // Verbesserter Keydown Handler für Shift+/ Support auf versch. Layouts
+  document.addEventListener('keyup', (e) => {
+    // Shift + / (US) oder Shift + 7 (DE für /) - wir checken einfach auf ? oder / mit Shift
+    if (e.key === '?' || (e.shiftKey && e.code === 'Slash') || (e.shiftKey && e.key === '/')) {
+        if (!isOpen && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            openPalette();
+        }
+    }
+    // Cmd + K
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        isOpen ? closePalette() : openPalette();
+    }
+    // ESC to Close
+    if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        closePalette();
+    }
+  });
+
+  // Close on Backdrop Click
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) closePalette();
+  });
+
+  // Filter Logic
+  input?.addEventListener('input', (e) => {
+    filterItems((e.target as HTMLInputElement).value);
+  });
+
+  function filterItems(term: string) {
+    const lowerTerm = term.toLowerCase();
+    let hasVisible = false;
+
+    listItems.forEach((item) => {
+      const el = item as HTMLElement;
+      const label = el.getAttribute('data-label') || '';
+      
+      if (label.includes(lowerTerm)) {
+        el.parentElement!.style.display = 'block';
+        hasVisible = true;
+      } else {
+        el.parentElement!.style.display = 'none';
+      }
+    });
+
+    if (emptyMsg) {
+        emptyMsg.style.display = hasVisible ? 'none' : 'block';
+    }
+  }
 </script>

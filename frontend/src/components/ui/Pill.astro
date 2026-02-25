@@ -1,5 +1,8 @@
 ---
 // Dateipfad: frontend/src/components/ui/Pill.astro
+// Vibe: Tactical Tag / Military ID Label
+// Change: Rounded-Full removed -> Rounded-SM (Industrial Look)
+
 interface Props {
   text: string;
   theme?: 'neon' | 'dark' | 'outline';
@@ -8,22 +11,22 @@ interface Props {
 const { text, theme = 'neon' } = Astro.props;
 
 const themeClasses = {
-  // Haupt-Status: Leuchtet in der Akzentfarbe (z.B. Orange), schwarzer Text für Kontrast
-  neon: 'bg-a83-accent text-a83-bg border border-a83-accent shadow-[0_0_15px_color-mix(in_srgb,var(--a83-accent)_40%,transparent)]',
+  // ALERT / ACTIVE: Kojima Orange background, Dark text (Industrial Hazard Label)
+  neon: 'bg-a83-accent text-deep-canvas border-a83-accent shadow-[0_0_10px_var(--a83-accent)]',
   
-  // Tech-Specs: Dezent dunkel, Glassmorphismus
-  dark: 'bg-black/60 text-white/80 border border-white/10 backdrop-blur-md hover:border-white/30',
+  // STANDARD / INFO: Surface background, Veranda Green border (Tactical Readout)
+  dark: 'bg-a83-surface text-a83-text border-veranda-green/30 hover:border-veranda-green/60',
   
-  // Parameter: Transparenter Hintergrund, farbige Linie
-  outline: 'border border-a83-accent text-a83-accent bg-a83-accent/5 hover:bg-a83-accent/10'
+  // SUBTLE / META: Transparent, Tech-Specs lines
+  outline: 'border-veranda-green/50 text-veranda-green bg-veranda-green/5 hover:bg-veranda-green/10'
 };
 ---
 
 <span class:list={[
-  'inline-flex items-center px-3 py-1 rounded-full text-[10px] md:text-xs font-mono font-bold tracking-widest uppercase transition-all duration-300 select-none cursor-default',
+  'inline-flex items-center px-2 py-0.5 rounded-sm text-[9px] md:text-[10px] font-mono font-bold tracking-widest uppercase transition-all duration-300 select-none cursor-default border',
   themeClasses[theme]
 ]}>
-  {/* Kleiner "Live"-Indikator nur beim Neon-Theme */}
-  {theme === 'neon' && <span class="w-1.5 h-1.5 bg-a83-bg rounded-full mr-2 animate-pulse"></span>}
+  {/* Tactical Square Indicator (nur bei Neon) */}
+  {theme === 'neon' && <span class="w-1.5 h-1.5 bg-deep-canvas mr-2 animate-pulse rounded-[1px]"></span>}
   {text}
 </span>

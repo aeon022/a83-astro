@@ -1,8 +1,19 @@
-/* src/styles/global.css */
+/* Dateipfad: src/styles/global.css */
 @import "tailwindcss";
 
+/* THEME CONFIGURATION
+   Wir injizieren deine Palette direkt in die Tailwind-Engine.
+   Verwendung im HTML: class="bg-tactical-olive" oder class="text-kojima-orange"
+*/
 @theme {
-  /* Wir mappen unsere logischen Design-Tokens für Tailwind */
+  /* Raw Color Tokens */
+  --color-tactical-olive: #414a38;
+  --color-deep-canvas: #2b3224;
+  --color-kojima-orange: #ff4b12;
+  --color-bone-white: #e4e8df;
+  --color-veranda-green: #8c9980;
+
+  /* Semantic Tokens (Logic Layer) */
   --color-a83-bg: var(--a83-bg);
   --color-a83-surface: var(--a83-surface);
   --color-a83-accent: var(--a83-accent);
@@ -10,68 +21,88 @@
   --color-a83-text-bold: var(--a83-text-bold);
   --color-a83-sub: var(--a83-sub);
 
-  /* Wir machen deine Original-Farben auch direkt als Tailwind-Klassen verfügbar 
-     (z.B. text-kojima-orange), falls du sie mal zwingend brauchst */
-  --color-tactical-olive: #414a38;
-  --color-deep-canvas: #2b3224;
-  --color-kojima-orange: #ff4b12;
-  --color-bone-white: #e4e8df;
-  --color-veranda-green: #8c9980;
+  /* Animations */
+  --animate-cursor-blink: cursor-blink 1s step-end infinite;
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
 }
 
+/* BASE LAYER
+   Definition der Variablen für Light/Dark Mode und globale Gradients.
+*/
 @layer base {
   :root {
-    /* =========================================================
-       DIE BASIS-PALETTE (RONIN MIL-TEC)
-       ========================================================= */
+    /* =========================================
+       PALETTE: TACTICAL OPERATIONS
+       ========================================= */
     --tactical-olive: #414a38;
     --deep-canvas: #2b3224;
     --kojima-orange: #ff4b12;
     --bone-white: #e4e8df;
     --veranda-green: #8c9980;
 
-    /* =========================================================
-       LIGHT MODE (Tag-Akte)
-       Heller Hintergrund, tiefdunkle Schrift.
-       ========================================================= */
-    --a83-bg: var(--bone-white);         /* Heller, sauberer Akten-Hintergrund */
-    --a83-surface: var(--veranda-green); /* Boxen heben sich in sanftem Grün ab */
-    --a83-accent: var(--kojima-orange);  /* Der Knall bleibt! */
-    --a83-text: var(--tactical-olive);   /* Dunkle, entspannte Schrift */
-    --a83-text-bold: var(--deep-canvas); /* Fast schwarzer Kontrast für Headlines */
-    --a83-sub: var(--tactical-olive);    /* Subtile Metadaten */
+    /* Gradients (CSS Syntax) */
+    --gradient-tactical-v: linear-gradient(180deg, var(--tactical-olive), var(--deep-canvas));
+    --gradient-alert: linear-gradient(90deg, var(--kojima-orange), #ff7b52);
+
+    /* =========================================
+       LIGHT MODE (Field Operations / Tag)
+       Tech-Paper Look. Sehr sauber, hohe Lesbarkeit.
+       ========================================= */
+    --a83-bg: var(--bone-white);         
+    --a83-surface: #dce2d6; /* Leicht abgedunkeltes White für Cards */
+    --a83-accent: var(--kojima-orange);  
+    --a83-text: var(--tactical-olive);   
+    --a83-text-bold: var(--deep-canvas); 
+    --a83-sub: var(--veranda-green);
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      /* =========================================================
-         DARK MODE (Nacht-Operation)
-         Die echten, tiefen Tactical-Farben für die Nacht.
-         ========================================================= */
-      --a83-bg: var(--tactical-olive);       /* Das matte Haupt-Grün */
-      --a83-surface: var(--deep-canvas);     /* Dunklere Terminal-Boxen für Tiefe */
+      /* =========================================
+         DARK MODE (Night Ops / Stealth)
+         Tiefe, matte Töne. Kein reines Schwarz.
+         ========================================= */
+      --a83-bg: var(--deep-canvas);      /* Deine dunkelste Farbe als Base */
+      --a83-surface: var(--tactical-olive); /* Olive für UI-Elemente */
       --a83-accent: var(--kojima-orange);    
-      --a83-text: var(--bone-white);         /* Weiße, blendfreie Schrift */
-      --a83-text-bold: #ffffff;              /* Pures Weiß nur für knallende Headlines */
-      --a83-sub: var(--veranda-green);       /* Helle, abgetönte Metadaten */
+      --a83-text: #e4e8df;               /* Bone White für Text (weicher als reines Weiß) */
+      --a83-text-bold: #ffffff;          
+      --a83-sub: var(--veranda-green);      
     }
   }
 
-  /* Das globale Body-Setup */
+  /* Global Body Reset */
   body {
-    @apply bg-a83-bg text-a83-text font-mono antialiased transition-colors duration-500 selection:bg-a83-accent selection:text-white;
+    @apply bg-a83-bg text-a83-text font-mono antialiased transition-colors duration-500;
+    /* Optional: Custom Scrollbar für den Webkit-Look */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      @apply bg-a83-bg;
+    }
+    &::-webkit-scrollbar-thumb {
+      @apply bg-a83-surface rounded-full border border-a83-bg;
+    }
+  }
+
+  /* Typography Defaults */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-a83-text-bold tracking-tight;
   }
 }
 
+/* UTILITIES LAYER
+   Spezifische Helfer für deinen Vibe.
+*/
+@utility text-glow {
+  text-shadow: 0 0 10px var(--color-kojima-orange);
+}
 
-/* Harter iTerm / Terminal Cursor Blink (Global) */
-  @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  .animate-cursor-blink {
-    animation: cursor-blink 1s step-end infinite;
-  }
-
-
-  
+@utility border-tactical {
+  @apply border border-veranda-green/30;
+}

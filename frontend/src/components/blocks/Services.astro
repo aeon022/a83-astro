@@ -43,65 +43,65 @@ const displayServices = allServices
   : allMappedServices.filter(s => s.showOnStartpage);
 ---
 
-<section id="services" class="nav-content-sync relative w-full bg-white dark:bg-a83-bg py-24 lg:py-40 transition-colors duration-500 overflow-hidden">
+<section id="services" class="nav-content-sync relative w-full bg-a83-bg py-24 lg:py-40 transition-colors duration-500 overflow-hidden selection:bg-a83-accent selection:text-white">
   
   <div class="max-w-[1600px] mx-auto px-6 lg:px-16 relative z-10">
     
     <div class="mb-20">
       <div class="flex items-center gap-3 mb-4">
         <span class="w-1 h-4 bg-a83-accent shadow-[0_0_10px_var(--a83-accent)]"></span>
-        <span class="font-mono text-[10px] text-black/50 dark:text-white/50 uppercase tracking-[0.4em] font-bold">// SYSTEM_UPGRADES_AVAILABLE</span>
+        <span class="font-mono text-[10px] text-veranda-green uppercase tracking-[0.4em] font-bold">// SYSTEM_UPGRADES_AVAILABLE</span>
       </div>
-      <h2 class="text-5xl md:text-7xl font-black text-black dark:text-white tracking-tighter uppercase">
+      <h2 class="text-5xl md:text-7xl font-black text-a83-text-bold tracking-tighter uppercase">
         Available_Modules.
       </h2>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
       {displayServices.map((service) => (
-        <div class={`${service.size} group relative min-h-[450px] bg-gray-50 dark:bg-[#0a0a0a] border border-black/5 dark:border-white/5 overflow-hidden transition-all duration-500 hover:border-a83-accent/30 flex flex-col`}>
+        <div class={`${service.size} group relative min-h-[450px] bg-a83-surface/50 border border-veranda-green/20 overflow-hidden transition-all duration-500 hover:border-a83-accent/50 flex flex-col backdrop-blur-sm`}>
           
-          {/* Spotlight Effekt */}
-          <div class="absolute inset-0 bg-[radial-gradient(600px_circle_at_var(--m-x)_var(--m-y),var(--a83-accent),transparent_40%)] opacity-0 group-hover:opacity-[0.07] pointer-events-none transition-opacity duration-500"></div>
+          {/* Spotlight Effekt (Tactical Orange) */}
+          <div class="absolute inset-0 bg-[radial-gradient(600px_circle_at_var(--m-x)_var(--m-y),var(--a83-accent),transparent_40%)] opacity-0 group-hover:opacity-[0.05] pointer-events-none transition-opacity duration-500"></div>
 
           {/* Header Info */}
           <div class="p-8 lg:p-12 pb-0 flex justify-between items-start relative z-10">
             <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)] animate-pulse"></span>
-              <span class="font-mono text-[10px] text-black/40 dark:text-white/30 uppercase tracking-widest">{service.status}</span>
+              <span class="w-2 h-2 rounded-sm bg-veranda-green shadow-[0_0_8px_var(--veranda-green)] animate-pulse"></span>
+              <span class="font-mono text-[10px] text-veranda-green uppercase tracking-widest">{service.status}</span>
             </div>
-            <span class="font-mono text-[10px] text-black/20 dark:text-white/10">{service.id}</span>
+            <span class="font-mono text-[10px] text-veranda-green/60">{service.id}</span>
           </div>
 
           <div class="relative z-10 p-8 lg:p-12 pt-6 h-full flex flex-col justify-between flex-grow">
             
             <div class="max-w-xl">
-              <h3 class="text-3xl lg:text-4xl font-black text-black dark:text-white tracking-tight uppercase group-hover:text-a83-accent transition-colors">
+              <h3 class="text-3xl lg:text-4xl font-black text-a83-text-bold tracking-tight uppercase group-hover:text-a83-accent transition-colors">
                 {service.title.replace('_', ' ')}
               </h3>
               <p class="font-mono text-a83-accent text-xs mt-1 mb-6 uppercase tracking-widest">{service.tagline}</p>
               
-              <p class="text-black/60 dark:text-white/60 text-lg leading-relaxed mb-8 group-hover:text-black dark:group-hover:text-white/90 transition-colors">
+              <p class="text-a83-text text-lg leading-relaxed mb-8 group-hover:text-a83-text-bold transition-colors">
                 {service.description}
               </p>
 
               {/* Pricing & Parameters */}
               <div class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <span class="text-[9px] font-mono text-black/40 dark:text-white/30 uppercase block mb-3">Output_Parameters:</span>
+                  <span class="text-[9px] font-mono text-veranda-green uppercase block mb-3 border-b border-veranda-green/20 pb-1">Output_Parameters</span>
                   <ul class="space-y-2">
                     {service.outputParameters?.map((param: string) => (
-                      <li class="text-[11px] font-mono text-black/60 dark:text-white/50 flex gap-2">
+                      <li class="text-[11px] font-mono text-a83-text/80 flex gap-2">
                         <span class="text-a83-accent opacity-50">├─</span> {param}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                   <span class="text-[9px] font-mono text-black/40 dark:text-white/30 uppercase block mb-3">Build_Success:</span>
+                   <span class="text-[9px] font-mono text-veranda-green uppercase block mb-3 border-b border-veranda-green/20 pb-1">Build_Success</span>
                    <ul class="space-y-2">
                     {service.buildSuccess?.map((metric: string) => (
-                      <li class="text-[11px] font-mono text-green-600 dark:text-green-400 flex gap-2">
+                      <li class="text-[11px] font-mono text-veranda-green flex gap-2">
                         <span class="opacity-50">└─</span> {metric}
                       </li>
                     ))}
@@ -111,27 +111,27 @@ const displayServices = allServices
             </div>
 
             {/* Bottom Section: Price & Action */}
-            <div class="mt-auto pt-8 border-t border-black/5 dark:border-white/5 flex flex-col gap-6">
+            <div class="mt-auto pt-8 border-t border-veranda-green/20 flex flex-col gap-6">
               <div class="flex justify-between items-end">
                 <div>
-                  <span class="text-[9px] font-mono text-black/40 dark:text-white/30 uppercase block mb-1">{service.priceLabel}</span>
-                  <span class="text-2xl font-black text-black dark:text-white">{service.price}</span>
+                  <span class="text-[9px] font-mono text-veranda-green uppercase block mb-1">{service.priceLabel}</span>
+                  <span class="text-2xl font-black text-a83-text-bold">{service.price}</span>
                 </div>
                 <div class="flex flex-wrap gap-2 justify-end">
                   {service.specs.map((spec: string) => (
-                    <span class="font-mono text-[9px] px-2 py-1 border border-black/10 dark:border-white/10 text-black/40 dark:text-white/40">
+                    <span class="font-mono text-[9px] px-2 py-1 border border-veranda-green/20 text-veranda-green bg-veranda-green/5">
                       > {spec}
                     </span>
                   ))}
                 </div>
               </div>
               
-              <a href={service.actionLink} class="group/btn relative overflow-hidden border border-a83-accent/30 py-4 text-center font-mono text-xs uppercase tracking-[0.2em] text-a83-accent hover:text-black transition-colors duration-300">
+              <a href={service.actionLink} class="group/btn relative overflow-hidden border border-a83-accent py-4 text-center font-mono text-xs uppercase tracking-[0.2em] text-a83-accent hover:text-a83-bg transition-colors duration-300">
                 <span class="relative z-10">{service.buttonLabel}_</span>
                 <div class="absolute inset-0 -translate-x-full bg-a83-accent transition-transform duration-300 group-hover/btn:translate-x-0"></div>
               </a>
               
-              {service.footnote && <p class="text-[9px] font-mono text-black/30 dark:text-white/20 italic">*{service.footnote}</p>}
+              {service.footnote && <p class="text-[9px] font-mono text-veranda-green/60 italic">*{service.footnote}</p>}
             </div>
           </div>
 
@@ -141,9 +141,9 @@ const displayServices = allServices
     </div>
   </div>
 
-  {/* WATERMARK: Klebt am rechten Rand durch native vertical writing-mode & rotate-180 */}
+  {/* WATERMARK: Subtle Veranda Green */}
   <div class="absolute top-0 right-0 h-full hidden xl:flex items-center pointer-events-none select-none z-0">
-     <span class="[writing-mode:vertical-rl] rotate-180 text-[90px] font-black tracking-tighter text-black/5 dark:text-white/[0.03] uppercase leading-none">
+     <span class="[writing-mode:vertical-rl] rotate-180 text-[90px] font-black tracking-tighter text-veranda-green/5 uppercase leading-none">
         Core_Capabilities
      </span>
   </div>
