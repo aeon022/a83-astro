@@ -1,0 +1,30 @@
+{
+  "title": "Base Install",
+  "id": "MOD_00",
+  "order": 3,
+  "status": "AVAILABLE",
+  "showOnStartpage": false,
+  "size": "lg:col-span-4",
+  "tagline": "Root Access.",
+  "description": "Das perfekte Fundament.\nKein Design, nur rohe Power.",
+  "price": "850",
+  "priceLabel": "// BASE_PRICE in €",
+  "outputParameters": [
+    "Breakdance Builder Pro Setup",
+    "Framework Integration",
+    "Security Hardening (Firewall & Login-Schutz)",
+    "SMTP E-Mail Routing (Damit Mails ankommen)"
+  ],
+  "buildSuccess": [
+    "Ready to Build",
+    "100/100 Lighthouse Basis",
+    "Professionelle Architektur"
+  ],
+  "buttonLabel": "More",
+  "footnote": "* Base_Rate. Korrekturschleife. Exkl. etwaige Lizenzen.",
+  "specs": [
+    "Core_Hardening",
+    "Zero_Bloat_Setup",
+    "SMTP_Verified"
+  ]
+}

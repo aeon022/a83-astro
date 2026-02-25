@@ -1,13 +1,14 @@
 {
   "title": "One-Pager",
   "id": "MOD_01",
+  "order": 0,
   "status": "AVAILABLE",
   "showOnStartpage": true,
-  "size": "lg:col-span-8",
+  "size": "lg:col-span-4",
   "tagline": "Focus Mode",
   "description": "Eine Seite, ein Ziel\nLeads auf den Punkt.",
   "price": "1700",
-  "priceLabel": "UNIT_PRICE",
+  "priceLabel": "UNIT_PRICE in €",
   "outputParameters": [
     "Ideal für Launches & Kampagnen, die sofort zünden.",
     "Deine Botschaft auf einer Spur – zero Noise, maximaler Impact.",

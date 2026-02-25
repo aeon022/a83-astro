@@ -1,0 +1,31 @@
+{
+  "title": "RESCUE OP",
+  "id": "MOD_04",
+  "order": 4,
+  "status": "AVAILABLE",
+  "showOnStartpage": false,
+  "size": "lg:col-span-4",
+  "tagline": "Debug Mode.",
+  "description": "Deine Seite ist langsam, gehackt oder kaputt?\nWir holen sie zurück.",
+  "price": "auf Anfrage",
+  "priceLabel": "// BASE_PRICE:",
+  "outputParameters": [
+    "Fehleranalyse & Log-Check",
+    "Malware-Removal & Bereinigung",
+    "Performance-Optimierung (Caching, Assets)",
+    "Plugin-Konfliktlösung",
+    "Update-Service"
+  ],
+  "buildSuccess": [
+    "System wieder online",
+    "Ladezeit optimiert",
+    "Sicherheitslücken geschlossen"
+  ],
+  "buttonLabel": "sh rescue_init.sh",
+  "footnote": "* Base_Rate. Korrekturschleife. Exkl. etwaige Lizenzen.",
+  "specs": [
+    "Malware_Cleanup",
+    "Log_Analysis",
+    "Performance_Fix"
+  ]
+}

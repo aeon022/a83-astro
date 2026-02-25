@@ -1,7 +1,7 @@
 ---
 // Dateipfad: src/components/blocks/Highlights.astro
-// Version: V9.2 - GLOBAL CURSOR INTEGRATION
-// Changes: Removed local cursor, added data-cursor-text, cleaned up script
+// Version: V10.1 - TACTICAL DATA FOLDER / NAV POSITION FIX
+// Feature: Notch-Corners, Brackets, Sidebar-Readout & High-Performance Slider
 
 interface ProjectEntry {
   entity: string;
@@ -29,7 +29,7 @@ const { projects } = Astro.props as Props;
     <div class="absolute inset-0 bg-gradient-to-b from-a83-bg via-transparent to-a83-bg"></div>
   </div>
 
-  <div class="nav-content-sync w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 flex justify-between items-end pointer-events-none shrink-0 transition-all duration-500">
+  <div class="nav-content-sync w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 flex justify-between items-start pointer-events-none shrink-0 transition-all duration-500">
       <div class="pointer-events-auto">
         <div class="flex items-center gap-3 mb-2">
           <div class="relative w-1.5 h-1.5">
@@ -44,20 +44,22 @@ const { projects } = Astro.props as Props;
           Deployments.
         </h2>
       </div>
+  </div>
 
-      <div class="flex gap-3 pointer-events-auto">
-        <button id="nav-prev" class="group relative w-16 h-12 flex items-center justify-center bg-transparent focus:outline-none">
+  <div class="nav-content-sync w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 flex justify-end items-end pointer-events-none transition-all duration-500 mt-4 -mb-4">
+      <div class="flex gap-4 pointer-events-auto items-center">
+        <span class="font-mono text-[8px] text-veranda-green/30 uppercase tracking-[0.3em] mr-4 hidden md:block">manual_override //</span>
+        
+        <button id="nav-prev" class="group relative w-14 h-10 flex items-center justify-center bg-transparent focus:outline-none">
             <div class="absolute inset-0 border border-veranda-green/30 group-hover:border-a83-accent transition-colors duration-300 [clip-path:polygon(0_0,100%_0,100%_70%,85%_100%,0_100%)] bg-a83-surface/50 backdrop-blur-sm"></div>
-            <div class="relative flex items-center gap-2 z-10 opacity-60 group-hover:opacity-100 transition-opacity">
+            <div class="relative z-10 opacity-60 group-hover:opacity-100 transition-opacity">
                 <svg class="w-3 h-3 text-a83-text group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                <span class="font-mono text-[9px] text-a83-text font-bold tracking-widest hidden md:block">PREV</span>
             </div>
         </button>
 
-        <button id="nav-next" class="group relative w-16 h-12 flex items-center justify-center bg-transparent focus:outline-none">
+        <button id="nav-next" class="group relative w-14 h-10 flex items-center justify-center bg-transparent focus:outline-none">
             <div class="absolute inset-0 border border-veranda-green/30 group-hover:border-a83-accent transition-colors duration-300 [clip-path:polygon(15%_0,100%_0,100%_100%,0_100%,0_30%)] bg-a83-surface/50 backdrop-blur-sm"></div>
-            <div class="relative flex items-center gap-2 z-10 opacity-60 group-hover:opacity-100 transition-opacity">
-                <span class="font-mono text-[9px] text-a83-text font-bold tracking-widest hidden md:block">NEXT</span>
+            <div class="relative z-10 opacity-60 group-hover:opacity-100 transition-opacity">
                 <svg class="w-3 h-3 text-a83-text group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
             </div>
         </button>
@@ -69,70 +71,70 @@ const { projects } = Astro.props as Props;
         id="highlights-track" 
         class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 md:gap-8 px-4 md:px-16 w-full touch-pan-y h-full items-center"
       >
-        <div class="min-w-[5vw] h-full shrink-0 snap-align-none"></div>
+        <div class="min-w-[10vw] h-full shrink-0 snap-align-none"></div>
 
         {projects.map((project, index) => (
           <article 
-            class="group snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[900px] h-[85%] md:h-[90%] relative cinematic-card"
+            class="group snap-center shrink-0 w-[85vw] md:w-[50vw] lg:w-[750px] h-[70%] md:h-[75%] relative cinematic-card"
             data-index={index}
-            data-cursor-text="OPEN"
+            data-cursor-text="OPEN_FILE"
           >
-            <div class="glitch-wrapper relative w-full h-full bg-deep-canvas overflow-hidden border border-veranda-green/20 transition-all duration-500 hover:border-a83-accent/50">
+            <div class="absolute -inset-2 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity duration-500">
+                <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-a83-accent"></div>
+                <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-a83-accent"></div>
+                <div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-a83-accent"></div>
+                <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-a83-accent"></div>
+            </div>
+
+            <div class="glitch-wrapper relative w-full h-full bg-deep-canvas overflow-hidden border border-veranda-green/20 transition-all duration-500 group-hover:border-a83-accent/50 [clip-path:polygon(0_0,calc(100%-30px)_0,100%_30px,100%_100%,0_100%)]">
                 
-                {/* --- IMAGE OR PLACEHOLDER LOGIC --- */}
                 {project.entry.coverImage ? (
                     <>
                         <img 
                             src={project.entry.coverImage} 
                             alt={project.entry.entity}
                             loading={index < 2 ? "eager" : "lazy"}
-                            class="absolute inset-0 w-full h-full object-cover grayscale opacity-90 lg:opacity-70 lg:group-hover:opacity-100 lg:group-hover:grayscale-0 transition-all duration-700 ease-out"
+                            class="absolute inset-0 w-full h-full object-cover grayscale opacity-90 lg:opacity-50 lg:group-hover:opacity-80 lg:group-hover:grayscale-0 transition-all duration-700 ease-out"
                         />
                          {/* Glitch Layers */}
                         <div class="glitch-layer layer-r absolute inset-0 bg-transparent opacity-0 pointer-events-none mix-blend-overlay" style={`background-image: url('${project.entry.coverImage}'); background-size: cover; background-position: center;`}></div>
                         <div class="glitch-layer layer-g absolute inset-0 bg-transparent opacity-0 pointer-events-none mix-blend-overlay" style={`background-image: url('${project.entry.coverImage}'); background-size: cover; background-position: center;`}></div>
                     </>
                 ) : (
-                    /* PLACEHOLDER PATTERN "NO SIGNAL" */
                     <div class="absolute inset-0 w-full h-full bg-deep-canvas flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(var(--veranda-green) 1px, transparent 1px), linear-gradient(90deg, var(--veranda-green) 1px, transparent 1px); background-size: 40px 40px;"></div>
                         <div class="absolute inset-0 opacity-5" style="background: repeating-linear-gradient(45deg, #000, #000 10px, var(--veranda-green) 10px, var(--veranda-green) 20px);"></div>
-                        
-                        <div class="relative z-10 text-center">
-                            <div class="w-16 h-16 border border-veranda-green/30 mx-auto mb-4 flex items-center justify-center rounded-sm animate-pulse">
-                                <span class="font-mono text-xs text-veranda-green">!</span>
-                            </div>
-                            <span class="block font-mono text-[10px] tracking-[0.3em] text-veranda-green uppercase mb-1">Asset_Missing</span>
-                            <span class="block font-mono text-xs text-a83-accent font-bold animate-pulse">AWAITING_UPLINK</span>
-                        </div>
+                        <span class="block font-mono text-[10px] tracking-[0.3em] text-veranda-green uppercase animate-pulse">Awaiting_Data_Link</span>
                     </div>
                 )}
 
-                <div class="absolute inset-0 bg-gradient-to-t from-a83-bg via-a83-bg/40 to-transparent opacity-90 lg:opacity-80 transition-opacity duration-500"></div>
+                <div class="absolute right-0 top-12 bottom-0 w-12 border-l border-veranda-green/20 flex flex-col items-center py-6 gap-8 z-20 bg-deep-canvas/40 backdrop-blur-md hidden md:flex">
+                    <span class="[writing-mode:vertical-rl] text-[8px] font-mono text-veranda-green/40 uppercase tracking-[0.4em]">UUID_A83_TRK</span>
+                    <div class="w-px flex-1 bg-veranda-green/10"></div>
+                    <span class="[writing-mode:vertical-rl] text-[8px] font-mono text-a83-accent uppercase font-bold tracking-widest">DEPLOY_SUCCESS</span>
+                </div>
+
+                <div class="absolute inset-0 bg-gradient-to-t from-a83-bg via-a83-bg/60 to-transparent opacity-90 transition-opacity duration-500"></div>
 
                 <div class="absolute inset-0 p-6 md:p-10 flex flex-col justify-end">
                     
                     <div class="absolute top-6 left-6 flex items-center gap-3 fade-in-element">
-                        <span class="bg-a83-text-bold text-a83-bg font-mono text-[9px] uppercase px-2 py-0.5 font-bold">
-                            #{ (index + 1).toString().padStart(2, '0') }
+                        <span class="bg-a83-accent text-deep-canvas font-mono text-[9px] uppercase px-2 py-0.5 font-bold shadow-[0_0_10px_var(--a83-accent)]">
+                            MOD_{ (index + 1).toString().padStart(2, '0') }
                         </span>
-                        <span class="text-[9px] font-mono text-a83-text/60 tracking-widest uppercase border border-veranda-green/30 px-2 py-0.5">
+                        <span class="text-[9px] font-mono text-veranda-green tracking-widest uppercase border border-veranda-green/30 px-2 py-0.5 bg-deep-canvas/80">
                             {project.entry.arch}
                         </span>
                     </div>
 
-                    <div class="relative overflow-hidden">
-                        <h3 class="glitch-text-target text-3xl md:text-5xl lg:text-6xl font-black text-a83-text-bold tracking-tighter leading-[0.9] mb-3 transform translate-y-0 lg:translate-y-8 transition-transform duration-500 slide-up-element">
+                    <div class="relative overflow-hidden pr-12">
+                        <h3 class="glitch-text-target text-3xl md:text-5xl lg:text-5xl font-black text-bone-white tracking-tighter leading-[0.9] mb-4 transform transition-transform duration-500 slide-up-element group-hover:text-a83-accent">
                             {project.entry.entity}
                         </h3>
                         
-                        <div class="border-t border-veranda-green/30 pt-4 flex flex-col md:flex-row gap-4 justify-between md:items-end opacity-100 lg:opacity-0 transition-opacity duration-500 fade-in-element delay-100">
-                            <p class="text-a83-text/80 text-sm max-w-md line-clamp-2 font-medium font-mono">
-                                {project.entry.protocolReadout}
+                        <div class="border-t border-veranda-green/30 pt-4 flex flex-col gap-4 opacity-100 lg:opacity-0 transition-opacity duration-500 fade-in-element delay-100">
+                            <p class="text-veranda-green text-[11px] leading-relaxed max-w-sm font-mono">
+                                <span class="text-a83-accent font-bold mr-2">></span> {project.entry.protocolReadout}
                             </p>
-                            <div class="font-mono text-[9px] text-a83-accent whitespace-nowrap hidden md:block border border-a83-accent/30 px-2 py-1 bg-a83-accent/5">
-                                STATUS: OPTIMAL
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,19 +144,23 @@ const { projects } = Astro.props as Props;
           </article>
         ))}
         
-        <div class="min-w-[5vw] h-full shrink-0 snap-align-none"></div>
+        <div class="min-w-[10vw] h-full shrink-0 snap-align-none"></div>
       </div>
   </div>
 
-  <div class="nav-content-sync w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 pointer-events-none shrink-0 transition-all duration-500">
-     <div class="w-full h-px bg-veranda-green/20 flex items-center">
+  <div class="nav-content-sync w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 pointer-events-none shrink-0 transition-all duration-500 pb-4">
+     <div class="flex justify-between items-center mb-2 font-mono text-[8px] text-veranda-green/40 uppercase tracking-[0.2em]">
+        <span>SYS_SCAN_PROGRESS</span>
+        <span>NODE_04_STABLE</span>
+     </div>
+     <div class="w-full h-px bg-veranda-green/10 flex items-center">
         <div id="prog-bar" class="h-[2px] bg-a83-accent shadow-[0_0_15px_var(--a83-accent)] w-0 relative transition-all duration-100 ease-out">
             <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-a83-accent rotate-45"></div>
         </div>
      </div>
   </div>
 
-  </section>
+</section>
 
 <style is:global>
   html {
@@ -171,10 +177,12 @@ const { projects } = Astro.props as Props;
   }
   #highlights-track::-webkit-scrollbar { display: none; }
 
+  /* Glitch Animations */
   .active-slide .glitch-layer { animation: glitch-anim 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
   .active-slide .glitch-layer.layer-r { animation-delay: 0ms; transform: translate(5px, -5px); }
   .active-slide .glitch-layer.layer-g { animation-delay: 50ms; transform: translate(-5px, 5px); }
 
+  /* Reveal Logic */
   .active-slide .slide-up-element { transform: translateY(0) !important; }
   .active-slide .fade-in-element { opacity: 1 !important; }
   .group:hover .slide-up-element { transform: translateY(0) !important; }
@@ -191,15 +199,13 @@ const { projects } = Astro.props as Props;
 </style>
 
 <script>
-  const section = document.getElementById('highlights');
   const track = document.getElementById('highlights-track') as HTMLElement;
   const progBar = document.getElementById('prog-bar');
   const prevBtn = document.getElementById('nav-prev');
   const nextBtn = document.getElementById('nav-next');
   const cards = document.querySelectorAll('.cinematic-card');
   
-  // NOTE: Lokaler Cursor Code wurde entfernt. GlobalCursor übernimmt.
-
+  // Intersection Observer for Active States
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -211,23 +217,25 @@ const { projects } = Astro.props as Props;
       }
     });
   }, { root: track, threshold: 0.6 });
+  
   cards.forEach(c => observer.observe(c));
 
+  // Scroll & Button Logic
   if (track && progBar) {
      track.addEventListener('scroll', () => {
         const max = track.scrollWidth - track.clientWidth;
         const percent = (track.scrollLeft / max) * 100;
         progBar.style.width = `${percent}%`;
      }, { passive: true });
+
      prevBtn?.addEventListener('click', () => {
-        const card = track.querySelector('article');
-        const w = card ? card.clientWidth : 800;
-        track.scrollBy({ left: -(w + 32), behavior: 'smooth' });
+        const cardWidth = track.querySelector('article')?.clientWidth || 750;
+        track.scrollBy({ left: -(cardWidth + 48), behavior: 'smooth' });
      });
+
      nextBtn?.addEventListener('click', () => {
-        const card = track.querySelector('article');
-        const w = card ? card.clientWidth : 800;
-        track.scrollBy({ left: (w + 32), behavior: 'smooth' });
+        const cardWidth = track.querySelector('article')?.clientWidth || 750;
+        track.scrollBy({ left: (cardWidth + 48), behavior: 'smooth' });
      });
   }
 </script>

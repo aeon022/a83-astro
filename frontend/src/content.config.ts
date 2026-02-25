@@ -6,22 +6,44 @@ const showcase = defineCollection({
     loader: glob({ pattern: "**/*.json", base: "./src/content/showcase" }),
     schema: z.object({
         title: z.string(),
-        description: z.string(),
-        coverImage: z.string(),
-        client: z.string(),
-        publishDate: z.coerce.date(),
-        tags: z.array(z.string()),
+        coverImage: z.string().optional(),
+        excerpt: z.string().optional(),
+        entity: z.string(), // Korrigiert: Nutzt jetzt 'entity' statt 'client'
+        vector: z.string().optional(),
+        arch: z.string(),
+        cycle: z.string().optional(),
+        protocolReadout: z.string().optional(),
+        taskProtocol: z.string().optional(),
+        stackDeployed: z.array(z.string()).optional(),
+        fixExecuted: z.string().optional(),
+        finalStatus: z.string().optional(),
+        gatewayUri: z.string().optional(),
+        isHighlighted: z.boolean().default(false),
     })
 });
 
-const pricing = defineCollection({
-    loader: glob({ pattern: "**/*.json", base: "./src/content/pricing" }),
+const services = defineCollection({
+    loader: glob({ pattern: "**/*.json", base: "./src/content/services" }),
     schema: z.object({
-        plan: z.string(),
-        price: z.string(),
-        features: z.array(z.string()),
+        title: z.string(),
+        id: z.string(),
+        status: z.string().default('AVAILABLE'),
+        showOnStartpage: z.boolean().default(false),
+        accent: z.string().default('var(--a83-accent)'),
+        icon: z.string().optional(),
+        size: z.enum(['lg:col-span-8', 'lg:col-span-4']).default('lg:col-span-4'),
+        tagline: z.string().optional(),
+        description: z.string().optional(),
+        price: z.string().optional(),
+        priceLabel: z.string().default('// BASE_PRICE:'),
+        outputParameters: z.array(z.string()).optional(),
+        buildSuccess: z.array(z.string()).optional(),
+        buttonLabel: z.string().default('sh start_project.sh'),
+        actionLink: z.string().default('mailto:post@abteilung83.at'),
+        footnote: z.string().optional(),
+        specs: z.array(z.string()).optional(),
     })
 });
 
-// Wir exportieren die Collections passend zu deinem Verzeichnisbaum [cite: 47-107]
-export const collections = { showcase, pricing };^
+// Wir exportieren die Collections passend zu deiner Keystatic-Struktur
+export const collections = { showcase, services };

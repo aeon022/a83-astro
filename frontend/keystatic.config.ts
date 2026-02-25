@@ -1,4 +1,3 @@
-// Dateipfad: frontend/keystatic.config.ts
 import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
@@ -86,6 +85,13 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Service Title (z.B. One-Pager)' } }),
         id: fields.text({ label: 'Module ID (e.g. MOD_01)' }),
+        
+        // SORTIERUNG (Jetzt korrekt innerhalb des Schemas)
+        order: fields.integer({ 
+            label: 'Sort Order (0 = Top-Priority)', 
+            defaultValue: 10 
+        }),
+
         status: fields.text({ label: 'Status (z.B. live, AVAILABLE)', defaultValue: 'AVAILABLE' }),
         showOnStartpage: fields.checkbox({ label: 'Show on Startpage', defaultValue: false }),
         
@@ -124,7 +130,7 @@ export default config({
         
         // Specs für Tech-Details
         specs: fields.array(fields.text({ label: 'Spec' }), { label: 'Specs' }),
-      }
+      },
     }),
   },
 });

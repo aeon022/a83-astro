@@ -1,0 +1,137 @@
+---
+// Dateipfad: frontend/src/pages/services/[slug].astro
+// Version: V12.6 - HIGH CONTRAST BLUEPRINT
+// Update: Refined text values for maximum legibility
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const { slug } = Astro.params;
+const service = await reader.collections.services.read(slug as string);
+
+if (!service) {
+  return Astro.redirect('/404');
+}
+---
+
+<BaseLayout title={`${service.title} | Module_${service.id}`}>
+  <section class="min-h-screen bg-a83-bg pt-32 pb-20 px-6 lg:px-16 overflow-x-hidden relative selection:bg-a83-accent selection:text-white">
+    
+    <div class="absolute inset-0 opacity-[0.015] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>
+
+    <div class="max-w-[1600px] mx-auto mb-10 flex items-center justify-between border-b border-veranda-green/20 pb-6 relative z-20">
+        <div class="flex items-center gap-4 font-mono text-[10px] text-a83-text-bold uppercase tracking-[0.3em]">
+            <a href="/" class="hover:text-a83-accent transition-colors font-bold">A83_ROOT</a>
+            <span class="opacity-30">/</span>
+            <a href="/services" class="hover:text-a83-accent transition-colors font-bold">MODULES</a>
+            <span class="opacity-30">/</span>
+            <span class="text-a83-accent font-black">{service.id}</span>
+        </div>
+        <div class="hidden md:flex items-center gap-6 font-mono text-[10px]">
+            <span class="text-veranda-green font-bold uppercase tracking-widest">Blueprint_Active</span>
+            <span class="text-a83-accent animate-pulse font-black">● STABLE_UPLINK</span>
+        </div>
+    </div>
+
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 w-full auto-rows-min relative z-10">
+        
+        <div class="md:col-span-8 bg-a83-surface/40 border border-veranda-green/20 p-8 lg:p-14 relative overflow-hidden group min-w-0 w-full">
+            <div class="absolute top-0 right-0 p-4 font-mono text-[8px] text-veranda-green/20 font-bold">CORE_V.01 // {service.id}</div>
+            
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+                <span class="bg-a83-accent text-a83-bg font-mono text-[10px] font-black px-2 py-0.5 tracking-tighter uppercase shadow-sm">Mission_Spec</span>
+                <span class="text-a83-text-bold/60 font-mono text-[10px] uppercase tracking-[0.2em] font-bold">{service.tagline}</span>
+            </div>
+
+            <h1 class="text-5xl lg:text-7xl xl:text-8xl font-black text-a83-text-bold tracking-tighter uppercase mb-8 leading-[0.85] group-hover:text-a83-accent transition-colors duration-500 relative z-10">
+                {service.title.replace('_', ' ')}
+            </h1>
+            
+            <p class="text-xl lg:text-2xl text-a83-text-bold/90 leading-relaxed max-w-2xl font-mono whitespace-pre-line relative z-10 font-medium">
+                {service.description}
+            </p>
+        </div>
+
+        <div class="md:col-span-4 bg-a83-surface/40 border border-veranda-green/20 p-8 flex flex-col justify-between min-w-0 w-full">
+            <div class="space-y-8">
+                <div class="flex justify-between items-start border-b border-veranda-green/20 pb-4">
+                    <span class="font-mono text-[11px] text-a83-text-bold uppercase tracking-[0.2em] font-bold">Status</span>
+                    <span class="text-veranda-green font-mono text-[11px] font-black uppercase tracking-widest">{service.status}</span>
+                </div>
+                
+                <div class="space-y-4">
+                    <span class="font-mono text-[10px] text-a83-text-bold/40 uppercase tracking-[0.3em] font-bold">System_Efficiency</span>
+                    <div class="h-1.5 w-full bg-veranda-green/10 rounded-full">
+                        <div class="h-full bg-a83-accent w-[95%] shadow-[0_0_12px_var(--a83-accent)]"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-10">
+                <span class="block font-mono text-[10px] text-a83-text-bold/50 uppercase mb-2 tracking-[0.2em] font-bold">{service.priceLabel}</span>
+                <span class="text-5xl lg:text-6xl font-black text-a83-text-bold tracking-tighter">{service.price} €<span class="text-a83-accent text-2xl font-mono">*</span></span>
+            </div>
+        </div>
+
+        <div class="md:col-span-12 lg:col-span-9 bg-a83-surface/40 border border-veranda-green/20 p-8 lg:p-12 min-w-0 w-full">
+            <div class="flex items-center gap-3 mb-12">
+                <div class="w-10 h-px bg-a83-accent/60"></div>
+                <h3 class="font-mono text-[11px] text-a83-accent uppercase tracking-[0.4em] font-black">PROTOCOL_PARAMETERS</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
+                <div class="w-full">
+                    <ul class="space-y-6 w-full">
+                        {service.outputParameters?.map((param: string) => (
+                            <li class="flex gap-4 items-start font-mono text-[15px] group w-full">
+                                <span class="text-a83-accent font-black shrink-0 mt-1">├─</span>
+                                <span class="text-a83-text-bold leading-snug break-words flex-1 font-medium">{param}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                
+                <div class="flex flex-col gap-8 w-full">
+                     <div class="bg-a83-bg border-l-4 border-a83-accent p-6 font-mono text-[12px] text-a83-text-bold/80 leading-relaxed italic relative">
+                        <span class="text-a83-accent block not-italic mb-3 font-black uppercase tracking-[0.2em] text-[10px]">// QUALITY_ASSURANCE</span>
+                        "Entwickelt unter dem 'Zero Bloat' Paradigma. Wir garantieren maximale Performance und Skalierbarkeit für {service.title}."
+                    </div>
+                    <div class="space-y-3">
+                         {service.buildSuccess?.map((metric: string) => (
+                            <div class="flex items-center gap-3 font-mono text-[11px] text-a83-text-bold font-bold bg-veranda-green/5 px-4 py-2.5 border border-veranda-green/20">
+                                <span class="text-a83-accent font-black shrink-0">√</span> {metric}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:col-span-12 lg:col-span-3 bg-a83-surface/40 border border-veranda-green/20 p-8 flex flex-col gap-6 min-w-0 w-full">
+            <h3 class="font-mono text-[11px] text-a83-accent uppercase font-black tracking-[0.3em] border-b border-veranda-green/20 pb-4">Hard_Specs</h3>
+            <div class="space-y-3 flex-grow">
+                {service.specs.map((spec: string) => (
+                    <div class="border border-veranda-green/20 px-4 py-3 bg-a83-bg/50 font-mono text-[11px] text-a83-text-bold font-bold uppercase tracking-widest hover:border-a83-accent hover:text-a83-accent transition-all duration-300">
+                        > {spec}
+                    </div>
+                ))}
+            </div>
+            {service.footnote && (
+                <p class="text-[10px] font-mono text-a83-text-bold/50 leading-tight border-t border-veranda-green/10 pt-4 italic">
+                    {service.footnote}
+                </p>
+            )}
+        </div>
+
+    </div>
+
+    <div class="max-w-[1600px] mx-auto mt-8">
+        <a href={service.actionLink} class="block bg-a83-accent p-10 lg:p-14 text-center font-mono text-2xl lg:text-4xl font-black text-a83-bg uppercase tracking-[0.3em] hover:brightness-110 active:scale-[0.99] transition-all shadow-xl">
+            {service.buttonLabel.replace('.sh', '')}_EXE
+        </a>
+    </div>
+
+  </section>
+</BaseLayout>

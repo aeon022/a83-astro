@@ -1,0 +1,109 @@
+---
+// Version: V13.1 - HIGH CONTRAST DIRECTORY
+// Vibe: High-Density Inventory / Technical Catalog
+// Update: Refined contrast values for industrial legibility
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const serviceEntries = await reader.collections.services.all();
+
+// Sortierung nach Prio (order)
+const services = serviceEntries
+  .map(s => ({ slug: s.slug, ...s.entry }))
+  .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+
+const totalModules = services.length;
+---
+
+<BaseLayout title="System Directory | Modules">
+  <section class="min-h-screen bg-a83-bg pt-32 pb-20 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
+    
+    <div class="absolute inset-0 pointer-events-none z-0 opacity-[0.015]">
+        <div class="absolute inset-0 bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px)] bg-[size:100%_4px]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:40px_100%]"></div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto relative z-10">
+        
+        <header class="mb-16 border-l-4 border-a83-accent pl-8 py-2">
+            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black">
+                <span>// DIRECTORY_INDEX</span>
+                <span class="opacity-30">|</span>
+                <span>NODES_ACTIVE: {totalModules.toString().padStart(2, '0')}</span>
+            </div>
+            <h1 class="text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-none">
+                Capabilities.
+            </h1>
+            <p class="mt-6 font-mono text-sm text-a83-text-bold/70 max-w-xl font-medium">
+                System-weite Übersicht aller verfügbaren Architektur-Module. Wählen Sie eine Einheit für detaillierte Spezifikationen und Deployment-Parameter.
+            </p>
+        </header>
+
+        <div class="border-t border-veranda-green/30">
+            {services.map((service) => (
+                <a 
+                    href={`/services/${service.slug}`}
+                    class="group flex flex-col md:flex-row items-center justify-between py-10 border-b border-veranda-green/20 hover:bg-a83-accent/[0.03] transition-all duration-300 relative px-4 overflow-hidden"
+                >
+                    {/* Hover Indicator Background */}
+                    <div class="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-a83-accent/[0.06] to-transparent transition-transform duration-500 ease-out pointer-events-none"></div>
+
+                    <div class="flex items-center gap-8 relative z-10 w-full md:w-auto">
+                        <span class="font-mono text-[11px] text-veranda-green font-bold group-hover:text-a83-accent transition-colors">
+                            [{service.id}]
+                        </span>
+                        <div>
+                            <h2 class="text-3xl lg:text-4xl font-black text-a83-text-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">
+                                {service.title.replace('_', ' ')}
+                            </h2>
+                            <span class="font-mono text-[11px] text-a83-text-bold/60 uppercase tracking-widest font-bold">
+                                {service.tagline}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="hidden lg:flex gap-3 relative z-10">
+                        {service.specs.slice(0, 3).map(spec => (
+                            <span class="font-mono text-[10px] px-3 py-1 border border-veranda-green/30 text-a83-text-bold/50 uppercase font-bold group-hover:border-a83-accent/30 group-hover:text-a83-accent/60 transition-colors">
+                                {spec}
+                            </span>
+                        ))}
+                    </div>
+
+                    <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto mt-8 md:mt-0 relative z-10">
+                        <div class="text-right">
+                            <span class="block font-mono text-[9px] text-a83-text-bold/40 uppercase font-bold tracking-wider">Investment</span>
+                            <span class="text-2xl font-black text-a83-text-bold group-hover:text-a83-accent transition-colors">
+                                {service.price} €
+                            </span>
+                        </div>
+                        <div class="w-12 h-12 border-2 border-veranda-green/20 flex items-center justify-center group-hover:border-a83-accent group-hover:bg-a83-accent transition-all duration-300 shadow-sm">
+                            <svg class="w-5 h-5 text-a83-text-bold group-hover:text-a83-bg transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+
+        <footer class="mt-20 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-veranda-green/20 pt-12">
+            <div class="font-mono text-[11px] text-a83-text-bold/30 space-y-1 font-bold">
+                <p>END_OF_DIRECTORY // ALL_NODES_LOADED</p>
+                <p>ABTEILUNG83 // CORE_OS_V5.1</p>
+            </div>
+            <div class="flex gap-4 items-center">
+                <span class="font-mono text-[10px] text-a83-accent font-black tracking-widest uppercase">System_Stable</span>
+                <div class="flex gap-2">
+                    <div class="w-12 h-1.5 bg-veranda-green/10"></div>
+                    <div class="w-4 h-1.5 bg-a83-accent shadow-[0_0_8px_var(--a83-accent)]"></div>
+                    <div class="w-24 h-1.5 bg-veranda-green/10"></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+  </section>
+</BaseLayout>

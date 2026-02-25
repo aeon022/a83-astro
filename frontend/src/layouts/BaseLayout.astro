@@ -1,5 +1,8 @@
 ---
 // Dateipfad: frontend/src/layouts/BaseLayout.astro
+// Version: V14.0 - GLOBAL SYNC ENGINE INTEGRATION
+// Changes: Fixed <main> class for global menu glitch support
+
 import '../styles/global.css'; 
 import Header from './Header.astro';
 import Footer from '../components/blocks/Footer.astro';
@@ -30,17 +33,21 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
   
   <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500 flex flex-col min-h-screen">
     
-    {/* Header ist fixed, Position im DOM ist für z-index relevant, aber für Layout egal */}
+    {/* Navigation & Brand Header */}
     <Header />
 
-    {/* MAIN WRAPPER: Wichtig, damit der Footer nicht hochrutscht, wenn wenig Content da ist */}
-    <main class="flex-grow">
+    {/* MAIN WRAPPER 
+        Die Klasse 'nav-content-sync' reagiert auf html[data-nav-state] 
+        und triggert die Glitch-Animationen global.
+    */}
+    <main class="flex-grow nav-content-sync">
         <slot />
     </main>
     
-    {/* Footer Section */}
+    {/* Global Footer */}
     <Footer />
-    {/* Lädt Global Cursor */}
+    
+    {/* Tactical HUD Cursor */}
     <GlobalCursor />
 
   </body>
@@ -57,27 +64,39 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
   }
 
   /* ==============================================================
-     GLOBAL SPATIAL NAV SYNC ENGINE
+     GLOBAL SPATIAL NAV SYNC ENGINE (GSNSE)
+     Steuert das visuelle Verhalten des Contents bei Menü-Interaktion.
      ============================================================== */
   
+  /* Verhindert Klicks auf den Content, während das System instabil/offen ist */
+  html[data-nav-state="opening"] .nav-content-sync,
+  html[data-nav-state="open"] .nav-content-sync {
+    pointer-events: none;
+    user-select: none;
+  }
+
   html[data-nav-state="opening"] .nav-content-sync {
     animation: system-collapse 0.6s cubic-bezier(0.86, 0, 0.07, 1) forwards;
-    pointer-events: none;
   }
   
   html[data-nav-state="open"] .nav-content-sync {
-    opacity: 0; filter: blur(20px); transform: scale(0.95); pointer-events: none;
+    opacity: 0; 
+    filter: blur(20px); 
+    transform: scale(0.95);
   }
   
   html[data-nav-state="closing"] .nav-content-sync {
     animation: system-reboot 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    pointer-events: auto;
   }
 
   html:not([data-nav-state]) .nav-content-sync {
-    opacity: 1; filter: blur(0px); transform: scale(1); pointer-events: auto;
+    opacity: 1; 
+    filter: blur(0px); 
+    transform: scale(1); 
+    pointer-events: auto;
   }
 
+  /* ANIMATION: System-Kollaps beim Öffnen */
   @keyframes system-collapse {
     0% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1); }
     15% { opacity: 0.8; transform: scale(1.02) skewX(5deg) translate3d(5px, 0, 0); filter: blur(1px) brightness(1.5) contrast(1.2); }
@@ -87,6 +106,7 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
     100% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
   }
 
+  /* ANIMATION: System-Reboot beim Schließen */
   @keyframes system-reboot {
     0% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
     30% { opacity: 0.8; transform: scale(1.05) skewX(-10deg) translate3d(-5px, -2px, 0); filter: brightness(2) contrast(1.5) hue-rotate(-20deg); }

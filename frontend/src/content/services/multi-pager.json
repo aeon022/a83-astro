@@ -1,0 +1,30 @@
+{
+  "title": "Multi-Pager",
+  "id": "MOD_02",
+  "order": 1,
+  "status": "AVAILABLE",
+  "showOnStartpage": true,
+  "size": "lg:col-span-8",
+  "tagline": "Focus Mode.",
+  "description": "Strukturierter Markenauftritt\nSEO-Breit",
+  "price": "2800",
+  "priceLabel": "// BASE_PRICE in €",
+  "outputParameters": [
+    "Strukturierter Auftritt mit Tiefe und klarer Navigation.",
+    "Für Wachstum: mehr Content, mehr Leads, weniger Reibung.",
+    "Landing, Leistungen/Service, Cases, Portfolio, Team, Blog, Über uns, Kontakt",
+    "Socials"
+  ],
+  "buildSuccess": [
+    "skalierbar",
+    "sauber versioniert",
+    "Content-Wachstum"
+  ],
+  "buttonLabel": "More",
+  "footnote": "* Base_Rate. Korrekturschleife. Exkl. etwaige Lizenzen.",
+  "specs": [
+    "Information_Architecture",
+    "SEO_Deep_Scan",
+    "Scalable_CMS_Ready"
+  ]
+}

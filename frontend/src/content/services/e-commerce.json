@@ -1,0 +1,31 @@
+{
+  "title": "E-Commerce",
+  "id": "MOD_03",
+  "order": 2,
+  "status": "AVAILABLE",
+  "showOnStartpage": false,
+  "size": "lg:col-span-4",
+  "tagline": "Merchant Mode.",
+  "description": "Verkaufe digital, ohne Kopfschmerzen.\nSkalierbar ab Tag 1.",
+  "price": "4200",
+  "priceLabel": "// BASE_PRICE in €",
+  "outputParameters": [
+    "WooCommerce High-Performance Core",
+    "Payment Gateways (Stripe, PayPal, Apple Pay)",
+    "Landing, Leistungen/Service, Cases, Portfolio, Team, Blog, Über uns, Kontakt",
+    "Automatisierte E-Mails & Rechnungen",
+    "Varianten-Logik & Filter"
+  ],
+  "buildSuccess": [
+    "Conversion-optimiert",
+    "24/7 Sales Maschine",
+    "Lagerverwaltung integriert"
+  ],
+  "buttonLabel": "More",
+  "footnote": "* Base_Rate. Korrekturschleife. Exkl. etwaige Lizenzen.",
+  "specs": [
+    "Secure_Payment_Flow",
+    "Woo_Performance_Core",
+    "Auto_Invoicing_System"
+  ]
+}

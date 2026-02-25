@@ -2,8 +2,7 @@
 @import "tailwindcss";
 
 /* THEME CONFIGURATION
-   Wir injizieren deine Palette direkt in die Tailwind-Engine.
-   Verwendung im HTML: class="bg-tactical-olive" oder class="text-kojima-orange"
+   Injektion der Tactical-Palette in die Tailwind-Engine.
 */
 @theme {
   /* Raw Color Tokens */
@@ -31,29 +30,20 @@
 }
 
 /* BASE LAYER
-   Definition der Variablen für Light/Dark Mode und globale Gradients.
+   Variablen für Light/Dark Mode und globale Resets.
 */
 @layer base {
   :root {
-    /* =========================================
-       PALETTE: TACTICAL OPERATIONS
-       ========================================= */
+    /* PALETTE: TACTICAL OPERATIONS */
     --tactical-olive: #414a38;
     --deep-canvas: #2b3224;
     --kojima-orange: #ff4b12;
     --bone-white: #e4e8df;
     --veranda-green: #8c9980;
 
-    /* Gradients (CSS Syntax) */
-    --gradient-tactical-v: linear-gradient(180deg, var(--tactical-olive), var(--deep-canvas));
-    --gradient-alert: linear-gradient(90deg, var(--kojima-orange), #ff7b52);
-
-    /* =========================================
-       LIGHT MODE (Field Operations / Tag)
-       Tech-Paper Look. Sehr sauber, hohe Lesbarkeit.
-       ========================================= */
+    /* LIGHT MODE (Field Operations) */
     --a83-bg: var(--bone-white);         
-    --a83-surface: #dce2d6; /* Leicht abgedunkeltes White für Cards */
+    --a83-surface: #dce2d6; 
     --a83-accent: var(--kojima-orange);  
     --a83-text: var(--tactical-olive);   
     --a83-text-bold: var(--deep-canvas); 
@@ -62,23 +52,20 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      /* =========================================
-         DARK MODE (Night Ops / Stealth)
-         Tiefe, matte Töne. Kein reines Schwarz.
-         ========================================= */
-      --a83-bg: var(--deep-canvas);      /* Deine dunkelste Farbe als Base */
-      --a83-surface: var(--tactical-olive); /* Olive für UI-Elemente */
+      /* DARK MODE (Night Ops / Stealth) */
+      --a83-bg: var(--deep-canvas);      
+      --a83-surface: var(--tactical-olive); 
       --a83-accent: var(--kojima-orange);    
-      --a83-text: #e4e8df;               /* Bone White für Text (weicher als reines Weiß) */
+      --a83-text: #e4e8df;               
       --a83-text-bold: #ffffff;          
       --a83-sub: var(--veranda-green);      
     }
   }
 
-  /* Global Body Reset */
   body {
     @apply bg-a83-bg text-a83-text font-mono antialiased transition-colors duration-500;
-    /* Optional: Custom Scrollbar für den Webkit-Look */
+    
+    /* Custom Webkit Scrollbar */
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -90,15 +77,12 @@
     }
   }
 
-  /* Typography Defaults */
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold text-a83-text-bold tracking-tight;
   }
 }
 
-/* UTILITIES LAYER
-   Spezifische Helfer für deinen Vibe.
-*/
+/* UTILITIES LAYER */
 @utility text-glow {
   text-shadow: 0 0 10px var(--color-kojima-orange);
 }
@@ -107,14 +91,18 @@
   @apply border border-veranda-green/30;
 }
 
-
 /* HIDE SYSTEM CURSOR ON DESKTOP */
-
 @media (pointer: fine) {
-  /* Wir zwingen JEDES Element (auch Links und Buttons), 
-     den System-Mauszeiger zu verstecken */
   html, body, *, 
   a, button, input, select, textarea, [role="button"] {
     cursor: none !important;
   }
+}
+
+/* PERFORMANCE OPTIMIZATION FOR NAV ENGINE
+   Nur noch will-change hier behalten. 
+   Die Logik (Animationen & Opacity) liegt jetzt komplett im BaseLayout.
+*/
+.nav-content-sync {
+  will-change: opacity, filter, transform;
 }

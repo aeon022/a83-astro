@@ -1,15 +1,12 @@
 ---
 // Dateipfad: frontend/src/components/blocks/Services.astro
-// Vibe: Hardware-Rack / Bento Grid / System Modules
-// Tech: Keystatic Reader, Tailwind v4, CSS Grid, Native Vertical Writing
+// Version: V11.7 - CLEAN RACK / NO-TOP-BORDER
+// Update: Removed orange top accent line for a purist industrial look
 
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
 
-// Keystatic Reader initialisieren
 const reader = createReader(process.cwd(), keystaticConfig);
-
-// Daten abrufen aus der konsolidierten Services-Collection
 const serviceEntries = await reader.collections.services.all();
 
 interface Props {
@@ -18,140 +15,158 @@ interface Props {
 
 const { allServices = false } = Astro.props;
 
-// Mapping und Filterung der Services
-const allMappedServices = serviceEntries.map(item => ({
-  id: item.entry.id,
-  title: item.entry.title,
-  status: item.entry.status,
-  size: item.entry.size,
-  tagline: item.entry.tagline,
-  description: item.entry.description,
-  price: item.entry.price,
-  priceLabel: item.entry.priceLabel,
-  outputParameters: item.entry.outputParameters,
-  buildSuccess: item.entry.buildSuccess,
-  specs: item.entry.specs,
-  accent: item.entry.accent || 'var(--a83-accent)',
-  actionLink: item.entry.actionLink,
-  buttonLabel: item.entry.buttonLabel,
-  footnote: item.entry.footnote,
-  showOnStartpage: item.entry.showOnStartpage
-}));
+const allMappedServices = serviceEntries
+  .map(item => ({
+    id: item.entry.id,
+    order: item.entry.order ?? 99,
+    title: item.entry.title,
+    status: item.entry.status,
+    size: item.entry.size,
+    tagline: item.entry.tagline,
+    description: item.entry.description,
+    price: item.entry.price,
+    priceLabel: item.entry.priceLabel,
+    outputParameters: item.entry.outputParameters,
+    buildSuccess: item.entry.buildSuccess,
+    specs: item.entry.specs,
+    accent: item.entry.accent || 'var(--a83-accent)',
+    actionLink: item.entry.actionLink,
+    buttonLabel: item.entry.buttonLabel,
+    footnote: item.entry.footnote,
+    showOnStartpage: item.entry.showOnStartpage
+  }))
+  .sort((a, b) => a.order - b.order);
 
 const displayServices = allServices 
   ? allMappedServices 
   : allMappedServices.filter(s => s.showOnStartpage);
 ---
 
-<section id="services" class="nav-content-sync relative w-full bg-a83-bg py-24 lg:py-40 transition-colors duration-500 overflow-hidden selection:bg-a83-accent selection:text-white">
+<section id="services" class="nav-content-sync snap-center relative w-full h-screen max-h-[1080px] min-h-[700px] bg-a83-bg border-b border-veranda-green/20 flex flex-col transition-colors duration-500 overflow-hidden selection:bg-a83-accent selection:text-white">
   
-  <div class="max-w-[1600px] mx-auto px-6 lg:px-16 relative z-10">
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-a83-bg via-transparent to-a83-bg"></div>
+  </div>
+
+  <div class="flex-1 flex flex-col w-full max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10 py-8 lg:py-12 overflow-hidden">
     
-    <div class="mb-20">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="w-1 h-4 bg-a83-accent shadow-[0_0_10px_var(--a83-accent)]"></span>
-        <span class="font-mono text-[10px] text-veranda-green uppercase tracking-[0.4em] font-bold">// SYSTEM_UPGRADES_AVAILABLE</span>
+    <div class="mb-6 lg:mb-8 shrink-0">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="relative w-1.5 h-1.5">
+            <div class="absolute inset-0 bg-a83-accent rounded-sm animate-ping opacity-40"></div>
+            <div class="relative w-1.5 h-1.5 bg-a83-accent rounded-sm shadow-[0_0_10px_var(--a83-accent)]"></div>
+        </div>
+        <span class="font-mono text-[9px] text-veranda-green uppercase tracking-[0.4em] font-bold">// SYSTEM_UPGRADES</span>
       </div>
-      <h2 class="text-5xl md:text-7xl font-black text-a83-text-bold tracking-tighter uppercase">
-        Available_Modules.
-      </h2>
+      
+      <div class="flex justify-between items-end border-b border-veranda-green/20 pb-4">
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-black text-a83-text-bold tracking-tighter uppercase leading-none">
+          Available_Modules.
+        </h2>
+        <div class="hidden md:flex flex-col items-end font-mono text-[8px] text-veranda-green/40">
+            <span>READOUT: STABLE</span>
+            <span>DATA: PRIORITY_DESC</span>
+        </div>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
-      {displayServices.map((service) => (
-        <div class={`${service.size} group relative min-h-[450px] bg-a83-surface/50 border border-veranda-green/20 overflow-hidden transition-all duration-500 hover:border-a83-accent/50 flex flex-col backdrop-blur-sm`}>
-          
-          {/* Spotlight Effekt (Tactical Orange) */}
-          <div class="absolute inset-0 bg-[radial-gradient(600px_circle_at_var(--m-x)_var(--m-y),var(--a83-accent),transparent_40%)] opacity-0 group-hover:opacity-[0.05] pointer-events-none transition-opacity duration-500"></div>
-
-          {/* Header Info */}
-          <div class="p-8 lg:p-12 pb-0 flex justify-between items-start relative z-10">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-sm bg-veranda-green shadow-[0_0_8px_var(--veranda-green)] animate-pulse"></span>
-              <span class="font-mono text-[10px] text-veranda-green uppercase tracking-widest">{service.status}</span>
-            </div>
-            <span class="font-mono text-[10px] text-veranda-green/60">{service.id}</span>
-          </div>
-
-          <div class="relative z-10 p-8 lg:p-12 pt-6 h-full flex flex-col justify-between flex-grow">
+    <div class="flex-1 overflow-y-auto lg:overflow-visible scrollbar-hide h-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 h-full items-stretch">
+        {displayServices.map((service) => (
+          <div class={`${service.size} group relative bg-a83-surface/40 border border-veranda-green/10 transition-all duration-500 hover:border-a83-accent/40 flex flex-col backdrop-blur-sm`}>
             
-            <div class="max-w-xl">
-              <h3 class="text-3xl lg:text-4xl font-black text-a83-text-bold tracking-tight uppercase group-hover:text-a83-accent transition-colors">
-                {service.title.replace('_', ' ')}
-              </h3>
-              <p class="font-mono text-a83-accent text-xs mt-1 mb-6 uppercase tracking-widest">{service.tagline}</p>
-              
-              <p class="text-a83-text text-lg leading-relaxed mb-8 group-hover:text-a83-text-bold transition-colors">
-                {service.description}
-              </p>
+            {/* Spotlight Effect */}
+            <div class="absolute inset-0 bg-[radial-gradient(500px_circle_at_var(--m-x)_var(--m-y),var(--a83-accent),transparent_40%)] opacity-0 group-hover:opacity-[0.04] pointer-events-none transition-opacity duration-500"></div>
 
-              {/* Pricing & Parameters */}
-              <div class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <span class="text-[9px] font-mono text-veranda-green uppercase block mb-3 border-b border-veranda-green/20 pb-1">Output_Parameters</span>
-                  <ul class="space-y-2">
-                    {service.outputParameters?.map((param: string) => (
-                      <li class="text-[11px] font-mono text-a83-text/80 flex gap-2">
-                        <span class="text-a83-accent opacity-50">├─</span> {param}
-                      </li>
-                    ))}
-                  </ul>
+            {/* Header Info: Tight */}
+            <div class="p-6 lg:p-7 pb-0 flex justify-between items-start relative z-10 shrink-0">
+              <div class="flex items-center gap-2">
+                <span class="w-1 h-1 rounded-sm bg-veranda-green shadow-[0_0_6px_var(--veranda-green)]"></span>
+                <span class="font-mono text-[9px] text-veranda-green uppercase tracking-widest">{service.status}</span>
+              </div>
+              <span class="font-mono text-[8px] text-veranda-green/30">{service.id}</span>
+            </div>
+
+            {/* Module Main Content */}
+            <div class="relative z-10 p-6 lg:p-7 pt-4 flex flex-col justify-between h-full">
+              
+              <div class="max-w-xl">
+                <h3 class="text-2xl lg:text-3xl font-black text-a83-text-bold tracking-tight uppercase group-hover:text-a83-accent transition-colors leading-none mb-1">
+                  {service.title.replace('_', ' ')}
+                </h3>
+                <p class="font-mono text-a83-accent text-[9px] mb-4 uppercase tracking-[0.2em] font-bold">{service.tagline}</p>
+                
+                <p class="text-a83-text text-base lg:text-lg leading-snug mb-6 group-hover:text-a83-text-bold transition-colors whitespace-pre-line">
+                  {service.description}
+                </p>
+
+                <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <span class="text-[8px] font-mono text-veranda-green uppercase block border-b border-veranda-green/10 pb-1">Output</span>
+                    <ul class="space-y-1">
+                      {service.outputParameters?.map((param: string) => (
+                        <li class="text-[10px] font-mono text-a83-text/70 flex gap-2 leading-tight">
+                          <span class="text-a83-accent/40">├</span> {param}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div class="space-y-2">
+                     <span class="text-[8px] font-mono text-veranda-green uppercase block border-b border-veranda-green/10 pb-1">Success</span>
+                     <ul class="space-y-1">
+                      {service.buildSuccess?.map((metric: string) => (
+                        <li class="text-[10px] font-mono text-veranda-green flex gap-2 leading-tight">
+                          <span class="opacity-30">└</span> {metric}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <div>
-                   <span class="text-[9px] font-mono text-veranda-green uppercase block mb-3 border-b border-veranda-green/20 pb-1">Build_Success</span>
-                   <ul class="space-y-2">
-                    {service.buildSuccess?.map((metric: string) => (
-                      <li class="text-[11px] font-mono text-veranda-green flex gap-2">
-                        <span class="opacity-50">└─</span> {metric}
-                      </li>
+              </div>
+
+              <div class="mt-auto pt-6 border-t border-veranda-green/10 flex flex-col gap-4">
+                <div class="flex justify-between items-end gap-2">
+                  <div>
+                    <span class="text-[8px] font-mono text-veranda-green uppercase block mb-0.5">{service.priceLabel}</span>
+                    <span class="text-xl lg:text-2xl font-black text-a83-text-bold">{service.price}</span>
+                  </div>
+                  <div class="flex flex-wrap gap-1.5 justify-end">
+                    {service.specs.slice(0, 3).map((spec: string) => (
+                      <span class="font-mono text-[7px] px-1.5 py-0.5 border border-veranda-green/10 text-veranda-green bg-veranda-green/5">
+                        {spec}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
+                
+                <a href={service.actionLink} class="group/btn relative overflow-hidden border border-a83-accent py-3 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-a83-accent hover:text-a83-bg transition-colors duration-300">
+                  <span class="relative z-10">{service.buttonLabel}_</span>
+                  <div class="absolute inset-0 -translate-x-full bg-a83-accent transition-transform duration-300 group-hover/btn:translate-x-0"></div>
+                </a>
+                
+                {service.footnote && <p class="text-[8px] font-mono text-veranda-green/40 italic leading-tight">*{service.footnote}</p>}
               </div>
             </div>
 
-            {/* Bottom Section: Price & Action */}
-            <div class="mt-auto pt-8 border-t border-veranda-green/20 flex flex-col gap-6">
-              <div class="flex justify-between items-end">
-                <div>
-                  <span class="text-[9px] font-mono text-veranda-green uppercase block mb-1">{service.priceLabel}</span>
-                  <span class="text-2xl font-black text-a83-text-bold">{service.price}</span>
-                </div>
-                <div class="flex flex-wrap gap-2 justify-end">
-                  {service.specs.map((spec: string) => (
-                    <span class="font-mono text-[9px] px-2 py-1 border border-veranda-green/20 text-veranda-green bg-veranda-green/5">
-                      > {spec}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <a href={service.actionLink} class="group/btn relative overflow-hidden border border-a83-accent py-4 text-center font-mono text-xs uppercase tracking-[0.2em] text-a83-accent hover:text-a83-bg transition-colors duration-300">
-                <span class="relative z-10">{service.buttonLabel}_</span>
-                <div class="absolute inset-0 -translate-x-full bg-a83-accent transition-transform duration-300 group-hover/btn:translate-x-0"></div>
-              </a>
-              
-              {service.footnote && <p class="text-[9px] font-mono text-veranda-green/60 italic">*{service.footnote}</p>}
-            </div>
+            {/* ORANGER STREIFEN ENTFERNT */}
+            <div class="absolute bottom-0 right-0 w-8 h-px bg-a83-accent/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute bottom-0 right-0 w-px h-8 bg-a83-accent/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>
-
-          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-a83-accent to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 
-  {/* WATERMARK: Subtle Veranda Green */}
-  <div class="absolute top-0 right-0 h-full hidden xl:flex items-center pointer-events-none select-none z-0">
-     <span class="[writing-mode:vertical-rl] rotate-180 text-[90px] font-black tracking-tighter text-veranda-green/5 uppercase leading-none">
-        Core_Capabilities
+  <div class="absolute top-0 right-0 h-full hidden 2xl:flex items-center pointer-events-none select-none z-0">
+     <span class="[writing-mode:vertical-rl] rotate-180 text-[100px] font-black tracking-tighter text-veranda-green/[0.02] uppercase leading-none">
+        Hardware_Modules
      </span>
   </div>
 
 </section>
 
 <script>
-  // Spotlight Cursor Tracking
   const cards = document.querySelectorAll('#services .group');
   
   cards.forEach(card => {
@@ -165,3 +180,13 @@ const displayServices = allServices
     });
   });
 </script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  #services .group {
+    height: auto;
+    min-height: 100%;
+  }
+</style>

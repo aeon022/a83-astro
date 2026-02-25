@@ -1,7 +1,7 @@
 ---
 // Dateipfad: frontend/src/layouts/Header.astro
-// Vibe: Spatial UI + Tactical Terminal
-// Tech: Deep Background Fade, Kinetic Typography, Vanilla JS Fix
+// Version: V14.0 - SYNCED TACTICAL NAV
+// Vibe: Spatial UI + Terminal HUD
 ---
 <header id="site-header">
   <div class="header-row flex justify-end items-center gap-6 w-full">
@@ -101,38 +101,40 @@
   const body = document.body;
   const navLinks = document.querySelectorAll('.spatial-link');
   const actionLinks = document.querySelectorAll('.spatial-action');
-  
-  // Array Spread via ES6 (wird von Astro problemlos gebundled)
   const allLinks = [...navLinks, ...actionLinks];
   
-  // FIX: TS Types entfernt. Reines Vanilla JS.
   const mediaLayer = document.getElementById('spatial-media-layer');
   const hintText = document.getElementById('hint-text');
-
   const defaultHint = "> System idle.\n> Awaiting input...";
 
   function openMenu() {
     if (trigger) trigger.setAttribute('aria-expanded', 'true');
     if (overlay) overlay.setAttribute('aria-hidden', 'false');
+    
+    // Phase 1: Glitch-Collapse starten
     html.setAttribute('data-nav-state', 'opening');
     html.classList.add('nav-lock');
     body.classList.add('nav-lock');
     
+    // Phase 2: Nach 600ms (CSS-Dauer) in den statischen "Open" Zustand
     setTimeout(() => {
       html.setAttribute('data-nav-state', 'open');
-    }, 850);
+    }, 600); 
   }
 
   function closeMenu() {
     if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    
+    // Phase 1: Glitch-Reboot starten
     html.setAttribute('data-nav-state', 'closing');
     
+    // Phase 2: Nach 500ms (CSS-Dauer) Attribute entfernen
     setTimeout(() => {
       if (overlay) overlay.setAttribute('aria-hidden', 'true');
       html.removeAttribute('data-nav-state');
       html.classList.remove('nav-lock');
       body.classList.remove('nav-lock');
-    }, 400); 
+    }, 500); 
   }
 
   if (trigger) {
@@ -142,15 +144,16 @@
     });
   }
 
+  // Schließen bei Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay && overlay.getAttribute('aria-hidden') === 'false') {
       closeMenu();
     }
   });
 
+  // Link Hover Effekte (Media & Hint)
   allLinks.forEach(link => {
     link.addEventListener('mouseenter', (e) => {
-      // FIX: Keine Casts mehr
       const target = e.currentTarget;
       const imgSrc = target.getAttribute('data-img');
       const hint = target.getAttribute('data-hint') || '';
@@ -195,7 +198,6 @@
   padding: 24px clamp(24px, 4vw, 40px); display: flex;
   justify-content: flex-end; align-items: center; pointer-events: none;
   background: transparent !important;
-  /* Keep difference to be visible on both light/dark backgrounds initially */
   mix-blend-mode: difference;
   color: #ffffff;
 }
@@ -206,7 +208,6 @@
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-/* When Menu is Open: Switch to Normal Blend Mode & Bone White to contrast Deep Canvas */
 html[data-nav-state="open"] #site-header,
 html[data-nav-state="opening"] #site-header { mix-blend-mode: normal; }
 
@@ -215,6 +216,7 @@ html[data-nav-state="opening"] .brand-wordmark,
 html[data-nav-state="open"] .mech-burger,
 html[data-nav-state="opening"] .mech-burger { color: var(--bone-white) !important; }
 
+/* Wordmark Glitch-Ghosting */
 .brand-wordmark { font-size: clamp(12px, 1.2vw, 14px); font-weight: 700; letter-spacing: 0.1em; text-decoration: none; position: relative; }
 .brand-wordmark:hover { opacity: 0.7; }
 .brand-wordmark:hover::before, .brand-wordmark:hover::after {
@@ -227,6 +229,7 @@ html[data-nav-state="opening"] .mech-burger { color: var(--bone-white) !importan
 @keyframes ghost-drift-1 { 0% { transform: translate(-50%, -50%) translate(2px, 1px) skewX(2deg); } 33% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-3deg); } 66% { transform: translate(-50%, -50%) translate(1px, -2px) skewX(4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
 @keyframes ghost-drift-2 { 0% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-2deg); } 33% { transform: translate(-50%, -50%) translate(1px, 2px) skewX(3deg); } 66% { transform: translate(-50%, -50%) translate(-1px, 1px) skewX(-4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
 
+/* Mech-Burger Menu Button */
 .mech-burger { all: unset; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; cursor: pointer; }
 .mech-burger:hover { color: var(--a83-accent) !important; }
 .mech-lines { width: 32px; height: 14px; position: relative; }
@@ -257,7 +260,6 @@ html[data-nav-state="opening"] .mech-burger { color: var(--bone-white) !importan
 html[data-nav-state="opening"] .spatial-backdrop,
 html[data-nav-state="open"] .spatial-backdrop {
   backdrop-filter: blur(40px) brightness(0.5); 
-  /* Tactical Palette: Deep Canvas as Background */
   background: var(--deep-canvas); 
   opacity: 0.95;
 }
@@ -298,7 +300,6 @@ html[data-nav-state="open"] .spatial-link:nth-child(5) { transition-delay: 0.3s;
 .spatial-num {
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(12px, 1.5vw, 16px);
-  /* Veranda Green for Subtlety */
   color: var(--veranda-green);
   opacity: 0.5;
   writing-mode: vertical-rl;
@@ -313,17 +314,13 @@ html[data-nav-state="open"] .spatial-link:nth-child(5) { transition-delay: 0.3s;
   letter-spacing: -0.03em;
   line-height: 0.85;
   text-transform: uppercase;
-  
   color: transparent;
-  /* Bone White Outline */
   -webkit-text-stroke: 1px rgba(228, 232, 223, 0.2);
-  
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .spatial-link:hover .spatial-text {
-  /* Solid Bone White on Hover */
   color: var(--bone-white);
   -webkit-text-stroke: 0px transparent;
   transform: translateX(2vw);
@@ -331,7 +328,6 @@ html[data-nav-state="open"] .spatial-link:nth-child(5) { transition-delay: 0.3s;
 }
 
 .spatial-link:hover .spatial-num {
-  /* Kojima Orange for Activity */
   color: var(--a83-accent);
   opacity: 1;
 }

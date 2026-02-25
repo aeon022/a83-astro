@@ -1,0 +1,79 @@
+---
+// Version: V15.4 - PRECISION DATA SYNC
+// Fix: Collection "showcase" (Singular) & Field Mapping
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+
+// WICHTIG: .showcase (Singular) wie in deiner Config
+const workEntries = await reader.collections.showcase.all();
+
+const missions = workEntries
+  .map(m => ({ slug: m.slug, ...m.entry }))
+  .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+---
+
+<BaseLayout title="Mission Logs | Operational History">
+  <section class="nav-content-sync min-h-screen bg-a83-bg pt-32 pb-20 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
+    
+    <div class="absolute inset-0 opacity-[0.015] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+
+    <div class="max-w-[1600px] mx-auto relative z-10">
+        
+        <header class="mb-16 border-l-4 border-a83-accent pl-8 py-2">
+            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
+                <span>// MISSION_ARCHIVE_v5.1</span>
+                <span class="opacity-30">|</span>
+                <span>NODES: {missions.length.toString().padStart(2, '0')}</span>
+            </div>
+            <h1 class="text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-none">
+                Field_Reports.
+            </h1>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min">
+            {missions.map((mission) => (
+                <a 
+                    href={`/work/${mission.slug}`}
+                    class="md:col-span-6 lg:col-span-4 group relative bg-a83-surface/40 border border-veranda-green/20 overflow-hidden flex flex-col transition-all duration-500 hover:border-a83-accent/40"
+                >
+                    <div class="relative aspect-video overflow-hidden bg-deep-canvas">
+                        {mission.coverImage && (
+                          <img 
+                              src={mission.coverImage} 
+                              alt={mission.title}
+                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0 opacity-80"
+                          />
+                        )}
+                        <div class="absolute inset-0 bg-gradient-to-t from-a83-bg via-transparent to-transparent opacity-80"></div>
+                    </div>
+
+                    <div class="p-8 flex flex-col justify-between flex-grow relative z-10">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="min-w-0">
+                                <span class="font-mono text-[10px] text-a83-accent font-black tracking-widest block mb-1 uppercase">LOG_{mission.id || 'DATA'}</span>
+                                <h2 class="text-2xl lg:text-3xl font-black text-a83-text-bold uppercase tracking-tighter leading-none group-hover:text-a83-accent transition-colors truncate">
+                                    {mission.title.replace('_', ' ')}
+                                </h2>
+                            </div>
+                            <span class="font-mono text-[10px] text-a83-text-bold font-bold border border-a83-text-bold/20 px-2 py-1 ml-4">
+                                {mission.cycle}
+                            </span>
+                        </div>
+
+                        <div class="pt-6 border-t border-veranda-green/10">
+                            <span class="font-mono text-[9px] text-veranda-green uppercase tracking-widest block mb-2">// ARCH_SUMMARY</span>
+                            <p class="text-[11px] font-mono text-a83-text-bold/60 line-clamp-2 uppercase">
+                                {mission.arch}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </div>
+  </section>
+</BaseLayout>
