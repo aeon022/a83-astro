@@ -1,0 +1,53 @@
+---
+// Version: V1.0 - CONSENT_TERMINAL
+// Vibe: Bottom-Pinned Tactical Banner
+---
+
+<div id="cookie-terminal" class="fixed bottom-6 left-6 right-6 md:left-auto md:w-[400px] z-[200] bg-deep-canvas border border-a83-accent/30 p-6 transform translate-y-[150%] transition-transform duration-700 ease-out shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+    <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-2 h-2 bg-a83-accent animate-pulse"></div>
+            <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] uppercase">Consent_Required</span>
+        </div>
+        
+        <p class="font-mono text-[11px] text-bone-white/70 uppercase leading-relaxed mb-6">
+            Dieses System nutzt Cookies zur Optimierung der Performance. Akzeptierst du das Tracking-Protokoll?
+        </p>
+
+        <div class="grid grid-cols-2 gap-3">
+            <button id="decline-cookies" class="border border-veranda-green/20 font-mono text-[10px] text-veranda-green/50 py-3 uppercase hover:bg-veranda-green/10 transition-all font-black tracking-widest">
+                Minimal
+            </button>
+            <button id="accept-cookies" class="bg-a83-accent font-mono text-[10px] text-a83-bg py-3 uppercase hover:brightness-110 transition-all font-black tracking-widest">
+                Execute_All
+            </button>
+        </div>
+        
+        <div class="mt-4 flex justify-center">
+            <a href="/cookies" class="font-mono text-[8px] text-veranda-green/30 uppercase hover:text-a83-accent transition-colors tracking-widest">View_Detailed_Policy</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const terminal = document.getElementById('cookie-terminal');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const declineBtn = document.getElementById('decline-cookies');
+
+    // Check if consent was already given
+    if (!localStorage.getItem('a83_cookie_consent')) {
+        setTimeout(() => {
+            terminal?.classList.remove('translate-y-[150%]');
+        }, 2000);
+    }
+
+    acceptBtn?.addEventListener('click', () => {
+        localStorage.setItem('a83_cookie_consent', 'full');
+        terminal?.classList.add('translate-y-[150%]');
+    });
+
+    declineBtn?.addEventListener('click', () => {
+        localStorage.setItem('a83_cookie_consent', 'minimal');
+        terminal?.classList.add('translate-y-[150%]');
+    });
+</script>

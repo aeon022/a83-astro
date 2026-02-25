@@ -1,7 +1,6 @@
 ---
-// Version: V13.1 - HIGH CONTRAST DIRECTORY
-// Vibe: High-Density Inventory / Technical Catalog
-// Update: Refined contrast values for industrial legibility
+// Version: V13.5 - HIGH CONTRAST TERMINAL (MAX READABILITY)
+// Update: Solid dark background, reduced noise, brighter text elements
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { createReader } from '@keystatic/core/reader';
@@ -10,12 +9,19 @@ import keystaticConfig from '../../../keystatic.config';
 const reader = createReader(process.cwd(), keystaticConfig);
 const serviceEntries = await reader.collections.services.all();
 
-// Sortierung nach Prio (order)
 const services = serviceEntries
   .map(s => ({ slug: s.slug, ...s.entry }))
   .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
 const totalModules = services.length;
+
+const techStack = [
+  { category: 'Engines', tools: ['Astro 5.0', 'Vite', 'React'] },
+  { category: 'Visuals', tools: ['Tailwind v4', 'GSAP', 'Figma'] },
+  { category: 'Logic', tools: ['Keystatic', 'Markdoc', 'TypeScript'] },
+  { category: 'Deployment', tools: ['Ipax Wien', 'Docker', 'TLS 1.3'] },
+  { category: 'CMS_Hybrid', tools: ['WordPress', 'Breakdance', 'Oxygen'] }
+];
 ---
 
 <BaseLayout title="System Directory | Modules">
@@ -29,7 +35,7 @@ const totalModules = services.length;
     <div class="max-w-[1400px] mx-auto relative z-10">
         
         <header class="mb-16 border-l-4 border-a83-accent pl-8 py-2">
-            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black">
+            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
                 <span>// DIRECTORY_INDEX</span>
                 <span class="opacity-30">|</span>
                 <span>NODES_ACTIVE: {totalModules.toString().padStart(2, '0')}</span>
@@ -37,61 +43,71 @@ const totalModules = services.length;
             <h1 class="text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-none">
                 Capabilities.
             </h1>
-            <p class="mt-6 font-mono text-sm text-a83-text-bold/70 max-w-xl font-medium">
-                System-weite Übersicht aller verfügbaren Architektur-Module. Wählen Sie eine Einheit für detaillierte Spezifikationen und Deployment-Parameter.
-            </p>
         </header>
 
         <div class="border-t border-veranda-green/30">
             {services.map((service) => (
-                <a 
-                    href={`/services/${service.slug}`}
-                    class="group flex flex-col md:flex-row items-center justify-between py-10 border-b border-veranda-green/20 hover:bg-a83-accent/[0.03] transition-all duration-300 relative px-4 overflow-hidden"
-                >
-                    {/* Hover Indicator Background */}
+                <a href={`/services/${service.slug}`} class="group flex flex-col md:flex-row items-center justify-between py-10 border-b border-veranda-green/20 hover:bg-a83-accent/[0.03] transition-all duration-300 relative px-4 overflow-hidden">
                     <div class="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-a83-accent/[0.06] to-transparent transition-transform duration-500 ease-out pointer-events-none"></div>
-
                     <div class="flex items-center gap-8 relative z-10 w-full md:w-auto">
-                        <span class="font-mono text-[11px] text-veranda-green font-bold group-hover:text-a83-accent transition-colors">
-                            [{service.id}]
-                        </span>
+                        <span class="font-mono text-[11px] text-veranda-green font-bold group-hover:text-a83-accent transition-colors">[{service.id}]</span>
                         <div>
-                            <h2 class="text-3xl lg:text-4xl font-black text-a83-text-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">
-                                {service.title.replace('_', ' ')}
-                            </h2>
-                            <span class="font-mono text-[11px] text-a83-text-bold/60 uppercase tracking-widest font-bold">
-                                {service.tagline}
-                            </span>
+                            <h2 class="text-3xl lg:text-4xl font-black text-a83-text-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">{service.title.replace('_', ' ')}</h2>
+                            <span class="font-mono text-[11px] text-a83-text-bold/60 uppercase tracking-widest font-bold">{service.tagline}</span>
                         </div>
                     </div>
-
                     <div class="hidden lg:flex gap-3 relative z-10">
                         {service.specs.slice(0, 3).map(spec => (
-                            <span class="font-mono text-[10px] px-3 py-1 border border-veranda-green/30 text-a83-text-bold/50 uppercase font-bold group-hover:border-a83-accent/30 group-hover:text-a83-accent/60 transition-colors">
-                                {spec}
-                            </span>
+                            <span class="font-mono text-[10px] px-3 py-1 border border-veranda-green/30 text-a83-text-bold/50 uppercase font-bold">{spec}</span>
                         ))}
                     </div>
-
                     <div class="flex items-center justify-between md:justify-end gap-12 w-full md:w-auto mt-8 md:mt-0 relative z-10">
-                        <div class="text-right">
-                            <span class="block font-mono text-[9px] text-a83-text-bold/40 uppercase font-bold tracking-wider">Investment</span>
-                            <span class="text-2xl font-black text-a83-text-bold group-hover:text-a83-accent transition-colors">
-                                {service.price} €
-                            </span>
+                        <div class="text-right font-mono">
+                            <span class="block text-[9px] text-a83-text-bold/40 uppercase font-black tracking-widest">Investment</span>
+                            <span class="text-2xl font-black text-a83-text-bold group-hover:text-a83-accent transition-colors">{service.price} €</span>
                         </div>
-                        <div class="w-12 h-12 border-2 border-veranda-green/20 flex items-center justify-center group-hover:border-a83-accent group-hover:bg-a83-accent transition-all duration-300 shadow-sm">
-                            <svg class="w-5 h-5 text-a83-text-bold group-hover:text-a83-bg transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M9 5l7 7-7 7" />
-                            </svg>
+                        <div class="w-12 h-12 border-2 border-veranda-green/20 flex items-center justify-center group-hover:border-a83-accent group-hover:bg-a83-accent transition-all">
+                            <svg class="w-5 h-5 text-a83-text-bold group-hover:text-a83-bg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M9 5l7 7-7 7" /></svg>
                         </div>
                     </div>
                 </a>
             ))}
         </div>
 
+        <div id="stack-terminal" class="mt-32 p-10 bg-[#080808] border border-veranda-green/20 relative overflow-hidden opacity-0 shadow-2xl">
+            
+            <div class="absolute inset-0 pointer-events-none z-20 bg-[linear-gradient(rgba(255,255,255,0.02)_50%,transparent_50%)] bg-[size:100%_3px] opacity-5"></div>
+            
+            <div class="crt-sync-line absolute h-[2px] w-full bg-a83-accent top-0 left-0 z-30 opacity-0 shadow-[0_0_20px_var(--a83-accent)]"></div>
+
+            <header class="terminal-header flex items-center gap-6 mb-12 opacity-0">
+                <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] uppercase">// SYSTEM_HARDWARE_INVENTORY</span>
+                <div class="h-px flex-1 bg-veranda-green/20"></div>
+            </header>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-12 relative z-10">
+                {techStack.map(item => (
+                    <div class="terminal-col space-y-6">
+                        <span class="terminal-cat block font-mono text-[10px] text-a83-accent font-black uppercase tracking-[0.25em] border-b border-a83-accent/30 pb-3 opacity-0">
+                            {item.category}
+                        </span>
+                        <ul class="space-y-3">
+                            {item.tools.map(tool => (
+                                <li class="terminal-tool flex items-center gap-3 group/tool opacity-0">
+                                    <div class="w-1.5 h-1.5 bg-a83-accent shadow-[0_0_8px_var(--a83-accent)] group-hover/tool:bg-white group-hover/tool:shadow-white transition-all"></div>
+                                    <span class="font-mono text-[11px] text-bone-white font-bold uppercase tracking-wider group-hover/tool:text-a83-accent transition-colors">
+                                        {tool}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </div>
+
         <footer class="mt-20 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-veranda-green/20 pt-12">
-            <div class="font-mono text-[11px] text-a83-text-bold/30 space-y-1 font-bold">
+            <div class="font-mono text-[11px] text-a83-text-bold/30 space-y-1 font-black">
                 <p>END_OF_DIRECTORY // ALL_NODES_LOADED</p>
                 <p>ABTEILUNG83 // CORE_OS_V5.1</p>
             </div>
@@ -107,3 +123,67 @@ const totalModules = services.length;
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const terminal = document.getElementById('stack-terminal');
+
+  if (terminal) {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: terminal,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      }
+    });
+
+    // 1. Power On (Hard Cut to visible)
+    tl.to(terminal, { opacity: 1, duration: 0.1 });
+
+    // 2. Sync Line Sweep (Schneller, heller Strahl)
+    tl.fromTo('.crt-sync-line', 
+      { top: '-5%', opacity: 0 }, 
+      { top: '105%', opacity: 1, duration: 0.6, ease: "power3.inOut" }
+    ).to('.crt-sync-line', { opacity: 0, duration: 0.1 });
+
+    // 3. Content Reveal (Präzise und schnell danach)
+    tl.to('.terminal-header', { 
+        opacity: 1, 
+        duration: 0.3, 
+        ease: "power2.out" 
+    }, "-=0.3");
+
+    tl.to('.terminal-cat', {
+      opacity: 1,
+      y: 0,
+      duration: 0.3,
+      stagger: 0.1,
+      ease: "back.out(1.2)" // Leichtes "Einrasten"
+    }, "-=0.2");
+
+    tl.to('.terminal-tool', { 
+      opacity: 1, 
+      x: 0, 
+      duration: 0.2, 
+      stagger: 0.04,
+      ease: "power1.out" 
+    }, "-=0.4");
+  }
+</script>
+
+<style>
+  /* Initiale Zustände für die Animation */
+  .terminal-cat {
+    transform: translateY(10px);
+  }
+  .terminal-tool {
+    transform: translateX(-10px);
+  }
+  #stack-terminal {
+    contain: content;
+  }
+</style>

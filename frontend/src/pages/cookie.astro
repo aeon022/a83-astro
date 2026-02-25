@@ -1,0 +1,60 @@
+---
+// Version: V22.0 - COOKIE_PROTOCOLS (BONE WHITE EDITION)
+// Path: src/pages/cookies.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Cookies // Tracking_Protocols">
+  <section class="nav-content-sync min-h-screen bg-bone-white text-black pt-32 pb-24 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
+    
+    <div class="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>
+
+    <div class="max-w-[1000px] mx-auto relative z-10">
+        <header class="mb-20 border-l-4 border-a83-accent pl-8 py-2">
+            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
+                <span>// COOKIE_PROTOCOLS</span>
+                <span class="opacity-20 text-black">|</span>
+                <span class="text-black/40">STORAGE_POLICY</span>
+            </div>
+            <h1 class="text-6xl lg:text-8xl font-black text-black tracking-tighter uppercase leading-none">
+                Cookie.<br/>Policy
+            </h1>
+            <p class="mt-8 font-mono text-sm text-black/60 max-w-xl uppercase font-bold leading-relaxed">
+                Kleine Datenpakete für eine bessere Performance. Hier erfährst du, welche Telemetrie-Einheiten wir auf deinem System hinterlegen.
+            </p>
+        </header>
+
+        <div class="space-y-20 border-t border-black/10 pt-16">
+            <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-4">
+                    <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 01_DEFINITION</span>
+                </div>
+                <div class="md:col-span-8 font-mono text-xs uppercase text-black/70 leading-relaxed space-y-4">
+                    <p>Cookies sind kleine Textdateien, die von Websites verwendet werden, um die Benutzererfahrung effizienter zu gestalten. Laut Gesetz können wir Cookies auf deinem Gerät speichern, wenn diese für den Betrieb dieser Seite unbedingt notwendig sind.</p>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-4">
+                    <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 02_CATEGORIES</span>
+                </div>
+                <div class="md:col-span-8 space-y-8 font-mono text-xs uppercase">
+                    <div class="bg-black/[0.02] p-6 border border-black/5">
+                        <span class="text-a83-accent font-black block mb-2">Notwendig [Always Active]</span>
+                        <p class="text-black/60">Helfen dabei, eine Webseite nutzbar zu machen, indem sie Grundfunktionen wie Seitennavigation und Zugriff auf sichere Bereiche der Webseite ermöglichen.</p>
+                    </div>
+                    <div class="bg-black/[0.02] p-6 border border-black/5">
+                        <span class="text-black font-black block mb-2">Statistiken</span>
+                        <p class="text-black/60">Helfen uns zu verstehen, wie Besucher mit der Webseite interagieren, indem Informationen anonym gesammelt und gemeldet werden.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="mt-40 opacity-40 py-8 border-t border-black/5 font-mono text-[9px] flex justify-between uppercase tracking-widest">
+            <span>Policy_Active // 2026</span>
+            <span>© 2026 ABTEILUNG83</span>
+        </footer>
+    </div>
+  </section>
+</BaseLayout>

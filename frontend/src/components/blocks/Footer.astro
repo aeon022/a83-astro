@@ -1,5 +1,5 @@
 ---
-// Dateipfad: frontend/src/components/blocks/Footer.astro
+// Version: V21.3 - FOOTER (SOCIAL UPLINK SYNC)
 // Vibe: Machine Type Plate / Technical Readout
 // Features: Live UTC Clock, CSS Barcode, Tactical Grid
 
@@ -44,7 +44,7 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-3 font-mono text-xs">
           <li><a href="/work" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/Work</a></li>
           <li><a href="/services" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/Services</a></li>
-          <li><a href="/process" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/Process</a></li>
+          <li><a href="/pipeline" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/Pipeline</a></li>
           <li><a href="/about" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">/About</a></li>
         </ul>
       </div>
@@ -54,7 +54,7 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-3 font-mono text-xs">
           <li><a href="/imprint" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">Impressum</a></li>
           <li><a href="/privacy" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">Datenschutz</a></li>
-          <li><a href="/agb" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">AGB</a></li>
+          <li><a href="/cookies" class="hover:text-a83-accent transition-colors hover:pl-2 duration-300 block">Cookies</a></li>
         </ul>
       </div>
 
@@ -62,21 +62,39 @@ const currentYear = new Date().getFullYear();
         <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] mb-6 text-veranda-green/50 border-b border-veranda-green/20 pb-2">Comms</h4>
         <ul class="space-y-3 font-mono text-xs">
           <li>
-            <a href="mailto:contact@abteilung83.com" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+            <a href="mailto:post@abteilung83.com" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
               <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
               Email Uplink
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/gerwin-weiher/" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/gerwin.weiher/" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/gerwinweiher" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
+              X / Twitter
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@aeon022" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
+              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
+              YouTube
             </a>
           </li>
           <li>
             <a href="https://github.com/aeon022" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
               <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
               GitHub
-            </a>
-          </li>
-          <li>
-            <a href="#" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
-              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
-              LinkedIn
             </a>
           </li>
         </ul>
@@ -125,9 +143,7 @@ const currentYear = new Date().getFullYear();
 </footer>
 
 <script>
-  // 1. LIVE UTC CLOCK
   const clock = document.getElementById('utc-clock');
-  
   if (clock) {
     const updateTime = () => {
       const now = new Date();
@@ -138,7 +154,6 @@ const currentYear = new Date().getFullYear();
     updateTime();
   }
 
-  // 2. BACK TO TOP LOGIC
   const btn = document.getElementById('back-to-top');
   btn?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

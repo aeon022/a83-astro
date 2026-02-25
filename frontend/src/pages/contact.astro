@@ -1,7 +1,7 @@
 ---
-// Version: V17.1 - SECURE CONNECTION GATEWAY
+// Version: V17.2 - SECURE CONNECTION GATEWAY (SOCIAL SYNC)
 // Vibe: Encrypted Handshake / Terminal Input
-// Update: Switched to informal "Du" tone
+// Path: src/pages/contact.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -16,7 +16,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
                 <span>// CONNECTION_INITIATION</span>
                 <span class="opacity-30">|</span>
-                <span>SECURE_UPLINK_v.5.1</span>
+                <span>SECURE_UPLINK_v.5.2</span>
             </div>
             <h1 class="text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-none">
                 Get_In_Touch.
@@ -33,11 +33,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div class="space-y-4">
                         <label class="block font-mono text-[10px] text-a83-text-bold uppercase font-black tracking-widest opacity-60">01_Entity_Name</label>
-                        <input type="text" placeholder="DEIN NAME / FIRMA" class="w-full bg-transparent border-b-2 border-veranda-green/20 py-4 font-mono text-xl text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase" required />
+                        <input name="name" type="text" placeholder="DEIN NAME / FIRMA" class="w-full bg-transparent border-b-2 border-veranda-green/20 py-4 font-mono text-xl text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase" required />
                     </div>
                     <div class="space-y-4">
                         <label class="block font-mono text-[10px] text-a83-text-bold uppercase font-black tracking-widest opacity-60">02_Communication_Node</label>
-                        <input type="email" placeholder="EMAIL_ADRESSE" class="w-full bg-transparent border-b-2 border-veranda-green/20 py-4 font-mono text-xl text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase" required />
+                        <input name="email" type="email" placeholder="EMAIL_ADRESSE" class="w-full bg-transparent border-b-2 border-veranda-green/20 py-4 font-mono text-xl text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase" required />
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
                 <div class="space-y-4">
                     <label class="block font-mono text-[10px] text-a83-text-bold uppercase font-black tracking-widest opacity-60">04_Mission_Briefing</label>
-                    <textarea rows="4" placeholder="BESCHREIB DEIN PROJEKT..." class="w-full bg-a83-bg/30 border border-veranda-green/20 p-6 font-mono text-lg text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase resize-none"></textarea>
+                    <textarea name="message" rows="4" placeholder="BESCHREIB DEIN PROJEKT..." class="w-full bg-a83-bg/30 border border-veranda-green/20 p-6 font-mono text-lg text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase resize-none"></textarea>
                 </div>
 
                 <button type="submit" class="w-full bg-a83-accent p-8 font-mono text-2xl font-black text-a83-bg uppercase tracking-[0.3em] hover:brightness-110 active:scale-[0.99] transition-all relative overflow-hidden group">
@@ -69,32 +69,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <aside class="lg:col-span-4 space-y-8">
                 <div class="bg-a83-surface/30 border border-veranda-green/20 p-8 space-y-6">
                     <span class="block font-mono text-[10px] text-a83-accent font-black uppercase tracking-[0.4em] border-b border-a83-accent/20 pb-4">// DIRECT_UPLINK</span>
-                    <div class="space-y-4 font-mono text-sm text-a83-text-bold">
+                    <div class="space-y-4 font-mono text-sm text-a83-text-bold uppercase">
                         <div>
-                            <span class="block text-[9px] text-veranda-green uppercase font-bold tracking-widest">Mail_Channel</span>
-                            <a href="mailto:post@abteilung83.at" class="hover:text-a83-accent transition-colors">post@abteilung83.at</a>
+                            <span class="block text-[9px] text-veranda-green uppercase font-bold tracking-widest mb-1">Mail_Channel</span>
+                            <a href="mailto:post@abteilung83.com" class="hover:text-a83-accent transition-colors">post@abteilung83.com</a>
                         </div>
                         <div>
-                            <span class="block text-[9px] text-veranda-green uppercase font-bold tracking-widest">Location_Node</span>
+                            <span class="block text-[9px] text-veranda-green uppercase font-bold tracking-widest mb-1">Comms_Line</span>
+                            <a href="tel:+436605672361" class="hover:text-a83-accent transition-colors">+43 660 567 23 61</a>
+                        </div>
+                        <div>
+                            <span class="block text-[9px] text-veranda-green uppercase font-bold tracking-widest mb-1">Location_Node</span>
                             <p>GRAZ_CENTRAL // AUSTRIA</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-deep-canvas/10 border-l-2 border-a83-accent p-8 font-mono">
-                    <span class="block text-[10px] text-a83-text-bold font-black uppercase mb-4 tracking-widest">// SECURITY_PROTOCOL</span>
-                    <p class="text-[11px] text-a83-text-bold/60 leading-relaxed italic uppercase">
-                        Deine Daten werden über einen gesicherten End-to-End-Kanal übertragen. Keine Speicherung in Drittanbieter-Clouds ohne deine explizite Autorisierung.
-                    </p>
+                <div class="bg-a83-surface/30 border border-veranda-green/20 p-8 space-y-6">
+                    <span class="block font-mono text-[10px] text-a83-accent font-black uppercase tracking-[0.4em] border-b border-a83-accent/20 pb-4">// SOCIAL_NODES</span>
+                    <div class="grid grid-cols-1 gap-3 font-mono text-[11px] uppercase font-bold">
+                        <a href="https://www.linkedin.com/in/gerwin-weiher/" target="_blank" class="flex items-center gap-3 text-a83-text-bold/60 hover:text-a83-accent transition-all group">
+                            <span class="w-2 h-px bg-veranda-green/30 group-hover:w-4 group-hover:bg-a83-accent transition-all"></span> LinkedIn
+                        </a>
+                        <a href="https://www.instagram.com/gerwin.weiher/" target="_blank" class="flex items-center gap-3 text-a83-text-bold/60 hover:text-a83-accent transition-all group">
+                            <span class="w-2 h-px bg-veranda-green/30 group-hover:w-4 group-hover:bg-a83-accent transition-all"></span> Instagram
+                        </a>
+                        <a href="https://x.com/gerwinweiher" target="_blank" class="flex items-center gap-3 text-a83-text-bold/60 hover:text-a83-accent transition-all group">
+                            <span class="w-2 h-px bg-veranda-green/30 group-hover:w-4 group-hover:bg-a83-accent transition-all"></span> X_Twitter
+                        </a>
+                        <a href="https://www.youtube.com/@aeon022" target="_blank" class="flex items-center gap-3 text-a83-text-bold/60 hover:text-a83-accent transition-all group">
+                            <span class="w-2 h-px bg-veranda-green/30 group-hover:w-4 group-hover:bg-a83-accent transition-all"></span> YouTube
+                        </a>
+                        <a href="https://github.com/aeon022" target="_blank" class="flex items-center gap-3 text-a83-text-bold/60 hover:text-a83-accent transition-all group">
+                            <span class="w-2 h-px bg-veranda-green/30 group-hover:w-4 group-hover:bg-a83-accent transition-all"></span> GitHub
+                        </a>
+                    </div>
                 </div>
 
-                <div class="pt-8 opacity-20 hidden lg:block">
-                    <div class="flex gap-1 mb-4">
-                        {Array.from({ length: 15 }).map((_, i) => (
-                            <div class={`h-4 w-[2px] bg-veranda-green ${i % 4 === 0 ? 'bg-a83-accent h-6' : ''}`}></div>
-                        ))}
-                    </div>
-                    <p class="font-mono text-[8px] text-veranda-green uppercase tracking-[0.5em]">A83_HANDSHAKE_READY</p>
+                <div class="bg-deep-canvas/10 border-l-2 border-a83-accent p-8 font-mono">
+                    <span class="block text-[10px] text-a83-text-bold font-black uppercase mb-4 tracking-widest">// SECURITY_PROTOCOL</span>
+                    <p class="text-[11px] text-a83-text-bold/60 leading-relaxed italic uppercase font-medium">
+                        Deine Daten werden über einen gesicherten End-to-End-Kanal übertragen. Keine Speicherung in Drittanbieter-Clouds ohne deine explizite Autorisierung.
+                    </p>
                 </div>
             </aside>
         </div>
@@ -103,7 +119,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  /* Custom Focus Ring für Inputs */
   input:focus, textarea:focus {
     box-shadow: 0 0 15px rgba(255, 75, 18, 0.1);
   }
