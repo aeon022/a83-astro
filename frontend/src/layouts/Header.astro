@@ -1,6 +1,6 @@
 ---
 // Dateipfad: frontend/src/layouts/Header.astro
-// Version: V14.0 - SYNCED TACTICAL NAV
+// Version: V16.2 - SYNCED TACTICAL NAV + ROI DEPLOYMENT
 // Vibe: Spatial UI + Terminal HUD
 ---
 <header id="site-header">
@@ -39,9 +39,9 @@
         <span class="spatial-num">02</span>
         <span class="spatial-text">Services</span>
       </a>
-      <a href="/process" class="spatial-link group" data-img="/images/nav-process.webp" data-hint="> Loading standard operating procedures...&#xa;> Zero Bloat directive active.&#xa;> Execution path ready.">
+      <a href="/pipeline" class="spatial-link group" data-img="/images/nav-pipeline.webp" data-hint="> Loading standard operating procedures...&#xa;> Zero Bloat directive active.&#xa;> Execution path ready.">
         <span class="spatial-num">03</span>
-        <span class="spatial-text">Process</span>
+        <span class="spatial-text">Pipeline</span>
       </a>
       <a href="/blog" class="spatial-link group" data-img="/images/nav-blog.webp" data-hint="> Fetching latest system logs and intel...&#xa;> Decrypting data packets...&#xa;> 100% complete.">
         <span class="spatial-num">04</span>
@@ -69,9 +69,9 @@
       <div>
         <span class="block text-[10px] text-veranda-green uppercase tracking-widest mb-4 border-b border-veranda-green/20 pb-2">// EXECUTABLES</span>
         <div class="flex flex-col gap-4">
-          <a href="/#roi-calculator" class="spatial-action flex items-center gap-3 text-sm hover:text-a83-accent transition-colors group" data-hint="> Execute /sys/calc/roi_simulator.sh&#xa;> Booting projection engine...&#xa;> Ready for input.">
+          <a href="/roi" class="spatial-action flex items-center gap-3 text-sm hover:text-a83-accent transition-colors group" data-hint="> Execute /sys/calc/roi_simulator.sh&#xa;> Loading interactive projection HUD...&#xa;> Direct access granted.">
             <span class="w-2 h-2 border border-current group-hover:bg-a83-accent transition-colors"></span>
-            ROI_CALCULATOR.sh
+            ROI_CALCULATOR.exe
           </a>
           <a href="/contact" class="spatial-action flex items-center gap-3 text-sm hover:text-a83-accent transition-colors group" data-hint="> init_connection()&#xa;> Establishing secure handshake...&#xa;> Ping: 12ms. Ready.">
             <span class="w-2 h-2 border border-current bg-bone-white group-hover:bg-a83-accent transition-colors"></span>
@@ -110,13 +110,10 @@
   function openMenu() {
     if (trigger) trigger.setAttribute('aria-expanded', 'true');
     if (overlay) overlay.setAttribute('aria-hidden', 'false');
-    
-    // Phase 1: Glitch-Collapse starten
     html.setAttribute('data-nav-state', 'opening');
     html.classList.add('nav-lock');
     body.classList.add('nav-lock');
     
-    // Phase 2: Nach 600ms (CSS-Dauer) in den statischen "Open" Zustand
     setTimeout(() => {
       html.setAttribute('data-nav-state', 'open');
     }, 600); 
@@ -124,11 +121,8 @@
 
   function closeMenu() {
     if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    
-    // Phase 1: Glitch-Reboot starten
     html.setAttribute('data-nav-state', 'closing');
     
-    // Phase 2: Nach 500ms (CSS-Dauer) Attribute entfernen
     setTimeout(() => {
       if (overlay) overlay.setAttribute('aria-hidden', 'true');
       html.removeAttribute('data-nav-state');
@@ -144,14 +138,12 @@
     });
   }
 
-  // Schließen bei Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay && overlay.getAttribute('aria-hidden') === 'false') {
       closeMenu();
     }
   });
 
-  // Link Hover Effekte (Media & Hint)
   allLinks.forEach(link => {
     link.addEventListener('mouseenter', (e) => {
       const target = e.currentTarget;
@@ -216,7 +208,6 @@ html[data-nav-state="opening"] .brand-wordmark,
 html[data-nav-state="open"] .mech-burger,
 html[data-nav-state="opening"] .mech-burger { color: var(--bone-white) !important; }
 
-/* Wordmark Glitch-Ghosting */
 .brand-wordmark { font-size: clamp(12px, 1.2vw, 14px); font-weight: 700; letter-spacing: 0.1em; text-decoration: none; position: relative; }
 .brand-wordmark:hover { opacity: 0.7; }
 .brand-wordmark:hover::before, .brand-wordmark:hover::after {
@@ -229,7 +220,6 @@ html[data-nav-state="opening"] .mech-burger { color: var(--bone-white) !importan
 @keyframes ghost-drift-1 { 0% { transform: translate(-50%, -50%) translate(2px, 1px) skewX(2deg); } 33% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-3deg); } 66% { transform: translate(-50%, -50%) translate(1px, -2px) skewX(4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
 @keyframes ghost-drift-2 { 0% { transform: translate(-50%, -50%) translate(-2px, -1px) skewX(-2deg); } 33% { transform: translate(-50%, -50%) translate(1px, 2px) skewX(3deg); } 66% { transform: translate(-50%, -50%) translate(-1px, 1px) skewX(-4deg); } 100% { transform: translate(-50%, -50%) translate(0, 0) skewX(0deg); } }
 
-/* Mech-Burger Menu Button */
 .mech-burger { all: unset; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; cursor: pointer; }
 .mech-burger:hover { color: var(--a83-accent) !important; }
 .mech-lines { width: 32px; height: 14px; position: relative; }

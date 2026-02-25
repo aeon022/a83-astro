@@ -1,0 +1,40 @@
+---
+// Dateipfad: frontend/src/pages/roi.astro
+// Version: V16.2 - ROI MODULE DEPLOYMENT (FIXED SYNTAX)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RoiCalculator from '../components/ui/RoiCalculator';
+---
+
+<BaseLayout title="ROI Simulator // Projection Engine">
+  <section class="nav-content-sync min-h-screen bg-a83-bg flex items-center justify-center py-20 px-6">
+    <div class="max-w-[1200px] w-full">
+      
+      <div class="mb-10 flex items-end justify-between border-b border-a83-accent/30 pb-6">
+        <div>
+          <span class="font-mono text-xs text-a83-accent font-black tracking-[0.5em] uppercase block mb-2">
+            // System_Executable: ROI_CALC.sh
+          </span>
+          <h1 class="text-5xl lg:text-6xl font-black text-a83-text-bold uppercase tracking-tighter">
+            Efficiency_Simulator.
+          </h1>
+        </div>
+        <div class="hidden md:block text-right font-mono text-[10px] text-veranda-green/40 uppercase">
+          <p>Status: Calculation_Ready</p>
+          <p>Kernel: v.5.1_Optimization</p>
+        </div>
+      </div>
+
+      <RoiCalculator client:load />
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-[10px] text-veranda-green/40 uppercase tracking-widest">
+        <p>> Alle Berechnungen basieren auf der $ROI$-Formel für digitale Assets:</p>
+        <p class="md:text-right">A83_PROJECTION_STABILITY: 94.2%</p>
+      </div>
+      
+      <div class="mt-4 p-4 bg-a83-accent/5 border border-a83-accent/10 text-[11px] font-mono text-a83-text-bold/60 leading-relaxed overflow-x-auto">
+        {/* FIX: Formel in Backticks und geschweifte Klammern setzen, um Astro-Parsing zu umgehen */}
+        {`$$ROI = \left( \frac{\text{Erwarteter Gewinn} - \text{Investment}}{\text{Investment}} \right) \times 100$$`}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

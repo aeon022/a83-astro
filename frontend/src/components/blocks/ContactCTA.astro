@@ -1,0 +1,191 @@
+---
+// Version: V18.4 - TACTICAL UPLINK CTA (SYNCED EDITION)
+// Vibe: Secure Gateway / Industrial Handshake
+// Path: src/components/blocks/ContactCTA.astro
+---
+
+<section id="contact-uplink" class="nav-content-sync py-32 px-6 lg:px-16 bg-a83-bg border-t border-veranda-green/20 relative overflow-hidden selection:bg-a83-accent selection:text-white">
+  
+  <div class="absolute inset-0 opacity-[0.01] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+  <div class="absolute top-0 right-0 w-1/4 h-full bg-a83-accent/[0.03] blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-[1400px] mx-auto relative z-10">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+      
+      <div class="lg:col-span-8">
+        <header class="mb-12 border-l-4 border-a83-accent pl-8">
+            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
+                <span>// CONNECTION_INITIATION</span>
+                <span class="opacity-30">|</span>
+                <span>SECURE_UPLINK_v.5.1</span>
+            </div>
+            <h2 class="text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-none">
+                Ready to_Deploy?
+            </h2>
+        </header>
+
+        <div id="form-container" class="bg-a83-surface/30 border border-veranda-green/20 p-8 lg:p-12 relative overflow-hidden group">
+          <div id="success-overlay" class="absolute inset-0 bg-deep-canvas z-50 flex flex-col items-center justify-center text-center p-10 opacity-0 pointer-events-none transition-opacity duration-500">
+              <div class="glitch-text font-mono text-a83-accent text-3xl font-black mb-4" data-text="TRANSMISSION_COMPLETE">TRANSMISSION_COMPLETE</div>
+              <p class="font-mono text-[10px] text-bone-white/60 uppercase tracking-[0.3em]">Handshake erfolgreich. Ich melde mich bei dir.</p>
+              <button onclick="location.reload()" class="mt-8 font-mono text-[10px] text-a83-accent border border-a83-accent px-6 py-3 hover:bg-a83-accent hover:text-a83-bg transition-all uppercase font-black tracking-widest">Reboot_Terminal</button>
+          </div>
+
+          <form id="uplink-form" class="space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div class="space-y-4">
+                <label class="block font-mono text-[10px] text-a83-text-bold uppercase font-black tracking-widest opacity-60">01_Entity_Name</label>
+                <input name="name" type="text" placeholder="DEIN NAME / FIRMA" class="w-full bg-transparent border-b-2 border-veranda-green/20 py-4 font-mono text-xl text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase" required />
+              </div>
+              <div class="space-y-4">
+                <label class="block font-mono text-[10px] text-a83-text-bold uppercase font-black tracking-widest opacity-60">02_Communication_Node</label>
+                <input name="email" type="email" placeholder="EMAIL_ADRESSE" class="w-full bg-transparent border-b-2 border-veranda-green/20 py-4 font-mono text-xl text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase" required />
+              </div>
+            </div>
+
+            <div class="space-y-6">
+                <label class="block font-mono text-[10px] text-a83-text-bold uppercase font-black tracking-widest opacity-60">03_Requested_Module</label>
+                <div class="flex flex-wrap gap-3">
+                    {['One-Pager', 'Custom_Dev', 'UI/UX_Audit', 'Rescue_Op', 'Other'].map(service => (
+                        <label class="cursor-none group">
+                            <input type="radio" name="service" value={service} class="peer hidden" />
+                            <span class="px-5 py-2 border border-veranda-green/20 font-mono text-[10px] text-a83-text-bold/50 uppercase font-black peer-checked:bg-a83-accent peer-checked:text-a83-bg peer-checked:border-a83-accent transition-all group-hover:border-a83-accent/50 block tracking-widest">
+                                {service}
+                            </span>
+                        </label>
+                    ))}
+                </div>
+            </div>
+
+            <div class="space-y-4">
+              <label class="block font-mono text-[10px] text-a83-text-bold uppercase font-black tracking-widest opacity-60">04_Mission_Briefing</label>
+              <textarea name="message" rows="4" placeholder="BESCHREIB DEIN PROJEKT..." class="w-full bg-a83-bg/30 border border-veranda-green/20 p-6 font-mono text-lg text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase resize-none" required></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn" class="w-full bg-a83-accent p-10 font-mono text-2xl font-black text-a83-bg uppercase tracking-[0.4em] hover:brightness-110 active:scale-[0.99] transition-all relative group overflow-hidden">
+                <span class="relative z-10">Execute_Handshake_</span>
+                <div class="absolute inset-0 -translate-x-full bg-white opacity-10 group-hover:translate-x-0 transition-transform duration-700 ease-out"></div>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4 flex flex-col justify-between py-2">
+        <div class="space-y-12">
+          <div class="bg-a83-surface/30 border border-veranda-green/20 p-8 space-y-8">
+            <span class="block font-mono text-[10px] text-a83-accent font-black uppercase tracking-[0.4em] border-b border-a83-accent/20 pb-4">// DIRECT_UPLINK</span>
+            <div class="space-y-6 font-mono text-sm text-a83-text-bold">
+              <div class="group">
+                <span class="block text-[9px] text-veranda-green uppercase font-bold tracking-[0.2em] mb-1 opacity-60">Mail_Channel</span>
+                <a href="mailto:post@abteilung83.com" class="hover:text-a83-accent transition-colors">POST@ABTEILUNG83.COM</a>
+              </div>
+              <div>
+                <span class="block text-[9px] text-veranda-green uppercase font-bold tracking-[0.2em] mb-1 opacity-60">Location_Node</span>
+                <p>GRAZ // AUSTRIA</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-deep-canvas/10 border-l-4 border-a83-accent p-8 font-mono space-y-4">
+              <span class="block text-[10px] text-a83-text-bold font-black uppercase tracking-widest">// SECURITY_PROTOCOL</span>
+              <p class="text-[12px] text-a83-text-bold/60 leading-relaxed italic uppercase font-medium">
+                  Deine Daten werden über einen gesicherten End-to-End-Kanal übertragen. Keine Speicherung ohne deine Erlaubnis.
+              </p>
+          </div>
+        </div>
+
+        <div class="hidden lg:block pt-20">
+            <div id="status-display" class="font-mono space-y-2">
+              <div class="flex justify-between text-[10px] text-veranda-green font-bold uppercase tracking-widest">
+                <span>Encryption</span>
+                <span class="text-a83-accent">Enabled (AES-256)</span>
+              </div>
+              <div class="w-full h-1 bg-veranda-green/10">
+                <div class="w-full h-full bg-veranda-green/40 origin-left animate-[loading_4s_ease-in-out_infinite]"></div>
+              </div>
+              <p id="terminal-status" class="text-[9px] text-veranda-green opacity-40 uppercase tracking-widest mt-4">
+                > System_Idle // Awaiting_Handshake
+              </p>
+            </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('uplink-form') as HTMLFormElement;
+  const container = document.getElementById('form-container');
+  const successOverlay = document.getElementById('success-overlay');
+  const statusText = document.getElementById('terminal-status');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (submitBtn) {
+        submitBtn.innerHTML = '<span class="animate-pulse">TRANSMITTING...</span>';
+        submitBtn.setAttribute('disabled', 'true');
+    }
+    if (statusText) statusText.innerText = '> Encrypting_Packets...';
+    
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xvgzbgww', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        container?.classList.add('animate-glitch-burst');
+        setTimeout(() => {
+            successOverlay?.classList.remove('pointer-events-none', 'opacity-0');
+            successOverlay?.classList.add('opacity-100');
+            if (statusText) statusText.innerText = '> Connection_Closed // Data_Sent';
+        }, 300);
+      }
+    } catch (error) {
+      if (statusText) statusText.innerText = '> Error // Node_Offline';
+      if (submitBtn) {
+        submitBtn.innerText = 'RETRY_HANDSHAKE';
+        submitBtn.removeAttribute('disabled');
+      }
+    }
+  });
+</script>
+
+<style>
+  @keyframes loading {
+    0%, 100% { transform: scaleX(0.05); }
+    50% { transform: scaleX(0.8); }
+  }
+
+  .animate-glitch-burst {
+    animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both;
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); filter: brightness(1) invert(0); }
+    20% { transform: translate(-5px, 5px); filter: brightness(2) invert(1); }
+    40% { transform: translate(5px, -5px); filter: brightness(0.5) hue-rotate(90deg); }
+    100% { transform: translate(0); filter: brightness(1) invert(0); }
+  }
+
+  .glitch-text {
+    position: relative;
+    text-shadow: 0.05em 0 0 rgba(255, 75, 18, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+    animation: glitch-anim 500ms infinite;
+  }
+
+  @keyframes glitch-anim {
+    0% { text-shadow: 0.05em 0 0 rgba(255, 75, 18, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+    15% { text-shadow: -0.05em -0.025em 0 rgba(255, 75, 18, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+    100% { text-shadow: -0.05em -0.025em 0 rgba(255, 75, 18, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+  }
+</style>

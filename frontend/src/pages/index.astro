@@ -13,6 +13,7 @@ import Manifesto from '../components/blocks/Manifesto.astro';
 import Process from '../components/blocks/Process.astro';
 import Highlights from '../components/blocks/Highlights.astro';
 import Services from '../components/blocks/Services.astro';
+import ContactCTA from '../components/blocks/ContactCTA.astro';
 
 // Data Layer (Keystatic)
 import { createReader } from '@keystatic/core/reader';
@@ -78,8 +79,10 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
     )}
 
     {/* 5. SERVICES */}
-    {/* Kein Prop 'modules' nötig, da Services.astro sich die Daten selbst holt */}
     <Services />
+
+    {/* 6. CONTACT SECTION */}
+    <ContactCTA />
 
   </div>
 
