@@ -12,11 +12,11 @@ import TerminalButton from '../ui/TerminalButton.astro';
       <video 
         src="/video/hero/hero.webm" 
         autoplay loop muted playsinline 
-        class="video-fusion-element"
+        class="video-fusion-element will-change-transform"
       ></video>
     </div>
 
-    <div class="absolute inset-0 bg-[linear-gradient(var(--a83-text)_1px,transparent_1px),linear-gradient(90deg,var(--a83-text)_1px,transparent_1px)] bg-[size:100px_100px] opacity-[0.04] mix-blend-overlay"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(var(--a83-text)_1px,transparent_1px),linear-gradient(90deg,var(--a83-text)_1px,transparent_1px)] bg-[size:100px_100px] opacity-[0.03]"></div>
   </div>
 
   <canvas id="hero-rain" class="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-60"></canvas>
@@ -31,141 +31,103 @@ import TerminalButton from '../ui/TerminalButton.astro';
        <span class="hidden md:block font-mono text-[9px] text-white/50 uppercase tracking-widest">A83_Mainframe // Orbital_Sync</span>
     </div>
 
-    <div id="hero-content-block" class="flex flex-col items-start transform-style-3d transition-transform duration-100 ease-out will-change-transform">
+    <div id="hero-content-block" class="flex flex-col items-start transform-style-3d transition-transform duration-75 ease-out will-change-transform translate-z-0">
       
       <div class="mb-6 translate-z-20 border-l-2 border-a83-accent pl-4">
         <span class="font-mono text-xs md:text-sm text-a83-sub uppercase tracking-[0.3em]">// Webdesign, das knallt.</span>
       </div>
 
-      <h1 id="hero-headline" class="relative group leading-none mb-12 translate-z-50 cursor-crosshair">
-        
+      <h1 id="hero-headline" class="relative group leading-none mb-12 translate-z-50 cursor-none">
         <span class="block font-black text-white uppercase tracking-tighter whitespace-nowrap headline-fluid-size neon-outline glitch-accent" data-text="Wie Neonlicht">
           Wie Neonlicht
         </span>
-        
         <span class="block font-black text-white uppercase tracking-tighter headline-fluid-size blazing-neon glitch-accent" data-text="im Regen.">
           im Regen.
         </span>
       </h1>
 
       <div class="flex flex-col sm:flex-row gap-8 items-start pl-2 translate-z-30">
-          <TerminalButton 
-            variant="primary" 
-            href="mailto:post@abteilung83.at" 
-            prefix="EXEC" 
-            text="init_contact" 
-          />
+          <TerminalButton variant="primary" href="mailto:post@abteilung83.at" prefix="EXEC" text="init_contact" />
           <button onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})" class="group flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.4em] text-white hover:text-a83-accent transition-all">
             <span class="w-12 h-[1px] bg-white group-hover:w-20 group-hover:bg-a83-accent transition-all"></span>
             Enter_Vault
           </button>
       </div>
-
     </div>
   </div>
 </section>
 
 <style>
-  /* --- 3D KERNEL --- */
-  .perspective-container { perspective: 1500px; }
-  .transform-style-3d { transform-style: preserve-3d; }
+  /* --- PERFORMANCE OPTIMIZED STYLES --- */
+  .perspective-container { perspective: 1000px; } /* Etwas flacher für weniger Rechenlast */
+  .transform-style-3d { transform-style: preserve-3d; backface-visibility: hidden; }
+  .translate-z-0 { transform: translateZ(0); } /* GPU Promotion */
   .translate-z-20 { transform: translateZ(20px); }
   .translate-z-30 { transform: translateZ(40px); }
   .translate-z-50 { transform: translateZ(80px); }
 
-  /* --- MENU SYNC STYLES (UNVERÄNDERT) --- */
-  :global(html[data-nav-state="opening"]) #hero-visibility-layer { animation: system-collapse 0.6s cubic-bezier(0.86, 0, 0.07, 1) forwards; pointer-events: none; }
-  :global(html[data-nav-state="open"]) #hero-visibility-layer { opacity: 0; filter: blur(20px); transform: scale(0.95); pointer-events: none; }
-  :global(html[data-nav-state="closing"]) #hero-visibility-layer { animation: system-reboot 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; pointer-events: auto; }
-  :global(html:not([data-nav-state])) #hero-visibility-layer { opacity: 1; filter: blur(0px); transform: scale(1); pointer-events: auto; }
-
-  @keyframes system-collapse {
-    0% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1); }
-    15% { opacity: 0.8; transform: scale(1.02) skewX(5deg) translate3d(5px, 0, 0); filter: blur(1px) brightness(1.5) contrast(1.2); }
-    30% { opacity: 0.3; transform: scale(0.98) skewX(-15deg) translate3d(-10px, 5px, 0); filter: invert(0.2) hue-rotate(45deg); }
-    45% { opacity: 0.9; transform: scale(1.05) skewX(10deg); filter: brightness(2) contrast(1.5); }
-    60% { opacity: 0; transform: scale(0.95); filter: blur(10px); }
-    100% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
-  }
-
-  @keyframes system-reboot {
-    0% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
-    30% { opacity: 0.8; transform: scale(1.05) skewX(-10deg) translate3d(-5px, -2px, 0); filter: brightness(2) contrast(1.5) hue-rotate(-20deg); }
-    50% { opacity: 0.3; transform: scale(0.98) skewX(15deg) translate3d(8px, 2px, 0); filter: invert(0.1); }
-    70% { opacity: 1; transform: scale(1.01) skewX(-2deg); filter: brightness(1.2); }
-    100% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1) contrast(1); }
-  }
-
-  /* --- VIDEO FUSION FIX --- */
+  /* Video Fusion: Filter reduziert für bessere Framerate */
   .video-fusion-container {
-    position: absolute; top: 0; right: 0; bottom: 0; 
-    width: 100%; /* Auf 100% erweitert, um die Kante zu entfernen */
+    position: absolute; inset: 0;
     z-index: -1; overflow: hidden;
-    mask-image: radial-gradient(ellipse at center right, black 20%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse at center right, black 20%, transparent 80%);
+    mask-image: radial-gradient(ellipse at center right, black 20%, transparent 85%);
   }
   .video-fusion-element {
     width: 100%; height: 100%; object-fit: cover; 
-    object-position: right center; /* Video rechts halten */
+    object-position: right center;
     mix-blend-mode: screen; 
-    filter: contrast(140%) brightness(0.7) saturate(1.2); opacity: 0.8;
+    filter: brightness(0.7) contrast(120%); /* Weniger Filter-Stacking */
+    opacity: 0.6;
   }
 
-  /* --- TYPOGRAPHY (UNVERÄNDERT) --- */
+  /* Typography & Effects (Unverändert) */
   .headline-fluid-size { font-size: clamp(3rem, 10vw, 9rem); line-height: 0.82; }
-  .neon-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7); text-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+  .neon-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7); }
   .blazing-neon {
     color: #ffffff;
-    text-shadow: 0 0 5px #fff, 0 0 15px var(--a83-accent), 0 0 30px var(--a83-accent), 0 0 60px var(--a83-accent), 0 0 100px color-mix(in srgb, var(--a83-accent) 50%, red);
-    animation: neon-pulse 3s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    text-shadow: 0 0 15px var(--a83-accent), 0 0 30px var(--a83-accent);
+    animation: neon-pulse 4s infinite alternate ease-in-out;
   }
   @keyframes neon-pulse {
-    0% { opacity: 0.9; filter: brightness(1); }
-    100% { opacity: 1; filter: brightness(1.2) contrast(1.1); text-shadow: 0 0 10px #fff, 0 0 20px var(--a83-accent), 0 0 40px var(--a83-accent), 0 0 80px var(--a83-accent), 0 0 120px color-mix(in srgb, var(--a83-accent) 60%, red); }
-  }
-  .glitch-accent { position: relative; }
-  .is-glitching-hard { animation: text-flicker-hard 0.1s linear infinite !important; }
-  @keyframes text-flicker-hard {
-    0% { transform: translate(0, 0); text-shadow: 5px 0 var(--a83-accent), -5px 0 #fff; color: transparent; -webkit-text-stroke: 1.5px var(--a83-accent); }
-    50% { transform: translate(-4px, 2px); text-shadow: -5px 0 var(--a83-accent), 5px 0 #fff; opacity: 0.8; color: #fff;}
-    100% { transform: translate(3px, -2px); text-shadow: 3px 0 var(--a83-accent), -3px 0 #fff; color: transparent; -webkit-text-stroke: 1.5px #fff; }
+    0% { opacity: 0.95; }
+    100% { opacity: 1; text-shadow: 0 0 20px var(--a83-accent), 0 0- 40px var(--a83-accent); }
   }
 </style>
 
 <script>
-  // 1. NEON RAIN ENGINE
-  const canvas = document.getElementById('hero-rain');
-  const headline = document.getElementById('hero-headline');
+  const canvas = document.getElementById('hero-rain') as HTMLCanvasElement;
   const section = document.getElementById('hero-section');
   const contentBlock = document.getElementById('hero-content-block');
-  const ctx = canvas ? canvas.getContext('2d') : null;
+  const headline = document.getElementById('hero-headline');
+  const ctx = canvas?.getContext('2d', { alpha: true });
 
   if (canvas && ctx && section) {
     let width = canvas.width = section.offsetWidth;
     let height = canvas.height = section.offsetHeight;
     let isIntense = false;
+    let isActive = true; // Steuerung über IntersectionObserver
+
+    // OPTIMIERUNG 1: Stop Animation when not in view
+    const observer = new IntersectionObserver((entries) => {
+      isActive = entries[0].isIntersecting;
+    }, { threshold: 0.1 });
+    observer.observe(section);
 
     if (headline) {
-      headline.addEventListener('mouseenter', () => { 
-        isIntense = true; 
-        headline.classList.add('is-glitching-hard'); 
-      });
-      headline.addEventListener('mouseleave', () => { 
-        isIntense = false; 
-        headline.classList.remove('is-glitching-hard'); 
-      });
+      headline.addEventListener('mouseenter', () => { isIntense = true; headline.classList.add('is-glitching-hard'); });
+      headline.addEventListener('mouseleave', () => { isIntense = false; headline.classList.remove('is-glitching-hard'); });
     }
 
-    const rainColor = '255, 75, 18'; 
     class Drop {
+      x = 0; y = 0; speed = 0; length = 0; opacity = 0; layer = 0;
       constructor() { this.reset(true); }
       reset(initial = false) {
         this.layer = Math.random() > 0.5 ? 1 : 2;
         this.x = Math.random() * width;
         this.y = initial ? Math.random() * -height : -50;
-        this.speed = this.layer * (isIntense ? 12 : 3); 
-        this.length = this.layer * (isIntense ? 40 : 15);
-        this.opacity = this.layer * (isIntense ? 0.6 : 0.15); 
+        this.speed = this.layer * (isIntense ? 10 : 2.5); 
+        this.length = this.layer * (isIntense ? 30 : 12);
+        this.opacity = this.layer * (isIntense ? 0.5 : 0.1); 
       }
       update() {
         this.y += this.speed;
@@ -173,37 +135,47 @@ import TerminalButton from '../ui/TerminalButton.astro';
       }
       draw() {
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(${rainColor}, ${this.opacity})`;
-        ctx.lineWidth = this.layer * 0.5; 
+        ctx.strokeStyle = `rgba(255, 75, 18, ${this.opacity})`;
+        ctx.lineWidth = this.layer * 0.5;
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x, this.y - this.length);
         ctx.stroke();
       }
     }
 
-    let drops = Array.from({ length: 180 }, () => new Drop());
+    let drops = Array.from({ length: 120 }, () => new Drop()); // Anzahl leicht reduziert
+
     function animate() {
-      ctx.clearRect(0, 0, width, height);
-      drops.forEach(drop => { drop.update(); drop.draw(); });
+      if (isActive) {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < drops.length; i++) {
+          drops[i].update();
+          drops[i].draw();
+        }
+      }
       requestAnimationFrame(animate);
     }
     animate();
 
+    // OPTIMIERUNG 2: Throttled 3D Parallax
+    if (contentBlock) {
+      let ticking = false;
+      window.addEventListener('mousemove', (e) => {
+        if (!ticking && isActive) {
+          window.requestAnimationFrame(() => {
+            const xRotate = (e.clientY / window.innerHeight - 0.5) * -8; 
+            const yRotate = (e.clientX / window.innerWidth - 0.5) * 8;
+            contentBlock.style.transform = `rotateX(${xRotate}deg) rotateY(${yRotate}deg) translateZ(0)`;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+
     window.addEventListener('resize', () => {
       width = canvas.width = section.offsetWidth;
       height = canvas.height = section.offsetHeight;
-    });
-
-    // 2. TARGETED 3D PARALLAX (Nur der Textblock)
-    if (contentBlock) {
-      window.addEventListener('mousemove', (e) => {
-        const xRotate = (e.clientY / window.innerHeight - 0.5) * -10; 
-        const yRotate = (e.clientX / window.innerWidth - 0.5) * 10;
-        
-        requestAnimationFrame(() => {
-          contentBlock.style.transform = `rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
-        });
-      });
-    }
+    }, { passive: true });
   }
 </script>

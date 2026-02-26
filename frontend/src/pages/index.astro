@@ -6,6 +6,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CommandPalette from '../components/islands/CommandPalette.astro';
 import Pill from '../components/ui/Pill.astro';
+import SEO from '../components/core/SEO.astro';
 
 // Content Blocks
 import Hero from '../components/blocks/Hero.astro';
@@ -37,6 +38,12 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
 ---
 
 <BaseLayout title={headline}>
+
+  <SEO 
+    slot="head" 
+    title="ABTEILUNG83 // Digital Systems Engineering Graz" 
+    description="Webdesign & High-Performance Entwicklung. Ich baue Astro & WordPress Systeme ohne Bloat. Strategie, Performance und ROI für dein digitales Asset."
+  />
   
   <div class="flex flex-col items-center w-full font-mono text-a83-text">
     

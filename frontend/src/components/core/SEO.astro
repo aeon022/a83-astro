@@ -1,0 +1,51 @@
+---
+// Version: V1.1 - DYNAMIC_SEO_SIGNAL
+// Vibe: Automated Technical Meta Management
+// Update: Dynamic OG-Image Route Integration
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL | string;
+}
+
+const {
+  title = "ABTEILUNG83 // Advanced Web Architecture",
+  description = "Digital Systems Engineering & High-Performance Webentwicklung. Less Noise. Nice Data. No Bloat. Webdesign und Architektur aus Graz.",
+  image = "/og-preview.png",
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+} = Astro.props;
+
+/**
+ * GENERATOR LOGIC: 
+ * Erzeugt einen URL-konformen Namen aus dem Titel für die dynamische Route.
+ * Beispiel: "Services // Tech Stack" -> "Services_//_Tech_Stack"
+ */
+const formattedTitle = title.replace(/\s+/g, '_');
+const dynamicOgImage = `/og-image/${encodeURIComponent(formattedTitle)}.png`;
+
+// Falls das Standard-Bild gesetzt ist, ersetzen wir es durch das dynamische.
+// Falls du manuell ein Bild in den Props übergibst, wird dieses bevorzugt.
+const finalImage = image === "/og-preview.png" ? dynamicOgImage : image;
+---
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(finalImage, Astro.url)} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(finalImage, Astro.url)} />
+
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />

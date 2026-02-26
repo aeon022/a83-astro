@@ -1,29 +1,55 @@
 ---
-// Version: V23.2 - THE OPERATOR MANUAL (BROAD STACK SYNC)
+// Version: V23.5 - THE OPERATOR MANUAL (PATH_SYNC)
 // Vibe: Technical Specification / Versatile Systems Engineering
-// Path: src/pages/about.astro
+// Update: Fixed public directory pathing for Vite compatibility
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/core/SEO.astro';
+
+// Korrektur: In Astro/Vite werden Dateien aus /public direkt über / serviert.
+const operatorPhoto = "/images/operator.webp";
 ---
 
 <BaseLayout title="About // Gerwin_Weiher_Profile">
+  
+  <SEO 
+    slot="head" 
+    title="Gerwin Weiher // Web-Architektur & Systems Engineering Graz" 
+    description="Erfahre mehr über ABTEILUNG83. Ich entwickle performante Web-Systeme mit Astro & WordPress (Breakdance/Oxygen). 15+ Jahre Erfahrung in digitaler Infrastruktur."
+  />
+
   <section class="nav-content-sync min-h-screen bg-bone-white text-black pt-32 pb-24 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
     
     <div class="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>
 
     <div class="max-w-[1200px] mx-auto relative z-10">
         
-        <header class="mb-32 border-l-4 border-a83-accent pl-8 py-2">
-            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
-                <span>// ENTITY_PROFILE</span>
-                <span class="opacity-20 text-black">|</span>
-                <span>OPERATOR_ID: GERWIN_WEIHER</span>
+        <header class="mb-32 border-l-4 border-a83-accent pl-8 py-2 flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="flex-1">
+                <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
+                    <span>// ENTITY_PROFILE</span>
+                    <span class="opacity-20 text-black">|</span>
+                    <span>OPERATOR_ID: GERWIN_WEIHER</span>
+                </div>
+                <h1 class="text-7xl lg:text-9xl font-black text-black tracking-tighter uppercase leading-[0.85]">
+                    Gerwin.<br/><span class="text-a83-accent">Weiher_</span>
+                </h1>
+                <p class="mt-12 font-mono text-xl text-black max-w-xl uppercase font-black leading-tight border-t border-black/10 pt-8 italic">
+                    "Websites sind Werkzeuge. Die Wahl des Systems folgt der Funktion – nicht dem Hype."
+                </p>
             </div>
-            <h1 class="text-7xl lg:text-9xl font-black text-black tracking-tighter uppercase leading-[0.85]">
-                Gerwin.<br/><span class="text-a83-accent">Weiher_</span>
-            </h1>
-            <p class="mt-12 font-mono text-xl text-black max-w-3xl uppercase font-black leading-tight border-t border-black/10 pt-8 italic">
-                "Websites sind Werkzeuge. Die Wahl des Systems folgt der Funktion – nicht dem Hype."
-            </p>
+
+            <div class="relative w-full md:w-[350px] aspect-[3/4] overflow-hidden border border-black/10 group">
+                <div class="absolute inset-0 bg-a83-accent/10 mix-blend-multiply z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <img 
+                    src={operatorPhoto} 
+                    alt="Gerwin Weiher - Digital Systems Engineer" 
+                    class="w-full h-full object-cover grayscale contrast-125 brightness-90 transition-all duration-700 group-hover:scale-105"
+                />
+                <div class="absolute top-4 right-4 z-20 font-mono text-[8px] text-white bg-black px-2 py-1 uppercase tracking-widest opacity-60">
+                    Live_Feed: Active
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-a83-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20"></div>
+            </div>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-32">

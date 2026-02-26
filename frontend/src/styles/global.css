@@ -91,12 +91,19 @@
   @apply border border-veranda-green/30;
 }
 
-/* HIDE SYSTEM CURSOR ON DESKTOP */
+/* SYSTEM CURSOR KILLER - RADIKAL */
 @media (pointer: fine) {
-  html, body, *, 
-  a, button, input, select, textarea, [role="button"] {
+  /* Wir erzwingen 'none' auf ALLEM. Keine Ausnahmen. */
+  html, body, *, *:hover {
     cursor: none !important;
   }
+}
+
+#tactical-cursor {
+  /* Erzwingt einen eigenen GPU-Layer */
+  perspective: 1000px;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* PERFORMANCE OPTIMIZATION FOR NAV ENGINE

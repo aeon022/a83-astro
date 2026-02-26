@@ -1,10 +1,19 @@
 ---
-// Version: V19.3 - CYBER-TERMINAL OVERDRIVE
+// Version: V19.4 - CYBER-TERMINAL OVERDRIVE (SEO_REINFORCED)
 // Vibe: High-Level Glitch / Neural Link / Military Tech
+// Path: src/pages/pipeline.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/core/SEO.astro';
 ---
 
 <BaseLayout title="Pipeline // Overdrive_SOP">
+  
+  <SEO 
+    slot="head" 
+    title="Execution Pipeline // Der ABTEILUNG83 Workflow" 
+    description="Vom ersten Audit (Recon) bis zum stabilen Go-Live (Extraction). Entdecke meinen hochoptimierten Prozess für performante Web-Architekturen ohne Overhead."
+  />
+
   <div class="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] mix-blend-screen bg-[url('https://media.giphy.com/media/oEI9uWUicKgR2/giphy.gif')]"></div>
   
   <section class="nav-content-sync min-h-screen bg-a83-bg pt-32 pb-40 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">

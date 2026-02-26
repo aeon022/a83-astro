@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Hier den Link zur generierten Sitemap einfügen
+Sitemap: https://abteilung83.at/sitemap-index.xml
