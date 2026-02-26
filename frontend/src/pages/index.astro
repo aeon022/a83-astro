@@ -1,7 +1,7 @@
 ---
-// Dateipfad: frontend/src/pages/index.astro
+// Version: V15.0 - CENTRAL_COMMAND_SNAP_ENGINE
 // Vibe: Central Command / Dashboard
-// Update: Integrated KnowledgeBase (FAQ) & Pipeline Sync
+// Update: Full CSS Scroll-Snap Integration
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CommandPalette from '../components/islands/CommandPalette.astro';
@@ -11,10 +11,10 @@ import SEO from '../components/core/SEO.astro';
 // Content Blocks
 import Hero from '../components/blocks/Hero.astro';
 import Manifesto from '../components/blocks/Manifesto.astro';
-import Process from '../components/blocks/Process.astro'; // HINWEIS: Falls du das hyper-kinetische Update nutzt, nenne es Pipeline.astro
+import Process from '../components/blocks/Process.astro';
 import Highlights from '../components/blocks/Highlights.astro';
 import Services from '../components/blocks/Services.astro';
-import KnowledgeBase from '../components/blocks/KnowledgeBase.astro'; // NEU
+import KnowledgeBase from '../components/blocks/KnowledgeBase.astro';
 import ContactCTA from '../components/blocks/ContactCTA.astro';
 
 // Data Layer (Keystatic)
@@ -37,7 +37,7 @@ const headline = settings?.headline || 'Less Noise. Nice Data. No Bloat.';
 const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANCE_MODE';
 ---
 
-<BaseLayout title={headline}>
+<BaseLayout title={headline} isSnappable={true}>
 
   <SEO 
     slot="head" 
@@ -45,52 +45,60 @@ const systemStatus = settings?.status === 'active' ? 'ACTIVE_NODE' : 'MAINTENANC
     description="Webdesign & High-Performance Entwicklung. Ich baue Astro & WordPress Systeme ohne Bloat. Strategie, Performance und ROI für dein digitales Asset."
   />
   
-  <div class="flex flex-col items-center w-full font-mono text-a83-text">
+  {/* 1. HERO SECTION (Locked to Viewport) */}
+  <div class="w-full snap-start snap-always relative group overflow-hidden">
+    <Hero />
     
-    {/* 1. HERO SECTION */}
-    <div class="w-full relative group">
-      <Hero />
-      
-      {/* OVERLAY UI (Nav-Sync) */}
-      <div class="nav-content-sync absolute bottom-12 left-0 right-0 z-30 flex flex-col items-center pointer-events-none transition-all duration-500">
-        
-        {/* Status Pills */}
-        <div class="flex flex-wrap gap-4 justify-center pointer-events-auto interactive-element" data-sound="hover">
-          <Pill text={`status: ${systemStatus}`} theme="neon" />
-          <Pill text="engine: astro_v5" theme="dark" />
-          <Pill text="zero_bloat: true" theme="outline" />
-        </div>
+    {/* OVERLAY UI (Nav-Sync) */}
+    <div class="nav-content-sync absolute bottom-12 left-0 right-0 z-30 flex flex-col items-center pointer-events-none transition-all duration-500">
+      <div class="flex flex-wrap gap-4 justify-center pointer-events-auto interactive-element">
+        <Pill text={`status: ${systemStatus}`} theme="neon" />
+        <Pill text="engine: astro_v5" theme="dark" />
+        <Pill text="zero_bloat: true" theme="outline" />
+      </div>
 
-        {/* Command Hint */}
-        <div class="flex justify-center mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-500">
-           <div class="text-[10px] text-veranda-green font-mono tracking-widest text-center uppercase">
-              Press <kbd class="bg-deep-canvas border border-veranda-green/30 rounded-sm px-1.5 py-0.5 text-bone-white font-bold font-mono">Cmd</kbd> + <kbd class="bg-deep-canvas border border-veranda-green/30 rounded-sm px-1.5 py-0.5 text-bone-white font-bold font-mono">K</kbd> to execute
-           </div>
-        </div>
+      <div class="flex justify-center mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-500">
+         <div class="text-[10px] text-veranda-green font-mono tracking-widest text-center uppercase">
+            Press <kbd class="bg-deep-canvas border border-veranda-green/30 rounded-sm px-1.5 py-0.5 text-bone-white font-bold font-mono">Cmd</kbd> + <kbd class="bg-deep-canvas border border-veranda-green/30 rounded-sm px-1.5 py-0.5 text-bone-white font-bold font-mono">K</kbd> to execute
+         </div>
       </div>
     </div>
-
-    {/* 2. MANIFESTO */}
-    <Manifesto />
-
-    {/* 3. PIPELINE / PROCESS */}   
-    <Process />
-
-    {/* 4. HIGHLIGHTS */}
-    {highlightProjects.length > 0 && (
-      <Highlights projects={highlightProjects} />
-    )}
-
-    {/* 5. SERVICES */}
-    <Services />
-
-    {/* 6. KNOWLEDGE BASE (FAQ) */}
-    <KnowledgeBase />
-
-    {/* 7. CONTACT SECTION */}
-    <ContactCTA />
-
   </div>
+
+  {/* 2. MANIFESTO */}
+  <section class="w-full snap-start snap-always">
+    <Manifesto />
+  </section>
+
+  {/* 3. PIPELINE / PROCESS */}   
+  <section class="w-full snap-start snap-always">
+    <Process />
+  </section>
+
+  {/* 4. HIGHLIGHTS (Conditional) */}
+  {highlightProjects.length > 0 && (
+    <section class="w-full snap-start snap-always">
+      <Highlights projects={highlightProjects} />
+    </section>
+  )}
+
+  {/* 5. SERVICES */}
+  <section class="w-full snap-start snap-always">
+    <Services />
+  </section>
+
+  {/* 6. KNOWLEDGE BASE (FAQ) 
+      Hier nutzen wir snap-proximity, falls die Liste sehr lang wird, 
+      damit der User in der Mitte der Liste stoppen kann.
+  */}
+  <section class="w-full snap-start snap-proximity">
+    <KnowledgeBase />
+  </section>
+
+  {/* 7. CONTACT SECTION */}
+  <section class="w-full snap-start snap-always">
+    <ContactCTA />
+  </section>
 
   <CommandPalette />
 </BaseLayout>

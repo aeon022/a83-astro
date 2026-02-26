@@ -1,7 +1,7 @@
 ---
 // Dateipfad: frontend/src/layouts/BaseLayout.astro
-// Version: V14.0 - GLOBAL SYNC ENGINE INTEGRATION
-// Changes: Fixed <main> class for global menu glitch support
+// Version: V14.2 - GLOBAL SYNC + SNAP ENGINE
+// Changes: Integrated optional CSS Scroll-Snap logic
 
 import '../styles/global.css'; 
 import Header from './Header.astro';
@@ -12,9 +12,14 @@ import CookieBanner from '../components/ui/CookieBanner.astro';
 interface Props {
   title: string;
   description?: string;
+  isSnappable?: boolean; // Aktiviert den Magnetic-Scroll Modus
 }
 
-const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } = Astro.props;
+const { 
+  title, 
+  description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat.", 
+  isSnappable = false 
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -32,73 +37,71 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
     <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "ABTEILUNG83",
-    "image": "https://abteilung83.at/og-preview.png",
-    "@id": "https://abteilung83.at",
-    "url": "https://abteilung83.at",
-    "telephone": "+436605672361",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Steyrergasse 88/4",
-      "addressLocality": "Graz",
-      "postalCode": "8010",
-      "addressCountry": "AT"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 47.0707,
-      "longitude": 15.4395
-    },
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "09:00",
-      "closes": "18:00"
-    },
-    "sameAs": [
-      "https://www.linkedin.com/in/gerwin-weiher/",
-      "https://www.instagram.com/gerwin.weiher/",
-      "https://x.com/gerwinweiher"
-    ],
-    "founder": {
-      "@type": "Person",
-      "name": "Gerwin Weiher"
-    }
-  }
-</script>
-  
-  
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "ABTEILUNG83",
+        "image": "https://abteilung83.at/og-preview.png",
+        "@id": "https://abteilung83.at",
+        "url": "https://abteilung83.at",
+        "telephone": "+436605672361",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Steyrergasse 88/4",
+          "addressLocality": "Graz",
+          "postalCode": "8010",
+          "addressCountry": "AT"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 47.0707,
+          "longitude": 15.4395
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/gerwin-weiher/",
+          "https://www.instagram.com/gerwin.weiher/",
+          "https://x.com/gerwinweiher"
+        ],
+        "founder": {
+          "@type": "Person",
+          "name": "Gerwin Weiher"
+        }
+      }
+    </script>
   </head>
   
   <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500 flex flex-col min-h-screen">
     
-    {/* Navigation & Brand Header */}
     <Header />
 
     {/* MAIN WRAPPER 
-        Die Klasse 'nav-content-sync' reagiert auf html[data-nav-state] 
-        und triggert die Glitch-Animationen global.
+        Dynamische Klassen für Scroll-Snap: 
+        Wenn 'isSnappable' true ist, wird der Container zum scrollbaren Viewport-Host.
     */}
-    <main class="flex-grow nav-content-sync">
+    <main class:list={[
+      "flex-grow nav-content-sync",
+      { "h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar": isSnappable }
+    ]}>
         <slot />
+
+        {/* Im Snap-Modus muss der Footer als letzte Sektion innerhalb des Containers liegen */}
+        {isSnappable && (
+          <section class="snap-start">
+            <Footer />
+          </section>
+        )}
     </main>
     
-    {/* Global Footer */}
-    <Footer />
+    {/* Im Standard-Modus (z.B. Unterseiten) rendert der Footer ganz normal am Ende des Dokuments */}
+    {!isSnappable && <Footer />}
     
-    {/* Tactical HUD Cursor */}
     <GlobalCursor />
-
-    {/* Cookie Consent Terminal */}
     <CookieBanner />
 
   </body>
@@ -109,6 +112,15 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
     font-family: 'JetBrains Mono', monospace;
   }
 
+  /* Utility zum Verstecken der Scrollbar im Snap-Modus für den Full-Interface-Look */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   .interactive-element:hover {
     filter: drop-shadow(0 0 8px color-mix(in srgb, var(--a83-accent) 40%, transparent));
     transition: filter 0.3s ease;
@@ -116,10 +128,8 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
 
   /* ==============================================================
      GLOBAL SPATIAL NAV SYNC ENGINE (GSNSE)
-     Steuert das visuelle Verhalten des Contents bei Menü-Interaktion.
      ============================================================== */
   
-  /* Verhindert Klicks auf den Content, während das System instabil/offen ist */
   html[data-nav-state="opening"] .nav-content-sync,
   html[data-nav-state="open"] .nav-content-sync {
     pointer-events: none;
@@ -147,7 +157,6 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
     pointer-events: auto;
   }
 
-  /* ANIMATION: System-Kollaps beim Öffnen */
   @keyframes system-collapse {
     0% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1); }
     15% { opacity: 0.8; transform: scale(1.02) skewX(5deg) translate3d(5px, 0, 0); filter: blur(1px) brightness(1.5) contrast(1.2); }
@@ -157,7 +166,6 @@ const { title, description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat." } 
     100% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
   }
 
-  /* ANIMATION: System-Reboot beim Schließen */
   @keyframes system-reboot {
     0% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
     30% { opacity: 0.8; transform: scale(1.05) skewX(-10deg) translate3d(-5px, -2px, 0); filter: brightness(2) contrast(1.5) hue-rotate(-20deg); }
