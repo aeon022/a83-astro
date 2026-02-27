@@ -1,19 +1,25 @@
 ---
-// Version: V15.4 - PRECISION DATA SYNC
-// Fix: Collection "showcase" (Singular) & Field Mapping
-
+// Version: V15.6 - COMPONENT-BASED ARCHIVE SYNC
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import DecommissionedTicker from '../../components/ui/DecommissionedTicker.astro'; // NEU
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
-// WICHTIG: .showcase (Singular) wie in deiner Config
+// Alle Einträge aus der Singular-Collection laden
 const workEntries = await reader.collections.showcase.all();
 
-const missions = workEntries
+// 1. Filter für ACTIVE_OPERATIONS (live)
+const activeMissions = workEntries
+  .filter(m => m.entry.status === 'live')
   .map(m => ({ slug: m.slug, ...m.entry }))
   .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+
+// 2. Filter für DECOMMISSIONED (archive)
+const archivedMissions = workEntries
+  .filter(m => m.entry.status === 'archive')
+  .map(m => ({ slug: m.slug, ...m.entry }));
 ---
 
 <BaseLayout title="Mission Logs | Operational History">
@@ -27,15 +33,15 @@ const missions = workEntries
             <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
                 <span>// MISSION_ARCHIVE_v5.1</span>
                 <span class="opacity-30">|</span>
-                <span>NODES: {missions.length.toString().padStart(2, '0')}</span>
+                <span>NODES: {activeMissions.length.toString().padStart(2, '0')}</span>
             </div>
             <h1 class="text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-none">
                 Field_Reports.
             </h1>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min">
-            {missions.map((mission) => (
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min mb-32">
+            {activeMissions.map((mission) => (
                 <a 
                     href={`/work/${mission.slug}`}
                     class="md:col-span-6 lg:col-span-4 group relative bg-a83-surface/40 border border-veranda-green/20 overflow-hidden flex flex-col transition-all duration-500 hover:border-a83-accent/40"
@@ -74,6 +80,9 @@ const missions = workEntries
                 </a>
             ))}
         </div>
+
+        {/* INTEGRATION DER UI KOMPONENTE */}
+        <DecommissionedTicker projects={archivedMissions} />
     </div>
   </section>
 </BaseLayout>

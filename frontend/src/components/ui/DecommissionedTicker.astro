@@ -1,39 +1,331 @@
 ---
-import { getCollection } from 'astro:content';
-const archivedProjects = await getCollection('showcase', ({ data }) => {
-  return data.status === 'archive';
+// Dateipfad: src/components/ui/DecommissionedTicker.astro
+import { z } from 'astro:content';
+
+// THE GATEKEEPER: Strict Schema Validation
+const projectSchema = z.object({
+  title: z.string(),
+  cycle: z.string().optional().default('XX'),
+  vector: z.string().optional().default('LEGACY_DATA'),
 });
+
+export type ProjectNode = z.infer<typeof projectSchema>;
+
+export interface Props {
+  projects: ProjectNode[];
+}
+
+const { projects } = Astro.props;
+
+if (!projects || projects.length === 0) return null;
+
+// Build-Time Randomization for Bit Streams
+const generateHex = () => Math.random().toString(16).substring(2, 10).toUpperCase();
 ---
 
-<div class="w-full bg-black/40 border-y border-veranda-green/20 py-2 overflow-hidden whitespace-nowrap group">
-  <div class="inline-block animate-marquee group-hover:pause-animation">
-    {archivedProjects.map((project) => (
-      <span class="mx-8 font-mono text-xs text-veranda-green/50 uppercase tracking-widest">
-        <span class="text-kojima-orange">[DECOMMISSIONED]</span> 
-        {project.data.title} // CYCLE: {project.data.cycle} // STATUS: OFFLINE
-      </span>
-    ))}
+<aside class="a83-decom-root group" aria-label="Decommissioned Projects Archive">
+  {/* Hardware-Accelerated Noise & CRT Effects */}
+  <div class="crt-scanline"></div>
+  <div class="noise-overlay"></div>
+
+  {/* NEW: Statischer System-Header */}
+  <header class="archive-header">
+    <h2 class="archive-title">
+      <span class="prompt-icon">►</span> SYS.ARCHIVE <span class="dimmed">// DECOMMISSIONED_NODES</span>
+    </h2>
+  </header>
+  
+  <div class="ticker-viewport">
+    <div class="marquee-track group-hover:pause">
+      
+      {/* Primary Track */}
+      <div class="marquee-content">
+        {projects.map((project) => (
+          <article class="ticker-node">
+            <div class="node-header">
+              <span class="status-label pulse-slow">SYS_OFFLINE</span>
+              <span class="hex-id">0x{generateHex()}</span>
+            </div>
+            
+            <h3 class="project-title hard-glitch" data-text={project.title}>
+              {project.title}
+            </h3>
+            
+            <div class="node-meta">
+              <span class="cycle">NODE_0x{project.cycle}</span>
+              <span class="separator animate-blink">//</span>
+              <span class="vector">{project.vector}</span>
+            </div>
+            
+            <div class="bit-stream" aria-hidden="true">
+              {generateHex()} {generateHex()} {generateHex()}
+            </div>
+          </article>
+        ))}
+      </div>
+      
+      {/* Seamless Duplicate */}
+      <div class="marquee-content" aria-hidden="true">
+        {projects.map((project) => (
+          <article class="ticker-node">
+            <div class="node-header">
+              <span class="status-label pulse-slow">SYS_OFFLINE</span>
+              <span class="hex-id">0x{generateHex()}</span>
+            </div>
+            
+            <h3 class="project-title hard-glitch" data-text={project.title}>
+              {project.title}
+            </h3>
+            
+            <div class="node-meta">
+              <span class="cycle">NODE_0x{project.cycle}</span>
+              <span class="separator animate-blink">//</span>
+              <span class="vector">{project.vector}</span>
+            </div>
+            
+            <div class="bit-stream">
+              {generateHex()} {generateHex()} {generateHex()}
+            </div>
+          </article>
+        ))}
+      </div>
+      
+    </div>
   </div>
-  <div class="inline-block animate-marquee group-hover:pause-animation" aria-hidden="true">
-    {archivedProjects.map((project) => (
-      <span class="mx-8 font-mono text-xs text-veranda-green/50 uppercase tracking-widest">
-        <span class="text-kojima-orange">[DECOMMISSIONED]</span> 
-        {project.data.title} // CYCLE: {project.data.cycle} // STATUS: OFFLINE
-      </span>
-    ))}
-  </div>
-</div>
+</aside>
 
 <style>
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  /* A83 CORE VARS */
+  .a83-decom-root {
+    --bone-white: #e4e8df;
+    --kojima-orange: #f0461e;
+    --tactical-green: #00ff41;
+    --glitch-red: #ff003c;
+    --glitch-cyan: #00f0ff;
+
+    /* FULL-BLEED BREAKOUT */
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    
+    padding: 3rem 0 5rem 0; /* Oben etwas weniger Padding wegen dem Header */
+    
+    /* GHOST HUD */
+    background: rgba(10, 12, 10, 0.4);
+    backdrop-filter: blur(12px) contrast(1.1);
+    -webkit-backdrop-filter: blur(12px) contrast(1.1);
+    
+    border-top: 1px solid rgba(0, 255, 65, 0.15);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.15);
   }
-  .animate-marquee {
-    display: inline-block;
-    animation: marquee 30s linear infinite;
+
+  .crt-scanline {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0) 50%,
+      rgba(0,0,0,0.1) 50%,
+      rgba(0,0,0,0.1)
+    );
+    background-size: 100% 4px;
+    opacity: 0.6;
   }
-  .pause-animation {
+
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.12;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+  }
+
+  /* --- NEW: ARCHIVE HEADER --- */
+  .archive-header {
+    position: relative;
+    z-index: 25;
+    padding: 0 6vw;
+    margin-bottom: 3rem;
+  }
+
+  .archive-title {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--kojima-orange);
+    letter-spacing: 0.2em;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .archive-title .prompt-icon {
+    color: var(--tactical-green);
+    margin-right: 0.5rem;
+    animation: blink 1s steps(2, start) infinite;
+  }
+
+  .archive-title .dimmed {
+    color: rgba(228, 232, 223, 0.4); /* Bone White gedimmt */
+    font-weight: 400;
+  }
+  /* --------------------------- */
+
+  .ticker-viewport {
+    display: flex;
+    position: relative;
+    z-index: 15;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: fit-content;
+    animation: marquee-scroll 75s linear infinite;
+    will-change: transform;
+  }
+
+  .pause {
     animation-play-state: paused;
+  }
+
+  .marquee-content {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    min-width: 100%;
+  }
+
+  .ticker-node {
+    display: flex;
+    flex-direction: column;
+    padding: 0 6vw;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .node-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .status-label {
+    font-size: 0.75rem;
+    font-weight: 900;
+    background: var(--kojima-orange);
+    color: #fff;
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.15em;
+  }
+
+  .hex-id {
+    font-size: 0.8rem;
+    color: rgba(228, 232, 223, 0.5);
+  }
+
+  .project-title {
+    /* DOWNGRADE: Font-Size reduziert von max 8rem auf 4.5rem */
+    font-size: clamp(2rem, 4vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--bone-white);
+    position: relative;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .hard-glitch {
+    animation: text-shudder 4s infinite;
+  }
+
+  .hard-glitch::before,
+  .hard-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .hard-glitch::before {
+    color: var(--glitch-cyan);
+    z-index: -1;
+    animation: glitch-flash-1 4s infinite linear alternate-reverse;
+  }
+
+  .hard-glitch::after {
+    color: var(--glitch-red);
+    z-index: -2;
+    animation: glitch-flash-2 5s infinite linear alternate-reverse;
+  }
+
+  .node-meta {
+    margin-top: 0.75rem;
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    color: var(--tactical-green);
+    letter-spacing: 0.2em;
+    opacity: 0.9;
+  }
+
+  .bit-stream {
+    font-size: 0.7rem;
+    color: rgba(228, 232, 223, 0.3);
+    margin-top: 0.5rem;
+    word-spacing: 0.5rem;
+    font-family: monospace;
+  }
+
+  /* KEYFRAMES */
+  @keyframes marquee-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+
+  .pulse-slow {
+    animation: pulse 4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  }
+
+  .animate-blink {
+    animation: blink 1s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    to { visibility: hidden; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes text-shudder {
+    0%, 94%, 98%, 100% { transform: translate(0, 0); text-shadow: none; }
+    95% { transform: translate(-3px, 1px); text-shadow: -3px 0 var(--glitch-red), 3px 0 var(--glitch-cyan); }
+    96% { transform: translate(3px, -1px); text-shadow: 3px 0 var(--glitch-cyan), -3px 0 var(--glitch-red); }
+    97% { transform: translate(-1px, 2px); text-shadow: none; }
+  }
+
+  @keyframes glitch-flash-1 {
+    0%, 92%, 96%, 100% { opacity: 0; clip-path: inset(0 0 0 0); transform: translate(0); }
+    93% { opacity: 1; clip-path: inset(10% 0 80% 0); transform: translate(-5px, 2px); }
+    95% { opacity: 1; clip-path: inset(40% 0 10% 0); transform: translate(5px, -2px); }
+  }
+
+  @keyframes glitch-flash-2 {
+    0%, 91%, 95%, 100% { opacity: 0; clip-path: inset(0 0 0 0); transform: translate(0); }
+    92% { opacity: 1; clip-path: inset(80% 0 5% 0); transform: translate(5px, -5px); }
+    94% { opacity: 1; clip-path: inset(20% 0 30% 0); transform: translate(-5px, 5px); }
   }
 </style>
