@@ -95,91 +95,123 @@
 </div>
 
 <script>
-  const trigger = document.getElementById('nav-trigger');
-  const overlay = document.getElementById('nav-overlay');
-  const html = document.documentElement;
-  const body = document.body;
-  const navLinks = document.querySelectorAll('.spatial-link');
-  const actionLinks = document.querySelectorAll('.spatial-action');
-  const allLinks = [...navLinks, ...actionLinks];
-  
-  const mediaLayer = document.getElementById('spatial-media-layer');
-  const hintText = document.getElementById('hint-text');
-  const defaultHint = "> System idle.\n> Awaiting input...";
-
-  function openMenu() {
-    if (trigger) trigger.setAttribute('aria-expanded', 'true');
-    if (overlay) overlay.setAttribute('aria-hidden', 'false');
-    html.setAttribute('data-nav-state', 'opening');
-    html.classList.add('nav-lock');
-    body.classList.add('nav-lock');
+  const initNavSystems = () => {
+    const trigger = document.getElementById('nav-trigger');
+    const overlay = document.getElementById('nav-overlay');
+    const html = document.documentElement;
+    const body = document.body;
     
-    setTimeout(() => {
-      html.setAttribute('data-nav-state', 'open');
-    }, 600); 
-  }
+    // 1. SYSTEM RESET FÜR ASTRO VIEW TRANSITIONS
+    // Reinigt alle Altlasten (z.B. blockierte Scrollbars) von vorherigen Seiten
+    html.removeAttribute('data-nav-state');
+    html.classList.remove('nav-lock');
+    body.classList.remove('nav-lock');
+    if (overlay) overlay.setAttribute('aria-hidden', 'true');
 
-  function closeMenu() {
-    if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    html.setAttribute('data-nav-state', 'closing');
-    
-    setTimeout(() => {
-      if (overlay) overlay.setAttribute('aria-hidden', 'true');
-      html.removeAttribute('data-nav-state');
-      html.classList.remove('nav-lock');
-      body.classList.remove('nav-lock');
-    }, 500); 
-  }
+    const openMenu = (t) => {
+      if (t) t.setAttribute('aria-expanded', 'true');
+      if (overlay) overlay.setAttribute('aria-hidden', 'false');
+      html.setAttribute('data-nav-state', 'opening');
+      html.classList.add('nav-lock');
+      body.classList.add('nav-lock');
+      
+      setTimeout(() => {
+        // Nur auf 'open' setzen, wenn es nicht in der Zwischenzeit abgebrochen wurde
+        if(html.getAttribute('data-nav-state') === 'opening') {
+            html.setAttribute('data-nav-state', 'open');
+        }
+      }, 600); 
+    };
 
-  if (trigger) {
-    trigger.addEventListener('click', () => {
-      if (trigger.getAttribute('aria-expanded') === 'true') closeMenu();
-      else openMenu();
-    });
-  }
+    const closeMenu = (t) => {
+      if (t) t.setAttribute('aria-expanded', 'false');
+      html.setAttribute('data-nav-state', 'closing');
+      
+      setTimeout(() => {
+        if (overlay) overlay.setAttribute('aria-hidden', 'true');
+        html.removeAttribute('data-nav-state');
+        html.classList.remove('nav-lock');
+        body.classList.remove('nav-lock');
+      }, 500); 
+    };
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay && overlay.getAttribute('aria-hidden') === 'false') {
-      closeMenu();
+    if (trigger) {
+      // 2. EVENT LISTENER CLEANUP
+      // Klonen verhindert, dass Events bei View Transitions doppelt gebunden werden
+      const newTrigger = trigger.cloneNode(true);
+      trigger.parentNode.replaceChild(newTrigger, trigger);
+
+      newTrigger.addEventListener('click', () => {
+        if (newTrigger.getAttribute('aria-expanded') === 'true') closeMenu(newTrigger);
+        else openMenu(newTrigger);
+      });
+
+      // Globaler Escape-Key Listener (sicher registriert)
+      const handleEsc = (e) => {
+        if (e.key === 'Escape' && overlay && overlay.getAttribute('aria-hidden') === 'false') {
+          closeMenu(newTrigger);
+        }
+      };
+      
+      // Alte Listener vom Window entfernen, bevor wir neu binden
+      if (window.a83NavEsc) document.removeEventListener('keydown', window.a83NavEsc);
+      window.a83NavEsc = handleEsc;
+      document.addEventListener('keydown', window.a83NavEsc);
     }
-  });
 
-  allLinks.forEach(link => {
-    link.addEventListener('mouseenter', (e) => {
-      const target = e.currentTarget;
-      const imgSrc = target.getAttribute('data-img');
-      const hint = target.getAttribute('data-hint') || '';
+    // 3. SPATIAL HOVER EFFECTS NEU BINDEN
+    const navLinks = document.querySelectorAll('.spatial-link');
+    const actionLinks = document.querySelectorAll('.spatial-action');
+    const mediaLayer = document.getElementById('spatial-media-layer');
+    const hintText = document.getElementById('hint-text');
+    const defaultHint = "> System idle.\n> Awaiting input...";
 
-      if (mediaLayer && imgSrc) {
-        mediaLayer.src = imgSrc;
-        mediaLayer.classList.remove('opacity-0');
-        mediaLayer.classList.add('opacity-40');
-      }
+    [...navLinks, ...actionLinks].forEach(link => {
+      link.addEventListener('mouseenter', (e) => {
+        const target = e.currentTarget;
+        const imgSrc = target.getAttribute('data-img');
+        const hint = target.getAttribute('data-hint') || '';
 
-      if (hintText) {
-        hintText.innerHTML = ''; 
-        hintText.classList.remove('typing-effect');
-        void hintText.offsetWidth; 
-        
-        setTimeout(() => {
-          hintText.textContent = hint;
-          hintText.classList.add('typing-effect');
-        }, 30);
-      }
+        if (mediaLayer && imgSrc) {
+          mediaLayer.src = imgSrc;
+          mediaLayer.classList.remove('opacity-0');
+          mediaLayer.classList.add('opacity-40');
+        }
+
+        if (hintText) {
+          hintText.innerHTML = ''; 
+          hintText.classList.remove('typing-effect');
+          void hintText.offsetWidth; // Reflow erzwingen
+          
+          setTimeout(() => {
+            hintText.textContent = hint;
+            hintText.classList.add('typing-effect');
+          }, 30);
+        }
+      });
+      
+      link.addEventListener('mouseleave', () => {
+        if (mediaLayer) {
+          mediaLayer.classList.remove('opacity-40');
+          mediaLayer.classList.add('opacity-0');
+        }
+
+        if (hintText) {
+          hintText.textContent = defaultHint;
+          hintText.classList.remove('typing-effect');
+        }
+      });
     });
-    
-    link.addEventListener('mouseleave', () => {
-      if (mediaLayer) {
-        mediaLayer.classList.remove('opacity-40');
-        mediaLayer.classList.add('opacity-0');
-      }
+  };
 
-      if (hintText) {
-        hintText.textContent = defaultHint;
-        hintText.classList.remove('typing-effect');
-      }
-    });
-  });
+  // Astro Lifecycle Hooks (Feuert initial und nach JEDEM Routing-Glitch)
+  document.addEventListener('astro:page-load', initNavSystems);
+  
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initNavSystems();
+  } else {
+    document.addEventListener('DOMContentLoaded', initNavSystems);
+  }
 </script>
 
 <style is:global>

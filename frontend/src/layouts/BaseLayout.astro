@@ -107,6 +107,68 @@ const {
   </body>
 </html>
 
+<script>
+  const initGlobalRoutingGlitch = () => {
+    // 1. Hole alle internen Links (beginnen mit '/'). 
+    // Wir ignorieren externe Links und unseren speziellen "Vault Breach" Button aus dem Hero,
+    // da dieser seine eigene, noch extremere Animation hat.
+    const links = document.querySelectorAll('a[href^="/"]:not([target="_blank"]):not(#vault-breach-btn)');
+    
+    links.forEach(link => {
+      // Double-Bind Protection (wichtig bei Astro View Transitions)
+      if (link.hasAttribute('data-glitch-bound')) return;
+      link.setAttribute('data-glitch-bound', 'true');
+
+      link.addEventListener('click', (e) => {
+        // Erlaube weiterhin "In neuem Tab öffnen" (Strg+Klick, Cmd+Klick, Mittelklick)
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+        
+        const targetUrl = link.getAttribute('href');
+        
+        // Ignoriere Anchor-Links auf der selben Seite oder Klicks auf die aktive URL
+        if (!targetUrl || targetUrl.startsWith('#') || targetUrl === window.location.pathname) return;
+
+        // Standard-Routing blockieren
+        e.preventDefault();
+        
+        // Verhindern, dass die Animation mehrfach zündet
+        if (document.body.classList.contains('sys-transition-out')) return;
+        
+        // Start Glitch-Out
+        document.body.classList.add('sys-transition-out');
+
+        // OPTIONAL: Falls dein Nav-Menü offen ist, triggern wir hier das Schließen,
+        // damit es beim Seitenwechsel nicht im Weg ist.
+        const html = document.documentElement;
+        if (html.getAttribute('data-nav-state') === 'open') {
+           html.setAttribute('data-nav-state', 'closing');
+        }
+
+        // Exakt am Ende der Glitch-Out Animation (400ms) URL feuern.
+        // Wir setzen es auf 350ms, um Lade-Latenzen des Browsers leicht zu überschneiden.
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 350); 
+        
+        // Fallback Cleanup: Falls der User per Browser-"Zurück"-Button kommt,
+        // räumen wir die Klasse nach 1 Sekunde wieder ab.
+        setTimeout(() => {
+          document.body.classList.remove('sys-transition-out');
+        }, 1000);
+      });
+    });
+  };
+
+  // Astro View Transitions Support
+  document.addEventListener('astro:page-load', initGlobalRoutingGlitch);
+  
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initGlobalRoutingGlitch();
+  } else {
+    document.addEventListener('DOMContentLoaded', initGlobalRoutingGlitch);
+  }
+</script>
+
 <style is:global>
   kbd {
     font-family: 'JetBrains Mono', monospace;
@@ -173,4 +235,54 @@ const {
     70% { opacity: 1; transform: scale(1.01) skewX(-2deg); filter: brightness(1.2); }
     100% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1) contrast(1); }
   }
+
+/* ==============================================================
+     GLOBAL GLITCH TRANSITION ENGINE (ROUTING)
+     ============================================================== */
+  
+/* IN-GLITCH: Feuert automatisch bei jedem Seitenaufruf und stabilisiert die neue Seite */
+  body {
+    /* FIX: KEIN 'forwards' mehr! Der Transform muss nach 400ms komplett vom Body verschwinden */
+    animation: sys-glitch-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* OUT-GLITCH: Wird per JS vor dem Verlassen der Seite getriggert */
+  body.sys-transition-out {
+    animation: sys-glitch-out 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  body.sys-transition-out::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 65, 0.1),
+      rgba(0, 255, 65, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    animation: scanline-flash 0.4s forwards;
+  }
+
+  /* Die Seite reißt auf und blurrt aus */
+  @keyframes sys-glitch-out {
+    0% { filter: none; transform: translate3d(0, 0, 0) scale(1); }
+    30% { filter: contrast(150%) saturate(200%) hue-rotate(90deg); transform: translate3d(-5px, 2px, 0) scale(1.01) skewX(2deg); }
+    60% { filter: invert(0.1) contrast(300%) drop-shadow(3px 0 0 var(--tactical-green)) drop-shadow(-3px 0 0 var(--kojima-orange)); transform: translate3d(10px, -5px, 0) scale(1.03) skewX(-3deg); }
+    100% { filter: blur(6px) contrast(400%) brightness(150%); transform: scale(1.05); } /* PEAK - Hier feuert der Seitenwechsel */
+  }
+
+  /* Die neue Seite fängt exakt beim Out-Peak an und stabilisiert sich */
+@keyframes sys-glitch-in {
+    0% { filter: blur(6px) contrast(400%) brightness(150%) invert(1); transform: scale(1.05) skewX(5deg); }
+    50% { filter: invert(0.2) contrast(300%) drop-shadow(3px 0 0 var(--tactical-green)); transform: translate3d(5px, -5px, 0) scale(1.02) skewX(-2deg); }
+    /* FIX: transform: none löst die Fixed-Position-Blockade */
+    100% { filter: none; transform: none; }
+  }
+
 </style>
