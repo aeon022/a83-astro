@@ -1,0 +1,22 @@
+{
+  "title": "Die Brücke - soziokulturelles Zentrum",
+  "coverImage": "/images/showcase/die-bruecke-2023/coverImage.webp",
+  "excerpt": "Digitale Infrastruktur für Soziokultur. Ein komplexes Event- und Ticketing-System auf Oxygen-Basis, das vielfältige Kulturformate verwaltet und den Ticketverkauf nahtlos integriert.",
+  "entity": "Die Brücke",
+  "vector": "Platform",
+  "arch": "WP / Oxygen / Woo",
+  "cycle": "2023",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Die Brücke - soziokulturelles Zentrum (Graz). Fokus: Kabarett, Konzerte, Literatur.\n\n**System Conflict**: Das alte System konnte die Dichte des Programms und die kommerzielle Seite (Tickets) nicht nahtlos verbinden.\n\n### Mission Objectives:\n\n**Event-Core Integration**: Mächtiges Kalender-System für hunderte Termine.\n**Culture-Commerce Bridge**: Nahtloser Verkauf von Event-Tickets direkt über die Website.\n**Oxygen Customization**: Do-it-Yourself-Ästhetik mit moderner UX.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ENGINE] Oxygen Builder (Custom Design)",
+    "[LOGIC] The Events Calendar Pro",
+    "[COMMERCE] WooCommerce (Ticket Bridge)",
+    "[DATA] Dynamic Content Injection"
+  ],
+  "fixExecuted": "Custom Event Architecture in Oxygen. Wir haben eigene PHP-Templates injiziert, um volle Design-Kontrolle über die Event-Views zu erlangen.\n\n**Ticket-Flow**: WooCommerce wurde als \"Silent Engine\" integriert. Der Checkout ist minimalistisch und funktionell.\n\n**Dynamic Filtering**: Das Frontend erlaubt eine schnelle Filterung nach Kategorien (Musik, Wort, Diskurs).",
+  "finalStatus": "SYSTEM STATUS: CULTURE_SYNCED. Event-Handling: Automated. Ticket-Sales: Integrated.",
+  "gatewayUri": "https://diebruecke.social",
+  "isHighlighted": false
+}

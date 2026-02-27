@@ -1,0 +1,22 @@
+{
+  "title": "Kanizaj Marija-M. Photography GmbH",
+  "coverImage": "/images/showcase/kanizaj-marija/coverImage.webp",
+  "excerpt": "High-End Fotografie für Portrait, Reportage und Corporate Visuals. Bekannt für bildgewaltiges Storytelling und eine immersive Web-Experience, die visuelle Ästhetik radikal in den Mittelpunkt stellt.",
+  "entity": "Kanizaj Marija-M. Photography GmbH",
+  "vector": "Photography, Art",
+  "arch": "WP, Oxygen Builder, Fullpage.js",
+  "cycle": "2023",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Marija Kanizaj Photography. High-End Portrait & Documentary.\n\n**System Conflict**: Die Anforderung war eine immersive \"Fullpage\"-Navigation, bei der jedes Bild die volle Aufmerksamkeit bekommt. Standard-WordPress-Themes scheitern hier an der Performance und der starren DOM-Struktur.\n\n### Mission Objectives:\n\n**Zero-Distraction UI**: Das Interface muss sich den Bildern unterordnen.\n**Dynamic Adaptation**: Der Header (Logo/Menü) muss intelligent auf den Hintergrund reagieren (Hell/Dunkel-Wechsel pro Sektion).\n**Fluid Navigation**: Scroll-Jacking ohne \"Jank\". Absolute Smoothness erforderlich.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ENGINE] Oxygen Builder",
+    "[LIB] Fullpage.js (Custom Integration)",
+    "[LOGIC] Vanilla JS (Color Detection)",
+    "[OPTIMIZATION] Srcset Management"
+  ],
+  "fixExecuted": "Wir haben Oxygen als leere Leinwand genutzt und eine **Custom Fullpage.js Implementation** injiziert. Statt schwerer Plugins haben wir die Scroll-Logik direkt an den Core gebunden.\n\n**Adaptive Header Protocol**: Ein eigens entwickelter **Color-State-Controller** überwacht die aktive Sektion. Sobald der Viewport wechselt, prüft das System den Helligkeitswert des Hintergrunds und invertiert Logo & Navigation in Echtzeit.\n\n**Asset Delivery**: Da es sich um ein Portfolio handelt, haben wir einen aggressiven Lazy-Loading-Algorithmus implementiert, der nur die direkten Nachbar-Slides vorlädt (Preload Neighbor).",
+  "finalStatus": "SYSTEM STATUS: OPERATIONAL. Visual Impact: Maximum. User Flow: Guided. Tech Stack: Invisible.",
+  "gatewayUri": "https://kanizaj.com",
+  "isHighlighted": false
+}

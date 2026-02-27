@@ -1,0 +1,21 @@
+{
+  "title": "I WOOD LIKE KUMPUSCH",
+  "coverImage": "/images/showcase/kumpusch/coverImage.webp",
+  "excerpt": "Digitale Transformation eines Traditionsbetriebs zum Design-Studio. Radikale Anpassung eines WordPress-Templates, um die Fusion aus Handwerk, 'Robotic' und modernem Interior-Design markengerecht zu inszenieren.",
+  "entity": "I WOOD LIKE KUMPUSCH",
+  "vector": "Workshop, Corporate",
+  "arch": "WP, Template Mod",
+  "cycle": "2024",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: B. Kumpusch GmbH. Interior Design, Tischlerei & Robotic Milling.\n\n**System Conflict**: Ein traditioneller Handwerksbetrieb (gegr. 1978) hat sich zu einem High-End Designstudio entwickelt.\n\n### Mission Objectives:\n\n**Brand Injection**: Implementierung des neuen Contents.\n**Template Mutation**: Anpassung einer Standard-Architektur, um den \"Template-Look\" zu brechen.\n**Robotic Integration**: Darstellung der neuen 5-Achs-CNC-Fähigkeiten (\"Fräd\") als futuristischer USP.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[BASE] Custom Template Modification",
+    "[LOGIC] Advanced Custom Fields",
+    "[VISUALS] Fullscreen Portfolio Grid"
+  ],
+  "fixExecuted": "Strategischer Template Override. Wir haben ein kommerzielles Theme auf sein bloßes Skelett reduziert und die \"I Wood Like\" DNA injiziert.\n\n**Visual Space**: Implementierung einer Sektoren-Trennung in \"Space\" und \"Design\". Die Navigationsstruktur wurde abgeflacht, um die Klick-Tiefe zu reduzieren.",
+  "finalStatus": "SYSTEM STATUS: CRAFT_V2.0. Identity: Successfully recompiled. Robotic-Link: Active.",
+  "gatewayUri": "https://kumpusch.at",
+  "isHighlighted": false
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Dr. Christoph Illmer",
+  "coverImage": "/images/showcase/dr-christoph-illmer/coverImage.webp",
+  "excerpt": "Digitale Architektur für moderne Lungenheilkunde. Ein maßgeschneidertes Oxygen-Design, das medizinische Komplexität durch klare Struktur in eine Patient Experience übersetzt.",
+  "entity": "Dr. Christoph Illmer",
+  "vector": "Medical",
+  "arch": "WP, Oxygen Builder, ACF",
+  "cycle": "2025",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Dr. med. univ. Christoph Illmer. Facharzt für Innere Medizin und Lungenheilkunde in Graz.\n\n**System Conflict**: Eine moderne Wahlarzt-Ordination benötigte eine Präsenz, die sich vom \"Weißkittel-Standard\" abhebt. Clean & Calm.\n\n### Mission Objectives:\n\n**Trust Architecture**: Design, das durch Typografie und Whitespace Vertrauen schafft.\n**Information Clarity**: Komplexe diagnostische Leistungen verständlich aufbereiten.\n**Performance & Privacy**: Absolute Datensparsamkeit und Geschwindigkeit (Mobile First).",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ENGINE] Oxygen Builder",
+    "[DESIGN] Custom UI/UX (No-Theme)",
+    "[MODULE] Services Grid",
+    "[OPTIMIZATION] Mobile-First Architecture"
+  ],
+  "fixExecuted": "Verzicht auf Bloatware-Themes; maßgeschneidertes Interface \"from scratch\" mit **Oxygen**.\n\n**Content Surgery**: Medizinische Leistungen wurden in interaktive **Service-Module** umgewandelt. Jede Untersuchung wird prägnant ohne Fachchinesisch erklärt.\n\n**Visual Therapy**: Farbschema \"Medical Zen\". Navigation auf das Wesentliche reduziert, um die kognitive Last zu minimieren.",
+  "finalStatus": "SYSTEM STATUS: VITAL SIGNS STABLE. Patient-Flow: Optimized. Load-Time: Minimal.",
+  "gatewayUri": "https://innere-lunge.at",
+  "isHighlighted": true
+}

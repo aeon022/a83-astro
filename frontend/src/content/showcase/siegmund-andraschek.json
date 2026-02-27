@@ -1,0 +1,20 @@
+{
+  "title": "Siegmund Andraschek",
+  "coverImage": "/images/showcase/siegmund-andraschek/coverImage.webp",
+  "excerpt": "Digitale Bühne für einen Komponisten. Eine atmosphärische Onepage-Experience, die Musik durch visuelle Lautstärke spürbar macht.",
+  "entity": "Siegmund Andraschek",
+  "vector": "Design, Customization",
+  "arch": "WP, Theme",
+  "cycle": "2021",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Siegmund Andraschek. Komponist, Musiker, Arrangeur. Fokus: Klassik & Crossover.\n\n**System Conflict**: Klassische Musiker-Websites sind oft statisch. Ziel war es, die emotionale Wucht seiner Kompositionen visuell zu übersetzen.\n\n### Mission Objectives:\n\n**Visual Audio**: Design, das Rhythmus und Klang visuell übersetzt (Onepage-Flow).\n**Personality**: Der Künstler muss als Mensch greifbar sein, nicht nur als Diskografie.\n**Access**: Schneller Zugriff auf alle Kernbereiche.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ARCH] Onepage Customization",
+    "[STYLE] Dark Mode / Atmospheric"
+  ],
+  "fixExecuted": "Onepage-Template radikal angepasst (**\"Dark Mode Override\"**).\n\n**Atmospheric Layer**: Einsatz großer, stimmungsvoller Portraits. Typografie wird als grafisches Element genutzt (\"HÖR DAS LEBEN!\"), um Lautstärke zu simulieren.\n\n**Flow Control**: Die Sektionen fließen nahtlos ineinander über, geführt durch eine Sticky-Navigation.",
+  "finalStatus": "SYSTEM STATUS: COMPLETED (LEGACY). Vibe: Intense. Impact: High.",
+  "gatewayUri": "https://andraschek.at",
+  "isHighlighted": false
+}

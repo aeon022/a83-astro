@@ -1,0 +1,22 @@
+{
+  "title": "Messner GmbH Workshops for noble interiors",
+  "coverImage": "/images/showcase/messner-graz/coverImage.webp",
+  "excerpt": "Wie übersetzt man die physische Qualität eines Printmagazins in den Browser? Kein \"Scroll-Durch\", sondern ein \"Blättern-Gefühl\".",
+  "entity": "Messnger GmbH",
+  "vector": "Workshop, Corporate",
+  "arch": "WP, Template, Multilang",
+  "cycle": "2022",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Messner Ges.m.b.H. Fokus: Luxusyachten, Kreuzfahrtschiffe, Privatvillen.\n\n**System Conflict**: Die bestehende Web-Präsenz konnte mit der haptischen Qualität des Printprodukts \"m-Magazin\" nicht mithalten.\n\n### Mission Objectives:\n\n**Print-to-Web Translation**: Übertragung des Editorial-Designs in ein responsives Web-Interface.\n**High-Fidelity Showcase**: Die exklusiven Referenzen müssen wie in einem Hochglanz-Magazin wirken.\n**Legacy Integration**: Nahtlose Einbindung der bestehenden Magazin-Ausgaben.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[THEME] Bridge",
+    "[LAYOUT] CSS Grid (Editorial Style)",
+    "[ASSETS] High-Res Image Handling",
+    "[MODULE] PDF/Flipbook Integration"
+  ],
+  "fixExecuted": "Wir haben den klassischen \"Web-Flow\" aufgebrochen und durch ein **Editorial-Grid** ersetzt. Feste \"Seiten\"-Strukturen geben dem Auge Halt.\n\n**Typography Override**: Einsatz von Schriften und Satzspiegeln, die sonst im Print zuhause sind. CSS-Regeln folgen den Regeln des Papierformats.\n\n**Visual Weight**: Bilder wurden in maximaler Qualität serviert, um die Textur der Materialien spürbar zu machen.",
+  "finalStatus": "PRINT_DIGITIZED. Brand-Consistency: 100% Match. Aesthetic: High-Gloss.",
+  "gatewayUri": "https://www.messner-graz.at",
+  "isHighlighted": false
+}

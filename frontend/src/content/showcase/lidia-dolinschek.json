@@ -1,0 +1,22 @@
+{
+  "title": "Lidia Dolinschek",
+  "coverImage": "/images/showcase/lidia-dolinschek/coverImage.webp",
+  "excerpt": "Digitale Bühne für eine vielseitige Stimme. Eine strukturierte Plattform, die künstlerisches Portfolio und therapeutisches Angebot vereint.",
+  "entity": "Lidia Dolinschek",
+  "vector": "Artist",
+  "arch": "WP, Visual Composer",
+  "cycle": "2018",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Lidia Dolinschek. Sängerin, Sprecherin, Stimmtherapeutin.\n\n**System Conflict**: Eine vielseitige Künstlerin brauchte eine Plattform, die ihre unterschiedlichen Rollen (Bühne vs. Therapie) vereint.\n\n### Mission Objectives:\n\n**Portfolio Unification**: Zusammenführung der Bereiche \"Kunst\" (Musik) und \"Handwerk\" (Logopädie).\n**Audio Integration**: Einbindung von Hörproben, die auf allen Geräten funktionieren.\n**Legacy Stability**: Optimierung der Visual Composer Basis.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ENGINE] Visual Composer",
+    "[MEDIA] HTML5 Audio Player",
+    "[DESIGN] Custom Theme Design",
+    "[MODULE] Gallery & Media Grid"
+  ],
+  "fixExecuted": "Bestehendes Theme stabilisiert und visuell bereinigt.\n\n**Content Segmentation**: Klare visuelle Trennung durch Farbschemata zwischen \"Sängerin\" und \"Logopädin\".\n\n**Media Optimization**: Implementierung eines responsiven Audio-Players, der Demos \"on-tap\" abspielbar macht, ohne externe Dienste zu erzwingen (Datenschutz).",
+  "finalStatus": "SYSTEM STATUS: VOCAL_RANGE_OPTIMIZED. Media-Access: Instant. Structure: Multi-Role.",
+  "gatewayUri": "http://www.lidia-dolinschek.at/",
+  "isHighlighted": false
+}

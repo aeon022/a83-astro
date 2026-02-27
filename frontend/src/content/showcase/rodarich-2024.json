@@ -1,0 +1,22 @@
+{
+  "title": "Rodarich",
+  "coverImage": "/images/showcase/rodarich-2024/coverImage.webp",
+  "excerpt": "Cinematisches Portfolio für eine Imageagentur. Eine Oxygen-basierte Plattform, die statische Raster sprengt.",
+  "entity": "Rodarich",
+  "vector": "Dev & Motion",
+  "arch": "WP, Oxygen Builder",
+  "cycle": "2024",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Rodarich Imageagentur. High-End Branding & Strategie (Graz).\n\n**System Conflict**: Eine Agentur für visuelles Storytelling darf keine statische Website haben. \"Don't just show it, play it.\"\n\n### Mission Objectives:\n\n**Motion-First Portfolio**: Projektübersicht mit Video-Thumbnails statt statischer Bilder.\n**Custom Layouts**: Jede Case-Study braucht Raum für Editorial-Design.\n**Identity Fusion**: Digitale Spiegelung der Agentur-Persönlichkeit (\"Scharfe Typen\").",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ENGINE] Oxygen Builder",
+    "[MEDIA] Background Video Handling",
+    "[SCRIPT] Custom Hover Interactions",
+    "[OPTIMIZATION] Lazy-Load Video"
+  ],
+  "fixExecuted": "Konzept \"Portfolio\" neu gedacht: **Immersive Grid Architecture**.\n\n**Live-Preview Protocol**: In der Übersicht werden beim Hover WebM-Video-Loops geladen. Das macht das Grid zu einem kuratierten Showreel.\n\n**Editorial Freedom**: Mit Oxygen haben wir Templates erstellt, in denen Bilder überlappen und Weißraum aktiv genutzt wird.",
+  "finalStatus": "SYSTEM STATUS: IN_MOTION. Visuals: Cinematic. Vibe: Unapologetic.",
+  "gatewayUri": "https://rodarich.at",
+  "isHighlighted": false
+}

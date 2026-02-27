@@ -1,0 +1,22 @@
+{
+  "title": "Audiodownload",
+  "coverImage": "/images/showcase/audiodownload/coverImage.webp",
+  "excerpt": "High-Performance E-Commerce für digitale Güter. Ein auf Geschwindigkeit optimierter WooCommerce-Store mit automatisierter Auslieferung.",
+  "entity": "Kolmans e.U.",
+  "vector": "Design, E-Comm",
+  "arch": "WP, Woo, Theme",
+  "cycle": "2021",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: AudioDownload Portal. Marktplatz für digitale Audio-Assets (Musik, Samples).\n\n**System Conflict**: Verkauf rein digitaler Produkte erfordert hohen Schutz gegen Link-Sharing und sofortige Auslieferung nach Zahlung.\n\n### Mission Objectives:\n\n**Instant Fulfillment**: Zugriff auf Dateien Sekunden nach dem Checkout.\n**Asset Protection**: Verhindern von Hotlinking und unbefugtem Teilen.\n**Preview Logic**: Schnelle Audio-Vorschau, die nicht heruntergeladen werden kann.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[COMMERCE] WooCommerce (Digital Mode)",
+    "[SECURITY] Signed URL Generation",
+    "[STORAGE] Externer S3 Bucket / Protected Local",
+    "[UX] Custom Audio Player"
+  ],
+  "fixExecuted": "WooCommerce auf den **\"Virtual-Only\" Modus** gestrippt.\n\n**Secure Delivery Pipeline**: Einsatz von **X-Sendfile / Nginx-Redirects** oder signierten URLs. Der Server streamt die Datei direkt an den authentifizierten User.\n\n**User Dashboard**: Maßgeschneiderte Mediathek statt klassischer Bestellhistorie. Tracks sind sofort abspielbar.",
+  "finalStatus": "SYSTEM STATUS: STREAMLINED. Security: Locked down. Delivery: Instant.",
+  "gatewayUri": "https://www.audiodownload.at/portal/",
+  "isHighlighted": false
+}

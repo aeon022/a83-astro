@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+const archivedProjects = await getCollection('showcase', ({ data }) => {
+  return data.status === 'archive';
+});
+---
+
+<div class="w-full bg-black/40 border-y border-veranda-green/20 py-2 overflow-hidden whitespace-nowrap group">
+  <div class="inline-block animate-marquee group-hover:pause-animation">
+    {archivedProjects.map((project) => (
+      <span class="mx-8 font-mono text-xs text-veranda-green/50 uppercase tracking-widest">
+        <span class="text-kojima-orange">[DECOMMISSIONED]</span> 
+        {project.data.title} // CYCLE: {project.data.cycle} // STATUS: OFFLINE
+      </span>
+    ))}
+  </div>
+  <div class="inline-block animate-marquee group-hover:pause-animation" aria-hidden="true">
+    {archivedProjects.map((project) => (
+      <span class="mx-8 font-mono text-xs text-veranda-green/50 uppercase tracking-widest">
+        <span class="text-kojima-orange">[DECOMMISSIONED]</span> 
+        {project.data.title} // CYCLE: {project.data.cycle} // STATUS: OFFLINE
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+  }
+  .pause-animation {
+    animation-play-state: paused;
+  }
+</style>

@@ -1,0 +1,22 @@
+{
+  "title": "KW Partner",
+  "coverImage": "/images/showcase/kw-partner/coverImage.webp",
+  "excerpt": "Radikaler Minimalismus für eine Strategieberatung. Eine digitale Visitenkarte, die durch Weißraum und Typografie maximale Seriosität vermittelt.",
+  "entity": "KW Partner",
+  "vector": "Consulting, Corporate",
+  "arch": "Static HTML, CSS",
+  "cycle": "2018",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Kainzinger-Webern & Partner. Consulting für Marketing und Kommunikation.\n\n**System Conflict**: Consulting benötigt kein Portfolio-Showcase. Gefragt war eine digitale Visitenkarte, die Kompetenz ausstrahlt, ohne zu schreien.\n\n### Mission Objectives:\n\n**Radical Minimalism**: Reduktion auf Logo, Kernkompetenzen und Kontakt.\n**Typography Focus**: Da es keine Bilder gibt, trägt die Schrift die Marke.\n**Instant Contact**: Kontaktdaten müssen sofort ohne Klick verfügbar sein.",
+  "stackDeployed": [
+    "[CORE] HTML",
+    "[ARCH] Single Page Application",
+    "[DESIGN] Typographic Grid",
+    "[PERFORMANCE] 100/100 Lighthouse",
+    "[SECURITY] Hardened"
+  ],
+  "fixExecuted": "**Zero-Distraction Interface** entwickelt.\n\n**Whitespace Strategy**: 80% des Viewports bestehen aus Weißraum. Das lenkt den Fokus kompromisslos auf das zentrierte Logo und die Kompetenzliste.\n\n**Responsive Typography**: Die Schriftgrößen skalieren dynamisch (`clamp()`), um auf jedem Gerät perfekt lesbar zu sein.",
+  "finalStatus": "SYSTEM STATUS: PURIFIED. Load-Time: < 0.3s. Clarity: Maximum.",
+  "gatewayUri": "https://kw-partner.at",
+  "isHighlighted": false
+}

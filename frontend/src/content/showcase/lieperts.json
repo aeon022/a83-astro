@@ -1,0 +1,22 @@
+{
+  "title": "Lieperts",
+  "coverImage": "/images/showcase/lieperts/coverImage.webp",
+  "excerpt": "Fine Dining & Boutique Hotel. Kein \"Theme\", sondern \"Michelin-Stern\".",
+  "entity": "Lieperts",
+  "vector": "Restaurant, Hotel",
+  "arch": "WP, Woo, Theme",
+  "cycle": "2025",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Lieperts (Leutschach). Fine Dining Restaurant (1 Michelin Stern) & Boutique-Hotel.\n\n**System Conflict**: Ein Haus, das kulinarische Perfektion liefert, brauchte eine digitale Entsprechung. Storytelling kombiniert mit harter Funktionalität.\n\n### Mission Objectives:\n\n**Theme-Mutation**: Ein WordPress-Theme visuell so aufbrechen, dass es dem individuellen Charakter entspricht.\n**Conversion-Logic**: Nahtlose Integration von **WooCommerce** für Gutscheine und einem externen **Booking-Tool**.\n**UX-Fusion**: Den Spagat zwischen \"Café\", \"Dinner\" und \"Rooms\" in einer einzigen Navigation abbilden.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[BASE] Custom Theme Adaptation",
+    "[COMMERCE] WooCommerce Engine",
+    "[LOGIC] Booking-System Integration",
+    "[ASSETS] High-Fidelity Imagery"
+  ],
+  "fixExecuted": "Basis-Theme als Skelett genutzt und via **Custom CSS** komplett umgebaut.\n\n**Commerce-Layer**: WooCommerce wurde so stark angepasst (\"stripped down\"), dass es sich wie ein natürlicher Teil der Experience anfühlt. Der Checkout-Prozess wurde auf minimale Reibung optimiert.\n\n**Booking-Bridge**: Saubere Einbindung externer Booking-Tools via API/Interface.",
+  "finalStatus": "SYSTEM STATUS: SERVED. Sales-Vector: Active (Gutscheine). Aesthetic: Star-Level.",
+  "gatewayUri": "https://www.lieperts.at",
+  "isHighlighted": true
+}

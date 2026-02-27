@@ -1,0 +1,21 @@
+{
+  "title": "TiNA - Wort- und Markenatelier",
+  "coverImage": "/images/showcase/tina/coverImage.webp",
+  "excerpt": "Pixel-genaue Umsetzung einer individuellen Markenidentität, Bewegung und Performance.",
+  "entity": "TiNA",
+  "vector": "Dev & Motion",
+  "arch": "WP, Oxygen Builder, GSAP",
+  "cycle": "2023",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: TVF. (Corporate/Service Sector).\n\n**System Conflict**: Ein Design musste ohne Kompromisse ins Web übertragen werden. Die Anforderung: Ein visuelles Intro, das die Markenidentität sofort setzt, ohne die UX zu blockieren.\n\n### Mission Objectives:\n\n**Pixel-Perfect Execution**: 1:1 Umsetzung des Custom Designs in Oxygen.\n**Motion Integration**: Entwicklung einer komplexen Intro-Sequenz mit GSAP (via Motion.page) für maximalen Impact beim ersten Besuch.\n**Performance Balance**: Trotz schwerer Animationen muss der Core Web Vitals Score im grünen Bereich bleiben.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ENGINE] Oxygen Builder",
+    "[ANIMATION] Motion.page (GSAP Wrapper)",
+    "[SCRIPTING] Custom JS"
+  ],
+  "fixExecuted": "Wir haben Oxygen als Framework genutzt, um volle Kontrolle über den DOM zu haben (kein Theme-Bloat). Das Herzstück ist das **Motion.page Intro**.\n\n**The Sequence**: Eine Timeline-basierte Animation, die Logo und Key-Visuals beim Laden aufbaut. Wir haben `ScrollTrigger` und `TimeLineLite` genutzt, um die Elemente präzise zu choreografieren.\n\n**Non-Blocking Load**: Die Animation läuft asynchron, sodass der Content im Hintergrund bereits gerendert wird (Perceived Performance).",
+  "finalStatus": "SYSTEM STATUS: ANIMATED. Visuals: Fluid & Dynamic. Codebase: Clean.",
+  "gatewayUri": "https://t-v-f.at",
+  "isHighlighted": true
+}

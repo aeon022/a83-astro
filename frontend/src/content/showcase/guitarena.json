@@ -1,0 +1,22 @@
+{
+  "title": "Guitarena",
+  "coverImage": "/images/showcase/guitarena/coverImage.webp",
+  "excerpt": "Spannender Kontrast: Analoge, akustische Gitarrenmusik trifft auf harte digitale Struktur. Wir inszenieren hier Kultur, nicht Corporate.",
+  "entity": "Guitarena",
+  "vector": "Culture / Events",
+  "arch": "WP, Oxygen Builder, ACF",
+  "cycle": "2023",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Guitarena. Kulturinitiative für Fingerstyle & Acoustic Guitar (Spittal/Drau).\n\n**System Conflict**: Ein 25 Jahre gewachsenes Kulturprojekt benötigte eine digitale Bühne, die der akustischen Qualität gerecht wird. Das alte System war statisch und konnte den dynamischen Konzertkalender nicht elegant abbilden.\n\n### Mission Objectives:\n\n**Event Architecture**: Entwicklung eines flexiblen Systems für kommende Konzerte und ein wachsendes Archiv.\n**Visual Acoustics**: Das Design muss die intime Atmosphäre des \"Ortenburgerkellers\" transportieren, ohne altbacken zu wirken.\n**Legacy Preservation**: 25 Jahre Konzertgeschichte müssen zugänglich und strukturiert abrufbar sein.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[ENGINE] Oxygen Builder (Raw Power)",
+    "[DATA] Custom Post Types (Events)",
+    "[FEAT] Advanced Loop Logic",
+    "[UX] Responsive Event Cards"
+  ],
+  "fixExecuted": "Wir haben uns gegen Standard-Event-Plugins entschieden und eine **Custom Event Engine** mit Oxygen gebaut. Das erlaubt maximale Kontrolle über das Layout ohne Bloatware-Overhead.\n\n**Dynamic Time-Shift**: Das System unterscheidet automatisch zwischen \"Upcoming\" und \"Archive\". Sobald ein Konzertdatum verstreicht, wird das Asset automatisch verschoben.\n\n**Visual Fidelity**: Wir haben die visuelle Identität (Schloss Porcia, Gewölbe) in eine saubere, digitale Typografie übersetzt.",
+  "finalStatus": "SYSTEM STATUS: STAGE CLEAR. Event-Handling: Automated. Archive-Depth: 100% restored.",
+  "gatewayUri": "https://guitarena.at",
+  "isHighlighted": false
+}

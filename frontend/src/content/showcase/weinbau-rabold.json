@@ -1,0 +1,22 @@
+{
+  "title": "Weinbau Rabold",
+  "coverImage": "/images/showcase/weinbau-rabold/coverImage.webp",
+  "excerpt": "Digitale Heimat für traditionelles Winzer-Handwerk. Eine puristische Web-Präsenz, die Regionalität und digitale Ästhetik verbindet, um 'echte Weine' authentisch zu präsentieren.",
+  "entity": "Weinbau Rabold",
+  "vector": "Design & Dev, E-Com",
+  "arch": "WP, Custom Design, Forms",
+  "cycle": "2019",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Weinbau Rabold (Eisenberg). Familienbetrieb, Fokus auf naturnahe Produktion und Regionalität.\n\n**System Conflict**: Ein traditioneller Betrieb benötigte eine digitale Identität, die \"Ursprünglichkeit\" transportiert, ohne altbacken zu wirken. Die Herausforderung war, die emotionale Qualität des Weinbaus in eine strukturierte Web-Architektur zu übersetzen.\n\n### Mission Objectives:\n\n**Authenticity Layer**: Das Design muss die \"Echtheit\" der Produkte spiegeln.\n**Content Structure**: Klare Gliederung von Betrieb, Weinen und Veranstaltungen.\n**Simplicity**: Ein System, das für den Kunden leicht zu verwalten ist.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[THEME] Custom Assembly",
+    "[STRUCTURE] Multi-Page Architecture",
+    "[ASSETS] High-Quality Photography",
+    "[MODULE] Order Form Logic"
+  ],
+  "fixExecuted": "Wir haben eine **\"Earth-Tone\"-Ästhetik** implementiert, die die Farben der Region (Lehm, Wein) aufgreift. Statt aggressiver Sales-Funnels steht hier die Geschichte im Vordergrund.\n\n**Navigation Logic**: Die Struktur ist bewusst flach gehalten (Home -> Weine -> Bestellung), um die User-Journey so reibungsfrei wie möglich zu gestalten.\n\n**Technical Assembly**: Das System läuft auf einer optimierten Instanz, die speziell für ländliche Bandbreiten optimiert wurde (Low-Latency Assets).",
+  "finalStatus": "SYSTEM STATUS: VINTAGE_APPROVED. Brand-Fit: 100% Authentic. Maintenance: Low-Level.",
+  "gatewayUri": "https://weinbau-rabold.at",
+  "isHighlighted": false
+}

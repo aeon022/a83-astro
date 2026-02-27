@@ -1,0 +1,22 @@
+{
+  "title": "Christklang Shop",
+  "coverImage": "/images/showcase/christklang-shop/coverImage.webp",
+  "excerpt": "Cross-Plattform-Strategie für modernes Brauchtum. Ein hybrides E-Commerce-System, das physische Produkte, digitale App-Lizenzen und Künstler-Booking vereint.",
+  "entity": "Christklang",
+  "vector": "E-Comm",
+  "arch": "WP, Woo, Theme",
+  "cycle": "2022",
+  "protocolReadout": "Weniger Blabla, mehr Builds.\ncommit: clean-ship",
+  "taskProtocol": "**Target Analysis**: Christklang (Musikprojekt). Fokus: Interaktives Weihnachtssingen, App-Vertrieb & Event-Buchung.\n\n**System Conflict**: Ein klassisches Print-Produkt musste in die mobile Ära transformiert werden. Zentraler Vertriebskanal für physische Güter und digitale Lizenzen.\n\n### Mission Objectives:\n\n**Hybrid Commerce**: Shop für physischen Versand und digitale Freischalt-Codes (App-Unlock) in einem Checkout.\n**Artist Booking**: Plattform zur Buchung von Ensembles.\n**App Ecosystem**: Nahtlose Brücke zwischen Web-Shop und Mobile-App.",
+  "stackDeployed": [
+    "[CORE] WordPress",
+    "[COMMERCE] WooCommerce",
+    "[LOGIC] License Key Generation",
+    "[INTERFACE] Custom Booking Forms",
+    "[SYNC] App Store / Play Store Linkage"
+  ],
+  "fixExecuted": "**Digital Fulfillment**: Beim Kauf des Bundles generiert das System automatisch eindeutige Gutschein-Codes für die Christklang-App. Der Prozess ist vollautomatisiert, um Admin-Aufwand in der Hochsaison zu eliminieren.\n\n**Event-Logic**: Für die Künstler-Vermittlung wurde ein **Conditional Booking System** eingebunden.",
+  "finalStatus": "SYSTEM STATUS: ON_AIR. Sales-Vector: Hybrid (Print + Digital). App-Sync: Active.",
+  "gatewayUri": "https://christklang.at/shop/",
+  "isHighlighted": false
+}
