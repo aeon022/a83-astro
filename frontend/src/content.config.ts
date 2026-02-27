@@ -1,4 +1,3 @@
-// Dateipfad: frontend/src/content.config.ts
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
@@ -6,11 +5,17 @@ const showcase = defineCollection({
     loader: glob({ pattern: "**/*.json", base: "./src/content/showcase" }),
     schema: z.object({
         title: z.string(),
+        // NEU: Hinzugefügt, damit wir nach 'archive' filtern können
+        status: z.enum(['live', 'archive']).default('live'), 
+        
         coverImage: z.string().optional(),
         excerpt: z.string().optional(),
-        entity: z.string(), // Korrigiert: Nutzt jetzt 'entity' statt 'client'
+        
+        // FIX: Auf .optional() gesetzt, damit archivierte Projekte ohne diese Keys laden
+        entity: z.string().optional(), 
+        arch: z.string().optional(),
+        
         vector: z.string().optional(),
-        arch: z.string(),
         cycle: z.string().optional(),
         protocolReadout: z.string().optional(),
         taskProtocol: z.string().optional(),
@@ -27,6 +32,8 @@ const services = defineCollection({
     schema: z.object({
         title: z.string(),
         id: z.string(),
+        // NEU: Falls du 'order' in den JSONs hast, muss es hier rein
+        order: z.number().optional(), 
         status: z.string().default('AVAILABLE'),
         showOnStartpage: z.boolean().default(false),
         accent: z.string().default('var(--a83-accent)'),
@@ -45,5 +52,4 @@ const services = defineCollection({
     })
 });
 
-// Wir exportieren die Collections passend zu deiner Keystatic-Struktur
 export const collections = { showcase, services };
