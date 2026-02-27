@@ -1,15 +1,20 @@
 ---
-// Version: V21.3 - FOOTER (SOCIAL UPLINK SYNC)
+// Dateipfad: src/components/ui/Footer.astro
+// Version: V21.4 - FOOTER (SOCIAL UPLINK SYNC + REBOOT GLITCH)
 // Vibe: Machine Type Plate / Technical Readout
-// Features: Live UTC Clock, CSS Barcode, Tactical Grid
+// Features: Live UTC Clock, CSS Barcode, Tactical Grid, Hard-Reset Reboot
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="relative w-full bg-deep-canvas border-t border-veranda-green/30 text-veranda-green pt-16 pb-8 overflow-hidden">
+{/* BUGFIX: overflow-hidden auf root entfernt, damit der Button ausbrechen kann */}
+<footer class="relative w-full bg-deep-canvas border-t border-veranda-green/30 text-veranda-green pt-16 pb-8">
   
-  <div class="absolute inset-0 pointer-events-none opacity-[0.03]" 
-       style="background-image: linear-gradient(var(--veranda-green) 1px, transparent 1px), linear-gradient(90deg, var(--veranda-green) 1px, transparent 1px); background-size: 20px 20px;">
+  {/* BUGFIX: Grid in isolierten overflow-Container verschoben */}
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute inset-0 opacity-[0.03]" 
+         style="background-image: linear-gradient(var(--veranda-green) 1px, transparent 1px), linear-gradient(90deg, var(--veranda-green) 1px, transparent 1px); background-size: 20px 20px;">
+    </div>
   </div>
 
   <div class="max-w-[1800px] mx-auto px-6 lg:px-16 relative z-10">
@@ -61,42 +66,12 @@ const currentYear = new Date().getFullYear();
       <div class="md:col-span-2">
         <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] mb-6 text-veranda-green/50 border-b border-veranda-green/20 pb-2">Comms</h4>
         <ul class="space-y-3 font-mono text-xs">
-          <li>
-            <a href="mailto:post@abteilung83.com" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
-              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
-              Email Uplink
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/gerwin-weiher/" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
-              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/gerwin.weiher/" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
-              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
-              Instagram
-            </a>
-          </li>
-          <li>
-            <a href="https://x.com/gerwinweiher" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
-              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
-              X / Twitter
-            </a>
-          </li>
-          <li>
-            <a href="https://www.youtube.com/@aeon022" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
-              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
-              YouTube
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/aeon022" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors">
-              <span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>
-              GitHub
-            </a>
-          </li>
+          <li><a href="mailto:post@abteilung83.com" class="group flex items-center gap-2 hover:text-bone-white transition-colors"><span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>Email Uplink</a></li>
+          <li><a href="https://www.linkedin.com/in/gerwin-weiher/" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors"><span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/gerwin.weiher/" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors"><span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>Instagram</a></li>
+          <li><a href="https://x.com/gerwinweiher" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors"><span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>X / Twitter</a></li>
+          <li><a href="https://www.youtube.com/@aeon022" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors"><span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>YouTube</a></li>
+          <li><a href="https://github.com/aeon022" target="_blank" class="group flex items-center gap-2 hover:text-bone-white transition-colors"><span class="w-1.5 h-1.5 bg-veranda-green group-hover:bg-a83-accent transition-colors"></span>GitHub</a></li>
         </ul>
       </div>
 
@@ -136,26 +111,104 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 
-  <button id="back-to-top" class="absolute right-6 top-0 -translate-y-1/2 bg-deep-canvas border border-veranda-green/30 p-3 hover:border-a83-accent hover:text-a83-accent transition-all group z-20" aria-label="Back to Top">
-    <svg class="w-4 h-4 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+  <button id="system-reboot-btn" class="absolute right-6 top-0 -translate-y-1/2 bg-deep-canvas border border-veranda-green/30 p-3 hover:border-a83-accent hover:text-a83-accent transition-all group z-20" aria-label="System Reboot (Back to Top)">
+    <svg class="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
   </button>
 
 </footer>
 
-<script>
-  const clock = document.getElementById('utc-clock');
-  if (clock) {
-    const updateTime = () => {
-      const now = new Date();
-      const timeString = now.toISOString().split('T')[1].split('.')[0];
-      clock.innerText = timeString;
-    };
-    setInterval(updateTime, 1000);
-    updateTime();
+<style is:global>
+  /* GLOBAL SYSTEM REBOOT GLITCH */
+  body.sys-rebooting {
+    animation: sys-reboot-glitch 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    overflow-x: hidden;
   }
 
-  const btn = document.getElementById('back-to-top');
-  btn?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  /* Simuliert statisches Rauschen während des Glitches */
+  body.sys-rebooting::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+  }
+
+  @keyframes sys-reboot-glitch {
+    0% { filter: none; transform: translate3d(0, 0, 0) scale(1); }
+    15% { filter: invert(0.8) hue-rotate(180deg) contrast(150%); transform: translate3d(-10px, 5px, 0) scale(1.01) skewX(2deg); }
+    30% { filter: contrast(300%) grayscale(100%); transform: translate3d(10px, -5px, 0) scale(1.02) skewX(-3deg); }
+    45% { filter: blur(4px) contrast(500%) sepia(100%) hue-rotate(90deg); transform: scale(1.05); } /* Der Jump-Peak */
+    50% { filter: blur(8px) contrast(800%) saturate(0); transform: scale(1.08); }
+    65% { filter: invert(0.9) hue-rotate(270deg); transform: translate3d(5px, 10px, 0) skewX(4deg); }
+    85% { filter: contrast(150%); transform: translate3d(-2px, -2px, 0); }
+    100% { filter: none; transform: translate3d(0, 0, 0) scale(1); }
+  }
+</style>
+
+<script>
+  // Funktion kapseln, damit sie bei View Transitions neu geladen werden kann
+  const initFooterSystems = () => {
+    // 1. CLOCK LOGIC
+    const clock = document.getElementById('utc-clock');
+    if (clock) {
+      const updateTime = () => {
+        const now = new Date();
+        const timeString = now.toISOString().split('T')[1].split('.')[0];
+        clock.innerText = timeString;
+      };
+      updateTime();
+      
+      // Cleanup altes Interval (wichtig bei View Transitions!)
+      if (window.a83ClockInterval) clearInterval(window.a83ClockInterval);
+      window.a83ClockInterval = setInterval(updateTime, 1000);
+    }
+
+    // 2. REBOOT LOGIC
+    const btn = document.getElementById('system-reboot-btn');
+    
+    // Alten Listener entfernen durch Klonen (verhindert Double-Fires in Astro)
+    if (btn) {
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+
+      newBtn.addEventListener('click', () => {
+        if (document.body.classList.contains('sys-rebooting')) return;
+
+        // Trigger Glitch
+        document.body.classList.add('sys-rebooting');
+        
+        // Brute-Force Scroll am Peak des Glitches (330ms)
+        setTimeout(() => {
+          // 1. Target für normale Unterseiten (Window/Body)
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+          
+          // 2. Target für die Startseite (CSS-Snap-Container)
+          const snapContainer = document.querySelector('main.overflow-y-auto');
+          if (snapContainer) {
+            snapContainer.scrollTop = 0;
+          }
+        }, 330);
+
+        // System stabilisieren
+        setTimeout(() => {
+          document.body.classList.remove('sys-rebooting');
+        }, 750);
+      });
+    }
+  };
+
+  // Setup für Astro View Transitions UND initialen Page Load
+  document.addEventListener('astro:page-load', initFooterSystems);
+  
+  // Fallback, falls View Transitions deaktiviert sind
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initFooterSystems();
+  } else {
+    document.addEventListener('DOMContentLoaded', initFooterSystems);
+  }
 </script>
