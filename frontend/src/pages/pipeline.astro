@@ -102,7 +102,42 @@ import SEO from '../components/core/SEO.astro';
 </BaseLayout>
 
 <script>
-  // SCRAMBLE TEXT LOGIC
+  const initPipeline = () => {
+    const main = document.getElementById('main-content');
+    const progressLine = document.getElementById('scroll-progress-line');
+    const bgGrid = document.getElementById('grid-bg');
+    const steps = document.querySelectorAll('.pipeline-step');
+
+    if (!main) return;
+
+    // Wir hören auf den Scroll-Event des Containers, nicht des Windows!
+    main.addEventListener('scroll', () => {
+      // Berechnung basierend auf dem internen Scroll-Zustand des Containers
+      const scrollPct = Math.min(
+        main.scrollTop / (main.scrollHeight - main.clientHeight) * 1.4, 
+        1
+      );
+      
+      if (progressLine) progressLine.style.transform = `scaleY(${scrollPct})`;
+      if (bgGrid) bgGrid.style.transform = `translateY(${main.scrollTop * -0.05}px)`;
+
+      steps.forEach((step) => {
+        const rect = step.getBoundingClientRect();
+        // getBoundingClientRect bleibt relativ zum Viewport, das funktioniert weiterhin!
+        const isActive = rect.top < window.innerHeight * 0.6;
+        step.classList.toggle('active', isActive);
+      });
+    }, { passive: true });
+  };
+
+  // WICHTIG für Astro View Transitions: 
+  // Das Script muss nach jedem Seitenwechsel neu initialisiert werden.
+  document.addEventListener('astro:page-load', initPipeline);
+  
+  // Fallback für den ersten Load ohne Transition
+  initPipeline();
+
+  // SCRAMBLE TEXT LOGIC (Bleibt gleich, muss aber auch in die Init)
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
   document.querySelectorAll('.scramble-text').forEach((el: any) => {
     el.onmouseover = () => {
@@ -117,22 +152,6 @@ import SEO from '../components/core/SEO.astro';
       }, 30);
     }
   });
-
-  // SCROLL SYNC
-  window.addEventListener('scroll', () => {
-    const progressLine = document.getElementById('scroll-progress-line');
-    const bgGrid = document.getElementById('grid-bg');
-    const scrollPct = Math.min(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 1.4, 1);
-    
-    if (progressLine) progressLine.style.transform = `scaleY(${scrollPct})`;
-    if (bgGrid) bgGrid.style.transform = `translateY(${window.scrollY * -0.05}px)`;
-
-    document.querySelectorAll('.pipeline-step').forEach((step) => {
-      const rect = step.getBoundingClientRect();
-      const isActive = rect.top < window.innerHeight * 0.6;
-      step.classList.toggle('active', isActive);
-    });
-  }, { passive: true });
 </script>
 
 <style is:global>

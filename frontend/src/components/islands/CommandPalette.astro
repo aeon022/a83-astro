@@ -9,7 +9,9 @@ const commands = [
   { id: 'nav-03', label: 'Go to: Process', href: '/process', type: 'NAV' },
   { id: 'act-01', label: 'Run: ROI Calculator', href: '/#roi-calculator', type: 'EXEC' },
   { id: 'act-02', label: 'Init: Connection Protocol', href: '/contact', type: 'EXEC' },
-  { id: 'sys-01', label: 'System: Toggle Theme', action: 'theme', type: 'SYS' },
+  { id: 'sys-01', label: 'Mode: Dark', action: 'dark', type: 'SYS' },
+  { id: 'sys-02', label: 'Mode: Light', action: 'light', type: 'SYS' },
+  { id: 'sys-03', label: 'Mode: System', action: 'system', type: 'SYS' },
 ];
 ---
 
@@ -92,88 +94,135 @@ const permission = "ROOT_ACCESS";
 </div>
 
 <script>
-  const overlay = document.getElementById('cmd-overlay');
+  const overlay  = document.getElementById('cmd-overlay');
   const container = document.getElementById('cmd-container');
-  const input = document.getElementById('cmd-input') as HTMLInputElement;
+  const input    = document.getElementById('cmd-input') as HTMLInputElement;
   const listItems = document.querySelectorAll('.cmd-item');
-  const emptyMsg = document.getElementById('cmd-empty');
+  const emptyMsg  = document.getElementById('cmd-empty');
 
   let isOpen = false;
+  let focusedIndex = -1;
+
+  // Returns currently visible items
+  function getVisible(): HTMLElement[] {
+    return Array.from(listItems).filter(
+      (el) => (el as HTMLElement).parentElement!.style.display !== 'none'
+    ) as HTMLElement[];
+  }
+
+  // Highlight a specific visible item by index
+  function setFocused(index: number) {
+    const visible = getVisible();
+    // Clear all highlights
+    visible.forEach((el) => {
+      el.classList.remove('border-a83-accent', '!bg-white/5');
+      el.classList.add('border-transparent');
+    });
+    focusedIndex = visible.length === 0 ? -1 : Math.max(0, Math.min(index, visible.length - 1));
+    if (focusedIndex >= 0 && visible[focusedIndex]) {
+      visible[focusedIndex].classList.remove('border-transparent');
+      visible[focusedIndex].classList.add('border-a83-accent', '!bg-white/5');
+      visible[focusedIndex].scrollIntoView({ block: 'nearest' });
+    }
+  }
 
   function openPalette() {
     if (isOpen) return;
     isOpen = true;
+    focusedIndex = -1;
     overlay?.classList.remove('hidden');
-    // Force Reflow für Transition
-    void overlay?.offsetWidth;
-    
+    void overlay?.offsetWidth; // Force reflow for transition
     overlay?.classList.remove('opacity-0');
     container?.classList.remove('opacity-0', 'scale-95');
     container?.classList.add('scale-100');
-    
     input.value = '';
     filterItems('');
     input?.focus();
-    
-    document.body.style.overflow = 'hidden'; // Scroll Lock
+    document.body.style.overflow = 'hidden';
   }
 
   function closePalette() {
     if (!isOpen) return;
     isOpen = false;
-    
     overlay?.classList.add('opacity-0');
     container?.classList.remove('scale-100');
     container?.classList.add('opacity-0', 'scale-95');
-    
     setTimeout(() => {
       overlay?.classList.add('hidden');
       document.body.style.overflow = '';
     }, 200);
   }
 
-  // --- SHORTCUTS LOGIC ---
-  window.addEventListener('keydown', (e) => {
-    // Open: Cmd+K OR Shift + / (Question Mark)
-    if (
-        (e.metaKey && e.key === 'k') || 
-        (e.ctrlKey && e.key === 'k') ||
-        (e.key === '?') || // Shift + / auf US Layouts oft ?
-        (e.shiftKey && e.key === '7') // Shift + 7 ist / auf DE Layouts (Check ist loose)
-    ) {
-      // Wir prüfen "Shift + /" generisch über e.key
-      // Auf DE Tastatur ist '/' Shift+7. Auf US ist es direkt '/'. 
-      // Wir erlauben einfach '?' (was Shift+/ ist) oder explizit Shift+/
+  function executeItem(el: HTMLElement) {
+    const action = el.getAttribute('data-action');
+    if (action === 'dark' || action === 'light') {
+      document.documentElement.classList.remove('dark', 'light');
+      document.documentElement.classList.add(action);
+      localStorage.setItem('theme', action);
+      closePalette();
+      return;
     }
-  });
-  
-  // Verbesserter Keydown Handler für Shift+/ Support auf versch. Layouts
-  document.addEventListener('keyup', (e) => {
-    // Shift + / (US) oder Shift + 7 (DE für /) - wir checken einfach auf ? oder / mit Shift
-    if (e.key === '?' || (e.shiftKey && e.code === 'Slash') || (e.shiftKey && e.key === '/')) {
-        if (!isOpen && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-            openPalette();
-        }
+    if (action === 'system') {
+      // Clear override and immediately apply system preference
+      localStorage.removeItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.remove('dark', 'light');
+      document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
+      closePalette();
+      return;
     }
-    // Cmd + K
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        isOpen ? closePalette() : openPalette();
+    const href = el.getAttribute('href');
+    if (href && href !== '#') {
+      window.location.href = href;
+      closePalette();
     }
-    // ESC to Close
-    if (e.key === 'Escape' && isOpen) {
-        e.preventDefault();
-        closePalette();
+  }
+
+  // Keyboard: arrows + enter (keydown so we can preventDefault scroll)
+  document.addEventListener('keydown', (e) => {
+    if (!isOpen) return;
+    const visible = getVisible();
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setFocused(focusedIndex + 1 >= visible.length ? 0 : focusedIndex + 1);
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setFocused(focusedIndex - 1 < 0 ? visible.length - 1 : focusedIndex - 1);
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (focusedIndex >= 0 && visible[focusedIndex]) {
+        executeItem(visible[focusedIndex]);
+      }
     }
   });
 
-  // Close on Backdrop Click
+  // Open/close shortcuts (keyup)
+  document.addEventListener('keyup', (e) => {
+    if (e.key === '?' || (e.shiftKey && e.code === 'Slash') || (e.shiftKey && e.key === '/')) {
+      if (!isOpen && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        openPalette();
+      }
+    }
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      isOpen ? closePalette() : openPalette();
+    }
+    if (e.key === 'Escape' && isOpen) {
+      e.preventDefault();
+      closePalette();
+    }
+  });
+
+  // Close on backdrop click
   overlay?.addEventListener('click', (e) => {
     if (e.target === overlay) closePalette();
   });
 
-  // Filter Logic
+  // Filter input
   input?.addEventListener('input', (e) => {
     filterItems((e.target as HTMLInputElement).value);
   });
@@ -181,11 +230,9 @@ const permission = "ROOT_ACCESS";
   function filterItems(term: string) {
     const lowerTerm = term.toLowerCase();
     let hasVisible = false;
-
     listItems.forEach((item) => {
       const el = item as HTMLElement;
       const label = el.getAttribute('data-label') || '';
-      
       if (label.includes(lowerTerm)) {
         el.parentElement!.style.display = 'block';
         hasVisible = true;
@@ -193,9 +240,15 @@ const permission = "ROOT_ACCESS";
         el.parentElement!.style.display = 'none';
       }
     });
-
-    if (emptyMsg) {
-        emptyMsg.style.display = hasVisible ? 'none' : 'block';
-    }
+    if (emptyMsg) emptyMsg.style.display = hasVisible ? 'none' : 'block';
+    focusedIndex = -1; // Reset selection after filter
   }
+
+  // Click handler for all items
+  document.getElementById('cmd-list')?.addEventListener('click', (e) => {
+    const item = (e.target as HTMLElement).closest('.cmd-item') as HTMLElement | null;
+    if (!item) return;
+    e.preventDefault();
+    executeItem(item);
+  });
 </script>

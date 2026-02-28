@@ -1,18 +1,19 @@
 ---
 // Dateipfad: frontend/src/layouts/BaseLayout.astro
-// Version: V14.2 - GLOBAL SYNC + SNAP ENGINE
-// Changes: Integrated optional CSS Scroll-Snap logic
+// Version: V17.1 - OMNISCIENT RESTORE ENGINE + THEME PERSISTENCE + GLOBAL HUD
+// Fixes: Theme-Flicker & Content Visibility Reset
 
-import '../styles/global.css'; 
+import '../styles/global.css';
 import Header from './Header.astro';
 import Footer from '../components/blocks/Footer.astro';
 import GlobalCursor from '../components/ui/GlobalCursor.astro';
 import CookieBanner from '../components/ui/CookieBanner.astro';
+import CommandPalette from '../components/islands/CommandPalette.astro';
 
 interface Props {
   title: string;
   description?: string;
-  isSnappable?: boolean; // Aktiviert den Magnetic-Scroll Modus
+  isSnappable?: boolean;
 }
 
 const { 
@@ -32,6 +33,19 @@ const {
     <meta name="description" content={description} />
     <title>{title} | ABTEILUNG83</title>
     
+    <script is:inline>
+      (function() {
+        // Always set dark or light class — dark: Tailwind utilities require a class, not just @media.
+        // localStorage preference wins; otherwise follow system preference.
+        const saved = localStorage.getItem('theme');
+        const theme = (saved === 'dark' || saved === 'light')
+          ? saved
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.add(theme);
+        document.documentElement.setAttribute('data-nav-state', 'closed');
+      })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -63,11 +77,6 @@ const {
           "opens": "09:00",
           "closes": "18:00"
         },
-        "sameAs": [
-          "https://www.linkedin.com/in/gerwin-weiher/",
-          "https://www.instagram.com/gerwin.weiher/",
-          "https://x.com/gerwinweiher"
-        ],
         "founder": {
           "@type": "Person",
           "name": "Gerwin Weiher"
@@ -76,105 +85,146 @@ const {
     </script>
   </head>
   
-  <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500 flex flex-col min-h-screen">
+  <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500 flex flex-col h-screen overflow-hidden">
     
     <Header />
 
-    {/* MAIN WRAPPER 
-        Dynamische Klassen für Scroll-Snap: 
-        Wenn 'isSnappable' true ist, wird der Container zum scrollbaren Viewport-Host.
-    */}
-    <main class:list={[
-      "flex-grow nav-content-sync",
-      { "h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar": isSnappable }
-    ]}>
-        <slot />
+    <main 
+      id="main-content" 
+      data-snappable={isSnappable}
+      class:list={[
+        "flex-grow nav-content-sync w-full overflow-y-auto",
+        { "snap-y snap-mandatory scroll-smooth hide-scrollbar": isSnappable }
+      ]}
+    >
+        <div class="flex flex-col min-h-full">
+            <div class="flex-grow">
+                <slot />
+            </div>
 
-        {/* Im Snap-Modus muss der Footer als letzte Sektion innerhalb des Containers liegen */}
-        {isSnappable && (
-          <section class="snap-start">
-            <Footer />
-          </section>
-        )}
+            {isSnappable ? (
+              <section class="snap-start">
+                <Footer />
+              </section>
+            ) : (
+              <Footer />
+            )}
+        </div>
     </main>
-    
-    {/* Im Standard-Modus (z.B. Unterseiten) rendert der Footer ganz normal am Ende des Dokuments */}
-    {!isSnappable && <Footer />}
     
     <GlobalCursor />
     <CookieBanner />
+    <CommandPalette /> 
+    <div id="glitch-overlay-node" aria-hidden="true"></div>
+
+    <script>
+      // A83 ADVANCED SCROLL RESTORATION ENGINE V16.5
+      const getScrollKey = () => `a83_scroll_${window.location.pathname}`;
+
+      const savePos = () => {
+        const main = document.getElementById('main-content');
+        if (main && (main.hasAttribute('data-snappable') || main.getAttribute('data-snappable') === 'true')) {
+          sessionStorage.setItem(getScrollKey(), main.scrollTop.toString());
+        }
+      };
+
+      const restorePos = () => {
+        const main = document.getElementById('main-content');
+        const saved = sessionStorage.getItem(getScrollKey());
+
+        if (main && saved) {
+          const scrollVal = parseInt(saved, 10);
+          const snappable = main.getAttribute('data-snappable') === 'true';
+          if (snappable) (main as HTMLElement).style.scrollSnapType = 'none';
+          
+          (main as HTMLElement).style.scrollBehavior = 'auto';
+          main.scrollTop = scrollVal;
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (snappable) (main as HTMLElement).style.scrollSnapType = 'y mandatory';
+              (main as HTMLElement).style.scrollBehavior = 'smooth';
+            });
+          });
+        }
+      };
+
+      document.addEventListener('astro:before-preparation', (event) => {
+        savePos();
+
+        const originalLoader = (event as any).loader;
+        (event as any).loader = async function() {
+          const html = document.documentElement;
+          if (html.getAttribute('data-nav-state') === 'open') {
+             html.setAttribute('data-nav-state', 'closing');
+          }
+
+          const glitchNode = document.getElementById('glitch-overlay-node');
+          if (glitchNode) {
+            glitchNode.classList.add('glitch-out');
+            await new Promise(resolve => setTimeout(resolve, 350));
+          }
+          
+          await originalLoader();
+        };
+      });
+
+      document.addEventListener('astro:after-swap', () => {
+        restorePos();
+        
+        const glitchNode = document.getElementById('glitch-overlay-node');
+        if (glitchNode) {
+          glitchNode.classList.remove('glitch-out');
+          glitchNode.classList.add('glitch-in');
+          setTimeout(() => glitchNode.classList.remove('glitch-in'), 400);
+        }
+      });
+
+      window.addEventListener('load', restorePos);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const glitchNode = document.getElementById('glitch-overlay-node');
+        if (glitchNode) {
+          glitchNode.classList.add('glitch-in');
+          setTimeout(() => glitchNode.classList.remove('glitch-in'), 400);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const link = target.closest('a');
+        if (link && link.hash && link.pathname === window.location.pathname) {
+          const main = document.getElementById('main-content');
+          const targetEl = document.querySelector(link.hash);
+          if (main && targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    </script>
 
   </body>
 </html>
 
-<script>
-  const initGlobalRoutingGlitch = () => {
-    // 1. Hole alle internen Links (beginnen mit '/'). 
-    // Wir ignorieren externe Links und unseren speziellen "Vault Breach" Button aus dem Hero,
-    // da dieser seine eigene, noch extremere Animation hat.
-    const links = document.querySelectorAll('a[href^="/"]:not([target="_blank"]):not(#vault-breach-btn)');
-    
-    links.forEach(link => {
-      // Double-Bind Protection (wichtig bei Astro View Transitions)
-      if (link.hasAttribute('data-glitch-bound')) return;
-      link.setAttribute('data-glitch-bound', 'true');
-
-      link.addEventListener('click', (e) => {
-        // Erlaube weiterhin "In neuem Tab öffnen" (Strg+Klick, Cmd+Klick, Mittelklick)
-        if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
-        
-        const targetUrl = link.getAttribute('href');
-        
-        // Ignoriere Anchor-Links auf der selben Seite oder Klicks auf die aktive URL
-        if (!targetUrl || targetUrl.startsWith('#') || targetUrl === window.location.pathname) return;
-
-        // Standard-Routing blockieren
-        e.preventDefault();
-        
-        // Verhindern, dass die Animation mehrfach zündet
-        if (document.body.classList.contains('sys-transition-out')) return;
-        
-        // Start Glitch-Out
-        document.body.classList.add('sys-transition-out');
-
-        // OPTIONAL: Falls dein Nav-Menü offen ist, triggern wir hier das Schließen,
-        // damit es beim Seitenwechsel nicht im Weg ist.
-        const html = document.documentElement;
-        if (html.getAttribute('data-nav-state') === 'open') {
-           html.setAttribute('data-nav-state', 'closing');
-        }
-
-        // Exakt am Ende der Glitch-Out Animation (400ms) URL feuern.
-        // Wir setzen es auf 350ms, um Lade-Latenzen des Browsers leicht zu überschneiden.
-        setTimeout(() => {
-          window.location.href = targetUrl;
-        }, 350); 
-        
-        // Fallback Cleanup: Falls der User per Browser-"Zurück"-Button kommt,
-        // räumen wir die Klasse nach 1 Sekunde wieder ab.
-        setTimeout(() => {
-          document.body.classList.remove('sys-transition-out');
-        }, 1000);
-      });
-    });
-  };
-
-  // Astro View Transitions Support
-  document.addEventListener('astro:page-load', initGlobalRoutingGlitch);
-  
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    initGlobalRoutingGlitch();
-  } else {
-    document.addEventListener('DOMContentLoaded', initGlobalRoutingGlitch);
-  }
-</script>
-
 <style is:global>
+  html, body {
+    overflow: hidden !important;
+    height: 100% !important;
+    width: 100%;
+  }
+
+  #main-content {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   kbd {
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Utility zum Verstecken der Scrollbar im Snap-Modus für den Full-Interface-Look */
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -188,10 +238,7 @@ const {
     transition: filter 0.3s ease;
   }
 
-  /* ==============================================================
-     GLOBAL SPATIAL NAV SYNC ENGINE (GSNSE)
-     ============================================================== */
-  
+  /* GSNSE - GLOBAL SPATIAL NAV SYNC ENGINE */
   html[data-nav-state="opening"] .nav-content-sync,
   html[data-nav-state="open"] .nav-content-sync {
     pointer-events: none;
@@ -212,77 +259,64 @@ const {
     animation: system-reboot 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  html:not([data-nav-state]) .nav-content-sync {
-    opacity: 1; 
-    filter: blur(0px); 
-    transform: scale(1); 
-    pointer-events: auto;
-  }
-
   @keyframes system-collapse {
-    0% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1); }
-    15% { opacity: 0.8; transform: scale(1.02) skewX(5deg) translate3d(5px, 0, 0); filter: blur(1px) brightness(1.5) contrast(1.2); }
-    30% { opacity: 0.3; transform: scale(0.98) skewX(-15deg) translate3d(-10px, 5px, 0); filter: invert(0.2) hue-rotate(45deg); }
-    45% { opacity: 0.9; transform: scale(1.05) skewX(10deg); filter: brightness(2) contrast(1.5); }
-    60% { opacity: 0; transform: scale(0.95); filter: blur(10px); }
+    0% { opacity: 1; transform: scale(1); filter: blur(0); }
     100% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
   }
 
   @keyframes system-reboot {
     0% { opacity: 0; transform: scale(0.95); filter: blur(20px); }
-    30% { opacity: 0.8; transform: scale(1.05) skewX(-10deg) translate3d(-5px, -2px, 0); filter: brightness(2) contrast(1.5) hue-rotate(-20deg); }
-    50% { opacity: 0.3; transform: scale(0.98) skewX(15deg) translate3d(8px, 2px, 0); filter: invert(0.1); }
-    70% { opacity: 1; transform: scale(1.01) skewX(-2deg); filter: brightness(1.2); }
-    100% { opacity: 1; transform: scale(1) skewX(0deg); filter: blur(0) brightness(1) contrast(1); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
   }
 
-/* ==============================================================
-     GLOBAL GLITCH TRANSITION ENGINE (ROUTING)
-     ============================================================== */
-  
-/* IN-GLITCH: Feuert automatisch bei jedem Seitenaufruf und stabilisiert die neue Seite */
-  body {
-    /* FIX: KEIN 'forwards' mehr! Der Transform muss nach 400ms komplett vom Body verschwinden */
-    animation: sys-glitch-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* OUT-GLITCH: Wird per JS vor dem Verlassen der Seite getriggert */
-  body.sys-transition-out {
-    animation: sys-glitch-out 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  body.sys-transition-out::after {
-    content: '';
+  /* GLOBAL GLITCH TRANSITION ENGINE */
+  #glitch-overlay-node {
     position: fixed;
     inset: 0;
     z-index: 9999;
     pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: difference;
+  }
+
+  #glitch-overlay-node::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background: repeating-linear-gradient(
       0deg,
-      rgba(0, 255, 65, 0.1),
-      rgba(0, 255, 65, 0.1) 1px,
-      transparent 1px,
-      transparent 2px
+      rgba(0, 255, 65, 0.15),
+      rgba(0, 255, 65, 0.15) 2px,
+      transparent 2px,
+      transparent 4px
     );
+    opacity: 0;
+  }
+
+  #glitch-overlay-node.glitch-out {
+    animation: gpu-glitch-out 0.4s steps(4) forwards;
+  }
+  #glitch-overlay-node.glitch-out::after {
     animation: scanline-flash 0.4s forwards;
   }
 
-  /* Die Seite reißt auf und blurrt aus */
-  @keyframes sys-glitch-out {
-    0% { filter: none; transform: translate3d(0, 0, 0) scale(1); }
-    30% { filter: contrast(150%) saturate(200%) hue-rotate(90deg); transform: translate3d(-5px, 2px, 0) scale(1.01) skewX(2deg); }
-    60% { filter: invert(0.1) contrast(300%) drop-shadow(3px 0 0 var(--tactical-green)) drop-shadow(-3px 0 0 var(--kojima-orange)); transform: translate3d(10px, -5px, 0) scale(1.03) skewX(-3deg); }
-    100% { filter: blur(6px) contrast(400%) brightness(150%); transform: scale(1.05); } /* PEAK - Hier feuert der Seitenwechsel */
+  #glitch-overlay-node.glitch-in {
+    animation: gpu-glitch-in 0.4s steps(4) forwards;
   }
 
-  /* Die neue Seite fängt exakt beim Out-Peak an und stabilisiert sich */
-@keyframes sys-glitch-in {
-    0% { filter: blur(6px) contrast(400%) brightness(150%) invert(1); transform: scale(1.05) skewX(5deg); }
-    50% { filter: invert(0.2) contrast(300%) drop-shadow(3px 0 0 var(--tactical-green)); transform: translate3d(5px, -5px, 0) scale(1.02) skewX(-2deg); }
-    /* FIX: transform: none löst die Fixed-Position-Blockade */
-    100% { filter: none; transform: none; }
+  @keyframes gpu-glitch-out {
+    0% { opacity: 0; background: transparent; }
+    50% { opacity: 1; background: rgb(0, 255, 255); }
+    100% { opacity: 1; background: rgb(200, 200, 200); }
   }
 
+  @keyframes gpu-glitch-in {
+    0% { opacity: 1; background: rgb(255, 255, 255); }
+    100% { opacity: 0; background: transparent; }
+  }
+
+  @keyframes scanline-flash {
+    0%, 100% { opacity: 0; }
+    40%, 60% { opacity: 1; }
+  }
 </style>

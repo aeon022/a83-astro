@@ -53,12 +53,12 @@
   @media (prefers-color-scheme: dark) {
     :root {
       /* DARK MODE (Night Ops / Stealth) */
-      --a83-bg: var(--deep-canvas);      
-      --a83-surface: var(--tactical-olive); 
-      --a83-accent: var(--kojima-orange);    
-      --a83-text: #e4e8df;               
-      --a83-text-bold: #ffffff;          
-      --a83-sub: var(--veranda-green);      
+      --a83-bg: var(--deep-canvas);
+      --a83-surface: var(--tactical-olive);
+      --a83-accent: var(--kojima-orange);
+      --a83-text: #e4e8df;
+      --a83-text-bold: #ffffff;
+      --a83-sub: var(--veranda-green);
     }
   }
 
@@ -80,6 +80,33 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold text-a83-text-bold tracking-tight;
   }
+}
+
+/* DARK MODE VARIANT
+   Makes all Tailwind dark: utilities respond to the html.dark class (not just @media).
+   BaseLayout always adds 'dark' or 'light' to <html>, so system pref and manual toggle both work.
+*/
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* MANUAL CLASS OVERRIDES
+   Unlayered CSS has highest cascade priority — beats all @layer rules including Tailwind internals.
+*/
+html.dark {
+  --a83-bg: var(--deep-canvas);
+  --a83-surface: var(--tactical-olive);
+  --a83-accent: var(--kojima-orange);
+  --a83-text: #e4e8df;
+  --a83-text-bold: #ffffff;
+  --a83-sub: var(--veranda-green);
+}
+
+html.light {
+  --a83-bg: var(--bone-white);
+  --a83-surface: #dce2d6;
+  --a83-accent: var(--kojima-orange);
+  --a83-text: var(--tactical-olive);
+  --a83-text-bold: var(--deep-canvas);
+  --a83-sub: var(--veranda-green);
 }
 
 /* UTILITIES LAYER */

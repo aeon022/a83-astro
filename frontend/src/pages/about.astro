@@ -17,7 +17,7 @@ const operatorPhoto = "/images/operator.webp";
     description="Erfahre mehr über ABTEILUNG83. Ich entwickle performante Web-Systeme mit Astro & WordPress (Breakdance/Oxygen). 15+ Jahre Erfahrung in digitaler Infrastruktur."
   />
 
-  <section class="nav-content-sync min-h-screen bg-bone-white text-black pt-32 pb-24 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
+  <section class="nav-content-sync min-h-screen bg-bone-white dark:bg-a83-bg text-black dark:text-white pt-32 pb-24 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white transition-colors duration-500">
     
     <div class="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>
 
@@ -27,18 +27,18 @@ const operatorPhoto = "/images/operator.webp";
             <div class="flex-1">
                 <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
                     <span>// ENTITY_PROFILE</span>
-                    <span class="opacity-20 text-black">|</span>
+                    <span class="opacity-20 text-black dark:text-white">|</span>
                     <span>OPERATOR_ID: GERWIN_WEIHER</span>
                 </div>
-                <h1 class="text-7xl lg:text-9xl font-black text-black tracking-tighter uppercase leading-[0.85]">
+                <h1 class="text-7xl lg:text-9xl font-black text-black dark:text-white tracking-tighter uppercase leading-[0.85]">
                     Gerwin.<br/><span class="text-a83-accent">Weiher_</span>
                 </h1>
-                <p class="mt-12 font-mono text-xl text-black max-w-xl uppercase font-black leading-tight border-t border-black/10 pt-8 italic">
+                <p class="mt-12 font-mono text-xl text-black dark:text-white max-w-xl uppercase font-black leading-tight border-t border-black/10 dark:border-white/10 pt-8 italic transition-colors duration-500">
                     "Websites sind Werkzeuge. Die Wahl des Systems folgt der Funktion – nicht dem Hype."
                 </p>
             </div>
 
-            <div class="relative w-full md:w-[350px] aspect-[3/4] overflow-hidden border border-black/10 group">
+            <div class="relative w-full md:w-[350px] aspect-[3/4] overflow-hidden border border-black/10 dark:border-white/10 group transition-colors duration-500">
                 <div class="absolute inset-0 bg-a83-accent/10 mix-blend-multiply z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <img 
                     src={operatorPhoto} 
@@ -57,7 +57,7 @@ const operatorPhoto = "/images/operator.webp";
                 <span class="font-mono text-[10px] text-a83-accent font-black uppercase tracking-widest block mb-4">// ADAPTIVE_STRATEGY</span>
                 <h2 class="text-3xl font-black uppercase tracking-tighter leading-none">Custom Logic.<br/>Any Platform.</h2>
             </div>
-            <div class="md:col-span-8 font-mono text-sm uppercase leading-relaxed text-black/80 space-y-6">
+            <div class="md:col-span-8 font-mono text-sm uppercase leading-relaxed text-black/80 dark:text-white/80 space-y-6 transition-colors duration-500">
                 <p>
                     Mein Name ist Gerwin Weiher. Ich entwickle digitale Ökosysteme, die exakt auf deine Anforderungen zugeschnitten sind. Ob hochmoderne **Astro-Architekturen** oder robuste **WordPress-Systeme** – mein Fokus liegt immer auf sauberem Code und messbarem Output.
                 </p>
@@ -70,7 +70,7 @@ const operatorPhoto = "/images/operator.webp";
         <section class="mb-32">
             <div class="flex items-center gap-6 mb-16 uppercase">
                 <h2 class="text-4xl font-black tracking-tighter">System_Capabilities.</h2>
-                <div class="h-px flex-1 bg-black/10"></div>
+                <div class="h-px flex-1 bg-black/10 dark:bg-white/10 transition-colors duration-500"></div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -84,17 +84,17 @@ const operatorPhoto = "/images/operator.webp";
                     { label: 'Deployment', val: 'Managed Hosting / VPS' },
                     { label: 'Optimization', val: 'Performance / SEO' },
                 ].map(spec => (
-                    <div class="border border-black/10 p-6 space-y-2 bg-black/[0.02] hover:bg-black/[0.04] transition-all">
-                        <span class="block font-mono text-[9px] text-black/40 font-black uppercase">{spec.label}</span>
-                        <span class="block font-mono text-sm font-black uppercase text-black">{spec.val}</span>
+                    <div class="border border-black/10 dark:border-white/10 p-6 space-y-2 bg-black/[0.02] dark:bg-white/[0.03] hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all">
+                        <span class="block font-mono text-[9px] text-black/40 dark:text-white/40 font-black uppercase transition-colors duration-500">{spec.label}</span>
+                        <span class="block font-mono text-sm font-black uppercase text-black dark:text-white transition-colors duration-500">{spec.val}</span>
                     </div>
                 ))}
             </div>
         </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10 mb-32 border border-black/10">
-          <div class="bg-bone-white p-12 space-y-6">
-              <span class="font-mono text-[10px] text-black/40 font-black uppercase tracking-widest">// TYPICAL_ISSUES (THE NOISE)</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10 dark:bg-white/10 mb-32 border border-black/10 dark:border-white/10 transition-colors duration-500">
+          <div class="bg-bone-white dark:bg-a83-bg p-12 space-y-6 transition-colors duration-500">
+              <span class="font-mono text-[10px] text-black/40 dark:text-white/40 font-black uppercase tracking-widest transition-colors duration-500">// TYPICAL_ISSUES (THE NOISE)</span>
               <ul class="font-mono text-xs uppercase space-y-3 opacity-40">
                   <li>- Unnötiger Plugin-Ballast</li>
                   <li>- Langsame Page-Builder (Bloat)</li>
@@ -102,7 +102,7 @@ const operatorPhoto = "/images/operator.webp";
                   <li>- Fehlende Sicherheits-Protokolle</li>
               </ul>
           </div>
-          <div class="bg-bone-white p-12 space-y-6 border-l border-black/10">
+          <div class="bg-bone-white dark:bg-a83-bg p-12 space-y-6 border-l border-black/10 dark:border-white/10 transition-colors duration-500">
               <span class="font-mono text-[10px] text-a83-accent font-black uppercase tracking-widest">// A83_STANDARD (THE SIGNAL)</span>
               <ul class="font-mono text-xs uppercase space-y-3 font-bold">
                   <li class="flex gap-3"><span class="text-a83-accent">-></span> Lean-Architecture (Astro/WP)</li>
@@ -132,8 +132,8 @@ const operatorPhoto = "/images/operator.webp";
             </div>
         </div>
 
-        <footer class="mt-32 pt-16 border-t border-black/10 flex flex-col md:flex-row justify-between gap-8 items-end">
-            <div class="font-mono text-[10px] text-black/40 uppercase space-y-1 text-left">
+        <footer class="mt-32 pt-16 border-t border-black/10 dark:border-white/10 flex flex-col md:flex-row justify-between gap-8 items-end transition-colors duration-500">
+            <div class="font-mono text-[10px] text-black/40 dark:text-white/40 uppercase space-y-1 text-left transition-colors duration-500">
                 <p>Abteilung83 operates as a high-performance engineering unit.</p>
                 <p>Strategic tech-decisions for long-term digital growth.</p>
             </div>
