@@ -14,22 +14,22 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Missing required fields.' }), { status: 400 });
     }
 
+    // Wir nutzen process.env, um die Docker-Umgebungsvariablen zur Laufzeit zu greifen
     const transporter = nodemailer.createTransport({
-      host:   import.meta.env.SMTP_HOST,
-      port:   Number(import.meta.env.SMTP_PORT) || 465,
-      secure: (import.meta.env.SMTP_PORT ?? '465') !== '587',
+      host:   process.env.SMTP_HOST || '37.252.190.170',
+      port:   Number(process.env.SMTP_PORT) || 465,
+      secure: true, // Port 465 ist implizit secure
       auth: {
-        user: import.meta.env.SMTP_USER,
-        pass: import.meta.env.SMTP_PASS,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
-      // Hinzugefügt: Verhindert Zertifikats-Fehler bei manchen Plesk-Setups
       tls: {
         rejectUnauthorized: false
       }
     });
 
     await transporter.sendMail({
-      from:    `"ABTEILUNG83" <${import.meta.env.SMTP_FROM}>`,
+      from:    `"ABTEILUNG83" <${process.env.SMTP_FROM || 'glitch@abteilung83.at'}>`,
       to:      'post@abteilung83.com',
       replyTo: email,
       subject: `[A83] New contact: ${name} — ${service}`,
@@ -55,7 +55,6 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ success: true }), { status: 200 });
 
   } catch (error: any) {
-    // Das schreibt den exakten SMTP Fehler in deine 'docker logs'
     console.error('CRITICAL_SMTP_ERROR:', error.message);
     
     return new Response(JSON.stringify({ 
