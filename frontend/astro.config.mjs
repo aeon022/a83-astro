@@ -14,6 +14,9 @@ export default defineConfig({
     plugins: [tailwindcss()], // Tailwind v4 wird hier direkt als Vite-Plugin geladen
   },
   output: 'server',
+  security: {
+    checkOrigin: false // <-- Verhindert den automatischen 403 bei POST-Requests hinter Proxys
+  },
   
   // SEO & Legacy Routing (301 Umleitungen auf die Startseite)
   redirects: {
