@@ -1,0 +1,12 @@
+# Dateipfad: docker-compose.yml
+services:
+  a83-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: a83-astro-prod
+    restart: unless-stopped
+    ports:
+      - "4321:4321"
+    environment:
+      - NODE_ENV=production

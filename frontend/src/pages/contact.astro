@@ -34,9 +34,16 @@ import SEO from '../components/core/SEO.astro';
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
-            <form class="lg:col-span-8 bg-a83-surface/30 border border-veranda-green/20 p-8 lg:p-12 space-y-10 relative">
+            <form id="contact-form" action="/api/contact" method="POST" class="lg:col-span-8 bg-a83-surface/30 border border-veranda-green/20 p-8 lg:p-12 space-y-10 relative">
                 <div class="absolute top-0 right-0 p-4 font-mono text-[8px] text-veranda-green/20 uppercase tracking-widest">
                     Handshake_Protocol_Active
+                </div>
+
+                <div id="form-success" class="hidden border border-a83-accent/40 bg-a83-accent/10 p-6 font-mono text-sm text-a83-accent uppercase tracking-widest">
+                    // Transmission_Received — ich melde mich so bald wie möglich.
+                </div>
+                <div id="form-error" class="hidden border border-red-500/40 bg-red-500/10 p-6 font-mono text-sm text-red-400 uppercase tracking-widest">
+                    // Transmission_Failed — bitte direkt an post@abteilung83.com schreiben.
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -69,8 +76,8 @@ import SEO from '../components/core/SEO.astro';
                     <textarea name="message" rows="4" placeholder="BESCHREIB DEIN PROJEKT..." class="w-full bg-a83-bg/30 border border-veranda-green/20 p-6 font-mono text-lg text-a83-text-bold focus:border-a83-accent outline-none transition-colors placeholder:text-veranda-green/20 uppercase resize-none"></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-a83-accent p-8 font-mono text-2xl font-black text-a83-bg uppercase tracking-[0.3em] hover:brightness-110 active:scale-[0.99] transition-all relative overflow-hidden group">
-                    <span class="relative z-10">Execute_Handshake_</span>
+                <button id="submit-btn" type="submit" class="w-full bg-a83-accent p-8 font-mono text-2xl font-black text-a83-bg uppercase tracking-[0.3em] hover:brightness-110 active:scale-[0.99] transition-all relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span id="submit-label" class="relative z-10">Execute_Handshake_</span>
                     <div class="absolute inset-0 -translate-x-full bg-white opacity-10 group-hover:translate-x-0 transition-transform duration-700 ease-out"></div>
                 </button>
             </form>
@@ -126,6 +133,37 @@ import SEO from '../components/core/SEO.astro';
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form    = document.getElementById('contact-form') as HTMLFormElement;
+  const btn     = document.getElementById('submit-btn') as HTMLButtonElement;
+  const label   = document.getElementById('submit-label') as HTMLSpanElement;
+  const success = document.getElementById('form-success') as HTMLDivElement;
+  const error   = document.getElementById('form-error') as HTMLDivElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    label.textContent = 'Transmitting_...';
+    success.classList.add('hidden');
+    error.classList.add('hidden');
+
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
+      if (res.ok) {
+        success.classList.remove('hidden');
+        form.reset();
+      } else {
+        error.classList.remove('hidden');
+      }
+    } catch {
+      error.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      label.textContent = 'Execute_Handshake_';
+    }
+  });
+</script>
 
 <style>
   input:focus, textarea:focus {

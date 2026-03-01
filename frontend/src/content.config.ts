@@ -46,7 +46,7 @@ const services = defineCollection({
         outputParameters: z.array(z.string()).optional(),
         buildSuccess: z.array(z.string()).optional(),
         buttonLabel: z.string().default('sh start_project.sh'),
-        actionLink: z.string().default('mailto:post@abteilung83.at'),
+        actionLink: z.string().default('mailto:post@abteilung83.com'),
         footnote: z.string().optional(),
         specs: z.array(z.string()).optional(),
     })
