@@ -29,7 +29,7 @@ import SEO from '../components/core/SEO.astro';
                 <span class="opacity-30">|</span>
                 <span class="animate-pulse">SIGNAL_STRONG</span>
             </div>
-            <h1 class="text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-none scramble-text" data-value="Execution_Pipeline.">
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-tight lg:leading-none scramble-text" data-value="Execution_Pipeline.">
                 Execution_Pipeline.
             </h1>
         </header>
@@ -43,7 +43,7 @@ import SEO from '../components/core/SEO.astro';
                 </div>
             </div>
 
-            <div class="space-y-56 pb-20">
+            <div class="space-y-24 md:space-y-56 pb-20">
                 
                 {['RECON', 'BLUEPRINT', 'DEPLOYMENT', 'EXTRACTION'].map((phase, i) => (
                   <div class={`pipeline-step relative flex flex-col md:flex-row items-start md:items-center gap-12 group ${i % 2 !== 0 ? 'md:flex-row-reverse left-aligned' : 'right-aligned'}`} data-step={i+1}>
@@ -90,11 +90,11 @@ import SEO from '../components/core/SEO.astro';
             </div>
         </div>
 
-        <div class="mt-40 bg-a83-accent p-16 text-center group relative overflow-hidden active:scale-95 transition-transform">
+        <div class="mt-40 bg-a83-accent p-8 sm:p-12 lg:p-16 text-center group relative overflow-hidden active:scale-95 transition-transform">
             <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity animate-pulse"></div>
             <div class="absolute top-0 left-0 w-full h-1 bg-white/20 animate-data-flow"></div>
-            <h2 class="text-5xl lg:text-7xl font-black text-a83-bg uppercase tracking-tighter mb-8 relative z-10">Einstieg_Bestätigen.</h2>
-            <a href="/contact" class="relative z-10 inline-block bg-a83-bg text-a83-accent px-12 py-5 font-mono text-sm font-black uppercase tracking-[0.4em] hover:invert transition-all">Start_Project.sh</a>
+            <h2 class="text-2xl sm:text-4xl lg:text-7xl font-black text-a83-bg uppercase tracking-tighter mb-6 sm:mb-8 relative z-10">Einstieg_Bestätigen.</h2>
+            <a href="/contact" class="relative z-10 inline-block bg-a83-bg text-a83-accent px-8 sm:px-12 py-4 sm:py-5 font-mono text-sm font-black uppercase tracking-widest sm:tracking-[0.4em] hover:invert transition-all">Start_Project.sh</a>
         </div>
 
     </div>

@@ -56,7 +56,7 @@ const displayServices = allServices
 
 <section
   id="services"
-  class="nav-content-sync snap-center relative w-full h-screen max-h-[1080px] min-h-[700px] bg-a83-bg border-b border-veranda-green/20 flex flex-col transition-colors duration-500 overflow-hidden selection:bg-a83-accent selection:text-white"
+  class="nav-content-sync snap-center relative w-full lg:h-screen lg:max-h-[1080px] lg:min-h-[700px] bg-a83-bg border-b border-veranda-green/20 flex flex-col transition-colors duration-500 overflow-hidden selection:bg-a83-accent selection:text-white"
 >
   <div class="absolute inset-0 pointer-events-none z-0">
     <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -84,7 +84,7 @@ const displayServices = allServices
       </div>
     </div>
 
-    <div class="flex-1 overflow-y-auto lg:overflow-visible scrollbar-hide h-full">
+    <div class="flex-1 overflow-visible scrollbar-hide lg:h-full">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 lg:h-full lg:items-stretch">
         {displayServices.map((service) => {
           const safeHref = normalizeHref(service.actionLink, `/services#${service.id}`);
