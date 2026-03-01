@@ -1,8 +1,7 @@
 ---
 // Dateipfad: frontend/src/pages/blog/index.astro
-// Version: V6.0 - GHOST IN A SHELL / COMING SOON (MERGED)
-// Basis: V5.0 (HUD + Effekte + Live Compiler + Network)
-// Inhalt: V3.1 (Decrypted Communique / Kontext + Bullet-Manifest)
+// Version: V6.3 - LIGHT OPS / OUTLINES ONLY (NO BLOCK BACKGROUNDS)
+// Ziel: keine Panel-Backplates, nur Outlines + Ghost FX, mehr Abstand oben.
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GlitchText from '../../components/ui/GlitchText.astro';
@@ -12,220 +11,199 @@ import GlitchText from '../../components/ui/GlitchText.astro';
   title="Intelligence Nexus [LOCKED] | ABTEILUNG83"
   description="Zugriff auf den Data-Nexus. Ghost-Synchronisation läuft."
 >
-  <canvas id="nexus-bg" class="fixed inset-0 z-[-1] w-full h-full opacity-60"></canvas>
+  <!-- Network Canvas -->
+  <canvas id="nexus-bg" class="fixed inset-0 z-[-2] w-full h-full opacity-35"></canvas>
 
+  <!-- Light ambient background (kein Schwarz) -->
   <div
-    class="fixed inset-0 pointer-events-none z-0 bg-[linear-gradient(rgba(163,184,153,0.05)_1px,transparent_1px)] bg-[size:100%_4px] mix-blend-overlay"
+    class="fixed inset-0 z-[-1] pointer-events-none dark:hidden
+           bg-[radial-gradient(1200px_900px_at_15%_10%,rgba(163,184,153,0.22),transparent_55%),
+               radial-gradient(900px_700px_at_85%_25%,rgba(255,106,0,0.10),transparent_60%),
+               linear-gradient(to_bottom,rgba(248,250,249,1),rgba(241,245,243,1))]"
   ></div>
-  <div class="fixed inset-0 pointer-events-none z-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.95)]"></div>
 
-  <div class="fixed inset-0 pointer-events-none z-50 mix-blend-screen opacity-10 animate-screen-glitch bg-veranda-green/10"></div>
+  <!-- Subtle grid -->
+  <div
+    class="fixed inset-0 pointer-events-none z-0
+           bg-[linear-gradient(rgba(10,20,16,0.06)_1px,transparent_1px)]
+           bg-[size:100%_4px] mix-blend-multiply dark:mix-blend-overlay opacity-40 dark:opacity-20"
+  ></div>
 
-  <main class="relative z-10 w-full min-h-screen p-4 md:p-6 lg:p-12 flex flex-col pt-40 pb-24">
+  <!-- Soft flicker -->
+  <div class="fixed inset-0 pointer-events-none z-50 mix-blend-multiply opacity-[0.05] animate-screen-glitch bg-veranda-green/20"></div>
+
+  <main class="relative z-10 w-full min-h-screen p-4 md:p-6 lg:p-12 flex flex-col pt-52 pb-20">
     <div
-      class="grid grid-cols-1 md:grid-cols-12 gap-3 w-full max-w-[1400px] mx-auto min-h-[65vh] animate-entrance-glitch opacity-0 [animation-fill-mode:forwards]"
+      class="grid grid-cols-1 md:grid-cols-12 gap-4 w-full max-w-[1400px] mx-auto min-h-[65vh]
+             animate-entrance-glitch opacity-0 [animation-fill-mode:forwards]"
     >
       <!-- HERO / HUD -->
-      <section
-        class="col-span-1 md:col-span-12 lg:col-span-8 border border-white/10 bg-[#050806]/90 backdrop-blur-md p-6 lg:p-10 relative overflow-hidden flex flex-col justify-center animate-container-glitch"
-      >
-        <div class="absolute top-0 left-0 w-full h-[1px] bg-veranda-green opacity-50 animate-scan-horizontal"></div>
+      <section class="col-span-1 md:col-span-12 lg:col-span-8 panel-outline p-6 lg:p-10 relative overflow-hidden flex flex-col justify-center animate-container-glitch">
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-veranda-green/60 animate-scan-horizontal"></div>
 
         <div class="flex items-center justify-between mb-8 relative z-10">
-          <div
-            class="flex items-center gap-3 text-veranda-green font-mono text-[9px] uppercase tracking-widest border border-veranda-green/30 bg-veranda-green/10 px-2 py-1 shadow-[0_0_10px_rgba(163,184,153,0.2)]"
-          >
+          <div class="flex items-center gap-3 text-veranda-green font-mono text-[9px] uppercase tracking-widest border border-veranda-green/30 bg-transparent px-2 py-1">
             <span class="w-1.5 h-1.5 bg-veranda-green animate-pulse"></span>
             SYS_NEXUS::GHOST_SYNC
           </div>
 
-          <div class="font-mono text-[9px] text-bone-white/30 tracking-widest hidden sm:flex gap-4">
+          <div class="font-mono text-[9px] text-black/45 dark:text-bone-white/45 tracking-widest hidden sm:flex gap-4">
             <span class="animate-pulse text-a83-accent">MEM: 83TB</span>
             <span>NODE: A83-ALPHA</span>
           </div>
         </div>
 
-        <h1
-          class="text-5xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-tighter text-bone-white leading-[0.85] mb-6 relative z-10"
-        >
+        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold uppercase tracking-tighter text-black dark:text-bone-white leading-[0.85] mb-6 relative z-10">
           <GlitchText text="Intelligence" />
           <br />
-          <span
-            class="text-transparent [-webkit-text-stroke:1.5px_rgba(163,184,153,0.9)] drop-shadow-[0_0_8px_rgba(163,184,153,0.3)] animate-pulse-fast"
-          >
+          <span class="text-transparent [-webkit-text-stroke:1.5px_rgba(20,40,32,0.75)] dark:[-webkit-text-stroke:1.5px_rgba(228,232,223,0.75)] drop-shadow-[0_0_10px_rgba(163,184,153,0.18)] animate-pulse-fast">
             Nexus
           </span>
         </h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-4 relative z-10">
-          <div class="border-l border-a83-accent/50 pl-4">
+          <div class="border-l border-a83-accent/40 pl-4">
             <h3 class="font-mono text-[10px] text-a83-accent mb-2 uppercase tracking-widest animate-glitch-text">
               Operation Protocol
             </h3>
-            <p class="font-mono text-[11px] text-bone-white/60 leading-relaxed uppercase">
+            <p class="font-mono text-[11px] text-black/65 dark:text-bone-white/65 leading-relaxed uppercase">
               > Legacy Systeme terminiert.<br />
               > Zero-Bloat Architektur wird injiziert.<br />
               > Bewusstseinstransfer bei 83%.
             </p>
           </div>
 
-          <div class="flex flex-col gap-2 font-mono text-[9px] text-bone-white/50 uppercase tracking-widest mt-2">
+          <div class="flex flex-col gap-2 font-mono text-[9px] text-black/55 dark:text-bone-white/55 uppercase tracking-widest mt-2">
             <div class="flex flex-col gap-1">
               <div class="flex justify-between"><span>Ghost Sync</span> <span class="text-a83-accent">Active</span></div>
-              <div class="w-full h-[1px] bg-white/10"><div class="h-full bg-a83-accent w-[83%] animate-pulse"></div></div>
+              <div class="w-full h-[1px] bg-black/10">
+                <div class="h-full bg-a83-accent/80 w-[83%] animate-pulse"></div>
+              </div>
             </div>
 
             <div class="flex flex-col gap-1 mt-2">
               <div class="flex justify-between"><span>Decryption</span> <span class="text-veranda-green">Bypassed</span></div>
-              <div class="w-full h-[1px] bg-white/10"><div class="h-full bg-veranda-green w-[100%]"></div></div>
+              <div class="w-full h-[1px] bg-black/10">
+                <div class="h-full bg-veranda-green/80 w-[100%]"></div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div
-          class="absolute inset-0 font-mono text-[8px] text-veranda-green/10 opacity-40 break-all overflow-hidden z-0 select-none pointer-events-none"
-          id="bg-code-rain"
-        ></div>
+        <div class="absolute inset-0 font-mono text-[8px] text-veranda-green/15 opacity-40 break-all overflow-hidden z-0 select-none pointer-events-none" id="bg-code-rain"></div>
       </section>
 
-      <!-- NEURAL CORE (VISUAL) -->
-      <section
-        class="col-span-1 md:col-span-6 lg:col-span-4 border border-white/10 bg-[#050806]/90 backdrop-blur-md p-6 relative flex flex-col items-center justify-center hidden sm:flex overflow-hidden"
-      >
-        <div class="absolute top-4 left-4 font-mono text-[9px] text-bone-white/30 tracking-widest">NEURAL_CORE</div>
+      <!-- NEURAL CORE -->
+      <section class="col-span-1 md:col-span-6 lg:col-span-4 panel-outline p-6 relative overflow-hidden hidden sm:flex flex-col items-center justify-center">
+        <div class="absolute top-4 left-4 font-mono text-[9px] text-black/45 dark:text-bone-white/45 tracking-widest">NEURAL_CORE</div>
 
         <div class="relative w-40 h-40 lg:w-48 lg:h-48 flex items-center justify-center my-4 animate-core-glitch">
-          <div class="absolute inset-0 bg-veranda-green/10 rounded-full blur-2xl animate-pulse"></div>
+          <div class="absolute inset-0 bg-veranda-green/12 rounded-full blur-2xl animate-pulse"></div>
 
-          <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full text-white/20 animate-spin-slow">
-            <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 10" />
-            <circle
-              cx="100"
-              cy="100"
-              r="80"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-dasharray="40 80"
-              class="text-veranda-green/60"
-            />
-            <path d="M100 0 L100 200 M0 100 L200 100" stroke="currentColor" stroke-width="0.5" opacity="0.3" />
+          <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full text-black/15 animate-spin-slow">
+            <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2 10" />
+            <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="40 80" class="text-veranda-green/60" />
+            <path d="M100 0 L100 200 M0 100 L200 100" stroke="currentColor" stroke-width="0.6" opacity="0.25" />
           </svg>
 
-          <div class="absolute inset-6 border border-dashed border-a83-accent/40 rounded-full animate-spin-reverse"></div>
+          <div class="absolute inset-6 border border-dashed border-a83-accent/35 rounded-full animate-spin-reverse"></div>
 
-          <div
-            class="w-8 h-8 lg:w-10 lg:h-10 bg-a83-accent/20 border border-a83-accent rounded-sm flex items-center justify-center backdrop-blur-md animate-ping-slow rotate-45 shadow-[0_0_15px_rgba(255,106,0,0.3)]"
-          >
-            <div class="w-2 h-2 bg-bone-white rounded-full animate-pulse-fast"></div>
+          <div class="w-8 h-8 lg:w-10 lg:h-10 bg-a83-accent/0 border border-a83-accent/55 rounded-sm flex items-center justify-center backdrop-blur-md animate-ping-slow rotate-45 shadow-[0_0_18px_rgba(255,106,0,0.16)]">
+            <div class="w-2 h-2 bg-black/70 dark:bg-bone-white/70 rounded-full animate-pulse-fast"></div>
           </div>
         </div>
       </section>
 
       <!-- LIVE COMPILER -->
-      <section
-        class="col-span-1 md:col-span-6 lg:col-span-4 border border-white/10 bg-[#050806]/90 backdrop-blur-md p-4 relative h-48 lg:h-64 overflow-hidden flex flex-col"
-      >
-        <div class="font-mono text-[9px] text-veranda-green mb-2 border-b border-veranda-green/30 pb-2 flex justify-between">
+      <section class="col-span-1 md:col-span-6 lg:col-span-4 panel-outline p-4 relative h-48 lg:h-64 overflow-hidden flex flex-col">
+        <div class="font-mono text-[9px] text-veranda-green/90 mb-2 border-b border-black/10 pb-2 flex justify-between">
           <span>// GHOST_COMPILER.exe</span>
           <span class="animate-pulse text-a83-accent">EXECUTING</span>
         </div>
 
-        <div id="live-compiler" class="font-mono text-[10px] text-bone-white/70 leading-relaxed overflow-hidden flex-grow flex flex-col justify-end gap-1">
-        </div>
+        <div id="live-compiler" class="font-mono text-[10px] text-black/70 dark:text-bone-white/70 leading-relaxed overflow-hidden flex-grow flex flex-col justify-end gap-1"></div>
       </section>
 
       <!-- METRICS -->
-      <section
-        class="col-span-1 md:col-span-12 lg:col-span-8 border border-white/10 bg-[#050806]/90 backdrop-blur-md p-6 relative flex flex-col justify-between h-48 lg:h-64"
-      >
-        <div class="font-mono text-[9px] text-bone-white/40 mb-4 border-b border-white/10 pb-2 uppercase">
+      <section class="col-span-1 md:col-span-12 lg:col-span-8 panel-outline p-6 relative flex flex-col justify-between h-48 lg:h-64">
+        <div class="font-mono text-[9px] text-black/45 dark:text-bone-white/45 mb-4 border-b border-black/10 dark:border-white/10 pb-2 uppercase">
           // System_Metrics_Array
         </div>
 
         <div class="grid grid-cols-4 gap-2 md:gap-4 h-full items-end pb-2">
           <div class="flex flex-col justify-end h-full gap-1 group">
             <div class="font-mono text-[9px] text-a83-accent text-right">0x83</div>
-            <div class="w-full bg-white/5 h-full relative">
-              <div class="absolute bottom-0 w-full bg-a83-accent/80 h-[83%] group-hover:bg-a83-accent transition-all animate-bar-glitch-1"></div>
+            <div class="w-full bg-black/5 dark:bg-white/5 h-full relative">
+              <div class="absolute bottom-0 w-full bg-a83-accent/70 h-[83%] group-hover:bg-a83-accent transition-all animate-bar-glitch-1"></div>
             </div>
-            <div class="font-mono text-[8px] text-bone-white/30 text-center mt-1">ASTRO_CORE</div>
+            <div class="font-mono text-[8px] text-black/45 dark:text-bone-white/45 text-center mt-1">ASTRO_CORE</div>
           </div>
 
           <div class="flex flex-col justify-end h-full gap-1 group">
             <div class="font-mono text-[9px] text-veranda-green text-right">0x99</div>
-            <div class="w-full bg-white/5 h-full relative">
-              <div class="absolute bottom-0 w-full bg-veranda-green/80 h-[99%] group-hover:bg-veranda-green transition-all animate-bar-glitch-2"></div>
+            <div class="w-full bg-black/5 dark:bg-white/5 h-full relative">
+              <div class="absolute bottom-0 w-full bg-veranda-green/70 h-[99%] group-hover:bg-veranda-green transition-all animate-bar-glitch-2"></div>
             </div>
-            <div class="font-mono text-[8px] text-bone-white/30 text-center mt-1">ZOD_SCHEMA</div>
+            <div class="font-mono text-[8px] text-black/45 dark:text-bone-white/45 text-center mt-1">ZOD_SCHEMA</div>
           </div>
 
           <div class="flex flex-col justify-end h-full gap-1 group">
-            <div class="font-mono text-[9px] text-bone-white/80 text-right">0x45</div>
-            <div class="w-full bg-white/5 h-full relative">
-              <div class="absolute bottom-0 w-full bg-bone-white/60 h-[45%] group-hover:bg-bone-white transition-all animate-bar-glitch-3"></div>
+            <div class="font-mono text-[9px] text-black/70 dark:text-bone-white/70 text-right">0x45</div>
+            <div class="w-full bg-black/5 dark:bg-white/5 h-full relative">
+              <div class="absolute bottom-0 w-full bg-black/45 dark:bg-bone-white/45 h-[45%] group-hover:bg-black/60 dark:group-hover:bg-bone-white/60 transition-all animate-bar-glitch-3"></div>
             </div>
-            <div class="font-mono text-[8px] text-bone-white/30 text-center mt-1">V8_ENGINE</div>
+            <div class="font-mono text-[8px] text-black/45 dark:text-bone-white/45 text-center mt-1">V8_ENGINE</div>
           </div>
 
           <div class="flex flex-col justify-end h-full gap-1 group hidden sm:flex">
             <div class="font-mono text-[9px] text-a83-accent text-right">ERR</div>
-            <div class="w-full bg-red-900/20 h-full relative">
-              <div class="absolute bottom-0 w-full bg-red-500/80 h-[15%] animate-pulse-fast"></div>
+            <div class="w-full bg-red-500/10 h-full relative">
+              <div class="absolute bottom-0 w-full bg-red-500/60 h-[15%] animate-pulse-fast"></div>
             </div>
-            <div class="font-mono text-[8px] text-red-500/50 text-center mt-1">LEGACY_JS</div>
+            <div class="font-mono text-[8px] text-red-600/70 text-center mt-1">LEGACY_JS</div>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- DECRYPTED COMMUNIQUE (V3.1 CONTENT) -->
-    <div class="w-full max-w-4xl mx-auto mt-12 mb-16 relative">
+    <!-- COMMUNIQUE -->
+    <div class="w-full max-w-4xl mx-auto mt-16 mb-16 relative">
       <div class="flex items-center gap-3 mb-6">
-        <div class="w-full h-[1px] bg-white/10 flex-grow"></div>
-        <div class="font-mono text-[10px] md:text-xs text-bone-white/40 uppercase tracking-widest border border-white/10 px-4 py-1 bg-black/50 backdrop-blur-sm">
+        <div class="w-full h-[1px] bg-black/10 dark:bg-white/10 grow"></div>
+        <div class="font-mono text-[10px] md:text-xs text-black/45 dark:text-bone-white/45 uppercase tracking-widest border border-black/10 dark:border-white/10 px-4 py-1 bg-transparent">
           Decrypted Communique // Read-Only
         </div>
-        <div class="w-full h-[1px] bg-white/10 flex-grow"></div>
+        <div class="w-full h-[1px] bg-black/10 dark:bg-white/10 grow"></div>
       </div>
 
-      <article
-        class="relative border border-white/10 bg-black/80 p-6 md:p-10 shadow-[0_0_30px_rgba(0,0,0,0.8)] overflow-hidden"
-      >
-        <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-veranda-green"></div>
-        <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-a83-accent"></div>
-
-        <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none select-none">
-          <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M16,11V18.1L13.9,16L11.1,18.8L8.3,16L6.2,18.1V11H16Z"
-            />
-          </svg>
-        </div>
+      <article class="panel-outline p-6 md:p-10 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-veranda-green/70"></div>
+        <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-a83-accent/70"></div>
 
         <div class="font-mono text-[10px] md:text-xs text-a83-accent mb-4 break-all">
           root@a83-alpha:~ $ cat /docs/COMMUNIQUE.md
         </div>
 
-        <h2 class="font-mono text-xl md:text-2xl lg:text-3xl font-bold uppercase tracking-tight text-bone-white mb-5 mt-0">
+        <h2 class="font-mono text-xl md:text-2xl lg:text-3xl font-bold uppercase tracking-tight text-black dark:text-bone-white mb-5 mt-0">
           Was passiert hier?
         </h2>
 
-        <div class="font-mono text-[12px] md:text-sm text-bone-white/70 leading-relaxed space-y-4">
-          <p>
-            Du suchst unseren Blog. Du findest einen Terminal-Compiler in Aktion. Warum?
-          </p>
-          <p class="text-bone-white/80">
+        <div class="font-mono text-[12px] md:text-sm text-black/75 dark:text-bone-white/75 leading-relaxed space-y-4">
+          <p>Du suchst unseren Blog. Du findest einen Terminal-Compiler in Aktion. Warum?</p>
+
+          <p class="text-black/80 dark:text-bone-white/80">
             Weil wir uns weigern, Standard-Müll auszuliefern. Die ABTEILUNG83 strukturiert aktuell ihre gesamte Architektur um.
-            Wir migrieren von monolithischen Legacy-Systemen auf einen nativen <span class="text-veranda-green font-semibold">Astro + TypeScript Stack</span>.
+            Wir migrieren von monolithischen Legacy-Systemen auf einen nativen
+            <span class="text-veranda-green font-semibold">Astro + TypeScript Stack</span>.
             Keine aufgeblähten Pagebuilder, kein unnötiges Client-Side-JavaScript. Nur rohe Performance.
           </p>
-          <p class="text-bone-white/80">
+
+          <p class="text-black/80 dark:text-bone-white/80">
             Hier entsteht in Kürze der <span class="text-veranda-green font-semibold">Intelligence Nexus</span>.
             Unser Archiv für Deep-Dives, Architektur-Konzepte, Performance-Patterns und ungeschönte Dev-Logs.
           </p>
 
-          <div class="mt-6 border-t border-white/10 pt-6">
+          <div class="mt-6 border-t border-black/10 dark:border-white/10 pt-6">
             <ul class="list-none p-0 m-0 space-y-3">
               <li class="flex items-start gap-3">
                 <span class="text-a83-accent mt-[2px]">>></span>
@@ -244,80 +222,76 @@ import GlitchText from '../../components/ui/GlitchText.astro';
 
           <div class="mt-6 flex items-center">
             <span class="text-veranda-green mr-2">root@a83-alpha:~ $</span>
-            <span class="w-2 h-4 bg-bone-white/80 animate-cursor-blink inline-block shadow-[0_0_8px_rgba(255,255,255,0.5)]"></span>
+            <span class="w-2 h-4 bg-black/70 dark:bg-bone-white/70 animate-cursor-blink inline-block"></span>
           </div>
         </div>
       </article>
     </div>
 
-    <!-- INCOMING TRANSMISSIONS -->
+    <!-- TRANSMISSIONS -->
     <div class="w-full max-w-5xl mx-auto">
       <div class="font-mono text-[9px] text-veranda-green/70 uppercase tracking-widest mb-4 border-b border-veranda-green/20 pb-2 flex justify-between">
         <span>// INCOMING_TRANSMISSIONS (GHOST_NODES)</span>
-        <span class="animate-pulse">DOWNLOADING...</span>
+        <span class="animate-pulse text-black/40 dark:text-bone-white/40">DOWNLOADING...</span>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="transmission-grid">
-        <div class="border border-white/10 bg-[#050806]/80 p-4 relative overflow-hidden">
-          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer"></div>
-
+        <div class="panel-outline p-4 relative overflow-hidden">
+          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.03)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer"></div>
           <div class="relative z-10">
             <div class="font-mono text-[9px] text-a83-accent mb-3 flex justify-between">
-              <span>FILE_0x83</span> <span class="animate-pulse">ACTV</span>
+              <span>FILE_0x83</span> <span class="animate-pulse text-black/35 dark:text-bone-white/35">ACTV</span>
             </div>
-            <div class="w-full h-1.5 bg-white/5 mb-4 relative overflow-hidden">
-              <div class="sim-bar absolute top-0 left-0 h-full bg-a83-accent transition-all duration-300" data-val="42" style="width: 42%;"></div>
+            <div class="w-full h-1.5 bg-black/10 dark:bg-white/10 mb-4 relative overflow-hidden">
+              <div class="sim-bar absolute top-0 left-0 h-full bg-a83-accent/75 transition-all duration-300" data-val="42" style="width: 42%;"></div>
             </div>
-            <div class="font-mono text-[9px] text-bone-white/40 flex justify-between">
-              <span>COMPILING</span> <span class="sim-pct text-bone-white">42%</span>
+            <div class="font-mono text-[9px] text-black/55 dark:text-bone-white/55 flex justify-between">
+              <span>COMPILING</span> <span class="sim-pct text-black/80 dark:text-bone-white/80">42%</span>
             </div>
           </div>
         </div>
 
-        <div class="border border-white/10 bg-[#050806]/80 p-4 relative overflow-hidden">
-          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" style="animation-delay: 0.35s"></div>
-
+        <div class="panel-outline p-4 relative overflow-hidden">
+          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.03)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" style="animation-delay: 0.35s"></div>
           <div class="relative z-10">
             <div class="font-mono text-[9px] text-veranda-green mb-3 flex justify-between">
-              <span>PARSING_AST</span> <span class="animate-pulse">ACTV</span>
+              <span>PARSING_AST</span> <span class="animate-pulse text-black/35 dark:text-bone-white/35">ACTV</span>
             </div>
-            <div class="w-full h-1.5 bg-white/5 mb-4 relative overflow-hidden">
-              <div class="sim-bar absolute top-0 left-0 h-full bg-veranda-green transition-all duration-300" data-val="89" style="width: 89%;"></div>
+            <div class="w-full h-1.5 bg-black/10 dark:bg-white/10 mb-4 relative overflow-hidden">
+              <div class="sim-bar absolute top-0 left-0 h-full bg-veranda-green/75 transition-all duration-300" data-val="89" style="width: 89%;"></div>
             </div>
-            <div class="font-mono text-[9px] text-bone-white/40 flex justify-between">
-              <span>EXTRACTING</span> <span class="sim-pct text-bone-white">89%</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="border border-white/10 bg-[#050806]/80 p-4 relative overflow-hidden hidden sm:block">
-          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" style="animation-delay: 0.7s"></div>
-
-          <div class="relative z-10">
-            <div class="font-mono text-[9px] text-bone-white/50 mb-3 flex justify-between">
-              <span>DEV_LOG_01</span> <span>QUEUED</span>
-            </div>
-            <div class="w-full h-1.5 bg-white/5 mb-4 relative overflow-hidden">
-              <div class="sim-bar absolute top-0 left-0 h-full bg-bone-white/50 transition-all duration-300" data-val="12" style="width: 12%;"></div>
-            </div>
-            <div class="font-mono text-[9px] text-bone-white/40 flex justify-between">
-              <span>DECRYPT</span> <span class="sim-pct text-bone-white">12%</span>
+            <div class="font-mono text-[9px] text-black/55 dark:text-bone-white/55 flex justify-between">
+              <span>EXTRACTING</span> <span class="sim-pct text-black/80 dark:text-bone-white/80">89%</span>
             </div>
           </div>
         </div>
 
-        <div class="border border-white/10 bg-[#050806]/80 p-4 relative overflow-hidden hidden md:block">
-          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" style="animation-delay: 1.05s"></div>
-
+        <div class="panel-outline p-4 relative overflow-hidden hidden sm:block">
+          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.03)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" style="animation-delay: 0.7s"></div>
           <div class="relative z-10">
-            <div class="font-mono text-[9px] text-bone-white/50 mb-3 flex justify-between">
-              <span>UI_PATTERN_Z</span> <span>QUEUED</span>
+            <div class="font-mono text-[9px] text-black/55 dark:text-bone-white/55 mb-3 flex justify-between">
+              <span>DEV_LOG_01</span> <span class="text-black/45 dark:text-bone-white/45">QUEUED</span>
             </div>
-            <div class="w-full h-1.5 bg-white/5 mb-4 relative overflow-hidden">
-              <div class="sim-bar absolute top-0 left-0 h-full bg-bone-white/50 transition-all duration-300" data-val="4" style="width: 4%;"></div>
+            <div class="w-full h-1.5 bg-black/10 dark:bg-white/10 mb-4 relative overflow-hidden">
+              <div class="sim-bar absolute top-0 left-0 h-full bg-black/35 dark:bg-bone-white/35 transition-all duration-300" data-val="12" style="width: 12%;"></div>
             </div>
-            <div class="font-mono text-[9px] text-bone-white/40 flex justify-between">
-              <span>DECRYPT</span> <span class="sim-pct text-bone-white">4%</span>
+            <div class="font-mono text-[9px] text-black/55 dark:text-bone-white/55 flex justify-between">
+              <span>DECRYPT</span> <span class="sim-pct text-black/80 dark:text-bone-white/80">12%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-outline p-4 relative overflow-hidden hidden md:block">
+          <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.03)_50%,transparent_75%)] bg-[length:250%_250%] animate-shimmer" style="animation-delay: 1.05s"></div>
+          <div class="relative z-10">
+            <div class="font-mono text-[9px] text-black/55 dark:text-bone-white/55 mb-3 flex justify-between">
+              <span>UI_PATTERN_Z</span> <span class="text-black/45 dark:text-bone-white/45">QUEUED</span>
+            </div>
+            <div class="w-full h-1.5 bg-black/10 dark:bg-white/10 mb-4 relative overflow-hidden">
+              <div class="sim-bar absolute top-0 left-0 h-full bg-black/35 dark:bg-bone-white/35 transition-all duration-300" data-val="4" style="width: 4%;"></div>
+            </div>
+            <div class="font-mono text-[9px] text-black/55 dark:text-bone-white/55 flex justify-between">
+              <span>DECRYPT</span> <span class="sim-pct text-black/80 dark:text-bone-white/80">4%</span>
             </div>
           </div>
         </div>
@@ -327,11 +301,8 @@ import GlitchText from '../../components/ui/GlitchText.astro';
 </BaseLayout>
 
 <script lang="ts">
-  // =========================================================
-  // VANILLA/TS: GLITCH, LIVE COMPILER & ACTIVE TRANSMISSIONS
-  // =========================================================
   document.addEventListener('astro:page-load', () => {
-    // 1. LIVE GHOST COMPILER
+    // 1) LIVE COMPILER
     const compiler = document.getElementById('live-compiler');
     if (compiler) {
       compiler.innerHTML = '';
@@ -347,37 +318,29 @@ import GlitchText from '../../components/ui/GlitchText.astro';
       ];
 
       let msgIndex = 0;
-
       const typeLine = () => {
         if (msgIndex >= messages.length) msgIndex = 0;
-
         const line = document.createElement('div');
         line.innerHTML = `> ${messages[msgIndex]}`;
         compiler.appendChild(line);
-
         if (compiler.children.length > 7) compiler.removeChild(compiler.firstChild as ChildNode);
-
         msgIndex++;
         setTimeout(typeLine, Math.random() * 600 + 200);
       };
-
       setTimeout(typeLine, 800);
     }
 
-    // 2. ACTIVE TRANSMISSIONS (Live Loading Bars)
+    // 2) TRANSMISSIONS
     const bars = document.querySelectorAll<HTMLElement>('.sim-bar');
     if (bars.length > 0) {
       setInterval(() => {
         bars.forEach((bar) => {
           let current = parseFloat(bar.getAttribute('data-val') || '0');
-
           if (current < 100) {
             current += Math.random() * 4;
             if (current > 100) current = 100;
-
             bar.setAttribute('data-val', current.toString());
             bar.style.width = `${current}%`;
-
             const pctText = bar.parentElement?.parentElement?.querySelector<HTMLElement>('.sim-pct');
             if (pctText) pctText.textContent = `${Math.floor(current)}%`;
           } else if (Math.random() > 0.95) {
@@ -388,7 +351,7 @@ import GlitchText from '../../components/ui/GlitchText.astro';
       }, 500);
     }
 
-    // 3. FAKE CODE RAIN BACKGROUND
+    // 3) CODE RAIN
     const codeRain = document.getElementById('bg-code-rain');
     if (codeRain) {
       let rainText = '';
@@ -397,10 +360,9 @@ import GlitchText from '../../components/ui/GlitchText.astro';
       codeRain.textContent = rainText;
     }
 
-    // 4. CANVAS NODE NETWORK (Theme)
+    // 4) CANVAS NETWORK
     const canvas = document.getElementById('nexus-bg') as HTMLCanvasElement | null;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -413,15 +375,15 @@ import GlitchText from '../../components/ui/GlitchText.astro';
     });
 
     const nodes: Array<{ x: number; y: number; vx: number; vy: number; radius: number }> = [];
-    const numNodes = Math.floor((width * height) / 10000);
+    const numNodes = Math.floor((width * height) / 11000);
 
     for (let i = 0; i < numNodes; i++) {
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 1.2,
-        vy: (Math.random() - 0.5) * 1.2,
-        radius: Math.random() * 1.5 + 0.5
+        vx: (Math.random() - 0.5) * 0.95,
+        vy: (Math.random() - 0.5) * 0.95,
+        radius: Math.random() * 1.4 + 0.4
       });
     }
 
@@ -438,7 +400,7 @@ import GlitchText from '../../components/ui/GlitchText.astro';
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(163, 184, 153, 0.4)';
+        ctx.fillStyle = 'rgba(163, 184, 153, 0.26)';
         ctx.fill();
 
         for (let j = i + 1; j < nodes.length; j++) {
@@ -447,12 +409,12 @@ import GlitchText from '../../components/ui/GlitchText.astro';
           const dy = node.y - node2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 110) {
+          if (dist < 120) {
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(node2.x, node2.y);
-            ctx.strokeStyle = `rgba(163, 184, 153, ${0.25 - dist / 440})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(163, 184, 153, ${0.15 - dist / 900})`;
+            ctx.lineWidth = 0.55;
             ctx.stroke();
           }
         }
@@ -466,95 +428,92 @@ import GlitchText from '../../components/ui/GlitchText.astro';
 </script>
 
 <style is:global>
-  /* -----------------------------------------------------------
-     HARDCORE TERMINAL / GLITCH ANIMATIONS
-     ----------------------------------------------------------- */
+  /* OUTLINE-ONLY PANELS */
+  .panel-outline {
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  :where(.dark, .dark *) .panel-outline {
+    border-color: rgba(255,255,255,0.12);
+  }
 
-  /* Terminal Cursor */
+  /* Animations (wie gehabt, leicht entschärft) */
   .animate-cursor-blink { animation: terminal-blink 1s step-end infinite; }
   @keyframes terminal-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-  /* INITIAL LOAD GLITCH */
   @keyframes entrance-glitch {
-    0% { clip-path: inset(50% 0 50% 0); transform: scale(1.05); filter: hue-rotate(90deg) blur(5px); opacity: 0; }
-    20% { clip-path: inset(10% 0 80% 0); opacity: 1; filter: invert(1); }
-    40% { clip-path: inset(80% 0 10% 0); transform: scale(0.98); filter: none; }
-    60% { clip-path: inset(0 0 0 0); transform: scale(1.02); filter: hue-rotate(-45deg); }
-    80% { clip-path: inset(20% 0 50% 0); transform: translate(5px, -5px); }
+    0% { clip-path: inset(55% 0 45% 0); transform: scale(1.03); filter: hue-rotate(35deg) blur(4px); opacity: 0; }
+    18% { clip-path: inset(12% 0 80% 0); opacity: 1; filter: contrast(1.2); }
+    40% { clip-path: inset(78% 0 12% 0); transform: scale(0.99); filter: none; }
+    70% { clip-path: inset(0 0 0 0); transform: scale(1.01); filter: hue-rotate(-10deg); }
     100% { clip-path: inset(0 0 0 0); transform: scale(1); filter: none; opacity: 1; }
   }
-  .animate-entrance-glitch { animation: entrance-glitch 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+  .animate-entrance-glitch { animation: entrance-glitch 1.05s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 
-  /* Rotations */
   .animate-spin-slow { animation: spin 12s linear infinite; }
   .animate-spin-reverse { animation: spin 8s linear infinite reverse; }
-  .animate-pulse-fast { animation: pulse 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+  .animate-pulse-fast { animation: pulse 0.85s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
   @keyframes ping-slow {
     0% { transform: scale(1) rotate(45deg); opacity: 1; }
-    50% { transform: scale(1.4) rotate(45deg); opacity: 0.4; }
+    50% { transform: scale(1.32) rotate(45deg); opacity: 0.45; }
     100% { transform: scale(1) rotate(45deg); opacity: 1; }
   }
-  .animate-ping-slow { animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
+  .animate-ping-slow { animation: ping-slow 2.6s cubic-bezier(0, 0, 0.2, 1) infinite; }
 
-  /* Scanlines */
   @keyframes scan-horizontal {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
-  .animate-scan-horizontal { animation: scan-horizontal 2s ease-in-out infinite; }
+  .animate-scan-horizontal { animation: scan-horizontal 2.2s ease-in-out infinite; }
 
-  /* Text Glitch */
   @keyframes glitch-text {
-    0%, 90% { transform: translate(0); opacity: 1; }
-    92% { transform: translate(2px, 1px); opacity: 0.8; }
-    94% { transform: translate(-2px, -1px); opacity: 1; }
-    96% { transform: translate(1px, 2px); opacity: 0.9; }
-    98% { transform: translate(-1px, -2px); opacity: 1; }
+    0%, 92% { transform: translate(0); opacity: 1; }
+    94% { transform: translate(1px, 1px); opacity: 0.88; }
+    96% { transform: translate(-1px, -1px); opacity: 1; }
+    98% { transform: translate(1px, -1px); opacity: 0.92; }
     100% { transform: translate(0); opacity: 1; }
   }
-  .animate-glitch-text { animation: glitch-text 3s infinite; }
+  .animate-glitch-text { animation: glitch-text 3.2s infinite; }
 
-  /* Container/Box Glitch */
   @keyframes container-glitch {
-    0%, 95% { filter: none; transform: skewX(0deg); }
-    96% { filter: hue-rotate(90deg); transform: skewX(-1deg); }
-    97% { filter: invert(10%); transform: skewX(1deg); }
-    98% { filter: none; transform: skewX(0deg); }
+    0%, 96% { filter: none; transform: skewX(0deg); }
+    97% { filter: hue-rotate(30deg); transform: skewX(-0.6deg); }
+    98% { filter: contrast(1.05); transform: skewX(0.6deg); }
+    100% { filter: none; transform: skewX(0deg); }
   }
-  .animate-container-glitch { animation: container-glitch 6s infinite; }
+  .animate-container-glitch { animation: container-glitch 7s infinite; }
 
-  /* Global Screen Flicker */
   @keyframes screen-glitch {
     0%, 98% { opacity: 0; }
-    98.5% { opacity: 0.08; }
+    98.5% { opacity: 0.06; }
     99% { opacity: 0; }
-    99.5% { opacity: 0.12; }
+    99.5% { opacity: 0.08; }
     100% { opacity: 0; }
   }
-  .animate-screen-glitch { animation: screen-glitch 8s infinite; }
+  .animate-screen-glitch { animation: screen-glitch 9s infinite; }
 
-  /* Bar Glitches (für Metriken) */
   @keyframes bar-glitch {
     0%, 90% { height: var(--h); }
-    92% { height: calc(var(--h) - 15%); }
-    95% { height: calc(var(--h) + 15%); }
+    92% { height: calc(var(--h) - 12%); }
+    95% { height: calc(var(--h) + 12%); }
     100% { height: var(--h); }
   }
   .animate-bar-glitch-1 { --h: 83%; animation: bar-glitch 4s infinite; }
   .animate-bar-glitch-2 { --h: 99%; animation: bar-glitch 5s infinite; }
   .animate-bar-glitch-3 { --h: 45%; animation: bar-glitch 6s infinite; }
 
-  /* Core SVG Zucken */
   @keyframes core-glitch {
     0%, 95% { transform: scale(1); filter: none; }
-    96% { transform: scale(1.03) translate(2px, -2px); filter: drop-shadow(0 0 15px var(--color-a83-accent)); }
-    98% { transform: scale(0.97) translate(-2px, 2px); filter: none; }
+    96% { transform: scale(1.02) translate(2px, -2px); filter: drop-shadow(0 0 14px rgba(163,184,153,0.25)); }
+    98% { transform: scale(0.99) translate(-2px, 2px); filter: none; }
     100% { transform: scale(1); }
   }
-  .animate-core-glitch { animation: core-glitch 5s infinite; }
+  .animate-core-glitch { animation: core-glitch 5.5s infinite; }
 
-  /* Skeleton Shimmer (aus V3.1 übernommen) */
   @keyframes shimmer {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }

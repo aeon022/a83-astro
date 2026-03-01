@@ -43,6 +43,12 @@ const {
           : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.classList.add(theme);
         document.documentElement.setAttribute('data-nav-state', 'closed');
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+          if (localStorage.getItem('theme')) return;
+          document.documentElement.classList.remove('dark', 'light');
+          document.documentElement.classList.add(e.matches ? 'dark' : 'light');
+        });
       })();
     </script>
 

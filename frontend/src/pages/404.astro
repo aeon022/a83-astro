@@ -1,0 +1,309 @@
+---
+// Dateipfad: frontend/src/pages/404.astro
+// Version: V1.0 - GHOST_SIGNAL / NODE_NOT_FOUND
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — NODE_NOT_FOUND | ABTEILUNG83"
+  description="Signal lost. Node not found in the neural grid."
+>
+  <canvas id="err-canvas" class="fixed inset-0 z-[-1] w-full h-full opacity-40"></canvas>
+
+  <!-- CRT scanlines -->
+  <div class="fixed inset-0 pointer-events-none z-0 bg-[linear-gradient(rgba(140,153,128,0.04)_1px,transparent_1px)] bg-[size:100%_3px] mix-blend-overlay"></div>
+  <!-- Vignette -->
+  <div class="fixed inset-0 pointer-events-none z-0 shadow-[inset_0_0_180px_rgba(0,0,0,0.97)]"></div>
+  <!-- Rare screen flash -->
+  <div class="fixed inset-0 pointer-events-none z-50 mix-blend-screen opacity-0 animate-screen-flash bg-kojima-orange/5"></div>
+
+  <main class="relative z-10 w-full min-h-screen flex flex-col items-center justify-center p-6 md:p-12">
+
+    <!-- TOP HUD BAR -->
+    <div class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-3 font-mono text-[9px] uppercase tracking-widest text-a83-text/20 border-b border-white/5 z-40">
+      <div class="flex items-center gap-4">
+        <span class="text-a83-accent animate-pulse">● CRITICAL</span>
+        <span>A83-ALPHA :: ERROR_STATE</span>
+      </div>
+      <div class="hidden sm:flex gap-6">
+        <span>SIG: <span class="text-red-500">LOST</span></span>
+        <span>NODE: <span class="text-red-500">UNREACHABLE</span></span>
+        <span id="hud-time" class="text-a83-text/40">--:--:--</span>
+      </div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="w-full max-w-4xl animate-entrance-glitch opacity-0 [animation-fill-mode:forwards]">
+
+      <!-- Corner brackets (mil-tec) -->
+      <div class="relative border border-white/10 p-8 md:p-14 overflow-hidden">
+        <!-- Corner decorations -->
+        <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-a83-accent"></div>
+        <div class="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-a83-accent"></div>
+        <div class="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-veranda-green"></div>
+        <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-veranda-green"></div>
+
+        <!-- Horizontal scan line sweep -->
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-a83-accent/60 animate-scan-h"></div>
+
+        <!-- STATUS BADGE -->
+        <div class="flex items-center gap-4 mb-8">
+          <div class="flex items-center gap-2 font-mono text-[9px] uppercase tracking-widest border border-red-500/40 bg-red-950/30 px-3 py-1 text-red-400">
+            <span class="w-1.5 h-1.5 bg-red-500 animate-pulse"></span>
+            ERR :: NODE_NOT_FOUND
+          </div>
+          <div class="hidden sm:block font-mono text-[9px] text-a83-text/20 tracking-widest">
+            PROTOCOL: HTTP/1.1 · STATUS: 0x194
+          </div>
+        </div>
+
+        <!-- BIG 404 -->
+        <div class="relative mb-8 select-none">
+          <!-- Ghost / echo layers -->
+          <div aria-hidden="true" class="absolute inset-0 font-black text-[clamp(19rem,32vw,22rem)] leading-none tracking-tighter text-a83-accent/10 blur-sm translate-x-[3px] translate-y-[2px] animate-glitch-ghost-a">
+            404
+          </div>
+          <div aria-hidden="true" class="absolute inset-0 font-black text-[clamp(9rem,32vw,22rem)] leading-none tracking-tighter text-veranda-green/15 blur-[2px] -translate-x-[3px] -translate-y-[1px] animate-glitch-ghost-b">
+            404
+          </div>
+          <!-- Primary -->
+          <h1 class="relative font-black text-[clamp(9rem,32vw,22rem)] leading-none tracking-tighter text-a83-text-bold animate-404-flicker" id="big-404">
+            404
+          </h1>
+        </div>
+
+        <!-- SUBTITLE ROW -->
+        <div class="font-mono text-[11px] sm:text-sm text-a83-text/60 uppercase tracking-[0.2em] mb-2">
+          GHOST_SIGNAL — TRANSMISSION ABORTED
+        </div>
+        <div class="font-mono text-[9px] text-veranda-green/60 uppercase tracking-widest mb-10">
+          > The requested node was purged from the neural grid. No trace detected.
+        </div>
+
+        <!-- TERMINAL OUTPUT -->
+        <div class="border border-white/10 bg-black/60 p-4 mb-10 font-mono text-[11px] leading-relaxed">
+          <div class="text-veranda-green/50 mb-2 border-b border-white/5 pb-2 flex justify-between">
+            <span>// DIAGNOSTIC_TRACE.log</span>
+            <span class="text-red-500 animate-pulse">FAULT</span>
+          </div>
+          <div id="terminal-out" class="space-y-1 text-a83-text/50"></div>
+          <div class="flex items-center mt-3">
+            <span class="text-veranda-green mr-2">root@a83-alpha:~ $</span>
+            <span class="w-2 h-4 bg-a83-text/80 animate-cursor-blink inline-block shadow-[0_0_8px_rgba(255,255,255,0.5)]"></span>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a
+            href="/"
+            class="group flex items-center gap-3 border border-a83-accent/60 bg-a83-accent/10 hover:bg-a83-accent/20 text-a83-accent font-mono text-[11px] uppercase tracking-widest px-6 py-3 transition-all duration-200 hover:border-a83-accent hover:shadow-[0_0_20px_rgba(255,75,18,0.2)]"
+          >
+            <span class="w-2 h-2 border border-current group-hover:bg-a83-accent transition-colors"></span>
+            RETURN_TO_BASECAMP()
+          </a>
+          <a
+            href="/contact"
+            class="group flex items-center gap-3 border border-white/10 hover:border-veranda-green/40 text-a83-text/40 hover:text-a83-text/70 font-mono text-[11px] uppercase tracking-widest px-6 py-3 transition-all duration-200"
+          >
+            <span class="w-2 h-2 border border-current group-hover:bg-veranda-green/40 transition-colors"></span>
+            REPORT_ANOMALY()
+          </a>
+        </div>
+
+        <!-- METRICS STRIP -->
+        <div class="flex gap-6 mt-10 pt-6 border-t border-white/5 font-mono text-[9px] text-a83-text/20 uppercase tracking-widest">
+          <div>NODES_SCANNED <span class="text-a83-text/40" id="nodes-count">---</span></div>
+          <div>MATCH_RATE <span class="text-red-500">0.00%</span></div>
+          <div class="hidden sm:block">GRID_STATUS <span class="text-a83-accent">DEGRADED</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM CALLSIGN -->
+    <div class="mt-8 font-mono text-[9px] text-a83-text/15 uppercase tracking-widest text-center">
+      ABTEILUNG83 · INTELLIGENCE NEXUS · <span class="text-a83-accent/40">CLASSIFIED</span>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+
+    // HUD clock
+    const hudTime = document.getElementById('hud-time');
+    if (hudTime) {
+      const tick = () => {
+        hudTime.textContent = new Date().toLocaleTimeString('de-DE', { hour12: false });
+      };
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    // Nodes scanned counter
+    const nodesEl = document.getElementById('nodes-count');
+    if (nodesEl) {
+      let count = 0;
+      const target = Math.floor(Math.random() * 40000 + 20000);
+      const step = Math.ceil(target / 60);
+      const ticker = setInterval(() => {
+        count = Math.min(count + step, target);
+        nodesEl.textContent = count.toLocaleString('en-US');
+        if (count >= target) clearInterval(ticker);
+      }, 30);
+    }
+
+    // Terminal trace output
+    const term = document.getElementById('terminal-out');
+    if (term) {
+      const lines = [
+        "<span class='text-veranda-green'>[INIT]</span>  Routing table lookup... <span class='text-red-500'>FAILED</span>",
+        "<span class='text-veranda-green'>[SCAN]</span>  Probing adjacent nodes... <span class='text-red-500'>NO_MATCH</span>",
+        "<span class='text-a83-accent'>[WARN]</span>  Ghost signal detected — origin unknown.",
+        "<span class='text-veranda-green'>[LOG]</span>   Path erased from memory bank.",
+        "<span class='text-a83-accent'>[WARN]</span>  Fallback protocol engaged.",
+        "<span class='text-veranda-green'>[SYS]</span>   Uplink status: <span class='text-red-500'>UNREACHABLE</span>",
+        "<span class='text-veranda-green'>[OUT]</span>   Returning operator to safe zone...",
+      ];
+      let i = 0;
+      const appendLine = () => {
+        if (i >= lines.length) return;
+        const div = document.createElement('div');
+        div.innerHTML = `> ${lines[i]}`;
+        div.style.opacity = '0';
+        term.appendChild(div);
+        requestAnimationFrame(() => {
+          div.style.transition = 'opacity 0.3s';
+          div.style.opacity = '1';
+        });
+        i++;
+        setTimeout(appendLine, Math.random() * 500 + 250);
+      };
+      setTimeout(appendLine, 600);
+    }
+
+    // Canvas: node network (same as blog, but red-tinted for error state)
+    const canvas = document.getElementById('err-canvas') as HTMLCanvasElement | null;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
+    window.addEventListener('resize', () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+
+    const nodes: { x: number; y: number; vx: number; vy: number; r: number; dead: boolean }[] = [];
+    const count = Math.floor((w * h) / 12000);
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        r: Math.random() * 1.2 + 0.4,
+        dead: Math.random() > 0.7, // 30% "dead" nodes — red
+      });
+    }
+
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > w) n.vx *= -1;
+        if (n.y < 0 || n.y > h) n.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = n.dead ? 'rgba(255,75,18,0.5)' : 'rgba(140,153,128,0.35)';
+        ctx.fill();
+
+        for (let j = i + 1; j < nodes.length; j++) {
+          const m = nodes[j];
+          const dx = n.x - m.x, dy = n.y - m.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(m.x, m.y);
+            const alpha = 0.18 - dist / 555;
+            ctx.strokeStyle = (n.dead || m.dead)
+              ? `rgba(255,75,18,${alpha})`
+              : `rgba(140,153,128,${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    };
+    draw();
+  });
+</script>
+
+<style is:global>
+  /* 404 ENTRANCE */
+  @keyframes entrance-glitch {
+    0%   { clip-path: inset(50% 0 50% 0); transform: scale(1.04); filter: hue-rotate(90deg) blur(4px); opacity: 0; }
+    20%  { clip-path: inset(10% 0 80% 0); opacity: 1; filter: invert(1); }
+    40%  { clip-path: inset(80% 0 10% 0); transform: scale(0.98); filter: none; }
+    60%  { clip-path: inset(0 0 0 0); transform: scale(1.01); filter: hue-rotate(-30deg); }
+    80%  { clip-path: inset(15% 0 40% 0); transform: translate(4px, -3px); }
+    100% { clip-path: inset(0 0 0 0); transform: scale(1); filter: none; opacity: 1; }
+  }
+  .animate-entrance-glitch { animation: entrance-glitch 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+
+  /* 404 NUMBER FLICKER */
+  @keyframes flicker-404 {
+    0%, 89%   { opacity: 1; text-shadow: none; }
+    90%        { opacity: 0.4; text-shadow: 4px 0 0 rgba(255,75,18,0.8), -4px 0 0 rgba(140,153,128,0.8); }
+    91%        { opacity: 1; text-shadow: none; }
+    95%        { opacity: 0.7; text-shadow: -3px 0 0 rgba(255,75,18,0.6); }
+    96%        { opacity: 1; }
+    98%        { opacity: 0.2; text-shadow: 6px 0 0 rgba(255,75,18,0.9), -6px 0 0 rgba(140,153,128,0.9); letter-spacing: 0.15em; }
+    99%        { opacity: 1; text-shadow: none; letter-spacing: -0.05em; }
+    100%       { opacity: 1; }
+  }
+  .animate-404-flicker { animation: flicker-404 5s ease-in-out infinite; }
+
+  /* GHOST LAYERS */
+  @keyframes glitch-ghost-a {
+    0%, 88%  { transform: translate(3px, 2px); opacity: 0.6; }
+    90%      { transform: translate(10px, -4px) scaleX(1.02); opacity: 0.9; }
+    92%      { transform: translate(-6px, 3px); opacity: 0.4; }
+    95%      { transform: translate(3px, 2px); opacity: 0.6; }
+    100%     { transform: translate(3px, 2px); }
+  }
+  .animate-glitch-ghost-a { animation: glitch-ghost-a 5s ease-in-out infinite; }
+
+  @keyframes glitch-ghost-b {
+    0%, 88%  { transform: translate(-3px, -1px); opacity: 0.5; }
+    90%      { transform: translate(-12px, 5px) scaleX(0.98); opacity: 0.8; }
+    93%      { transform: translate(5px, -4px); opacity: 0.3; }
+    95%      { transform: translate(-3px, -1px); opacity: 0.5; }
+    100%     { transform: translate(-3px, -1px); }
+  }
+  .animate-glitch-ghost-b { animation: glitch-ghost-b 5s ease-in-out infinite; }
+
+  /* SCAN LINE SWEEP */
+  @keyframes scan-h {
+    0%   { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+  .animate-scan-h { animation: scan-h 3s linear infinite; }
+
+  /* SCREEN FLASH */
+  @keyframes screen-flash {
+    0%, 96%    { opacity: 0; }
+    97%        { opacity: 0.06; }
+    97.5%      { opacity: 0; }
+    98.5%      { opacity: 0.1; }
+    99%        { opacity: 0; }
+    100%       { opacity: 0; }
+  }
+  .animate-screen-flash { animation: screen-flash 10s infinite; }
+</style>
