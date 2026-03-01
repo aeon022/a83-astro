@@ -85,7 +85,7 @@ const displayServices = allServices
     </div>
 
     <div class="flex-1 overflow-y-auto lg:overflow-visible scrollbar-hide h-full">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 h-full items-stretch">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 lg:h-full lg:items-stretch">
         {displayServices.map((service) => {
           const safeHref = normalizeHref(service.actionLink, `/services#${service.id}`);
 
@@ -219,6 +219,10 @@ const displayServices = allServices
 
   #services .group {
     height: auto;
-    min-height: 100%;
+  }
+  @media (min-width: 1024px) {
+    #services .group {
+      min-height: 100%;
+    }
   }
 </style>

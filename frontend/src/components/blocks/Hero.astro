@@ -38,7 +38,7 @@ import TerminalButton from '../ui/TerminalButton.astro';
       </div>
 
       <h1 id="hero-headline" class="relative group leading-none mb-12 translate-z-50 cursor-none">
-        <span class="block font-black text-white uppercase tracking-tighter whitespace-nowrap headline-fluid-size neon-outline glitch-accent" data-text="Wie Neonlicht">
+        <span class="block font-black text-white uppercase tracking-tighter md:whitespace-nowrap headline-fluid-size neon-outline glitch-accent" data-text="Wie Neonlicht">
           Wie Neonlicht
         </span>
         <span class="block font-black text-white uppercase tracking-tighter headline-fluid-size blazing-neon glitch-accent" data-text="im Regen.">
@@ -81,7 +81,10 @@ import TerminalButton from '../ui/TerminalButton.astro';
     opacity: 0.6;
   }
 
-  .headline-fluid-size { font-size: clamp(3rem, 10vw, 9rem); line-height: 0.82; }
+  .headline-fluid-size { font-size: clamp(2rem, 9vw, 9rem); line-height: 0.9; }
+  @media (min-width: 768px) {
+    .headline-fluid-size { font-size: clamp(3rem, 10vw, 9rem); line-height: 0.82; }
+  }
   .neon-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7); }
   .blazing-neon {
     color: #ffffff;
