@@ -8,5 +8,11 @@ services:
     restart: unless-stopped
     ports:
       - "4383:4321"
+    # WICHTIG 1: Lädt die SMTP-Passwörter aus der .env auf dem Server
+    env_file:
+      - .env
+    # WICHTIG 2: Erlaubt dem Container, den Server-Mailstack zu erreichen
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - NODE_ENV=production
