@@ -1,4 +1,4 @@
-// astro.config.mjs
+// Dateipfad: frontend/astro.config.mjs
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
@@ -14,4 +14,16 @@ export default defineConfig({
     plugins: [tailwindcss()], // Tailwind v4 wird hier direkt als Vite-Plugin geladen
   },
   output: 'server',
+  
+  // SEO & Legacy Routing (301 Umleitungen auf die Startseite)
+  redirects: {
+    '/cms': '/',
+    '/cms/[...slug]': '/',
+    
+    // WordPress Ghost-Town Bereinigung
+    '/wp-admin': '/',
+    '/wp-admin/[...slug]': '/',
+    '/wp-content/[...slug]': '/',
+    '/wp-includes/[...slug]': '/'
+  }
 });
