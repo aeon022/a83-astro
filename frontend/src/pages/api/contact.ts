@@ -1,9 +1,47 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 
+// In-memory rate limit: max 5 submissions per IP per hour
+const rateLimit = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimit.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimit.set(ip, { count: 1, resetAt: now + 3_600_000 });
+    return false;
+  }
+  if (entry.count >= 5) return true;
+  entry.count++;
+  return false;
+}
+
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Rate limit by IP
+    const ip =
+      request.headers.get('cf-connecting-ip') ||
+      request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+      'unknown';
+
+    if (isRateLimited(ip)) {
+      return new Response(JSON.stringify({ error: 'Too many requests.' }), { status: 429 });
+    }
+
     const data = await request.formData();
+
+    // Honeypot: if filled, silently succeed (bot detected)
+    const honeypot = data.get('website')?.toString() || '';
+    if (honeypot) {
+      return new Response(JSON.stringify({ success: true }), { status: 200 });
+    }
+
+    // Timing check: reject if submitted in under 2s or older than 2 hours
+    const timestamp = parseInt(data.get('_t')?.toString() || '0', 10);
+    const elapsed = Date.now() - timestamp;
+    if (!timestamp || elapsed < 2_000 || elapsed > 7_200_000) {
+      return new Response(JSON.stringify({ error: 'Invalid request.' }), { status: 400 });
+    }
 
     const name    = data.get('name')?.toString().trim();
     const email   = data.get('email')?.toString().trim();
@@ -14,11 +52,10 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Missing required fields.' }), { status: 400 });
     }
 
-    // Wir nutzen process.env, um die Docker-Umgebungsvariablen zur Laufzeit zu greifen
     const transporter = nodemailer.createTransport({
       host:   process.env.SMTP_HOST || '37.252.190.170',
       port:   Number(process.env.SMTP_PORT) || 465,
-      secure: true, // Port 465 ist implizit secure
+      secure: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -56,10 +93,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   } catch (error: any) {
     console.error('CRITICAL_SMTP_ERROR:', error.message);
-    
-    return new Response(JSON.stringify({ 
-      error: 'Internal Server Error', 
-      details: error.message 
+
+    return new Response(JSON.stringify({
+      error: 'Internal Server Error',
+      details: error.message
     }), { status: 500 });
   }
 };
