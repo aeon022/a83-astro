@@ -9,9 +9,9 @@ import TerminalButton from '../ui/TerminalButton.astro';
     <div class="absolute inset-0 bg-[radial-gradient(circle_at-[40%_50%],transparent_0%,var(--deep-canvas)_90%)] opacity-95"></div>
     
     <div class="video-fusion-container">
-      <video 
-        src="/video/hero/hero.webm" 
-        autoplay loop muted playsinline 
+      <video
+        src="/video/hero/hero.webm"
+        autoplay loop muted playsinline preload="none"
         class="video-fusion-element will-change-transform"
       ></video>
     </div>
@@ -186,7 +186,8 @@ import TerminalButton from '../ui/TerminalButton.astro';
         }
       }
 
-      let drops = Array.from({ length: 120 }, () => new Drop());
+      const dropCount = window.innerWidth < 768 ? 40 : 120;
+      let drops = Array.from({ length: dropCount }, () => new Drop());
 
       let animationFrameId: number;
       function animate() {
@@ -205,7 +206,7 @@ import TerminalButton from '../ui/TerminalButton.astro';
       animate();
       (window as any).heroRainFrame = animationFrameId;
 
-      if (contentBlock) {
+      if (contentBlock && window.matchMedia('(hover: hover)').matches) {
         let ticking = false;
         window.addEventListener('mousemove', (e) => {
           if (!ticking && isActive) {

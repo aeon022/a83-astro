@@ -194,18 +194,20 @@ const displayServices = allServices
 
 <script>
   // Mouse spotlight vars; pure JS (keine TS casts im Browser)
-  const cards = document.querySelectorAll('#services .group');
+  if (window.matchMedia('(hover: hover)').matches) {
+    const cards = document.querySelectorAll('#services .group');
 
-  cards.forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      card.style.setProperty('--m-x', `${x}px`);
-      card.style.setProperty('--m-y', `${y}px`);
+        card.style.setProperty('--m-x', `${x}px`);
+        card.style.setProperty('--m-y', `${y}px`);
+      });
     });
-  });
+  }
 </script>
 
 <style>

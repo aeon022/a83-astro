@@ -273,11 +273,11 @@ const codeSnippets = [
     if (seqIndex >= sequence.length) seqIndex = 0;
     const currentStep = sequence[seqIndex];
     if (currentStep.action === 'type') {
-      if (charIndex < currentStep.text.length) { terminalElement.innerHTML += currentStep.text.charAt(charIndex); charIndex++; setTimeout(runTerminal, currentStep.speed); } 
+      if (charIndex < currentStep.text.length) { terminalElement.appendChild(document.createTextNode(currentStep.text.charAt(charIndex))); charIndex++; setTimeout(runTerminal, currentStep.speed); }
       else { seqIndex++; charIndex = 0; runTerminal(); }
     } else if (currentStep.action === 'wait') { setTimeout(() => { seqIndex++; runTerminal(); }, currentStep.speed); }
-    else if (currentStep.action === 'break') { terminalElement.innerHTML += '<br>'; seqIndex++; runTerminal(); }
-    else if (currentStep.action === 'clear') { terminalElement.innerHTML = ''; seqIndex++; setTimeout(runTerminal, currentStep.speed); }
+    else if (currentStep.action === 'break') { terminalElement.appendChild(document.createElement('br')); seqIndex++; runTerminal(); }
+    else if (currentStep.action === 'clear') { terminalElement.textContent = ''; seqIndex++; setTimeout(runTerminal, currentStep.speed); }
   }
   runTerminal();
 </script>
