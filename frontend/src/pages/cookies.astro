@@ -1,0 +1,148 @@
+---
+// Dateipfad: frontend/src/pages/cookies.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/core/SEO.astro';
+---
+
+<BaseLayout title="Cookies // Tracking_Protocols">
+  <SEO
+    slot="head"
+    title="Cookie-Richtlinie | ABTEILUNG83 Graz"
+    description="Cookie-Richtlinie von ABTEILUNG83. Informationen zum Einsatz von Cookies auf dieser Website gemäß DSGVO."
+    noindex={true}
+  />
+  <section class="nav-content-sync min-h-screen bg-bone-white text-black pt-32 pb-24 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
+
+    <div class="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>
+
+    <div class="max-w-[1000px] mx-auto relative z-10">
+
+      <header class="mb-20 border-l-4 border-a83-accent pl-8 py-2">
+        <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
+          <span>// COOKIE_PROTOCOLS</span>
+          <span class="opacity-20 text-black">|</span>
+          <span class="text-black/40">STORAGE_POLICY</span>
+        </div>
+        <h1 class="text-6xl lg:text-8xl font-black text-black tracking-tighter uppercase leading-none">
+          Cookie.<br/>Policy
+        </h1>
+        <p class="mt-8 font-mono text-sm text-black/60 max-w-xl uppercase font-bold leading-relaxed">
+          Kleine Datenpakete für eine bessere Performance. Hier erfährst du, welche Telemetrie-Einheiten wir auf deinem System hinterlegen.
+        </p>
+      </header>
+
+      <div class="space-y-20 border-t border-black/10 pt-16">
+
+        <!-- 01 Definition -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div class="md:col-span-4">
+            <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 01_Definition</span>
+          </div>
+          <div class="md:col-span-8 font-mono text-xs uppercase text-black/70 leading-relaxed space-y-4">
+            <p>Cookies sind kleine Textdateien, die ein Browser beim Besuch einer Website auf deinem Gerät speichert. Neben klassischen Cookies verwenden wir auch <strong class="text-black">localStorage</strong> und <strong class="text-black">sessionStorage</strong> — browserseitige Speichermechanismen, die keine Netzwerkanfragen auslösen und ausschließlich lokal auf deinem Gerät verbleiben.</p>
+            <p>Diese Website setzt ausschließlich technisch notwendige Einheiten ein. Es werden keine Tracking- oder Werbe-Cookies von Drittanbietern verwendet.</p>
+          </div>
+        </section>
+
+        <!-- 02 Eingesetzte Cookies / Storage -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div class="md:col-span-4">
+            <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 02_Storage_Units</span>
+          </div>
+          <div class="md:col-span-8 space-y-4">
+
+            <!-- Table header -->
+            <div class="grid grid-cols-12 gap-2 font-mono text-[9px] text-black/30 uppercase tracking-widest border-b border-black/10 pb-2">
+              <span class="col-span-4">Name</span>
+              <span class="col-span-3">Typ</span>
+              <span class="col-span-2">Dauer</span>
+              <span class="col-span-3">Zweck</span>
+            </div>
+
+            <!-- a83_cookie_consent -->
+            <div class="grid grid-cols-12 gap-2 font-mono text-[10px] uppercase bg-black/[0.02] border border-black/5 p-4 items-start">
+              <div class="col-span-4">
+                <span class="text-a83-accent font-black break-all">a83_cookie_consent</span>
+                <span class="block text-[8px] text-black/30 mt-1">localStorage</span>
+              </div>
+              <div class="col-span-3 text-black/60">
+                <span class="bg-black/5 px-1.5 py-0.5 text-[9px]">Notwendig</span>
+              </div>
+              <div class="col-span-2 text-black/60">Permanent</div>
+              <div class="col-span-3 text-black/60 leading-relaxed">Speichert deine Cookie-Einwilligung (full / minimal)</div>
+            </div>
+
+            <!-- theme -->
+            <div class="grid grid-cols-12 gap-2 font-mono text-[10px] uppercase bg-black/[0.02] border border-black/5 p-4 items-start">
+              <div class="col-span-4">
+                <span class="text-black font-black">theme</span>
+                <span class="block text-[8px] text-black/30 mt-1">localStorage</span>
+              </div>
+              <div class="col-span-3 text-black/60">
+                <span class="bg-black/5 px-1.5 py-0.5 text-[9px]">Notwendig</span>
+              </div>
+              <div class="col-span-2 text-black/60">Permanent</div>
+              <div class="col-span-3 text-black/60 leading-relaxed">Speichert die gewählte Darstellung (dark / light)</div>
+            </div>
+
+            <!-- a83_scroll_[path] -->
+            <div class="grid grid-cols-12 gap-2 font-mono text-[10px] uppercase bg-black/[0.02] border border-black/5 p-4 items-start">
+              <div class="col-span-4">
+                <span class="text-black font-black break-all">a83_scroll_[pfad]</span>
+                <span class="block text-[8px] text-black/30 mt-1">sessionStorage</span>
+              </div>
+              <div class="col-span-3 text-black/60">
+                <span class="bg-black/5 px-1.5 py-0.5 text-[9px]">Notwendig</span>
+              </div>
+              <div class="col-span-2 text-black/60">Sitzung</div>
+              <div class="col-span-3 text-black/60 leading-relaxed">Merkt die Scroll-Position pro Seite für reibungslose Navigation</div>
+            </div>
+
+            <p class="font-mono text-[9px] text-black/30 uppercase leading-relaxed pt-2">
+              * Permanent = bleibt gespeichert bis du den Browser-Cache leerst. Sitzung = wird beim Schließen des Tabs gelöscht.
+            </p>
+          </div>
+        </section>
+
+        <!-- 03 Drittanbieter -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div class="md:col-span-4">
+            <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 03_Third_Party</span>
+          </div>
+          <div class="md:col-span-8 space-y-6">
+            <div class="bg-black/[0.02] p-6 border border-black/5 font-mono text-xs uppercase">
+              <span class="text-black font-black block mb-2">Google Fonts</span>
+              <p class="text-black/60 leading-relaxed">Wir laden Schriftarten über den Google Fonts CDN. Dabei wird deine IP-Adresse an Server von Google (USA) übermittelt. Die Übertragung erfolgt auf Basis von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einheitlicher Darstellung). Google kann dabei eigene Cookies setzen — diese unterliegen der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-a83-accent hover:underline">Google-Datenschutzerklärung</a>.</p>
+            </div>
+            <div class="bg-black/[0.02] p-6 border border-black/5 font-mono text-xs uppercase">
+              <span class="text-black font-black block mb-2">Kein Tracking / Keine Werbung</span>
+              <p class="text-black/60 leading-relaxed">Auf dieser Website werden keine Analytics-Dienste (z.B. Google Analytics, Matomo), Werbenetzwerke oder Social-Media-Pixel eingesetzt.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 Einstellungen -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div class="md:col-span-4">
+            <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 04_Control</span>
+          </div>
+          <div class="md:col-span-8 font-mono text-xs uppercase text-black/70 leading-relaxed space-y-4">
+            <p>Du kannst deine Einwilligung jederzeit widerrufen, indem du den Browser-LocalStorage für diese Domain leerst. In den meisten Browsern erreichst du das über:</p>
+            <div class="bg-black/[0.02] p-4 border border-black/5 space-y-1 text-[10px]">
+              <p><span class="text-black font-black">Chrome / Edge:</span> Einstellungen → Datenschutz → Browserdaten löschen</p>
+              <p><span class="text-black font-black">Firefox:</span> Einstellungen → Datenschutz → Cookies und Website-Daten löschen</p>
+              <p><span class="text-black font-black">Safari:</span> Einstellungen → Datenschutz → Alle Website-Daten entfernen</p>
+            </div>
+            <p>Alternativ kannst du direkt über die Browser-DevTools (F12 → Application → Local Storage) einzelne Einträge löschen.</p>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="mt-40 opacity-40 py-8 border-t border-black/5 font-mono text-[9px] flex flex-col sm:flex-row justify-between gap-2 uppercase tracking-widest">
+        <span>Policy_Active // 2026 — Stand: März 2026</span>
+        <span>© 2026 ABTEILUNG83</span>
+      </footer>
+    </div>
+  </section>
+</BaseLayout>
