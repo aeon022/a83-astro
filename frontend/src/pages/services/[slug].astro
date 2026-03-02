@@ -4,6 +4,7 @@
 // Update: Refined text values for maximum legibility
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/core/SEO.astro';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
 
@@ -17,6 +18,11 @@ if (!service) {
 ---
 
 <BaseLayout title={`${service.title} | Module_${service.id}`}>
+  <SEO
+    slot="head"
+    title={`${service.title} | Webdesign Graz — ABTEILUNG83`}
+    description={`${service.tagline} — Professionelles ${service.title} von ABTEILUNG83 Graz. Astro, WordPress, Breakdance & Oxygen Builder.`}
+  />
   <section class="min-h-screen bg-a83-bg pt-32 pb-20 px-6 lg:px-16 overflow-x-hidden relative selection:bg-a83-accent selection:text-white">
     
     <div class="absolute inset-0 opacity-[0.015] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>

@@ -3,9 +3,15 @@
 // Vibe: Tactical ReadMe / Legal Documentation
 // Path: src/pages/imprint.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/core/SEO.astro';
 ---
 
 <BaseLayout title="Imprint // System_ReadMe">
+  <SEO
+    slot="head"
+    title="Impressum | ABTEILUNG83 Graz"
+    description="Impressum von ABTEILUNG83 — Gerwin Weiher, Webdesign & Web-Architektur aus Graz, Österreich."
+  />
   <section class="nav-content-sync min-h-screen bg-bone-white text-black pt-32 pb-24 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
     
     <div class="absolute inset-0 opacity-[0.05] bg-[radial-gradient(#000_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>

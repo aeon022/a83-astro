@@ -2,10 +2,16 @@
 // Dateipfad: frontend/src/pages/roi.astro
 // Version: V16.2 - ROI MODULE DEPLOYMENT (FIXED SYNTAX)
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/core/SEO.astro';
 import RoiCalculator from '../components/ui/RoiCalculator';
 ---
 
 <BaseLayout title="ROI Simulator // Projection Engine">
+  <SEO
+    slot="head"
+    title="ROI Simulator | Webdesign Graz — ABTEILUNG83"
+    description="Berechne den Return on Investment deiner neuen Website. Unser ROI-Kalkulator zeigt, wie performante Webarchitektur deinen digitalen ROI steigert."
+  />
   <section class="nav-content-sync min-h-screen bg-a83-bg flex items-center justify-center py-20 px-6">
     <div class="max-w-[1200px] w-full">
       

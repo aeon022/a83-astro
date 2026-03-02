@@ -2,12 +2,19 @@
 // Dateipfad: frontend/src/pages/404.astro
 // Version: V1.0 - GHOST_SIGNAL / NODE_NOT_FOUND
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SEO from '../components/core/SEO.astro';
 ---
 
 <BaseLayout
   title="404 — NODE_NOT_FOUND | ABTEILUNG83"
   description="Signal lost. Node not found in the neural grid."
 >
+  <SEO
+    slot="head"
+    title="404 — Seite nicht gefunden | ABTEILUNG83"
+    description="Diese Seite existiert nicht. Kehre zur Startseite von ABTEILUNG83 zurück."
+    noindex={true}
+  />
   <canvas id="err-canvas" class="fixed inset-0 z-[-1] w-full h-full opacity-40"></canvas>
 
   <!-- CRT scanlines -->

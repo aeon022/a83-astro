@@ -1,6 +1,7 @@
 ---
 // Version: V15.6 - COMPONENT-BASED ARCHIVE SYNC
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/core/SEO.astro';
 import DecommissionedTicker from '../../components/ui/DecommissionedTicker.astro'; // NEU
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
@@ -23,6 +24,11 @@ const archivedMissions = workEntries
 ---
 
 <BaseLayout title="Mission Logs | Operational History">
+  <SEO
+    slot="head"
+    title="Referenzen & Web-Projekte | ABTEILUNG83 — Webdesign Graz"
+    description="Abgeschlossene Web-Projekte von ABTEILUNG83 aus Graz. Astro, WordPress, Breakdance & Oxygen Builder Websites mit messbarem Output."
+  />
   <section class="nav-content-sync min-h-screen bg-a83-bg pt-32 pb-20 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
     
     <div class="absolute inset-0 opacity-[0.015] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
