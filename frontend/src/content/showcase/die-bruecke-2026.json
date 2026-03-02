@@ -1,0 +1,21 @@
+{
+  "title": "Die Brücke – Das inklusive Web-Portal (Relaunch 2.1)",
+  "coverImage": "/images/showcase/die-bruecke-2025/coverImage.webp",
+  "excerpt": "High-Performance Headless-Relaunch für Steiermarks Pionier-Zentrum der Inklusion. Ein modulares Ökosystem auf Astro- und Directus-Basis, das Kultur, soziale Dienste und E-Commerce barrierefrei unter einer Flagge vereint.",
+  "entity": "Die Brücke – soziokulturelles Zentrum",
+  "vector": "Headless Portal / Community Hub",
+  "arch": "Astro / Tailwind v4 / Directus",
+  "cycle": "2024/2025",
+  "protocolReadout": "Performance-First. Accessibility-Core. Headless-Logic.\ncommit: bridge-reboot-v2.1",
+  "taskProtocol": "**Target Analysis**: Transformation des soziokulturellen Zentrums (Graz) von einem WordPress-Monolithen zu einer hochperformanten Headless-Architektur. Fokus: Verschmelzung von Kultur (Events), sozialen Dienstleistungen (FASS, FED, WASS) und E-Commerce.\n\n**System Conflict**: Das alte System (2023) stieß bei der Skalierung der Datentypen und der Performance (Core Web Vitals) an Grenzen. Die Trennung von redaktionellem Content, Event-Logik und Shop-Funktionalität war technisch zu eng verzahnt.\n\n### Mission Objectives:\n\n**Headless Decoupling**: Vollständige Trennung von Daten (Directus) und Darstellung (Astro) für maximale Sicherheit und Speed.\n**Accessibility 2.0**: Umfassende Barrierefreiheit als Kern-Feature, unterstützt durch die Effizienz von Tailwind v4.\n**Unified Commerce**: Integration von Snipcart (Shop) und Pretix (Tickets) als schlanke, API-basierte Lösungen.",
+  "stackDeployed": [
+    "[CORE] Astro (Hybrid Rendering)",
+    "[ENGINE] Tailwind CSS v4 (Vite-Native)",
+    "[BACKEND] Directus Headless CMS (Dockerized)",
+    "[DATABASE] PostgreSQL & Redis",
+    "[COMMERCE] Snipcart & Pretix Integration",
+    "[INFRA] Ubuntu 24.04 LTS / Nginx Proxy / OrbStack"
+  ],
+  "fixExecuted": "Migration der Architektur auf einen modernen Hybrid-Ansatz. Wir nutzen Astro für statische Performance bei Inhaltsseiten und SSR für dynamische Event-Filter.\n\n**Data-Layer**: Directus fungiert als Single Source of Truth (SSOT). Wir haben ein striktes TypeScript-Schema implementiert, das die API-Antworten direkt in die Astro-Komponenten typisiert.\n\n**UI-Architecture**: Einsatz von Tailwind v4 für ein schlankes CSS-Bundle. Die Integration erfolgt über das neue Vite-Plugin, wobei wir die Design-Konsistenz über CSS-Variablen steuern, statt über eine klassische config-Datei.\n\n**Deployment-Security**: Isolierung des Backends via Docker auf Ubuntu 24.04, geschützt durch einen Nginx Reverse Proxy und SSL-Terminierung via Plesk.",
+  "finalStatus": "SYSTEM STATUS: DEPLOYMENT_PHASE. Frontend: Optimized. Data-Model: Scalable. Accessibility: Audit-Ready."
+}
