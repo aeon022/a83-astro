@@ -1,0 +1,116 @@
+{
+  "title": "AI Context Purifier",
+  "status": "live",
+  "description": "Clean Markdown from any webpage selection for ChatGPT, Claude, and other AI tools. Strip cookie banners, nav bars, and page noise with one shortcut.",
+  "longDescription": "Select content on any webpage, press a shortcut, and copy purified Markdown instead of dragging UI junk into your prompts.",
+  "url": "https://a83.lemonsqueezy.com/checkout/buy/AIP_PRODUCT_ID",
+  "heroEyebrow": "// CHROME EXTENSION · MANIFEST V3",
+  "heroTitle": "AI CONTEXT<br>PURIFIER",
+  "heroTag": "// CLEAN MARKDOWN. ONE SHORTCUT.",
+  "heroTagline": "Stop pasting nav bars and cookie banners into your prompts.<br><strong>⌘ Shift X</strong> — select text on any webpage,<br>get clean Markdown. Ready for ChatGPT, Claude, or any AI.",
+  "heroCTAPrimaryText": "BUY PRO — $10",
+  "heroCTAPrimaryURL": "https://a83.lemonsqueezy.com/checkout/buy/AIP_PRODUCT_ID",
+  "heroCTASecondaryText": "SEE HOW IT WORKS ▾",
+  "heroCTASecondaryURL": "#how",
+  "supportedAIs": [
+    "CHATGPT",
+    "CLAUDE",
+    "GEMINI",
+    "MARKDOWN",
+    "COPY HISTORY",
+    "CUSTOM FILTERS"
+  ],
+  "mockupSectionLabel": "// LIVE PREVIEW",
+  "mockupTitle": "SEE IT IN ACTION",
+  "mockupSubtitle": "Select text on any page, press <strong>⌘ Shift X</strong>. The toast confirms. Your clipboard has clean Markdown.",
+  "featuresSectionLabel": "// FEATURES",
+  "featuresTitle": "BUILT FOR AI POWER USERS",
+  "featuresSubtitle": "Everything you need to feed clean context into any language model.",
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "INSTANT SHORTCUT",
+      "desc": "Use ⌘ Shift X on Mac or Ctrl Shift X on Windows on any website. Customizable via chrome://extensions/shortcuts."
+    },
+    {
+      "icon": "🖱️",
+      "title": "RIGHT-CLICK MENU",
+      "desc": "Select text, right-click, and copy as clean Markdown when you do not want to rely on the keyboard shortcut."
+    },
+    {
+      "icon": "🔬",
+      "title": "SURGICAL EXTRACTION",
+      "desc": "Purifies only the selected content instead of converting the whole page like reader modes do."
+    },
+    {
+      "icon": "📝",
+      "title": "CLEAN MARKDOWN",
+      "desc": "Preserves headings, emphasis, code, and links while removing interface noise and layout junk."
+    },
+    {
+      "icon": "🕐",
+      "title": "COPY HISTORY",
+      "desc": "Save the last 10 purified texts locally and re-copy them from the popup with one click. Pro only."
+    },
+    {
+      "icon": "🎛️",
+      "title": "CUSTOM FILTERS",
+      "desc": "Add site-specific CSS selectors for noise the default filter set does not catch. Pro only."
+    }
+  ],
+  "themesSectionLabel": "// WORKFLOWS",
+  "themesTitle": "LESS NOISE. BETTER CONTEXT.",
+  "themesSubtitle": "Use the shortcut for speed, the context menu for precision, and Pro filters when you need site-specific cleanup.",
+  "howItWorksSectionLabel": "// SETUP",
+  "howItWorksTitle": "THREE STEPS. THAT'S IT.",
+  "steps": [
+    {
+      "num": "1",
+      "title": "INSTALL",
+      "desc": "Add AI Context Purifier from the Chrome Web Store. No signup, no account, no config required."
+    },
+    {
+      "num": "2",
+      "title": "SELECT",
+      "desc": "Mark any text on any webpage, from articles and docs to Stack Overflow threads and GitHub READMEs."
+    },
+    {
+      "num": "3",
+      "title": "PURIFY",
+      "desc": "Press ⌘ Shift X or use the context menu to copy clean Markdown directly into your AI workflow."
+    }
+  ],
+  "pricingSectionLabel": "// PRICING",
+  "pricingTitle": "ONE-TIME. NO SUBSCRIPTION.",
+  "pricingSubtitle": "The core feature is free forever. Pay once for history and custom filters.",
+  "pricingTiers": [
+    {
+      "tier": "FREE",
+      "amount": "$0",
+      "note": "// forever free",
+      "features": "Unlimited copies\n⌘ Shift X shortcut\nRight-click menu\nAll noise filters\nLast copy preview",
+      "dimmedFeatures": "Copy history (10 items)\nCustom filter rules",
+      "btn": "INSTALL FREE",
+      "btnUrl": "#install",
+      "featured": false
+    },
+    {
+      "tier": "PRO",
+      "amount": "$10",
+      "note": "// one-time · 5 devices",
+      "features": "Unlimited copies\n⌘ Shift X shortcut\nRight-click menu\nAll noise filters\nLast copy preview\nCopy history (10 items)\nCustom filter rules",
+      "btn": "BUY PRO ▶",
+      "btnUrl": "https://a83.lemonsqueezy.com/checkout/buy/AIP_PRODUCT_ID",
+      "featured": true
+    }
+  ],
+  "ctaSectionLabel": "// GET STARTED",
+  "ctaTitle": "STOP FEEDING YOUR AI GARBAGE.",
+  "ctaSubtitle": "One shortcut. Clean context. Better answers.",
+  "ctaBtn": "BUY PRO — $10 ▶",
+  "ctaBtnUrl": "https://a83.lemonsqueezy.com/checkout/buy/AIP_PRODUCT_ID",
+  "secondaryCtaBtn": "FREE INSTALL",
+  "secondaryCtaBtnUrl": "#install",
+  "footerLeft": "▶ AI CONTEXT PURIFIER <span style=\"opacity:0.4\">// ABTEILUNG83 · 2026</span>",
+  "footerRight": "BUILT FOR AI POWER USERS"
+}

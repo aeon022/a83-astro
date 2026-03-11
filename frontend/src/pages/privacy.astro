@@ -123,9 +123,77 @@ import SEO from '../components/core/SEO.astro';
                 </div>
             </section>
 
+            <section class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-4">
+                    <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 05_CHROME_EXTENSIONS</span>
+                </div>
+                <div class="md:col-span-8 space-y-8">
+                    <div class="bg-black/[0.02] p-8 border border-black/5">
+                        <h3 class="font-black text-lg uppercase mb-4 tracking-tighter">EnvSwitch</h3>
+                        <p class="font-mono text-[11px] text-black/60 uppercase leading-relaxed">
+                            EnvSwitch speichert Projekt- und Umgebungs-Konfigurationen
+                            (Domainnamen und Labels) ausschließlich im lokalen
+                            Browser-Speicher (<span class="text-black">chrome.storage.local</span>).
+                            Es werden keine Daten an externe Server übertragen.
+                            Es werden keine personenbezogenen Daten erhoben.
+                        </p>
+                    </div>
+                    <div class="bg-black/[0.02] p-8 border border-black/5">
+                        <h3 class="font-black text-lg uppercase mb-4 tracking-tighter">AI Context Purifier</h3>
+                        <p class="font-mono text-[11px] text-black/60 uppercase leading-relaxed">
+                            AI Context Purifier verarbeitet vom Nutzer ausgewählten Text
+                            auf der aktuellen Webseite lokal im Browser und konvertiert
+                            ihn zu Markdown. Das Ergebnis wird in die Zwischenablage
+                            geschrieben. Weder ausgewählter Text noch Seiteninhalt werden
+                            an externe Server übertragen. Pro-Lizenzschlüssel werden über
+                            <span class="text-black">api.abteilung83.at</span> gegen die
+                            LemonSqueezy API verifiziert. Es werden keine persönlichen
+                            Browserdaten gespeichert oder geteilt.
+                        </p>
+                    </div>
+                    <div class="bg-black/[0.02] p-8 border border-black/5">
+                        <h3 class="font-black text-lg uppercase mb-4 tracking-tighter">A83 Lyric-OS</h3>
+                        <p class="font-mono text-[11px] text-black/60 uppercase leading-relaxed">
+                            Diese Extension liest beim Klick auf den Transform-Button
+                            temporär den sichtbaren Textinhalt des aktiven Browser-Tabs.
+                            Dieser Inhalt wird ausschließlich zur Generierung von
+                            Songtexten verwendet und weder von ABTEILUNG83 gespeichert,
+                            protokolliert noch weitergegeben.
+                        </p>
+                        <p class="font-mono text-[11px] text-black/60 uppercase leading-relaxed mt-4">
+                            Wenn du den API-Modus aktivierst und deinen eigenen
+                            Anthropic API-Schlüssel hinterlegst, wird der Seiteninhalt
+                            direkt von deinem Browser an die Anthropic API
+                            (<span class="text-black">api.anthropic.com</span>)
+                            übertragen, um Lyrics zu erzeugen. Dein API-Schlüssel wird
+                            lokal in deinem Browser über
+                            <span class="text-black">chrome.storage.local</span>
+                            gespeichert und niemals an unsere Server übertragen.
+                        </p>
+                        <p class="font-mono text-[11px] text-black/60 uppercase leading-relaxed mt-4">
+                            Alle weiteren Einstellungen wie Genre, Sprache und AI-Modus
+                            werden ausschließlich lokal in deinem Browser gespeichert.
+                        </p>
+                    </div>
+                    <div class="bg-black/[0.02] p-8 border border-black/5">
+                        <h3 class="font-black text-lg uppercase mb-4 tracking-tighter">PromptVault</h3>
+                        <p class="font-mono text-[11px] text-black/60 uppercase leading-relaxed">
+                            PromptVault speichert Prompts lokal im Browser-Speicher
+                            (<span class="text-black">chrome.storage.local</span>).
+                            Pro-Nutzer, die Cloud-Sync aktivieren, speichern ihre
+                            Prompt-Daten in Supabase (EU-Region). Lizenzschlüssel
+                            werden über <span class="text-black">api.abteilung83.at</span>
+                            gegen die LemonSqueezy API verifiziert. Es werden keine
+                            Browser-Historien oder sonstigen personenbezogenen Daten
+                            erhoben.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             <section class="grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-black/10 pt-16">
                 <div class="md:col-span-4">
-                    <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 05_CONTROLLER_UPLINK</span>
+                    <span class="font-mono text-[10px] text-a83-accent font-black tracking-[0.3em] block uppercase">// 06_CONTROLLER_UPLINK</span>
                 </div>
                 <div class="md:col-span-8 font-mono text-sm uppercase">
                     <p class="font-black text-xl mb-4">Abteilung83 // Gerwin Weiher</p>

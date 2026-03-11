@@ -3,6 +3,7 @@ const { sectionLabel, title, subtitle, variant } = Astro.props;
 
 const isLyricOs = variant === 'a83-lyric-os';
 const isEnvSwitch = variant === 'envswitch';
+const isAiPurifier = variant === 'ai-context-purifier';
 ---
 <section id="themes">
   <div class="container">
@@ -76,6 +77,41 @@ const isEnvSwitch = variant === 'envswitch';
             <div class="t-card-mini t-card t-border">
               <div class="t-card-title t-accent">PRODUCTION VIEW</div>
               <div class="t-card-text t-muted">Verify the real customer-facing page without manually rewriting the URL or losing your current position.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : isAiPurifier ? (
+      <div class="themes-grid purifier-modes-grid">
+        <div class="theme-card purifier-mode-card">
+          <div class="theme-label-bar">SHORTCUT</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">⌘ SHIFT X</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">FASTEST FLOW</div>
+              <div class="t-card-text t-muted">Select text on any page and purify it instantly without breaking focus.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card purifier-mode-card">
+          <div class="theme-label-bar">MENU</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">RIGHT-CLICK ACTION</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">PRECISE CONTROL</div>
+              <div class="t-card-text t-muted">Use the context menu when you want an explicit copy action on the current selection.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card purifier-mode-card active">
+          <div class="theme-label-bar">PRO FILTERS</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">CUSTOM SELECTORS</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">SITE-SPECIFIC CLEANUP</div>
+              <div class="t-card-text t-muted">Add extra selectors for stubborn page junk and keep your AI context surgically clean.</div>
             </div>
           </div>
         </div>
@@ -232,6 +268,43 @@ const isEnvSwitch = variant === 'envswitch';
     }
 
     .envswitch-mode-card .t-card-mini {
+      min-height: 0;
+    }
+  }
+
+  .purifier-modes-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .purifier-mode-card {
+    border-color: color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+    background: color-mix(in srgb, var(--a83-surface) 82%, var(--a83-bg));
+  }
+
+  .purifier-mode-card.active {
+    border-color: color-mix(in srgb, var(--a83-accent) 36%, var(--a83-surface));
+    box-shadow: 0 0 24px color-mix(in srgb, var(--a83-accent) 12%, transparent);
+  }
+
+  .purifier-mode-card .theme-label-bar {
+    color: var(--a83-accent);
+  }
+
+  .purifier-mode-card .t-title-row {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .purifier-mode-card .t-card-mini {
+    min-height: 132px;
+  }
+
+  @media (max-width: 700px) {
+    .purifier-modes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .purifier-mode-card .t-card-mini {
       min-height: 0;
     }
   }

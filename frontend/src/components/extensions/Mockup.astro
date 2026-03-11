@@ -3,6 +3,7 @@ const { sectionLabel, title, subtitle, variant } = Astro.props;
 
 const isLyricOs = variant === 'a83-lyric-os';
 const isEnvSwitch = variant === 'envswitch';
+const isAiPurifier = variant === 'ai-context-purifier';
 ---
 <section class="mockup-section">
   <div class="container">
@@ -114,6 +115,79 @@ const isEnvSwitch = variant === 'envswitch';
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    ) : isAiPurifier ? (
+      <div class="purifier-shell">
+        <div class="purifier-ba-grid">
+          <div class="purifier-ba-card purifier-ba-card--before">
+            <div class="purifier-ba-label"><span class="purifier-ba-dot purifier-ba-dot--red"></span>WITHOUT - raw clipboard</div>
+            <div class="purifier-ba-content">
+              <span class="purifier-noise">Home | Products | Blog | Contact | Login</span>
+              <span class="purifier-noise">We use cookies to improve your experience. Accept All</span>
+              <span class="purifier-noise">Home › Blog › JavaScript › Async</span>
+              <span class="purifier-keep">Understanding Async/Await</span>
+              <span class="purifier-keep">Async functions let you write async code as if it were synchronous. The await keyword pauses execution until a Promise resolves...</span>
+              <span class="purifier-noise">Share: Twitter LinkedIn Facebook Copy Link</span>
+              <span class="purifier-noise">Related: 10 JS Tips · Top Frameworks 2026</span>
+              <span class="purifier-noise">Author: Jane Doe · Senior Dev · 142 followers</span>
+              <span class="purifier-noise">Comments (24) · Subscribe to newsletter</span>
+            </div>
+          </div>
+
+          <div class="purifier-ba-arrow">→</div>
+
+          <div class="purifier-ba-card purifier-ba-card--after">
+            <div class="purifier-ba-label"><span class="purifier-ba-dot purifier-ba-dot--green"></span>WITH PURIFIER - clean Markdown</div>
+            <div class="purifier-ba-content">
+              <span class="purifier-md-h">## Understanding Async/Await</span><br />
+              <span class="purifier-md-body">Async functions let you write async code as if it were synchronous. The await keyword pauses execution until a Promise resolves...</span><br /><br />
+              <span class="purifier-md-dim">// 312 chars · noise removed ✓</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mockup-wrap purifier-mock-wrap">
+          <div class="browser-chrome">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-url">dev.to/article/understanding-async-await</div>
+          </div>
+          <div class="browser-body purifier-browser-body">
+            <div class="purifier-fake-page">
+              <div class="purifier-fake-page__nav">
+                <div class="purifier-fake-nav-logo">DEV Community</div>
+                <div class="purifier-fake-nav-links"><span>Feed</span><span>Tags</span><span>Sign in</span></div>
+              </div>
+              <div class="purifier-fake-page__body">
+                <div class="purifier-cookie"><span>🍪 We use cookies to improve your experience.</span><button class="purifier-cookie__btn">Accept All</button></div>
+                <div class="purifier-breadcrumb">Home › JavaScript › Async</div>
+                <div class="purifier-selected">
+                  <div class="purifier-fake-h1">Understanding Async/Await in JavaScript</div>
+                  <div class="purifier-fake-p">Async functions allow you to write promise-based code as if it were synchronous. The <code>await</code> keyword pauses execution inside an async function until the Promise resolves, without blocking the main thread.</div>
+                  <div class="purifier-fake-p">This makes error handling with try/catch natural and keeps the code readable even for complex async flows.</div>
+                </div>
+                <div class="purifier-share">🔗 Share: Twitter · LinkedIn · Copy Link · Reddit</div>
+                <div class="purifier-author">Jane Doe · Senior Developer · Follow · 142 followers</div>
+              </div>
+            </div>
+
+            <div class="purifier-md-panel">
+              <div class="purifier-md-panel__header">
+                <span class="purifier-md-panel__title">▶ PURIFIED OUTPUT</span>
+                <span class="purifier-md-panel__badge">COPIED ✓</span>
+              </div>
+              <div class="purifier-md-panel__content">
+                <span class="purifier-md-h">## Understanding Async/Await</span><br />
+                <span class="purifier-md-body">Async functions allow you to write promise-based code as if it were synchronous. The `await` keyword pauses execution inside an async function until the Promise resolves, without blocking the main thread.</span><br /><br />
+                <span class="purifier-md-body">This makes error handling with try/catch natural and keeps the code readable even for complex async flows.</span>
+              </div>
+              <div class="purifier-md-panel__footer">312 CHARS · NOISE REMOVED</div>
+            </div>
+
+            <div class="purifier-toast">✓ Copied as Markdown · 312 chars</div>
           </div>
         </div>
       </div>
@@ -592,6 +666,256 @@ const isEnvSwitch = variant === 'envswitch';
     color: color-mix(in srgb, var(--muted) 65%, var(--a83-bg));
   }
 
+  .purifier-shell {
+    margin-top: 40px;
+  }
+
+  .purifier-ba-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  .purifier-ba-card {
+    overflow: hidden;
+    background: color-mix(in srgb, var(--a83-surface) 84%, var(--a83-bg));
+    border: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+    border-radius: 4px;
+    text-align: left;
+  }
+
+  .purifier-ba-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-bottom: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+  }
+
+  .purifier-ba-card--before .purifier-ba-label { color: #f87171; }
+  .purifier-ba-card--after .purifier-ba-label { color: #34d399; }
+
+  .purifier-ba-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+  }
+
+  .purifier-ba-dot--red { background: #f87171; }
+
+  .purifier-ba-dot--green {
+    background: #34d399;
+    box-shadow: 0 0 6px rgba(52, 211, 153, 0.6);
+  }
+
+  .purifier-ba-content {
+    padding: 14px;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .purifier-noise,
+  .purifier-keep {
+    display: block;
+  }
+
+  .purifier-noise {
+    color: #7a6c78;
+    text-decoration: line-through;
+  }
+
+  .purifier-keep,
+  .purifier-md-body { color: var(--a83-text); }
+
+  .purifier-md-h {
+    color: var(--a83-accent);
+    font-weight: 800;
+  }
+
+  .purifier-md-dim { color: var(--a83-text-dim); }
+
+  .purifier-ba-arrow {
+    color: var(--a83-accent);
+    font-size: 28px;
+    text-shadow: 0 0 14px color-mix(in srgb, var(--a83-accent) 24%, transparent);
+  }
+
+  .purifier-mock-wrap {
+    position: relative;
+  }
+
+  .purifier-browser-body {
+    position: relative;
+  }
+
+  .purifier-fake-page {
+    width: 460px;
+    background: #f8f8ff;
+  }
+
+  .purifier-fake-page__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .purifier-fake-nav-logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .purifier-fake-nav-links {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: #9ca3af;
+  }
+
+  .purifier-fake-page__body {
+    padding: 16px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .purifier-cookie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: #1f2937;
+    color: #d1d5db;
+    font-size: 10px;
+  }
+
+  .purifier-cookie__btn {
+    border: 0;
+    border-radius: 2px;
+    padding: 3px 8px;
+    background: #6b7280;
+    color: #fff;
+    font-size: 9px;
+  }
+
+  .purifier-breadcrumb,
+  .purifier-author {
+    color: #9ca3af;
+    font-size: 9px;
+  }
+
+  .purifier-breadcrumb { margin-bottom: 8px; }
+
+  .purifier-selected {
+    padding: 1px 0;
+    background: rgba(167, 139, 250, 0.18);
+    border-radius: 2px;
+  }
+
+  .purifier-fake-h1 {
+    margin-bottom: 8px;
+    color: #111;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .purifier-fake-p {
+    margin-bottom: 8px;
+    color: #374151;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .purifier-fake-p code {
+    padding: 1px 4px;
+    border-radius: 2px;
+    background: #e8e8ff;
+    font-size: 9px;
+  }
+
+  .purifier-share {
+    margin-bottom: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background: #f3f4f6;
+    color: #9ca3af;
+    font-size: 9px;
+  }
+
+  .purifier-md-panel {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    background: color-mix(in srgb, var(--a83-bg) 92%, #0a0a0f);
+    border-left: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+    text-align: left;
+  }
+
+  .purifier-md-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+    background: color-mix(in srgb, var(--a83-surface) 84%, var(--a83-bg));
+  }
+
+  .purifier-md-panel__title {
+    color: var(--a83-accent);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+  }
+
+  .purifier-md-panel__badge {
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    border-radius: 2px;
+    padding: 2px 7px;
+    background: rgba(52, 211, 153, 0.1);
+    color: #34d399;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+
+  .purifier-md-panel__content {
+    flex: 1;
+    padding: 14px;
+    color: var(--a83-text);
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
+  .purifier-md-panel__footer {
+    border-top: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+    padding: 10px 14px;
+    color: var(--a83-text-dim);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .purifier-toast {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    border: 1px solid rgba(52, 211, 153, 0.5);
+    border-radius: 6px;
+    padding: 8px 14px;
+    background: #111119;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    color: #34d399;
+    font-size: 11px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+
   @media (max-width: 700px) {
     .envswitch-fake-page {
       width: 100%;
@@ -601,6 +925,24 @@ const isEnvSwitch = variant === 'envswitch';
       width: 100%;
       border-left: none;
       border-top: 1px solid var(--border);
+    }
+
+    .purifier-ba-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .purifier-ba-arrow {
+      transform: rotate(90deg);
+    }
+
+    .purifier-fake-page,
+    .purifier-md-panel {
+      width: 100%;
+    }
+
+    .purifier-md-panel {
+      border-top: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+      border-left: 0;
     }
   }
 </style>
