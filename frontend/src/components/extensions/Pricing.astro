@@ -1,5 +1,25 @@
 ---
 const { sectionLabel, title, subtitle, tiers } = Astro.props;
+
+function normalizeFeatures(tier) {
+  if (Array.isArray(tier.features)) {
+    return tier.features;
+  }
+
+  const activeFeatures = String(tier.features ?? '')
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((text) => ({ text, dim: false }));
+
+  const dimmedFeatures = String(tier.dimmedFeatures ?? '')
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((text) => ({ text, dim: true }));
+
+  return [...activeFeatures, ...dimmedFeatures];
+}
 ---
 <section id="pricing">
   <div class="container">
@@ -8,14 +28,14 @@ const { sectionLabel, title, subtitle, tiers } = Astro.props;
     <p class="sub" set:html={subtitle}></p>
 
     <div class="pricing-grid">
-      {tiers.map((tier: { tier: string; amount: string; note: string; features: any[]; btn: string; btnUrl: string; featured: boolean }) => (
+      {tiers.map((tier: { tier: string; amount: string; note: string; features: any[] | string; dimmedFeatures?: string; btn: string; btnUrl: string; featured: boolean }) => (
         <div class={`price-card ${tier.featured ? 'featured' : ''}`}>
           {tier.featured && <div class="price-badge">MOST POPULAR</div>}
           <div class="price-tier">{tier.tier}</div>
           <div class="price-amount" set:html={tier.amount}></div>
           <div class="price-note" set:html={tier.note}></div>
           <ul class="price-features">
-            {tier.features.map((feature: { text: string; dim: boolean }) => (
+            {normalizeFeatures(tier).map((feature: { text: string; dim: boolean }) => (
               <li class={feature.dim ? 'dim' : ''}>{feature.text}</li>
             ))}
           </ul>

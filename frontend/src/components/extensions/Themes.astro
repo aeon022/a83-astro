@@ -2,6 +2,7 @@
 const { sectionLabel, title, subtitle, variant } = Astro.props;
 
 const isLyricOs = variant === 'a83-lyric-os';
+const isEnvSwitch = variant === 'envswitch';
 ---
 <section id="themes">
   <div class="container">
@@ -40,6 +41,41 @@ const isLyricOs = variant === 'a83-lyric-os';
             <div class="t-card-mini t-card t-border">
               <div class="t-card-title t-accent">TRACK-READY OUTPUT</div>
               <div class="t-card-text t-muted">Format the result for music tools and move from webpage to produced audio in under a minute.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : isEnvSwitch ? (
+      <div class="themes-grid envswitch-modes-grid">
+        <div class="theme-card envswitch-mode-card">
+          <div class="theme-label-bar">LOCAL</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">localhost:3000</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">DEV LOOP</div>
+              <div class="t-card-text t-muted">Jump into local development instantly with automatic `http://` handling for localhost and IP targets.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card envswitch-mode-card active">
+          <div class="theme-label-bar">STAGING</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">staging.shop.de</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">QA CHECKPOINT</div>
+              <div class="t-card-text t-muted">Keep the exact path, query string, and anchor while validating pre-production changes with one click.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card envswitch-mode-card">
+          <div class="theme-label-bar">LIVE</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">shop.de</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">PRODUCTION VIEW</div>
+              <div class="t-card-text t-muted">Verify the real customer-facing page without manually rewriting the URL or losing your current position.</div>
             </div>
           </div>
         </div>
@@ -159,6 +195,43 @@ const isLyricOs = variant === 'a83-lyric-os';
     }
 
     .lyricos-mode-card .t-card-mini {
+      min-height: 0;
+    }
+  }
+
+  .envswitch-modes-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .envswitch-mode-card {
+    border-color: color-mix(in srgb, var(--a83-accent) 16%, var(--a83-surface));
+    background: color-mix(in srgb, var(--a83-surface) 82%, var(--a83-bg));
+  }
+
+  .envswitch-mode-card.active {
+    border-color: color-mix(in srgb, var(--a83-accent) 34%, var(--a83-surface));
+    box-shadow: 0 0 24px color-mix(in srgb, var(--a83-accent) 12%, transparent);
+  }
+
+  .envswitch-mode-card .theme-label-bar {
+    color: var(--a83-accent);
+  }
+
+  .envswitch-mode-card .t-title-row {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .envswitch-mode-card .t-card-mini {
+    min-height: 132px;
+  }
+
+  @media (max-width: 700px) {
+    .envswitch-modes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .envswitch-mode-card .t-card-mini {
       min-height: 0;
     }
   }

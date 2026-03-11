@@ -129,7 +129,7 @@ export default config({
         heroCTASecondaryURL: fields.text({ label: 'Hero CTA Secondary URL' }),
         supportedAIs: fields.array(
           fields.text({ label: 'AI Name' }),
-          { label: 'Supported AIs', itemLabel: props => props.value }
+          { label: 'Supported AIs' }
         ),
         mockupSectionLabel: fields.text({ label: 'Mockup Section Label' }),
         mockupTitle: fields.text({ label: 'Mockup Title' }),
@@ -144,8 +144,7 @@ export default config({
                 desc: fields.text({ label: 'Description', multiline: true }),
             }),
             {
-                label: 'Features',
-                itemLabel: props => props.fields.title.value || 'Feature'
+                label: 'Features'
             }
         ),
         themesSectionLabel: fields.text({ label: 'Themes Section Label' }),
@@ -160,8 +159,7 @@ export default config({
                 desc: fields.text({ label: 'Description', multiline: true }),
             }),
             {
-                label: 'Steps',
-                itemLabel: props => props.fields.title.value || 'Step'
+                label: 'Steps'
             }
         ),
         pricingSectionLabel: fields.text({ label: 'Pricing Section Label' }),
@@ -172,23 +170,23 @@ export default config({
                 tier: fields.text({ label: 'Tier' }),
                 amount: fields.text({ label: 'Amount' }),
                 note: fields.text({ label: 'Note' }),
-                features: fields.array(
-                    fields.object({
-                        text: fields.text({ label: 'Feature Text' }),
-                        dim: fields.checkbox({ label: 'Dimmed' }),
-                    }),
-                    {
-                        label: 'Features',
-                        itemLabel: props => props.fields.text.value || 'Feature'
-                    }
-                ),
+                features: fields.text({
+                    label: 'Features',
+                    description: 'One feature per line',
+                    multiline: true,
+                }),
+                dimmedFeatures: fields.text({
+                    label: 'Dimmed Features',
+                    description: 'One dimmed feature per line',
+                    multiline: true,
+                    validation: { isRequired: false },
+                }),
                 btn: fields.text({ label: 'Button Text' }),
                 btnUrl: fields.text({ label: 'Button URL' }),
                 featured: fields.checkbox({ label: 'Featured' }),
             }),
             {
-                label: 'Pricing Tiers',
-                itemLabel: props => props.fields.tier.value || 'Tier'
+                label: 'Pricing Tiers'
             }
         ),
         ctaSectionLabel: fields.text({ label: 'CTA Section Label' }),

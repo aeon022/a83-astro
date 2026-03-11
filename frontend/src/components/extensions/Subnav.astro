@@ -1,0 +1,111 @@
+---
+const { logo, links, ctaText, ctaUrl } = Astro.props;
+---
+<div class="extension-subnav-wrap">
+  <div class="extension-subnav">
+    <a href={ctaUrl} class="btn btn-primary extension-subnav__cta" target="_blank">{ctaText}</a>
+
+    <ul class="extension-subnav__links">
+      {links.map((link: { href: string; label: string }) => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+    </ul>
+
+    <div class="extension-subnav__logo">{logo}</div>
+  </div>
+</div>
+
+<style>
+  .extension-subnav-wrap {
+    position: sticky;
+    top: 72px;
+    z-index: 120;
+    padding: 0 24px;
+  }
+
+  .extension-subnav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .extension-subnav__cta {
+    justify-self: start;
+  }
+
+  .extension-subnav__links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .extension-subnav__links a {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+  }
+
+  .extension-subnav__links a:hover {
+    color: var(--green);
+  }
+
+  .extension-subnav__logo {
+    justify-self: end;
+    color: var(--text-strong);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .extension-subnav {
+      grid-template-columns: 1fr auto;
+    }
+
+    .extension-subnav__links {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .extension-subnav__logo {
+      order: -1;
+      justify-self: end;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .extension-subnav-wrap {
+      top: 68px;
+      padding: 0 16px;
+    }
+
+    .extension-subnav {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .extension-subnav__cta,
+    .extension-subnav__logo {
+      justify-self: start;
+    }
+
+    .extension-subnav__links {
+      gap: 16px;
+    }
+  }
+</style>

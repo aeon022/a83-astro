@@ -1,0 +1,117 @@
+{
+  "title": "EnvSwitch",
+  "status": "live",
+  "description": "Switch between Local, Staging, and Live in one click without editing URLs by hand. Same path, different domain.",
+  "longDescription": "Built for developers and QA engineers who jump between environments all day. Preserve the current path and query string while switching domains instantly.",
+  "coverImage": "/images/showcase/envswitch/coverImage.png",
+  "url": "https://a83.lemonsqueezy.com/checkout/buy/96cffa4c-323d-4821-bbb7-77e5afa2ebb1",
+  "heroEyebrow": "// CHROME EXTENSION · MANIFEST V3",
+  "heroTitle": "ENVSWITCH",
+  "heroTag": "// ONE CLICK. SAME PATH. DIFFERENT DOMAIN.",
+  "heroTagline": "Stop editing URLs by hand.<br><strong>Switch between Local, Staging, and Live</strong><br>without losing your place.",
+  "heroCTAPrimaryText": "GET PRO — $15",
+  "heroCTAPrimaryURL": "https://a83.lemonsqueezy.com/checkout/buy/96cffa4c-323d-4821-bbb7-77e5afa2ebb1",
+  "heroCTASecondaryText": "SEE HOW IT WORKS ↓",
+  "heroCTASecondaryURL": "#install",
+  "supportedAIs": [
+    "LOCALHOST",
+    "STAGING",
+    "LIVE",
+    "PATH PRESERVED",
+    "TEAM EXPORT",
+    "100% LOCAL"
+  ],
+  "mockupSectionLabel": "// LIVE PREVIEW",
+  "mockupTitle": "SEE IT IN ACTION",
+  "mockupSubtitle": "The popup appears instantly when you click the extension icon. Current environment is highlighted. One click switches the tab.",
+  "featuresSectionLabel": "// FEATURES",
+  "featuresTitle": "EVERY DETAIL COVERED",
+  "featuresSubtitle": "Small extension, sharp execution.",
+  "features": [
+    {
+      "icon": "↔️",
+      "title": "PATH STAYS INTACT",
+      "desc": "The full path, query string, and anchor are preserved on every switch so you land on the exact same page."
+    },
+    {
+      "icon": "🔒",
+      "title": "SMART PROTOCOL DETECTION",
+      "desc": "localhost and IP addresses open with http:// automatically. Everything else gets https://."
+    },
+    {
+      "icon": "🗂️",
+      "title": "MULTIPLE PROJECTS",
+      "desc": "Manage as many projects as you need. EnvSwitch auto-detects which project matches the current tab."
+    },
+    {
+      "icon": "📤",
+      "title": "TEAM EXPORT / IMPORT",
+      "desc": "Export your full project configuration as JSON and share it with the team. Import merges without overwriting existing setups."
+    },
+    {
+      "icon": "💾",
+      "title": "100% LOCAL",
+      "desc": "No account, no server, no tracking. Everything lives in chrome.storage.local on your machine."
+    },
+    {
+      "icon": "✅",
+      "title": "MINIMAL PERMISSIONS",
+      "desc": "Only storage, tabs, and activeTab. No host permissions, no content scripts, no background snooping."
+    }
+  ],
+  "themesSectionLabel": "// ENVIRONMENTS",
+  "themesTitle": "THREE TARGETS. ONE MEMORY.",
+  "themesSubtitle": "Switch context without breaking flow. Local, Staging, and Live all keep the same route so QA and dev work stay aligned.",
+  "howItWorksSectionLabel": "// SETUP",
+  "howItWorksTitle": "UP AND RUNNING IN 2 MINUTES",
+  "steps": [
+    {
+      "num": "1",
+      "title": "INSTALL & OPEN",
+      "desc": "Add EnvSwitch from the Chrome Web Store and click the icon on any site you work on."
+    },
+    {
+      "num": "2",
+      "title": "ADD YOUR ENVIRONMENTS",
+      "desc": "Label the current URL, add the other domains, and save the project once."
+    },
+    {
+      "num": "3",
+      "title": "SWITCH INSTANTLY",
+      "desc": "Click any environment button and EnvSwitch navigates the tab to the same path on the selected domain."
+    }
+  ],
+  "pricingSectionLabel": "// PRICING",
+  "pricingTitle": "SIMPLE. ONE-TIME. YOURS FOREVER.",
+  "pricingSubtitle": "No subscription. No renewal. Pay once, use forever.",
+  "pricingTiers": [
+    {
+      "tier": "FREE",
+      "amount": "$0",
+      "note": "// forever free",
+      "features": "Up to 2 projects\n3 environments per project\nOne-click switching\n100% local storage",
+      "dimmedFeatures": "Unlimited projects\nTeam Export / Import",
+      "btn": "INSTALL FREE",
+      "btnUrl": "#install",
+      "featured": false
+    },
+    {
+      "tier": "PRO",
+      "amount": "$15",
+      "note": "// one-time · 5 devices",
+      "features": "Unlimited projects\nUnlimited environments\nOne-click switching\n100% local storage\nTeam Export / Import (JSON)\nUse on up to 5 devices",
+      "btn": "GET PRO — $15 →",
+      "btnUrl": "https://a83.lemonsqueezy.com/checkout/buy/96cffa4c-323d-4821-bbb7-77e5afa2ebb1",
+      "featured": true
+    }
+  ],
+  "ctaSectionLabel": "// GET STARTED",
+  "ctaTitle": "STOP EDITING URLS BY HAND.",
+  "ctaSubtitle": "Built for developers and QA engineers who context-switch constantly.",
+  "ctaBtn": "GET PRO — $15 →",
+  "ctaBtnUrl": "https://a83.lemonsqueezy.com/checkout/buy/96cffa4c-323d-4821-bbb7-77e5afa2ebb1",
+  "secondaryCtaBtn": "FREE INSTALL",
+  "secondaryCtaBtnUrl": "#install",
+  "footerLeft": "ENVSWITCH <span style=\"opacity:0.4\">// ABTEILUNG83 · 2026</span>",
+  "footerRight": "BUILT FOR DEVELOPERS"
+}

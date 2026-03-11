@@ -261,7 +261,7 @@ html.light {
 
 /* ── HERO ── */
 .promptvault-page .hero {
-  padding: 144px 0 80px;
+  padding: 208px 0 80px;
   text-align: center;
   position: relative;
 }
@@ -927,6 +927,6 @@ html.light {
   .promptvault-page .browser-body { flex-direction: column; }
   .promptvault-page .fake-chat { width: 100%; }
   .promptvault-page .ext-panel { width: 100%; border-left: none; border-top: 1px solid var(--border); }
-  .promptvault-page .hero { padding-top: 132px; }
+  .promptvault-page .hero { padding-top: 186px; }
   .promptvault-page .nav-links { display: none; }
 }

@@ -89,40 +89,8 @@
       "tier": "FREE",
       "amount": "€0",
       "note": "// forever free",
-      "features": [
-        {
-          "text": "Up to 10 prompts",
-          "dim": false
-        },
-        {
-          "text": "All 5 built-in AIs",
-          "dim": false
-        },
-        {
-          "text": "Instant inject",
-          "dim": false
-        },
-        {
-          "text": "3 themes",
-          "dim": false
-        },
-        {
-          "text": "AI-scoped prompts",
-          "dim": false
-        },
-        {
-          "text": "Unlimited prompts",
-          "dim": true
-        },
-        {
-          "text": "Custom AIs",
-          "dim": true
-        },
-        {
-          "text": "Cloud sync",
-          "dim": true
-        }
-      ],
+      "features": "Up to 10 prompts\nAll 5 built-in AIs\nInstant inject\n3 themes\nAI-scoped prompts",
+      "dimmedFeatures": "Unlimited prompts\nCustom AIs\nCloud sync",
       "btn": "INSTALL FREE",
       "btnUrl": "#install",
       "featured": false
@@ -131,36 +99,8 @@
       "tier": "PRO",
       "amount": "€11.99",
       "note": "// one-time payment",
-      "features": [
-        {
-          "text": "Unlimited prompts",
-          "dim": false
-        },
-        {
-          "text": "All 5 built-in AIs",
-          "dim": false
-        },
-        {
-          "text": "Instant inject",
-          "dim": false
-        },
-        {
-          "text": "3 themes",
-          "dim": false
-        },
-        {
-          "text": "AI-scoped prompts",
-          "dim": false
-        },
-        {
-          "text": "Custom AIs",
-          "dim": false
-        },
-        {
-          "text": "Cloud sync",
-          "dim": true
-        }
-      ],
+      "features": "Unlimited prompts\nAll 5 built-in AIs\nInstant inject\n3 themes\nAI-scoped prompts\nCustom AIs",
+      "dimmedFeatures": "Cloud sync",
       "btn": "BUY PRO ▶",
       "btnUrl": "https://a83.lemonsqueezy.com/checkout/buy/61ab7605-811e-488e-b559-be7ded6579e5",
       "featured": true
@@ -169,36 +109,8 @@
       "tier": "SYNC",
       "amount": "€1.99",
       "note": "// per month · cancel anytime",
-      "features": [
-        {
-          "text": "Everything in Pro",
-          "dim": false
-        },
-        {
-          "text": "Cloud sync",
-          "dim": false
-        },
-        {
-          "text": "Multi-device support",
-          "dim": false
-        },
-        {
-          "text": "Auto-backup",
-          "dim": false
-        },
-        {
-          "text": "—",
-          "dim": true
-        },
-        {
-          "text": "—",
-          "dim": true
-        },
-        {
-          "text": "—",
-          "dim": true
-        }
-      ],
+      "features": "Everything in Pro\nCloud sync\nMulti-device support\nAuto-backup",
+      "dimmedFeatures": "—\n—\n—",
       "btn": "GET SYNC ▶",
       "btnUrl": "https://a83.lemonsqueezy.com/checkout/buy/df9e48a0-d8f0-49f4-b996-c23a68c459f2",
       "featured": false

@@ -2,6 +2,7 @@
 const { sectionLabel, title, subtitle, variant } = Astro.props;
 
 const isLyricOs = variant === 'a83-lyric-os';
+const isEnvSwitch = variant === 'envswitch';
 ---
 <section class="mockup-section">
   <div class="container">
@@ -42,6 +43,76 @@ const isLyricOs = variant === 'a83-lyric-os';
               <div class="lyricos-output-line">we are data on the road -</div>
               <div class="lyricos-output-line">somewhere between the link and light</div>
               <div class="lyricos-output-line">we became the song of night.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : isEnvSwitch ? (
+      <div class="envswitch-shell">
+        <div class="envswitch-url-demo">
+          <div class="envswitch-url-bar">
+            <span class="envswitch-url-proto">https://</span>
+            <span class="envswitch-url-host">staging.shop.de</span>
+            <span class="envswitch-url-path">/products/123?ref=sale</span>
+          </div>
+          <div class="envswitch-url-arrow">↓ click "Live"</div>
+          <div class="envswitch-url-bar envswitch-url-bar--active">
+            <span class="envswitch-url-proto">https://</span>
+            <span class="envswitch-url-host envswitch-url-host--active">shop.de</span>
+            <span class="envswitch-url-path">/products/123?ref=sale</span>
+          </div>
+        </div>
+
+        <div class="mockup-wrap envswitch-mock-wrap">
+          <div class="browser-chrome">
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-dot"></div>
+            <div class="browser-url">staging.shop.de/products/123</div>
+          </div>
+          <div class="browser-body envswitch-browser-body">
+            <div class="envswitch-fake-page">
+              <div class="envswitch-fake-page__nav">
+                <div class="envswitch-fake-page__logo">ShopDemo</div>
+                <div class="envswitch-fake-page__navlinks">
+                  <span>Products</span>
+                  <span>About</span>
+                  <span>Contact</span>
+                </div>
+              </div>
+              <div class="envswitch-fake-page__body">
+                <div class="envswitch-fake-page__breadcrumb">Home / Products / Wireless Headphones</div>
+                <div class="envswitch-fake-page__title">Wireless Headphones Pro</div>
+                <div class="envswitch-fake-page__price">€149.00</div>
+                <div class="envswitch-fake-page__btn">Add to Cart</div>
+              </div>
+            </div>
+
+            <div class="envswitch-popup">
+              <div class="envswitch-popup__header">
+                <div class="envswitch-popup__logo">EnvSwitch</div>
+                <span class="envswitch-popup__menu">≡</span>
+              </div>
+              <div class="envswitch-popup__urlbar">
+                <span class="envswitch-popup__dot"></span>
+                <span class="envswitch-popup__host">staging.shop.de</span>
+                <span class="envswitch-popup__badge">Staging</span>
+              </div>
+              <div class="envswitch-popup__project">Online Shop</div>
+              <div class="envswitch-popup__envs">
+                <div class="envswitch-env-btn">
+                  <span class="envswitch-env-btn__label">Local</span>
+                  <span class="envswitch-env-btn__host">localhost:3000</span>
+                </div>
+                <div class="envswitch-env-btn active">
+                  <span class="envswitch-env-btn__label">Staging</span>
+                  <span class="envswitch-env-btn__host">staging.shop.de</span>
+                </div>
+                <div class="envswitch-env-btn">
+                  <span class="envswitch-env-btn__label">Live</span>
+                  <span class="envswitch-env-btn__host">shop.de</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -288,6 +359,248 @@ const isLyricOs = variant === 'a83-lyric-os';
   @media (max-width: 700px) {
     .lyricos-mock-shell {
       max-width: 100%;
+    }
+  }
+
+  .envswitch-shell {
+    margin-top: 40px;
+  }
+
+  .envswitch-url-demo {
+    max-width: 600px;
+    margin: 0 auto 32px;
+    text-align: left;
+  }
+
+  .envswitch-url-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    font-size: 13px;
+  }
+
+  .envswitch-url-bar--active {
+    border-color: color-mix(in srgb, var(--a83-accent) 40%, var(--border));
+  }
+
+  .envswitch-url-proto {
+    color: var(--muted);
+  }
+
+  .envswitch-url-host {
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+
+  .envswitch-url-host--active {
+    color: var(--a83-accent);
+  }
+
+  .envswitch-url-path {
+    color: color-mix(in srgb, var(--muted) 65%, var(--a83-bg));
+  }
+
+  .envswitch-url-arrow {
+    margin: 4px 0;
+    text-align: center;
+    color: var(--a83-accent);
+    opacity: 0.65;
+  }
+
+  .envswitch-browser-body {
+    background: color-mix(in srgb, var(--a83-bg) 88%, #0f1117);
+  }
+
+  .envswitch-fake-page {
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+  }
+
+  .envswitch-fake-page__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    color: #111;
+  }
+
+  .envswitch-fake-page__logo {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .envswitch-fake-page__navlinks {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #6b7280;
+  }
+
+  .envswitch-fake-page__body {
+    flex: 1;
+    padding: 24px 20px;
+    color: #111;
+  }
+
+  .envswitch-fake-page__breadcrumb {
+    margin-bottom: 16px;
+    font-size: 11px;
+    color: #9ca3af;
+  }
+
+  .envswitch-fake-page__title {
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .envswitch-fake-page__price {
+    margin-bottom: 16px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1d4ed8;
+  }
+
+  .envswitch-fake-page__btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background: #1d4ed8;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .envswitch-popup {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border);
+    background: color-mix(in srgb, var(--a83-bg) 90%, #111318);
+  }
+
+  .envswitch-popup__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 13px;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--a83-bg) 88%, #0f1117);
+  }
+
+  .envswitch-popup__logo {
+    color: var(--a83-accent);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .envswitch-popup__menu {
+    color: color-mix(in srgb, var(--muted) 80%, var(--a83-text));
+  }
+
+  .envswitch-popup__urlbar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .envswitch-popup__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34d399;
+    flex-shrink: 0;
+  }
+
+  .envswitch-popup__host {
+    flex: 1;
+    font-size: 11px;
+    color: color-mix(in srgb, var(--muted) 82%, var(--a83-text));
+  }
+
+  .envswitch-popup__badge {
+    border-radius: 999px;
+    padding: 2px 7px;
+    background: color-mix(in srgb, var(--a83-accent) 12%, transparent);
+    color: var(--a83-accent);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .envswitch-popup__project {
+    padding: 9px 13px 2px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--muted) 65%, var(--a83-bg));
+  }
+
+  .envswitch-popup__envs {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px 10px 12px;
+  }
+
+  .envswitch-env-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 11px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    background: color-mix(in srgb, var(--a83-surface) 72%, var(--a83-bg));
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .envswitch-env-btn.active {
+    border-color: var(--a83-accent);
+    background: color-mix(in srgb, var(--a83-accent) 8%, transparent);
+  }
+
+  .envswitch-env-btn:nth-child(2) { animation-delay: 0.08s; }
+  .envswitch-env-btn:nth-child(3) { animation-delay: 0.16s; }
+
+  .envswitch-env-btn__label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-strong);
+  }
+
+  .envswitch-env-btn.active .envswitch-env-btn__label {
+    color: var(--a83-accent);
+  }
+
+  .envswitch-env-btn__host {
+    font-size: 10px;
+    text-align: right;
+    color: color-mix(in srgb, var(--muted) 65%, var(--a83-bg));
+  }
+
+  @media (max-width: 700px) {
+    .envswitch-fake-page {
+      width: 100%;
+    }
+
+    .envswitch-popup {
+      width: 100%;
+      border-left: none;
+      border-top: 1px solid var(--border);
     }
   }
 </style>
