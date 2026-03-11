@@ -3,6 +3,7 @@
   "status": "live",
   "description": "Clean Markdown from any webpage selection for ChatGPT, Claude, and other AI tools. Strip cookie banners, nav bars, and page noise with one shortcut.",
   "longDescription": "Select content on any webpage, press a shortcut, and copy purified Markdown instead of dragging UI junk into your prompts.",
+  "coverImage": "/images/showcase/ai-context-purifier/coverImage.png",
   "url": "https://a83.lemonsqueezy.com/checkout/buy/AIP_PRODUCT_ID",
   "heroEyebrow": "// CHROME EXTENSION · MANIFEST V3",
   "heroTitle": "AI CONTEXT<br>PURIFIER",
