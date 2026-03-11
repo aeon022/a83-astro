@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/core/SEO.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
+import Hero from '../../components/extensions/Hero.astro';
+import Mockup from '../../components/extensions/Mockup.astro';
+import Features from '../../components/extensions/Features.astro';
+import Themes from '../../components/extensions/Themes.astro';
+import HowItWorks from '../../components/extensions/HowItWorks.astro';
+import Pricing from '../../components/extensions/Pricing.astro';
+import CTABanner from '../../components/extensions/CTABanner.astro';
+import Footer from '../../components/extensions/Footer.astro';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const { slug } = Astro.params;
+
+// Daten aus der Singular-Collection 'extensions' laden
+const extension = await reader.collections.extensions.read(slug as string);
+
+if (!extension) {
+  return Astro.redirect('/404');
+}
+---
+
+<BaseLayout title={`${extension.title} | AI Prompt Manager for Chrome`} showFooter={false}>
+    <SEO
+        slot="head"
+        title={`${extension.title} | AI Prompt Manager for Chrome`}
+        description={extension.description}
+    />
+    <div class="promptvault-page">
+        <Hero 
+            eyebrow={extension.heroEyebrow}
+            title={extension.heroTitle}
+            tag={extension.heroTag}
+            tagline={extension.heroTagline}
+            ctaPrimary={extension.heroCTAPrimaryText}
+            ctaPrimaryUrl={extension.heroCTAPrimaryURL}
+            ctaSecondary={extension.heroCTASecondaryText}
+            ctaSecondaryUrl={extension.heroCTASecondaryURL}
+            supportedAIs={extension.supportedAIs}
+        />
+        <Mockup
+            variant={slug}
+            sectionLabel={extension.mockupSectionLabel}
+            title={extension.mockupTitle}
+            subtitle={extension.mockupSubtitle}
+        />
+        <Features
+            sectionLabel={extension.featuresSectionLabel}
+            title={extension.featuresTitle}
+            subtitle={extension.featuresSubtitle}
+            features={extension.features}
+        />
+        <Themes
+            variant={slug}
+            sectionLabel={extension.themesSectionLabel}
+            title={extension.themesTitle}
+            subtitle={extension.themesSubtitle}
+        />
+        <HowItWorks
+            sectionLabel={extension.howItWorksSectionLabel}
+            title={extension.howItWorksTitle}
+            steps={extension.steps}
+        />
+        <Pricing
+            sectionLabel={extension.pricingSectionLabel}
+            title={extension.pricingTitle}
+            subtitle={extension.pricingSubtitle}
+            tiers={extension.pricingTiers}
+        />
+        <CTABanner
+            sectionLabel={extension.ctaSectionLabel}
+            title={extension.ctaTitle}
+            subtitle={extension.ctaSubtitle}
+            cta={extension.ctaBtn}
+            ctaUrl={extension.ctaBtnUrl}
+            secondaryCta={extension.secondaryCtaBtn}
+            secondaryCtaUrl={extension.secondaryCtaBtnUrl}
+        />
+        <Footer
+            left={extension.footerLeft}
+            right={extension.footerRight}
+        />
+    </div>
+</BaseLayout>

@@ -1,0 +1,216 @@
+{
+  "title": "PromptVault",
+  "status": "live",
+  "description": "Save, search and inject your AI prompts into ChatGPT, Claude, Gemini and more — with one click. Built for power users.",
+  "longDescription": "Stop retyping the same prompts. Save once. Inject anywhere. ChatGPT, Claude, Gemini — one click away.",
+  "coverImage": "/images/showcase/promptvault/coverImage.png",
+  "url": "https://a83.lemonsqueezy.com/checkout/buy/61ab7605-811e-488e-b559-be7ded6579e5",
+  "heroEyebrow": "// CHROME EXTENSION · MANIFEST V3",
+  "heroTitle": "PROMPTVAULT",
+  "heroTag": "// YOUR AI PROMPT MANAGER",
+  "heroTagline": "Stop retyping the same prompts.<br><strong>Save once. Inject anywhere.</strong><br>ChatGPT, Claude, Gemini — one click away.",
+  "heroCTAPrimaryText": "BUY PRO — €11.99",
+  "heroCTAPrimaryURL": "https://a83.lemonsqueezy.com/checkout/buy/61ab7605-811e-488e-b559-be7ded6579e5",
+  "heroCTASecondaryText": "FREE INSTALL ▾",
+  "heroCTASecondaryURL": "#install",
+  "supportedAIs": [
+    "CHATGPT",
+    "CLAUDE",
+    "GEMINI",
+    "PERPLEXITY",
+    "MISTRAL",
+    "+ CUSTOM"
+  ],
+  "mockupSectionLabel": "// LIVE PREVIEW",
+  "mockupTitle": "SEE IT IN ACTION",
+  "mockupSubtitle": "The extension lives in Chrome's side panel — always one click away, never in the way.",
+  "featuresSectionLabel": "// FEATURES",
+  "featuresTitle": "BUILT FOR POWER USERS",
+  "featuresSubtitle": "Everything you need to run your AI workflow at full speed.",
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "ONE-CLICK INJECT",
+      "desc": "Hit INSERT and your prompt lands directly in the chat input — no copy-paste, no friction."
+    },
+    {
+      "icon": "🔍",
+      "title": "INSTANT SEARCH",
+      "desc": "Full-text search across all your prompts. Find what you need in milliseconds."
+    },
+    {
+      "icon": "🎯",
+      "title": "AI-SCOPED PROMPTS",
+      "desc": "Tag a prompt to a specific AI. It only appears when that AI is selected — keep your vault clean."
+    },
+    {
+      "icon": "☁️",
+      "title": "CLOUD SYNC",
+      "desc": "Add the Sync subscription (€1.99/mo) to back up and sync your vault across all your devices automatically."
+    },
+    {
+      "icon": "🤖",
+      "title": "CUSTOM AIs",
+      "desc": "Add any AI tool by URL. PromptVault injects into any web-based chat interface."
+    },
+    {
+      "icon": "🎨",
+      "title": "3 THEMES",
+      "desc": "Matrix Green, Dark Mono, Light. Pick your aesthetic — the terminal look is always sharp."
+    }
+  ],
+  "themesSectionLabel": "// THEMES",
+  "themesTitle": "YOUR AESTHETIC, YOUR CHOICE",
+  "themesSubtitle": "Three carefully crafted themes. Switch instantly from the header.",
+  "howItWorksSectionLabel": "// SETUP",
+  "howItWorksTitle": "UP AND RUNNING IN 60 SECONDS",
+  "steps": [
+    {
+      "num": "1",
+      "title": "INSTALL",
+      "desc": "Add PromptVault from the Chrome Web Store. One click, no signup required."
+    },
+    {
+      "num": "2",
+      "title": "SAVE",
+      "desc": "Open the side panel, type a title and your prompt, hit save. Done."
+    },
+    {
+      "num": "3",
+      "title": "INJECT",
+      "desc": "Navigate to any supported AI, pick your prompt, hit INSERT. It lands instantly."
+    }
+  ],
+  "pricingSectionLabel": "// PRICING",
+  "pricingTitle": "PAY FOR WHAT YOU USE.",
+  "pricingSubtitle": "Free forever locally. Pay once for unlimited prompts. Add sync only if you need it.",
+  "pricingTiers": [
+    {
+      "tier": "FREE",
+      "amount": "€0",
+      "note": "// forever free",
+      "features": [
+        {
+          "text": "Up to 10 prompts",
+          "dim": false
+        },
+        {
+          "text": "All 5 built-in AIs",
+          "dim": false
+        },
+        {
+          "text": "Instant inject",
+          "dim": false
+        },
+        {
+          "text": "3 themes",
+          "dim": false
+        },
+        {
+          "text": "AI-scoped prompts",
+          "dim": false
+        },
+        {
+          "text": "Unlimited prompts",
+          "dim": true
+        },
+        {
+          "text": "Custom AIs",
+          "dim": true
+        },
+        {
+          "text": "Cloud sync",
+          "dim": true
+        }
+      ],
+      "btn": "INSTALL FREE",
+      "btnUrl": "#install",
+      "featured": false
+    },
+    {
+      "tier": "PRO",
+      "amount": "€11.99",
+      "note": "// one-time payment",
+      "features": [
+        {
+          "text": "Unlimited prompts",
+          "dim": false
+        },
+        {
+          "text": "All 5 built-in AIs",
+          "dim": false
+        },
+        {
+          "text": "Instant inject",
+          "dim": false
+        },
+        {
+          "text": "3 themes",
+          "dim": false
+        },
+        {
+          "text": "AI-scoped prompts",
+          "dim": false
+        },
+        {
+          "text": "Custom AIs",
+          "dim": false
+        },
+        {
+          "text": "Cloud sync",
+          "dim": true
+        }
+      ],
+      "btn": "BUY PRO ▶",
+      "btnUrl": "https://a83.lemonsqueezy.com/checkout/buy/61ab7605-811e-488e-b559-be7ded6579e5",
+      "featured": true
+    },
+    {
+      "tier": "SYNC",
+      "amount": "€1.99",
+      "note": "// per month · cancel anytime",
+      "features": [
+        {
+          "text": "Everything in Pro",
+          "dim": false
+        },
+        {
+          "text": "Cloud sync",
+          "dim": false
+        },
+        {
+          "text": "Multi-device support",
+          "dim": false
+        },
+        {
+          "text": "Auto-backup",
+          "dim": false
+        },
+        {
+          "text": "—",
+          "dim": true
+        },
+        {
+          "text": "—",
+          "dim": true
+        },
+        {
+          "text": "—",
+          "dim": true
+        }
+      ],
+      "btn": "GET SYNC ▶",
+      "btnUrl": "https://a83.lemonsqueezy.com/checkout/buy/df9e48a0-d8f0-49f4-b996-c23a68c459f2",
+      "featured": false
+    }
+  ],
+  "ctaSectionLabel": "// GET STARTED",
+  "ctaTitle": "READY TO SUPERCHARGE YOUR AI WORKFLOW?",
+  "ctaSubtitle": "Join power users who stopped retyping and started shipping.",
+  "ctaBtn": "BUY PRO ▶",
+  "ctaBtnUrl": "https://a83.lemonsqueezy.com/checkout/buy/61ab7605-811e-488e-b559-be7ded6579e5",
+  "secondaryCtaBtn": "FREE INSTALL",
+  "secondaryCtaBtnUrl": "#install",
+  "footerLeft": "▶ PROMPTVAULT <span style=\"opacity:0.4\">// ABTEILUNG83 · 2026</span>",
+  "footerRight": "BUILT FOR POWER USERS"
+}

@@ -1,0 +1,293 @@
+---
+const { sectionLabel, title, subtitle, variant } = Astro.props;
+
+const isLyricOs = variant === 'a83-lyric-os';
+---
+<section class="mockup-section">
+  <div class="container">
+    <p class="section-label" set:html={sectionLabel}></p>
+    <h2>{title}</h2>
+    <p class="sub mockup-subtitle" set:html={subtitle}></p>
+
+    {isLyricOs ? (
+      <div class="lyricos-mock-shell">
+        <div class="lyricos-mock-grid"></div>
+        <div class="lyricos-mock">
+          <div class="lyricos-mock-bar">
+            <div class="lyricos-mock-title">A83 :// LYRIC-OS</div>
+            <span>🎵</span>
+          </div>
+          <div class="lyricos-mock-status">LYRICS GENERATED</div>
+          <div class="lyricos-mock-body">
+            <div>
+              <div class="lyricos-mock-label">LYRICS VIA</div>
+              <div class="lyricos-mock-modes">
+                <div class="lyricos-mock-btn active">⚡ API</div>
+                <div class="lyricos-mock-btn">CLAUDE</div>
+                <div class="lyricos-mock-btn">CHATGPT</div>
+                <div class="lyricos-mock-btn">GEMINI</div>
+              </div>
+            </div>
+            <div>
+              <div class="lyricos-mock-label">MUSIK</div>
+              <div class="lyricos-mock-modes">
+                <div class="lyricos-mock-btn music">♪ SUNO</div>
+                <div class="lyricos-mock-btn music">♪ UDIO</div>
+              </div>
+            </div>
+            <div class="lyricos-transform">▶ IN SONG VERWANDELN</div>
+            <div class="lyricos-output">
+              <div><span class="lyricos-output-tag">[Chorus]</span></div>
+              <div class="lyricos-output-line">Neon signs and broken code,</div>
+              <div class="lyricos-output-line">we are data on the road -</div>
+              <div class="lyricos-output-line">somewhere between the link and light</div>
+              <div class="lyricos-output-line">we became the song of night.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div class="mockup-wrap">
+        <div class="browser-chrome">
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+          <div class="browser-url">chatgpt.com</div>
+        </div>
+        <div class="browser-body">
+          <div class="fake-chat">
+            <div class="chat-msg ai">Hello! How can I help you today?</div>
+            <div class="chat-msg user" style="font-size:11px;opacity:0.7">Act as a senior software engineer and review my code for...</div>
+            <div class="chat-msg ai" style="opacity:0.6;font-size:11px">Sure! Please share your code and I'll provide a thorough review focusing on...</div>
+            <div class="chat-input-row">
+              <div class="chat-input" style="color:var(--muted);font-size:11px">Message ChatGPT...</div>
+            </div>
+          </div>
+
+          <div class="ext-panel">
+            <div class="ext-header">
+              <span class="ext-logo">▶ PROMPTVAULT</span>
+              <span style="color:var(--muted);font-size:10px">⚙</span>
+            </div>
+            <div class="ext-ai-row">
+              <span class="ext-label">TARGET:</span>
+              <select class="ext-select"><option>CHATGPT</option></select>
+              <span style="color:var(--muted);font-size:9px;border:1px solid var(--border);padding:2px 6px">+ CUSTOM</span>
+            </div>
+            <div class="ext-form">
+              <input class="ext-input" placeholder="prompt_identifier..." readonly>
+              <textarea class="ext-textarea" placeholder="// Enter prompt payload..." readonly></textarea>
+              <button class="ext-save-btn">+ SAVE PROMPT</button>
+            </div>
+            <div class="ext-list">
+              <div class="ext-card">
+                <div class="ext-card-title">CODE_REVIEW_SENIOR</div>
+                <div class="ext-card-preview">Act as a senior software engineer and review my code for bugs, performance issues and best practices...</div>
+                <div class="ext-card-actions">
+                  <div class="ext-action">DEL</div>
+                  <div class="ext-action">COPY</div>
+                  <div class="ext-action insert">INSERT</div>
+                </div>
+              </div>
+              <div class="ext-card">
+                <div class="ext-card-title">EXPLAIN_SIMPLE</div>
+                <div class="ext-card-preview">Explain this concept as if I'm a complete beginner. Use simple analogies...</div>
+                <div class="ext-card-actions">
+                  <div class="ext-action">DEL</div>
+                  <div class="ext-action">COPY</div>
+                  <div class="ext-action insert">INSERT</div>
+                </div>
+              </div>
+              <div class="ext-card">
+                <div class="ext-card-title">WRITE_TESTS</div>
+                <div class="ext-card-preview">Write comprehensive unit tests for the following code...</div>
+                <div class="ext-card-actions">
+                  <div class="ext-action">DEL</div>
+                  <div class="ext-action">COPY</div>
+                  <div class="ext-action insert">INSERT</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+<hr class="divider">
+
+<style>
+  .mockup-subtitle {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .lyricos-mock-shell {
+    position: relative;
+    margin: 40px auto 0;
+    max-width: 420px;
+  }
+
+  .lyricos-mock-grid {
+    position: absolute;
+    inset: -24px;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--a83-accent) 12%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--a83-accent) 12%, transparent) 1px, transparent 1px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse at center, black 35%, transparent 78%);
+    pointer-events: none;
+  }
+
+  .lyricos-mock {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 380px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--a83-surface) 88%, #0c1030), color-mix(in srgb, var(--a83-bg) 88%, #090b1f));
+    border: 1px solid color-mix(in srgb, var(--a83-accent) 22%, var(--a83-surface));
+    border-radius: 4px;
+    box-shadow:
+      0 0 60px color-mix(in srgb, var(--a83-accent) 16%, transparent),
+      0 32px 70px rgba(0, 0, 0, 0.28);
+    animation: lyricos-float 5s ease-in-out infinite;
+    text-align: left;
+  }
+
+  .lyricos-mock::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--a83-accent) 10%, transparent), transparent);
+    animation: lyricos-scan 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .lyricos-mock-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--a83-bg) 88%, #0c1030), color-mix(in srgb, var(--a83-surface) 82%, #14183a));
+    border-bottom: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+  }
+
+  .lyricos-mock-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    color: var(--a83-accent);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--a83-accent) 36%, transparent);
+  }
+
+  .lyricos-mock-status {
+    padding: 7px 14px;
+    background: color-mix(in srgb, var(--a83-surface) 84%, #181c48);
+    border-bottom: 1px solid color-mix(in srgb, var(--a83-accent) 18%, var(--a83-surface));
+    font-size: 10px;
+    color: color-mix(in srgb, #00ffaa 65%, var(--a83-text));
+    letter-spacing: 0.08em;
+  }
+
+  .lyricos-mock-status::before {
+    content: '> ';
+    color: color-mix(in srgb, var(--a83-accent) 40%, var(--a83-sub));
+  }
+
+  .lyricos-mock-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .lyricos-mock-label {
+    margin-bottom: 5px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--a83-sub);
+  }
+
+  .lyricos-mock-modes {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lyricos-mock-btn {
+    flex: 1;
+    padding: 5px 3px;
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--a83-sub);
+    background: color-mix(in srgb, var(--a83-surface) 84%, #191d48);
+    border: 1px solid color-mix(in srgb, var(--a83-accent) 12%, var(--a83-surface));
+    border-radius: 2px;
+  }
+
+  .lyricos-mock-btn.active {
+    color: var(--a83-accent);
+    border-color: var(--a83-accent);
+    background: transparent;
+    box-shadow: 0 0 6px color-mix(in srgb, var(--a83-accent) 20%, transparent);
+  }
+
+  .lyricos-mock-btn.music {
+    color: #cc5500;
+    border-color: #331500;
+  }
+
+  .lyricos-transform {
+    width: 100%;
+    padding: 11px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    color: #0a0a20;
+    background: linear-gradient(135deg, #00c8e0, #0099bb);
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+  }
+
+  .lyricos-output {
+    padding: 10px 12px;
+    font-size: 10px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--a83-sub);
+    background: color-mix(in srgb, var(--a83-bg) 90%, #0b0b1e);
+    border: 1px solid color-mix(in srgb, var(--a83-accent) 12%, var(--a83-surface));
+    border-left: 2px solid var(--a83-accent);
+    border-radius: 2px;
+  }
+
+  .lyricos-output-tag {
+    color: var(--a83-accent);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .lyricos-output-line {
+    color: var(--a83-text-bold);
+  }
+
+  @keyframes lyricos-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes lyricos-scan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+
+  @media (max-width: 700px) {
+    .lyricos-mock-shell {
+      max-width: 100%;
+    }
+  }
+</style>

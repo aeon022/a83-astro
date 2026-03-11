@@ -95,6 +95,114 @@ export default config({
       },
     }),
 
+    extensions: collection({
+      label: 'Extensions',
+      slugField: 'title',
+      path: 'src/content/extensions/*',
+      format: { data: 'json' },
+      schema: {
+        title: fields.slug({ name: { label: 'Extension Title' } }),
+        status: fields.select({
+          label: 'Deployment Status',
+          options: [
+            { label: 'ACTIVE_NODE (Live)', value: 'live' },
+            { label: 'DECOMMISSIONED (Archive)', value: 'archive' },
+          ],
+          defaultValue: 'live',
+        }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        longDescription: fields.text({ label: 'Long Description', multiline: true }),
+        coverImage: fields.image({
+          label: 'Cover Image',
+          directory: 'public/images/showcase',
+          publicPath: '/images/showcase/',
+          validation: { isRequired: false },
+        }),
+        url: fields.url({ label: 'URL' }),
+        heroEyebrow: fields.text({ label: 'Hero Eyebrow' }),
+        heroTitle: fields.text({ label: 'Hero Title' }),
+        heroTag: fields.text({ label: 'Hero Tag' }),
+        heroTagline: fields.text({ label: 'Hero Tagline', multiline: true }),
+        heroCTAPrimaryText: fields.text({ label: 'Hero CTA Primary Text' }),
+        heroCTAPrimaryURL: fields.text({ label: 'Hero CTA Primary URL' }),
+        heroCTASecondaryText: fields.text({ label: 'Hero CTA Secondary Text' }),
+        heroCTASecondaryURL: fields.text({ label: 'Hero CTA Secondary URL' }),
+        supportedAIs: fields.array(
+          fields.text({ label: 'AI Name' }),
+          { label: 'Supported AIs', itemLabel: props => props.value }
+        ),
+        mockupSectionLabel: fields.text({ label: 'Mockup Section Label' }),
+        mockupTitle: fields.text({ label: 'Mockup Title' }),
+        mockupSubtitle: fields.text({ label: 'Mockup Subtitle', multiline: true }),
+        featuresSectionLabel: fields.text({ label: 'Features Section Label' }),
+        featuresTitle: fields.text({ label: 'Features Title' }),
+        featuresSubtitle: fields.text({ label: 'Features Subtitle', multiline: true }),
+        features: fields.array(
+            fields.object({
+                icon: fields.text({ label: 'Icon' }),
+                title: fields.text({ label: 'Title' }),
+                desc: fields.text({ label: 'Description', multiline: true }),
+            }),
+            {
+                label: 'Features',
+                itemLabel: props => props.fields.title.value || 'Feature'
+            }
+        ),
+        themesSectionLabel: fields.text({ label: 'Themes Section Label' }),
+        themesTitle: fields.text({ label: 'Themes Title' }),
+        themesSubtitle: fields.text({ label: 'Themes Subtitle', multiline: true }),
+        howItWorksSectionLabel: fields.text({ label: 'How It Works Section Label' }),
+        howItWorksTitle: fields.text({ label: 'How It Works Title' }),
+        steps: fields.array(
+            fields.object({
+                num: fields.text({ label: 'Step Number' }),
+                title: fields.text({ label: 'Title' }),
+                desc: fields.text({ label: 'Description', multiline: true }),
+            }),
+            {
+                label: 'Steps',
+                itemLabel: props => props.fields.title.value || 'Step'
+            }
+        ),
+        pricingSectionLabel: fields.text({ label: 'Pricing Section Label' }),
+        pricingTitle: fields.text({ label: 'Pricing Title' }),
+        pricingSubtitle: fields.text({ label: 'Pricing Subtitle', multiline: true }),
+        pricingTiers: fields.array(
+            fields.object({
+                tier: fields.text({ label: 'Tier' }),
+                amount: fields.text({ label: 'Amount' }),
+                note: fields.text({ label: 'Note' }),
+                features: fields.array(
+                    fields.object({
+                        text: fields.text({ label: 'Feature Text' }),
+                        dim: fields.checkbox({ label: 'Dimmed' }),
+                    }),
+                    {
+                        label: 'Features',
+                        itemLabel: props => props.fields.text.value || 'Feature'
+                    }
+                ),
+                btn: fields.text({ label: 'Button Text' }),
+                btnUrl: fields.text({ label: 'Button URL' }),
+                featured: fields.checkbox({ label: 'Featured' }),
+            }),
+            {
+                label: 'Pricing Tiers',
+                itemLabel: props => props.fields.tier.value || 'Tier'
+            }
+        ),
+        ctaSectionLabel: fields.text({ label: 'CTA Section Label' }),
+        ctaTitle: fields.text({ label: 'CTA Title' }),
+        ctaSubtitle: fields.text({ label: 'CTA Subtitle' }),
+        ctaBtn: fields.text({ label: 'CTA Button Text' }),
+        ctaBtnUrl: fields.text({ label: 'CTA Button URL' }),
+        secondaryCtaBtn: fields.text({ label: 'Secondary CTA Button Text' }),
+        secondaryCtaBtnUrl: fields.text({ label: 'Secondary CTA Button URL' }),
+        footerLeft: fields.text({ label: 'Footer Left' }),
+        footerRight: fields.text({ label: 'Footer Right' }),
+      }
+    }),
+
     // SERVICES COLLECTION: Exakt wie von dir geliefert.
     services: collection({
       label: 'Services (System Modules)',

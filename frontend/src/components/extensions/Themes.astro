@@ -1,0 +1,165 @@
+---
+const { sectionLabel, title, subtitle, variant } = Astro.props;
+
+const isLyricOs = variant === 'a83-lyric-os';
+---
+<section id="themes">
+  <div class="container">
+    <p class="section-label" set:html={sectionLabel}></p>
+    <h2>{title}</h2>
+    <p class="sub" set:html={subtitle}></p>
+
+    {isLyricOs ? (
+      <div class="themes-grid lyricos-modes-grid">
+        <div class="theme-card lyricos-mode-card highlight">
+          <div class="theme-label-bar">DIRECT</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">⚡ API KEY</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">FASTEST FLOW</div>
+              <div class="t-card-text t-muted">Use Claude Haiku directly and get structured lyrics inside the extension instantly.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card lyricos-mode-card">
+          <div class="theme-label-bar">BROWSER</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">🤖 CLAUDE / GPT / GEMINI</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">NO SETUP REQUIRED</div>
+              <div class="t-card-text t-muted">Copy the songwriting prompt, open the AI you already use, paste, and generate.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card lyricos-mode-card music">
+          <div class="theme-label-bar">EXPORT</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">♪ SUNO / UDIO</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">TRACK-READY OUTPUT</div>
+              <div class="t-card-text t-muted">Format the result for music tools and move from webpage to produced audio in under a minute.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div class="themes-grid">
+        <div class="theme-card theme-green">
+          <div class="theme-label-bar">MATRIX GREEN</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">▶ PROMPTVAULT</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">CODE_REVIEW</div>
+              <div class="t-card-text t-muted">Act as a senior software engineer and review...</div>
+              <div class="t-card-row">
+                <div class="t-action t-border t-muted">DEL</div>
+                <div class="t-action t-border t-muted">COPY</div>
+                <div class="t-action t-btn">INSERT</div>
+              </div>
+            </div>
+            <div class="t-card-mini t-card t-border" style="opacity:0.6">
+              <div class="t-card-title t-accent">EXPLAIN_SIMPLE</div>
+              <div class="t-card-text t-muted">Explain this concept as if I'm a beginner...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card theme-dark">
+          <div class="theme-label-bar">DARK MONO</div>
+          <div class="theme-mini-ui">
+            <div class="t-title-row t-border t-header">▶ PROMPTVAULT</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">CODE_REVIEW</div>
+              <div class="t-card-text t-muted">Act as a senior software engineer and review...</div>
+              <div class="t-card-row">
+                <div class="t-action t-border t-muted">DEL</div>
+                <div class="t-action t-border t-muted">COPY</div>
+                <div class="t-action t-btn">INSERT</div>
+              </div>
+            </div>
+            <div class="t-card-mini t-card t-border" style="opacity:0.6">
+              <div class="t-card-title t-accent">EXPLAIN_SIMPLE</div>
+              <div class="t-card-text t-muted">Explain this concept as if I'm a beginner...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card theme-light">
+          <div class="theme-label-bar">LIGHT</div>
+          <div class="theme-mini-ui t-body">
+            <div class="t-title-row t-border t-header">▶ PROMPTVAULT</div>
+            <div class="t-card-mini t-card t-border">
+              <div class="t-card-title t-accent">CODE_REVIEW</div>
+              <div class="t-card-text t-muted">Act as a senior software engineer and review...</div>
+              <div class="t-card-row">
+                <div class="t-action t-border t-muted">DEL</div>
+                <div class="t-action t-border t-muted">COPY</div>
+                <div class="t-action t-btn">INSERT</div>
+              </div>
+            </div>
+            <div class="t-card-mini t-card t-border" style="opacity:0.6">
+              <div class="t-card-title t-accent">EXPLAIN_SIMPLE</div>
+              <div class="t-card-text t-muted">Explain this concept as if I'm a beginner...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+<hr class="divider">
+
+<style>
+  .lyricos-modes-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lyricos-mode-card {
+    border-color: color-mix(in srgb, var(--a83-accent) 16%, var(--a83-surface));
+    background: color-mix(in srgb, var(--a83-surface) 82%, var(--a83-bg));
+  }
+
+  .lyricos-mode-card.highlight {
+    border-color: color-mix(in srgb, var(--a83-accent) 36%, var(--a83-surface));
+    box-shadow: 0 0 24px color-mix(in srgb, var(--a83-accent) 10%, transparent);
+  }
+
+  .lyricos-mode-card.music {
+    border-color: rgba(255, 106, 0, 0.28);
+    background: color-mix(in srgb, rgba(255, 106, 0, 0.08) 45%, var(--a83-surface));
+  }
+
+  .lyricos-mode-card .theme-label-bar {
+    color: var(--a83-text-bold);
+  }
+
+  .lyricos-mode-card .t-title-row {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .lyricos-mode-card .t-card-mini {
+    min-height: 124px;
+  }
+
+  .lyricos-mode-card .t-card-title {
+    margin-bottom: 8px;
+  }
+
+  .lyricos-mode-card.music .t-card-title,
+  .lyricos-mode-card.music .theme-label-bar {
+    color: #ff6a00;
+  }
+
+  @media (max-width: 700px) {
+    .lyricos-modes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .lyricos-mode-card .t-card-mini {
+      min-height: 0;
+    }
+  }
+</style>

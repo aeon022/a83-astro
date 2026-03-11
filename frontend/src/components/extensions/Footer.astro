@@ -1,0 +1,7 @@
+---
+const { left, right } = Astro.props;
+---
+<footer>
+  <span set:html={left}></span>
+  <span style="opacity:0.4" set:html={right}></span>
+</footer>

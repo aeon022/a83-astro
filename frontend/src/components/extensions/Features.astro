@@ -1,0 +1,21 @@
+---
+const { sectionLabel, title, subtitle, features } = Astro.props;
+---
+<section id="features">
+  <div class="container">
+    <p class="section-label" set:html={sectionLabel}></p>
+    <h2>{title}</h2>
+    <p class="sub" set:html={subtitle}></p>
+
+    <div class="features-grid">
+      {features.map((feature: { icon: string; title: string; desc: string }) => (
+        <div class="feature-card">
+          <span class="feature-icon">{feature.icon}</span>
+          <div class="feature-title">{feature.title}</div>
+          <p class="feature-desc">{feature.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<hr class="divider">

@@ -1,0 +1,16 @@
+---
+const { sectionLabel, title, subtitle, cta, ctaUrl, secondaryCta, secondaryCtaUrl } = Astro.props;
+---
+<section>
+  <div class="container">
+    <div class="cta-banner">
+      <p class="section-label" set:html={sectionLabel}></p>
+      <h2 set:html={title}></h2>
+      <p class="sub" style="margin: 16px auto 32px; text-align:center;" set:html={subtitle}></p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href={ctaUrl} class="btn btn-primary" target="_blank" set:html={cta}></a>
+        <a href={secondaryCtaUrl} class="btn btn-ghost" set:html={secondaryCta}></a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,212 @@
+{
+  "title": "A83 Lyric-OS",
+  "status": "live",
+  "description": "Chrome extension that turns any webpage into full song lyrics with AI. Pick a genre, generate structured lyrics, and send them to Suno or Udio.",
+  "longDescription": "Extract the real content from any article or page, transform it into structured lyrics, and move from text to song in under a minute.",
+  "coverImage": "/images/showcase/a83-lyric-os/coverImage.png",
+  "url": "https://a83.lemonsqueezy.com/checkout/buy/76305092-c58f-4838-a410-ac2a651f7dbc",
+  "heroEyebrow": "// CHROME EXTENSION · MANIFEST V3 · FREE",
+  "heroTitle": "A83 LYRIC-OS",
+  "heroTag": "// TURN ANY WEBSITE INTO A SONG",
+  "heroTagline": "Extract any webpage.<br><strong>Turn signal into lyrics.</strong><br>Export to Suno or Udio in seconds.",
+  "heroCTAPrimaryText": "SUPPORT THE BUILDER ☕",
+  "heroCTAPrimaryURL": "https://a83.lemonsqueezy.com/checkout/buy/76305092-c58f-4838-a410-ac2a651f7dbc",
+  "heroCTASecondaryText": "INSTALL EXTENSION ▾",
+  "heroCTASecondaryURL": "#install",
+  "supportedAIs": [
+    "CLAUDE HAIKU API",
+    "CLAUDE.AI",
+    "CHATGPT",
+    "GEMINI",
+    "SUNO",
+    "UDIO"
+  ],
+  "mockupSectionLabel": "// LIVE PREVIEW",
+  "mockupTitle": "FROM ARTICLE TO CHORUS",
+  "mockupSubtitle": "Lyric-OS extracts the real page content, applies a genre persona, and returns structured lyrics ready for music generation.",
+  "featuresSectionLabel": "// FEATURES",
+  "featuresTitle": "BUILT FOR FAST SONGWORK",
+  "featuresSubtitle": "Everything the draft promised, mapped into the same extension page system as PromptVault.",
+  "features": [
+    {
+      "icon": "🧠",
+      "title": "SMART EXTRACTION",
+      "desc": "Strips navigation, ads, sidebars, and footer noise to focus on the actual content of the page."
+    },
+    {
+      "icon": "🎭",
+      "title": "5 GENRES",
+      "desc": "Generate lyrics in Synth-Wave, Industrial, Punk-Rock, Dark Pop, or Trap with dedicated prompt logic."
+    },
+    {
+      "icon": "🌍",
+      "title": "EN / DE",
+      "desc": "Switch between English and German output with one click and keep your preferred language between sessions."
+    },
+    {
+      "icon": "🔑",
+      "title": "FLEXIBLE AI SOURCES",
+      "desc": "Use your Anthropic API key directly or route prompts through Claude, ChatGPT, or Gemini in the browser."
+    },
+    {
+      "icon": "🎵",
+      "title": "SUNO & UDIO READY",
+      "desc": "Formats the result for music generators and gets you from webpage to produced track with minimal friction."
+    },
+    {
+      "icon": "🔒",
+      "title": "PRIVACY FIRST",
+      "desc": "API credentials stay in local browser storage and content only leaves the browser for the generation step you trigger."
+    }
+  ],
+  "themesSectionLabel": "// OUTPUT MODES",
+  "themesTitle": "ONE ENGINE, MULTIPLE FLOWS",
+  "themesSubtitle": "Use direct API generation for speed or browser-based AI and music tools when you want a no-setup workflow.",
+  "howItWorksSectionLabel": "// PROCESS",
+  "howItWorksTitle": "THREE STEPS. ONE SONG.",
+  "steps": [
+    {
+      "num": "1",
+      "title": "OPEN ANY PAGE",
+      "desc": "Load any article, blog post, product page, or news page and let the extension isolate the meaningful content."
+    },
+    {
+      "num": "2",
+      "title": "CHOOSE YOUR STYLE",
+      "desc": "Pick a genre, language, and AI route, then shape the source material into a songwriting prompt."
+    },
+    {
+      "num": "3",
+      "title": "GENERATE & EXPORT",
+      "desc": "Get Verse, Chorus, Bridge, and more in the extension, then copy or send the result to Suno or Udio."
+    }
+  ],
+  "pricingSectionLabel": "// ACCESS",
+  "pricingTitle": "FREE TO USE. OPTIONAL SUPPORT.",
+  "pricingSubtitle": "The extension itself is free. Support the project if you want faster iteration, then choose the workflow that fits your setup.",
+  "pricingTiers": [
+    {
+      "tier": "FREE",
+      "amount": "€0",
+      "note": "// local extension",
+      "features": [
+        {
+          "text": "Chrome extension access",
+          "dim": false
+        },
+        {
+          "text": "5 genre personas",
+          "dim": false
+        },
+        {
+          "text": "EN / DE output",
+          "dim": false
+        },
+        {
+          "text": "Browser AI handoff",
+          "dim": false
+        },
+        {
+          "text": "Suno / Udio export flow",
+          "dim": false
+        },
+        {
+          "text": "Direct API speed",
+          "dim": true
+        },
+        {
+          "text": "Builder support",
+          "dim": true
+        }
+      ],
+      "btn": "INSTALL FREE",
+      "btnUrl": "#install",
+      "featured": false
+    },
+    {
+      "tier": "API MODE",
+      "amount": "YOUR KEY",
+      "note": "// fastest workflow",
+      "features": [
+        {
+          "text": "Claude Haiku direct generation",
+          "dim": false
+        },
+        {
+          "text": "Lyrics inside extension",
+          "dim": false
+        },
+        {
+          "text": "No browser tab handoff",
+          "dim": false
+        },
+        {
+          "text": "Structured sections instantly",
+          "dim": false
+        },
+        {
+          "text": "Works with your own API key",
+          "dim": false
+        },
+        {
+          "text": "Requires Anthropic key",
+          "dim": true
+        },
+        {
+          "text": "Music output still external",
+          "dim": true
+        }
+      ],
+      "btn": "SET UP API",
+      "btnUrl": "#install",
+      "featured": true
+    },
+    {
+      "tier": "SUPPORT",
+      "amount": "ANY AMOUNT",
+      "note": "// optional donation",
+      "features": [
+        {
+          "text": "Support ongoing development",
+          "dim": false
+        },
+        {
+          "text": "Back a one-person tool",
+          "dim": false
+        },
+        {
+          "text": "Help fund future updates",
+          "dim": false
+        },
+        {
+          "text": "No subscription required",
+          "dim": false
+        },
+        {
+          "text": "Core extension stays free",
+          "dim": false
+        },
+        {
+          "text": "Required to use",
+          "dim": true
+        },
+        {
+          "text": "Locked features",
+          "dim": true
+        }
+      ],
+      "btn": "SUPPORT THE BUILDER",
+      "btnUrl": "https://a83.lemonsqueezy.com/checkout/buy/76305092-c58f-4838-a410-ac2a651f7dbc",
+      "featured": false
+    }
+  ],
+  "ctaSectionLabel": "// GET STARTED",
+  "ctaTitle": "READY TO TURN CONTENT INTO TRACKS?",
+  "ctaSubtitle": "Install the extension, pick a genre, and convert any page into structured lyrics in under a minute.",
+  "ctaBtn": "SUPPORT THE BUILDER ☕",
+  "ctaBtnUrl": "https://a83.lemonsqueezy.com/checkout/buy/76305092-c58f-4838-a410-ac2a651f7dbc",
+  "secondaryCtaBtn": "INSTALL EXTENSION",
+  "secondaryCtaBtnUrl": "#install",
+  "footerLeft": "▶ A83 LYRIC-OS <span style=\"opacity:0.4\">// ABTEILUNG83 · 2026</span>",
+  "footerRight": "TURN SIGNAL INTO SONG"
+}

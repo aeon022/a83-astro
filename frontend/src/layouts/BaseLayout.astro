@@ -18,12 +18,16 @@ interface Props {
   title: string;
   description?: string;
   isSnappable?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
 }
 
 const { 
   title, 
   description = "ABTEILUNG83 - Less Noise. Nice Data. No Bloat.", 
-  isSnappable = false 
+  isSnappable = false,
+  showHeader = true,
+  showFooter = true,
 } = Astro.props;
 ---
 
@@ -112,7 +116,7 @@ const {
   
   <body class="font-sans antialiased bg-a83-bg text-a83-text selection:bg-a83-accent selection:text-white transition-colors duration-500 flex flex-col h-screen overflow-hidden">
     
-    <Header />
+    {showHeader && <Header />}
 
     <main 
       id="main-content" 
@@ -127,13 +131,13 @@ const {
                 <slot />
             </div>
 
-            {isSnappable ? (
+            {showFooter && (isSnappable ? (
               <section class="snap-start">
                 <Footer />
               </section>
             ) : (
               <Footer />
-            )}
+            ))}
         </div>
     </main>
     

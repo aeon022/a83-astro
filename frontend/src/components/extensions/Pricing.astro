@@ -1,0 +1,28 @@
+---
+const { sectionLabel, title, subtitle, tiers } = Astro.props;
+---
+<section id="pricing">
+  <div class="container">
+    <p class="section-label" set:html={sectionLabel}></p>
+    <h2>{title}</h2>
+    <p class="sub" set:html={subtitle}></p>
+
+    <div class="pricing-grid">
+      {tiers.map((tier: { tier: string; amount: string; note: string; features: any[]; btn: string; btnUrl: string; featured: boolean }) => (
+        <div class={`price-card ${tier.featured ? 'featured' : ''}`}>
+          {tier.featured && <div class="price-badge">MOST POPULAR</div>}
+          <div class="price-tier">{tier.tier}</div>
+          <div class="price-amount" set:html={tier.amount}></div>
+          <div class="price-note" set:html={tier.note}></div>
+          <ul class="price-features">
+            {tier.features.map((feature: { text: string; dim: boolean }) => (
+              <li class={feature.dim ? 'dim' : ''}>{feature.text}</li>
+            ))}
+          </ul>
+          <a href={tier.btnUrl} class={`btn ${tier.featured ? 'btn-primary' : 'btn-ghost'}`} style="width:100%;justify-content:center" target="_blank">{tier.btn}</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<hr class="divider">

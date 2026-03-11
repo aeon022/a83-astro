@@ -1,0 +1,21 @@
+---
+const { eyebrow, title, tag, tagline, ctaPrimary, ctaPrimaryUrl, ctaSecondary, ctaSecondaryUrl, supportedAIs } = Astro.props;
+---
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow" set:html={eyebrow}></p>
+    <h1>{title}</h1>
+    <p class="hero-tag" set:html={tag}></p>
+    <p class="hero-tagline" set:html={tagline}></p>
+    <div class="hero-ctas">
+      <a href={ctaPrimaryUrl} class="btn btn-primary" target="_blank">{ctaPrimary}</a>
+      <a href={ctaSecondaryUrl} class="btn btn-ghost">{ctaSecondary}</a>
+    </div>
+    <p class="hero-supported">// WORKS WITH</p>
+    <div class="hero-ais">
+      {supportedAIs.map((ai: string) => (
+        <span class="ai-chip">{ai}</span>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,79 @@
+---
+// Version: V1.0 - EXTENSIONS INDEX
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SEO from '../../components/core/SEO.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+
+// Alle Einträge aus der Singular-Collection laden
+const extensionEntries = await reader.collections.extensions.all();
+
+// Filter for active extensions
+const activeExtensions = extensionEntries
+  .filter(m => m.entry.status === 'live')
+  .map(m => ({ slug: m.slug, ...m.entry }))
+---
+
+<BaseLayout title="Extensions | ABTEILUNG83">
+  <SEO
+    slot="head"
+    title="Extensions | ABTEILUNG83 — Webdesign Graz"
+    description="Custom extensions and apps by ABTEILUNG83."
+  />
+  <section class="nav-content-sync min-h-screen bg-a83-bg pt-32 pb-20 px-6 lg:px-16 relative overflow-hidden selection:bg-a83-accent selection:text-white">
+    
+    <div class="absolute inset-0 opacity-[0.015] bg-[linear-gradient(var(--veranda-green)_1px,transparent_1px),linear-gradient(90deg,var(--veranda-green)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+
+    <div class="max-w-[1600px] mx-auto relative z-10">
+        
+        <header class="mb-16 border-l-4 border-a83-accent pl-8 py-2">
+            <div class="flex items-center gap-4 font-mono text-[11px] text-a83-accent mb-3 tracking-[0.4em] font-black uppercase">
+                <span>// EXECUTABLES_v1.0</span>
+                <span class="opacity-30">|</span>
+                <span>NODES: {activeExtensions.length.toString().padStart(2, '0')}</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-a83-text-bold tracking-tighter uppercase leading-tight lg:leading-none">
+                Extensions.
+            </h1>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min mb-32">
+            {activeExtensions.map((extension) => (
+                <a 
+                    href={`/extensions/${extension.slug}`}
+                    class="md:col-span-6 lg:col-span-4 group relative bg-a83-surface/40 border border-veranda-green/20 overflow-hidden flex flex-col transition-all duration-500 hover:border-a83-accent/40"
+                >
+                    <div class="relative aspect-video overflow-hidden bg-deep-canvas">
+                        {extension.coverImage && (
+                          <img 
+                              src={extension.coverImage} 
+                              alt={extension.title}
+                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale hover:grayscale-0 opacity-80"
+                          />
+                        )}
+                        <div class="absolute inset-0 bg-gradient-to-t from-a83-bg via-transparent to-transparent opacity-80"></div>
+                    </div>
+
+                    <div class="p-8 flex flex-col justify-between flex-grow relative z-10">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="min-w-0">
+                                <h2 class="text-2xl lg:text-3xl font-black text-a83-text-bold uppercase tracking-tighter leading-none group-hover:text-a83-accent transition-colors truncate">
+                                    {extension.title.replace('_', ' ')}
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-veranda-green/10">
+                            <p class="text-[11px] font-mono text-a83-text-bold/60 line-clamp-2 uppercase">
+                                {extension.description}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </div>
+  </section>
+</BaseLayout>
