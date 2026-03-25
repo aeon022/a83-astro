@@ -9,31 +9,45 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/db": "^0.19.0",
-    "@astrojs/node": "^9.5.4",
-    "@astrojs/partytown": "^2.1.4",
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/sitemap": "^3.7.0",
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/jetbrains-mono": "^5.2.8",
-    "@keystatic/astro": "^5.0.6",
-    "@keystatic/core": "^0.5.48",
-    "@libsql/client": "^0.15.15",
-    "@resvg/resvg-js": "^2.6.2",
-    "@tailwindcss/vite": "^4.2.1",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "astro": "^5.17.1",
-    "astro-icon": "^1.1.5",
-    "effect": "^3.19.18",
-    "gsap": "^3.14.2",
-    "nodemailer": "^8.0.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "satori": "^0.19.2",
-    "tailwindcss": "^4.2.0"
+    "@astrojs/db": "0.19.0",
+    "@astrojs/node": "10.0.3",
+    "@astrojs/partytown": "2.1.4",
+    "@astrojs/react": "4.4.2",
+    "@astrojs/sitemap": "3.7.0",
+    "@fontsource/inter": "5.2.8",
+    "@fontsource/jetbrains-mono": "5.2.8",
+    "@keystatic/astro": "5.0.6",
+    "@keystatic/core": "0.5.49",
+    "@libsql/client": "0.15.15",
+    "@resvg/resvg-js": "2.6.2",
+    "@tailwindcss/vite": "4.2.2",
+    "@types/react": "18.3.1",
+    "@types/react-dom": "18.3.1",
+    "astro": "6.0.8",
+    "astro-icon": "1.1.5",
+    "effect": "3.20.0",
+    "gsap": "3.14.2",
+    "nodemailer": "8.0.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "satori": "0.19.2",
+    "sharp": "^0.34.5",
+    "tailwindcss": "4.2.2",
+    "typescript": "6.0.2",
+    "vite": "6.4.1"
   },
   "devDependencies": {
-    "@types/nodemailer": "^7.0.11"
+    "@types/nodemailer": "7.0.11"
+  },
+  "overrides": {
+    "@keystatic/astro": {
+      "astro": "6.0.8"
+    },
+    "@astrojs/node": {
+      "astro": "6.0.8"
+    }
+  },
+  "optionalDependencies": {
+    "@img/sharp-darwin-arm64": "^0.34.5"
   }
 }
