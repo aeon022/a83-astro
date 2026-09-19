@@ -39,6 +39,11 @@ import SEO from '../components/core/SEO.astro';
                     Handshake_Protocol_Active
                 </div>
 
+                <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;">
+                    <label>Leave empty <input name="website" type="text" autocomplete="off" tabindex="-1" /></label>
+                </div>
+                <input type="hidden" name="_t" id="form-timestamp" value="" />
+
                 <div id="form-success" class="hidden border border-a83-accent/40 bg-a83-accent/10 p-6 font-mono text-sm text-a83-accent uppercase tracking-widest">
                     // Transmission_Received — ich melde mich so bald wie möglich.
                 </div>
@@ -141,6 +146,9 @@ import SEO from '../components/core/SEO.astro';
   const success = document.getElementById('form-success') as HTMLDivElement;
   const error   = document.getElementById('form-error') as HTMLDivElement;
 
+  const stamp = document.getElementById('form-timestamp') as HTMLInputElement;
+  stamp.value = Date.now().toString();
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     btn.disabled = true;
@@ -153,6 +161,7 @@ import SEO from '../components/core/SEO.astro';
       if (res.ok) {
         success.classList.remove('hidden');
         form.reset();
+        stamp.value = Date.now().toString();
       } else {
         error.classList.remove('hidden');
       }
