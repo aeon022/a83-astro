@@ -1,9 +1,10 @@
+import { readFileSync } from 'node:fs';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import type { APIRoute } from 'astro';
 
 // Fonts laden (Pfade müssen zu deinen lokalen Files in /public/fonts passen)
-const fontBold = await fetch(new URL('../../../public/fonts/Inter-Black.ttf', import.meta.url)).then(res => res.arrayBuffer());
+const fontBold = readFileSync(new URL('../../../node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff', import.meta.url));
 const fontMono = await fetch(new URL('../../../public/fonts/JetBrainsMono-Bold.ttf', import.meta.url)).then(res => res.arrayBuffer());
 
 export const GET: APIRoute = async ({ params }) => {
@@ -22,7 +23,7 @@ export const GET: APIRoute = async ({ params }) => {
         justifyContent: 'space-between',
         backgroundColor: '#f2f2f0', // Bone White
         padding: '60px',
-        fontFamily: 'Inter',
+        fontFamily: 'Space Grotesk',
         position: 'relative',
       },
       children: [
@@ -70,7 +71,7 @@ export const GET: APIRoute = async ({ params }) => {
     width: 1200,
     height: 630,
     fonts: [
-      { name: 'Inter', data: fontBold, weight: 900, style: 'normal' },
+      { name: 'Space Grotesk', data: fontBold, weight: 700, style: 'normal' },
       { name: 'JetBrains Mono', data: fontMono, weight: 700, style: 'normal' },
     ],
   });
